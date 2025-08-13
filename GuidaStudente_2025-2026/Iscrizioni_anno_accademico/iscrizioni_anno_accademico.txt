@@ -1,0 +1,64 @@
+Come calcolo la media dei voti del 4° anno della scuola superiore necessaria per partecipare al primo bando di selezione?
+
+
+La media dei voti del 4° anno deve essere arrotondata alla seconda cifra decimale; se la terza cifra dopo la virgola è maggiore o uguale a 5 si deve arrotondare per eccesso.
+
+Ad esempio: 7,423 diventa 7,42 mentre in caso di media pari a 7,425 va indicato 7,43.
+
+Vanno sempre messe le 2 cifre dopo la virgola: se la media è 8 deve essere indicato 8,00
+
+Come ci si iscrive?
+
+
+Qui https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi sono descritti gli step per effettuare l'iscrizione. Attenzione: le procedure sono diverse a seconda della tipologia di corso (triennale o magistrale). Inoltre alcuni corsi sono ad accesso programmato, quindi è essenziale prendere visione dei rispettivi bandi.
+
+Qui https://www.unibg.it/node/10733 trovi il bando per l'ammissione ai corsi di laurea triennale ad accesso programmato.
+
+Come iscriversi a tempo parziale ?
+
+
+PART-TIME
+
+Se vuoi iscriverti come PART-TIME verifica se sei in possesso dei requisiti previsti dal Regolamento di Ateneo per le iscrizioni degli studenti con regime di studio a tempo parziale
+
+Se sei già iscritto ad anni precedenti e vuoi modificare la tua iscrizione da Part-time a Tempo Pieno o viceversa, prendi visione della Guida studenti per inviare la documentazione a mezzo FORM
+
+NB lo stato occupazionale Iscr. part-time e LAVORATORE non determina l’iscrizione come Part-Time ma rileva ai soli fini statistici.
+
+Esiste un servizio di orientamento?
+
+
+Sì, è attivo un servizio di orientamento e tutorato, a cui rivolgersi per dubbi e richieste di chiarimenti. Qui https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/pot-piani-orientamento-e-tutorato trovi tutte le informazioni.
+
+Mi sono dimenticato il numero di pre-matricola, come faccio a recuperarlo?
+
+
+Qui https://www.unibg.it/sites/default/files/how_to_-_recuperare_il_numero_di_pre-matricola.pdf trovi la guida che spiega come recuperare il numero di pre-matricola.
+
+Qual è l'offerta formativa per l'anno accademico 2024/2025?
+
+
+Qui https://www.unibg.it/studiare/ti-aiutiamo/scopri-unibg/cerca-tuo-corso-laurea , oppure qui  https://www.unibg.it/studiare/corsi/offerta-formativa  trovi le informazioni sui corsi di laurea triennali, magistrali e magistrali a ciclo unico offerti della nostra Università per l'anno accademico 2024/2025.
+
+Quali sono le scadenze per l'iscrizione?
+
+
+Qui https://www.unibg.it/studia-noi/iscriversi/scadenze-iscriversi trovi le scadenze, divise tra lauree triennali (o magistrali a ciclo unico) e lauree magistrali.
+
+Attenzione: per i corsi ad accesso programmato, è comunque essenziale prendere visione dei rispettivi bandi.
+
+TOLC - Devo iscrivermi al TOLC, ma non ci sono posti presso l'Università di Bergamo. Come faccio?
+
+
+Puoi iscriverti (sul sito CISIA) al TOLC presso una qualsiasi altra Università. Ricordati, se vuoi immatricolarti ad un nostro corso di Laurea, di effettuare la pre-iscrizione/immatricolazione in UNIBG entro le scadenze previste. In questo modo, il TOLC che hai sostenuto presso un'altra Università verrà acquisito dal nostro sistema.
+
+TOLC - Ho sostenuto il TOLC l'anno scorso, è ancora valido?
+
+
+Ai fini dell’ammissione ai corsi di laurea ad accesso programmato e dell’immatricolazione ai corsi di laurea ad accesso libero per l’anno accademico 2024/2025 sono validi i TOLC sostenuti a partire dal 1° gennaio 2023.
+
+TOLC - Posso rifarlo più volte? E, nel caso, quale viene preso in considerazione per le graduatorie?
+
+Sì, puoi rifare il TOLC più volte entro la scadenza (puoi farne uno al mese, ripagando ogni volta il contributo previsto di 30 euro).
+
+Ai fini della graduatoria (se ti sei pre-iscritto ad un corso di laurea ad accesso programmato), verrà preso in considerazione il TOLC con il punteggio migliore.
