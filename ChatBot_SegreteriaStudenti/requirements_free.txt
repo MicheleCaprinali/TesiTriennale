@@ -1,0 +1,25 @@
+# Core RAG e LangChain
+langchain==0.1.0
+langchain-community==0.0.10
+langchain-core==0.1.10
+
+# Database vettoriale
+chromadb==0.4.22
+
+# Embedding gratuiti con Sentence Transformers
+sentence-transformers==2.2.2
+
+# Ollama per LLM locale
+ollama==0.1.7
+
+# Utilities
+python-dotenv==1.0.0
+PyPDF2==3.0.1
+streamlit==1.28.0
+
+# Text processing
+langchain-text-splitters==0.0.1
+
+# System utilities
+colorama==0.4.6
+tqdm==4.66.1
