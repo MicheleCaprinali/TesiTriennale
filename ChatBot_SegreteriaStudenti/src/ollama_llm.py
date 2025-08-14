@@ -26,7 +26,14 @@ class OllamaLLM:
             response = requests.get(f"{self.base_url}/api/tags", timeout=5)
             return response.status_code == 200
         except:
-            return False
+            # Verifica se il processo è in esecuzione su Windows
+            import subprocess
+            try:
+                result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq ollama.exe'], 
+                                      capture_output=True, text=True)
+                return 'ollama.exe' in result.stdout
+            except:
+                return False
     
     def list_models(self) -> list:
         """Lista i modelli disponibili in Ollama"""
