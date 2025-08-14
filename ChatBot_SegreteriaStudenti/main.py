@@ -13,10 +13,14 @@ Tecnologie utilizzate:
 import os
 import sys
 from datetime import datetime
-from src.chatbot import setup_chatbot, ChatbotRAG
-from src.extract_and_save import process_all_documents
-from src.create_vectorstore import crea_vectorstore_free
-from src.ollama_llm import setup_ollama
+
+# Aggiungi il path per gli import
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+from chatbot import setup_chatbot, ChatbotRAG
+from extract_and_save import process_all_documents
+from create_vectorstore import crea_vectorstore_free
+from ollama_llm import setup_ollama
 
 def check_requirements():
     """Verifica requisiti del sistema"""
@@ -77,7 +81,7 @@ def setup_project():
     if not os.path.exists("vectordb") or not os.listdir("vectordb"):
         print("\n🔄 Creazione vectorstore...")
         try:
-            from src.split_into_chunks import split_text_in_chunks
+            from split_into_chunks import split_text_in_chunks
             import glob
             
             cartella_estratti = "extracted_text"
