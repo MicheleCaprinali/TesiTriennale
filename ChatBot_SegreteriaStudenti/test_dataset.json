@@ -1,0 +1,817 @@
+{
+  "metadata": {
+    "created_at": "2025-08-14T16:00:25.172466",
+    "total_queries": 100,
+    "categories": [
+      "tasse",
+      "lauree",
+      "esami",
+      "servizi",
+      "generale",
+      "contatti"
+    ],
+    "description": "Dataset di test per ChatBot RAG UniBG"
+  },
+  "queries": [
+    {
+      "id": 1,
+      "timestamp": "2025-07-26T16:00:25.170219",
+      "query": "Come funziona l'università?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 2,
+      "timestamp": "2025-08-07T16:00:25.170281",
+      "query": "Come richiedo un certificato di laurea con voti?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 3,
+      "timestamp": "2025-08-02T16:00:25.170292",
+      "query": "C'è una mensa universitaria?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 4,
+      "timestamp": "2025-07-24T16:00:25.170301",
+      "query": "Come richiedo l'esonero per reddito delle tasse universitarie?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 5,
+      "timestamp": "2025-08-03T16:00:25.170309",
+      "query": "Posso prenotare un appuntamento con la segreteria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 6,
+      "timestamp": "2025-08-01T16:00:25.170315",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 7,
+      "timestamp": "2025-07-20T16:00:25.170320",
+      "query": "Cosa succede se pago le tasse in ritardo?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 8,
+      "timestamp": "2025-07-18T16:00:25.170337",
+      "query": "C'è una mensa universitaria?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 9,
+      "timestamp": "2025-07-29T16:00:25.170345",
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 10,
+      "timestamp": "2025-07-24T16:00:25.170355",
+      "query": "Che documenti servono per iscriversi alla laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 11,
+      "timestamp": "2025-08-04T16:00:25.170362",
+      "query": "Come ottengo la ricevuta di pagamento delle tasse?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 12,
+      "timestamp": "2025-07-24T16:00:25.170369",
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 13,
+      "timestamp": "2025-08-06T16:00:25.170376",
+      "query": "Come funziona l'università?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 14,
+      "timestamp": "2025-07-26T16:00:25.170386",
+      "query": "Posso prenotare un appuntamento con la segreteria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 15,
+      "timestamp": "2025-08-01T16:00:25.170392",
+      "query": "Come funziona il servizio di orientamento?",
+      "category": "servizi",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 16,
+      "timestamp": "2025-07-21T16:00:25.170403",
+      "query": "Come richiedo l'esonero per reddito delle tasse universitarie?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 17,
+      "timestamp": "2025-08-14T16:00:25.170410",
+      "query": "Quali agevolazioni ci sono per studenti fuori sede?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 18,
+      "timestamp": "2025-08-01T16:00:25.170421",
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 19,
+      "timestamp": "2025-08-12T16:00:25.170428",
+      "query": "Come cambio data di un esame già prenotato?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 20,
+      "timestamp": "2025-07-28T16:00:25.170446",
+      "query": "Quali agevolazioni ci sono per studenti fuori sede?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 21,
+      "timestamp": "2025-08-01T16:00:25.170456",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 22,
+      "timestamp": "2025-08-11T16:00:25.170463",
+      "query": "Perché non riesco ad accedere al mio sportello studenti?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 23,
+      "timestamp": "2025-07-16T16:00:25.170475",
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 24,
+      "timestamp": "2025-08-07T16:00:25.170484",
+      "query": "Posso prenotare un appuntamento con la segreteria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 25,
+      "timestamp": "2025-07-21T16:00:25.170490",
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 26,
+      "timestamp": "2025-08-02T16:00:25.170499",
+      "query": "Dove parcheggio in università?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 27,
+      "timestamp": "2025-07-26T16:00:25.170510",
+      "query": "Posso vedere il mio libretto universitario aggiornato?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 28,
+      "timestamp": "2025-07-17T16:00:25.170519",
+      "query": "Come richiedo l'esonero per reddito delle tasse universitarie?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 29,
+      "timestamp": "2025-07-19T16:00:25.170527",
+      "query": "Quando posso prenotarmi per la sessione di laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 30,
+      "timestamp": "2025-07-18T16:00:25.170538",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 31,
+      "timestamp": "2025-07-29T16:00:25.170545",
+      "query": "Come posso contattare la segreteria via email?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 32,
+      "timestamp": "2025-08-02T16:00:25.170555",
+      "query": "Cosa succede se pago le tasse in ritardo?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 33,
+      "timestamp": "2025-07-17T16:00:25.170562",
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 34,
+      "timestamp": "2025-08-05T16:00:25.170572",
+      "query": "Perché non riesco ad accedere al mio sportello studenti?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 35,
+      "timestamp": "2025-08-14T16:00:25.170581",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 36,
+      "timestamp": "2025-08-05T16:00:25.170587",
+      "query": "Come posso contattare la segreteria via email?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 37,
+      "timestamp": "2025-07-15T16:00:25.170594",
+      "query": "Come richiedo un certificato di laurea con voti?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 38,
+      "timestamp": "2025-07-23T16:00:25.170602",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 39,
+      "timestamp": "2025-07-28T16:00:25.170608",
+      "query": "Dove parcheggio in università?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 40,
+      "timestamp": "2025-08-09T16:00:25.170619",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 41,
+      "timestamp": "2025-08-01T16:00:25.170625",
+      "query": "Come posso contattare la segreteria via email?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 42,
+      "timestamp": "2025-08-02T16:00:25.170634",
+      "query": "Che corsi ci sono a ingegneria?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 43,
+      "timestamp": "2025-08-06T16:00:25.170644",
+      "query": "Perché non riesco ad accedere al mio sportello studenti?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 44,
+      "timestamp": "2025-07-23T16:00:25.170657",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 45,
+      "timestamp": "2025-07-27T16:00:25.170665",
+      "query": "Posso vedere il mio libretto universitario aggiornato?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 46,
+      "timestamp": "2025-08-02T16:00:25.170675",
+      "query": "Come posso contattare la segreteria via email?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 47,
+      "timestamp": "2025-07-21T16:00:25.170685",
+      "query": "Posso iscrivermi a un esame se ho ancora un debito?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 48,
+      "timestamp": "2025-08-10T16:00:25.170692",
+      "query": "Come richiedo un certificato di laurea con voti?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 49,
+      "timestamp": "2025-07-28T16:00:25.170704",
+      "query": "Posso prenotare un appuntamento con la segreteria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 50,
+      "timestamp": "2025-07-16T16:00:25.170710",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 51,
+      "timestamp": "2025-07-19T16:00:25.170714",
+      "query": "Quanto tempo ci vuole per avere la pergamena?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 52,
+      "timestamp": "2025-08-03T16:00:25.171069",
+      "query": "Quando posso prenotarmi per la sessione di laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 53,
+      "timestamp": "2025-08-10T16:00:25.171163",
+      "query": "Posso vedere il mio libretto universitario aggiornato?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 54,
+      "timestamp": "2025-07-29T16:00:25.171181",
+      "query": "Quando devo pagare la seconda rata delle tasse?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 55,
+      "timestamp": "2025-08-07T16:00:25.171190",
+      "query": "Come ottengo la ricevuta di pagamento delle tasse?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 56,
+      "timestamp": "2025-08-11T16:00:25.171198",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 57,
+      "timestamp": "2025-08-06T16:00:25.171205",
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 58,
+      "timestamp": "2025-07-16T16:00:25.171214",
+      "query": "Cosa succede se pago le tasse in ritardo?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 59,
+      "timestamp": "2025-07-18T16:00:25.171222",
+      "query": "Perché non riesco ad accedere al mio sportello studenti?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 60,
+      "timestamp": "2025-07-19T16:00:25.171240",
+      "query": "Quanto tempo ci vuole per avere la pergamena?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 61,
+      "timestamp": "2025-07-25T16:00:25.171249",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 62,
+      "timestamp": "2025-08-03T16:00:25.171256",
+      "query": "Quando riceverò l'esito della mia domanda di borsa di studio?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 63,
+      "timestamp": "2025-08-08T16:00:25.171270",
+      "query": "Come richiedo supporto per studenti con DSA?",
+      "category": "servizi",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 64,
+      "timestamp": "2025-07-30T16:00:25.171281",
+      "query": "Cosa succede se pago le tasse in ritardo?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 65,
+      "timestamp": "2025-08-04T16:00:25.171288",
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 66,
+      "timestamp": "2025-08-09T16:00:25.171299",
+      "query": "Dove trovo informazioni sui tirocini curricolari?",
+      "category": "servizi",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 67,
+      "timestamp": "2025-07-16T16:00:25.171317",
+      "query": "Come cambio data di un esame già prenotato?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 68,
+      "timestamp": "2025-08-03T16:00:25.171331",
+      "query": "Quando riceverò l'esito della mia domanda di borsa di studio?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 69,
+      "timestamp": "2025-08-13T16:00:25.171342",
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 70,
+      "timestamp": "2025-07-28T16:00:25.171351",
+      "query": "Come richiedo supporto per studenti con DSA?",
+      "category": "servizi",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 71,
+      "timestamp": "2025-07-17T16:00:25.171360",
+      "query": "Che documenti servono per iscriversi alla laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 72,
+      "timestamp": "2025-08-11T16:00:25.171377",
+      "query": "Che documenti servono per iscriversi alla laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 73,
+      "timestamp": "2025-07-30T16:00:25.171384",
+      "query": "Come richiedo un certificato di laurea con voti?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 74,
+      "timestamp": "2025-08-12T16:00:25.171393",
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 75,
+      "timestamp": "2025-07-17T16:00:25.171400",
+      "query": "Che documenti servono per iscriversi alla laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 76,
+      "timestamp": "2025-08-07T16:00:25.171407",
+      "query": "Come funziona il servizio di orientamento?",
+      "category": "servizi",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 77,
+      "timestamp": "2025-07-25T16:00:25.171418",
+      "query": "Che corsi ci sono a ingegneria?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 78,
+      "timestamp": "2025-07-18T16:00:25.171430",
+      "query": "Come richiedo l'esonero per reddito delle tasse universitarie?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 79,
+      "timestamp": "2025-07-20T16:00:25.171438",
+      "query": "Come posso contattare la segreteria via email?",
+      "category": "contatti",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 80,
+      "timestamp": "2025-08-03T16:00:25.171448",
+      "query": "Perché non riesco ad accedere al mio sportello studenti?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 81,
+      "timestamp": "2025-07-31T16:00:25.171459",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 82,
+      "timestamp": "2025-07-18T16:00:25.171466",
+      "query": "Posso iscrivermi a un esame se ho ancora un debito?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 83,
+      "timestamp": "2025-07-20T16:00:25.171473",
+      "query": "Quando posso prenotarmi per la sessione di laurea?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 84,
+      "timestamp": "2025-08-04T16:00:25.171480",
+      "query": "Come funziona l'università?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 85,
+      "timestamp": "2025-08-06T16:00:25.171490",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 86,
+      "timestamp": "2025-07-31T16:00:25.171497",
+      "query": "Posso prenotare un appuntamento con la segreteria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 87,
+      "timestamp": "2025-07-25T16:00:25.171504",
+      "query": "Come richiedo l'esonero per reddito delle tasse universitarie?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 88,
+      "timestamp": "2025-08-05T16:00:25.171511",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 89,
+      "timestamp": "2025-07-19T16:00:25.171519",
+      "query": "Come funziona il servizio di orientamento?",
+      "category": "servizi",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 90,
+      "timestamp": "2025-07-29T16:00:25.171529",
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 91,
+      "timestamp": "2025-07-18T16:00:25.171538",
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 92,
+      "timestamp": "2025-08-12T16:00:25.171544",
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 93,
+      "timestamp": "2025-08-01T16:00:25.171550",
+      "query": "Il mio piano di studi è stato approvato?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 94,
+      "timestamp": "2025-07-22T16:00:25.171584",
+      "query": "Quando riceverò l'esito della mia domanda di borsa di studio?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 95,
+      "timestamp": "2025-07-23T16:00:25.171596",
+      "query": "Quando riceverò l'esito della mia domanda di borsa di studio?",
+      "category": "generale",
+      "expected_redirect": true,
+      "priority": "high"
+    },
+    {
+      "id": 96,
+      "timestamp": "2025-07-19T16:00:25.171607",
+      "query": "Come richiedo un certificato di laurea con voti?",
+      "category": "lauree",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 97,
+      "timestamp": "2025-08-12T16:00:25.171616",
+      "query": "Posso prenotare un appuntamento con la segreteria?",
+      "category": "esami",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 98,
+      "timestamp": "2025-07-30T16:00:25.171623",
+      "query": "Dove parcheggio in università?",
+      "category": "generale",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 99,
+      "timestamp": "2025-07-16T16:00:25.171634",
+      "query": "Dove si trova l'ufficio tasse e contributi?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    },
+    {
+      "id": 100,
+      "timestamp": "2025-07-26T16:00:25.171641",
+      "query": "Quando devo pagare la seconda rata delle tasse?",
+      "category": "tasse",
+      "expected_redirect": false,
+      "priority": "normal"
+    }
+  ]
+}

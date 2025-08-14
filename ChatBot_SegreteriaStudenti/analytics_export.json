@@ -1,0 +1,229 @@
+{
+  "export_timestamp": "2025-08-14T15:56:02.460913",
+  "queries": [
+    [
+      1,
+      "2025-08-14 13:56:02",
+      "Come faccio a iscrivermi agli esami?",
+      "Risposta di test per: Come faccio a iscrivermi agli esami?",
+      3.6950032074916805,
+      7,
+      0,
+      null
+    ],
+    [
+      2,
+      "2025-08-14 13:56:02",
+      "Come richiedere certificati?",
+      "Risposta di test per: Come richiedere certificati?",
+      2.651556049583177,
+      6,
+      0,
+      null
+    ],
+    [
+      3,
+      "2025-08-14 13:56:02",
+      "Come richiedere certificati?",
+      "Risposta di test per: Come richiedere certificati?",
+      3.989364751863369,
+      7,
+      1,
+      null
+    ],
+    [
+      4,
+      "2025-08-14 13:56:02",
+      "Come faccio a iscrivermi agli esami?",
+      "Risposta di test per: Come faccio a iscrivermi agli esami?",
+      2.7226805792095403,
+      6,
+      1,
+      null
+    ],
+    [
+      5,
+      "2025-08-14 13:56:02",
+      "Come faccio a iscrivermi agli esami?",
+      "Risposta di test per: Come faccio a iscrivermi agli esami?",
+      3.1348591842971025,
+      5,
+      1,
+      null
+    ],
+    [
+      6,
+      "2025-08-14 13:56:02",
+      "Come faccio a iscrivermi agli esami?",
+      "Risposta di test per: Come faccio a iscrivermi agli esami?",
+      3.2404978751140248,
+      3,
+      1,
+      null
+    ],
+    [
+      7,
+      "2025-08-14 13:56:02",
+      "Orari della segreteria?",
+      "Risposta di test per: Orari della segreteria?",
+      1.9156223056430222,
+      6,
+      0,
+      null
+    ],
+    [
+      8,
+      "2025-08-14 13:56:02",
+      "Orari della segreteria?",
+      "Risposta di test per: Orari della segreteria?",
+      2.8492863079903197,
+      8,
+      0,
+      null
+    ],
+    [
+      9,
+      "2025-08-14 13:56:02",
+      "Come richiedere certificati?",
+      "Risposta di test per: Come richiedere certificati?",
+      1.6759553671404523,
+      6,
+      0,
+      null
+    ],
+    [
+      10,
+      "2025-08-14 13:56:02",
+      "Quando devo pagare le tasse?",
+      "Risposta di test per: Quando devo pagare le tasse?",
+      3.897451389825638,
+      8,
+      0,
+      null
+    ],
+    [
+      11,
+      "2025-08-14 13:56:02",
+      "Orari della segreteria?",
+      "Risposta di test per: Orari della segreteria?",
+      3.6358579409278806,
+      6,
+      0,
+      null
+    ],
+    [
+      12,
+      "2025-08-14 13:56:02",
+      "Quando devo pagare le tasse?",
+      "Risposta di test per: Quando devo pagare le tasse?",
+      3.0878847661162414,
+      7,
+      0,
+      null
+    ],
+    [
+      13,
+      "2025-08-14 13:56:02",
+      "Come richiedere certificati?",
+      "Risposta di test per: Come richiedere certificati?",
+      2.2787106159549815,
+      4,
+      0,
+      null
+    ],
+    [
+      14,
+      "2025-08-14 13:56:02",
+      "Come faccio a iscrivermi agli esami?",
+      "Risposta di test per: Come faccio a iscrivermi agli esami?",
+      3.2788413147982274,
+      6,
+      1,
+      null
+    ],
+    [
+      15,
+      "2025-08-14 13:56:02",
+      "Come richiedere certificati?",
+      "Risposta di test per: Come richiedere certificati?",
+      1.8248383009477038,
+      7,
+      1,
+      null
+    ],
+    [
+      16,
+      "2025-08-14 13:56:02",
+      "Orari della segreteria?",
+      "Risposta di test per: Orari della segreteria?",
+      3.2059299330695317,
+      4,
+      1,
+      null
+    ],
+    [
+      17,
+      "2025-08-14 13:56:02",
+      "Quando devo pagare le tasse?",
+      "Risposta di test per: Quando devo pagare le tasse?",
+      2.897235729651771,
+      6,
+      1,
+      null
+    ],
+    [
+      18,
+      "2025-08-14 13:56:02",
+      "Come faccio a iscrivermi agli esami?",
+      "Risposta di test per: Come faccio a iscrivermi agli esami?",
+      2.1112518043759696,
+      8,
+      1,
+      null
+    ],
+    [
+      19,
+      "2025-08-14 13:56:02",
+      "Orari della segreteria?",
+      "Risposta di test per: Orari della segreteria?",
+      2.1574640970714962,
+      7,
+      1,
+      null
+    ],
+    [
+      20,
+      "2025-08-14 13:56:02",
+      "Orari della segreteria?",
+      "Risposta di test per: Orari della segreteria?",
+      1.5296013591254098,
+      8,
+      0,
+      null
+    ]
+  ],
+  "performance": [],
+  "stats": {
+    "total_queries": 20,
+    "avg_response_time": 2.79,
+    "redirect_rate": 50.0,
+    "frequent_queries": [
+      [
+        "Orari della segreteria?",
+        6
+      ],
+      [
+        "Come faccio a iscrivermi agli esami?",
+        6
+      ],
+      [
+        "Come richiedere certificati?",
+        5
+      ],
+      [
+        "Quando devo pagare le tasse?",
+        3
+      ]
+    ]
+  }
+}
