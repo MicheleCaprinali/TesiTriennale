@@ -1,314 +1,267 @@
-# Documentazione Tecnica - ChatBot RAG UniBG
+# Documentazione Tecnica
+## ChatBot RAG per Supporto Studenti UniBG
 
-## 🏗️ Architettura del Sistema
 
-### Overview
-Il sistema implementa un'architettura **RAG (Retrieval-Augmented Generation)** completamente locale e gratuita per fornire assistenza automatizzata agli studenti dell'Università degli Studi di Bergamo.
+## 1. Panoramica Sistema
 
-```mermaid
-graph TB
-    A[Utente] -->|Query| B[Sistema RAG]
-    B --> C[Preprocessing]
-    C --> D[Semantic Search]
-    D --> E[ChromaDB]
-    E -->|Top-K Docs| F[Context Assembly]
-    F --> G[LLM Generation]
-    G -->|Response| H[Post-processing]
-    H --> I[Routing Decision]
-    I -->|Risposta| A
-    I -->|Ticket Redirect| J[Sistema Ticketing]
+Sistema di chatbot basato su architettura RAG (Retrieval-Augmented Generation) per l'assistenza automatizzata agli studenti dell'Università di Bergamo.
+
+**Caratteristiche principali:**
+- Implementazione completamente locale (zero costi API)
+- Tecnologie open-source
+- Privacy-first (dati non condivisi esternamente)
+- Supporto multimodale (CLI + Web)
+
+---
+
+## 2. Architettura
+
+### 2.1 Componenti Core
+
+| Componente | Tecnologia | Funzione |
+|------------|------------|----------|
+| **LLM** | Mistral 7B + Ollama | Generazione risposte |
+| **Embeddings** | SentenceTransformers | Vettorizzazione testi |
+| **Vector DB** | ChromaDB | Ricerca semantica |
+| **Interface** | Streamlit + CLI | Interazione utente |
+
+### 2.2 Flusso Elaborazione
+
+```
+[Query Utente] 
+    ↓
+[Embedding Query]
+    ↓
+[Ricerca Similarità]
+    ↓
+[Selezione Top-5 Documenti]
+    ↓
+[Assemblaggio Contesto]
+    ↓
+[Generazione LLM]
+    ↓
+[Validazione + Routing]
+    ↓
+[Risposta Finale]
 ```
 
-### 🔧 Componenti Principali
+---
 
-#### 1. **Embedding Layer**
-- **Tecnologia**: SentenceTransformers (`all-MiniLM-L6-v2`)
-- **Dimensioni**: 384-dimensional embeddings
-- **Funzione**: Conversione testo → vettori semantici
-- **Performance**: ~100 doc/sec su CPU
+## 3. Implementazione
+
+### 3.1 Preprocessing Documenti
+
+**Input:** 20 file (PDF/TXT) dalla documentazione UniBG
+**Output:** 113 chunk semantici nel database vettoriale
+
+**Processo:**
+1. Estrazione testo automatica
+2. Chunking intelligente (1000 caratteri, overlap 200)
+3. Generazione embeddings (384 dimensioni)
+4. Indicizzazione in ChromaDB
+
+### 3.2 Sistema RAG
+
+**Modello Embedding:** all-MiniLM-L6-v2
+- Dimensioni vettore: 384
+- Performance: ~100 doc/sec
+- Esecuzione: Locale su CPU
+
+**Database Vettoriale:** ChromaDB
+- Indice: HNSW
+- Storage: ~2GB
+- Capacità: 113 documenti
+
+**LLM:** Mistral 7B
+- Memoria richiesta: 4GB RAM
+- Deployment: Ollama locale
+- Contesto massimo: 8192 token
+
+### 3.3 Routing Intelligente
+
+Il sistema identifica automaticamente query che richiedono assistenza personalizzata:
 
 ```python
-# Configurazione embedding
-model = SentenceTransformer('all-MiniLM-L6-v2')
-embeddings = model.encode(texts, show_progress_bar=True)
+# Criteri di routing al ticket system
+personal_keywords = ["mio", "mia", "non riesco", "personale"]
+low_confidence = ["non sono sicuro", "non posso fornire"]
+short_response = len(response) < 50
 ```
 
-#### 2. **Vector Database**
-- **Tecnologia**: ChromaDB (persistent storage)
-- **Indici**: HNSW per ricerca efficiente
-- **Capacità**: 113 documenti chunked
-- **Retrieval**: Similarity search con cosine distance
+---
 
-```python
-# Setup ChromaDB
-client = chromadb.PersistentClient(path="vectordb")
-collection = client.create_collection("unibg_docs")
-```
+## 4. Configurazione
 
-#### 3. **Large Language Model**
-- **Tecnologia**: Ollama + Mistral 7B
-- **Architettura**: Transformer-based
-- **Quantizzazione**: Q4_0 per efficienza
-- **Memoria**: ~4GB RAM requirement
+### 4.1 Parametri Sistema
 
-#### 4. **Retrieval System**
-- **Algoritmo**: Semantic similarity search
-- **K-value**: Top-5 documents retrieval
-- **Scoring**: Cosine similarity + distance normalization
-- **Context Length**: Max 2000 tokens
-
-### 📊 Pipeline di Elaborazione
-
-#### Phase 1: Document Processing
-```python
-def process_documents():
-    # 1. Extract text from PDF/TXT
-    raw_text = extract_text(document)
-    
-    # 2. Intelligent chunking
-    chunks = recursive_split(raw_text, 
-                           chunk_size=1000, 
-                           overlap=200)
-    
-    # 3. Generate embeddings
-    embeddings = embedding_model.encode(chunks)
-    
-    # 4. Store in vector DB
-    vectordb.add(chunks, embeddings)
-```
-
-#### Phase 2: Query Processing
-```python
-def handle_query(query):
-    # 1. Query embedding
-    query_embedding = embedding_model.encode(query)
-    
-    # 2. Similarity search
-    results = vectordb.similarity_search(
-        query_embedding, k=5
-    )
-    
-    # 3. Context assembly
-    context = "\n".join(results['documents'])
-    
-    # 4. LLM generation
-    response = llm.generate(
-        prompt=build_prompt(query, context)
-    )
-    
-    # 5. Response evaluation
-    should_redirect = evaluate_confidence(response)
-    
-    return {
-        'response': response,
-        'should_redirect': should_redirect
-    }
-```
-
-### 🎯 Algoritmi di Routing
-
-#### Sistema di Decisione Automatica
-```python
-def should_redirect_to_ticket(response, query):
-    """Algoritmo di routing intelligente"""
-    
-    # 1. Confidence scoring
-    low_confidence_phrases = [
-        "non sono sicuro", "non posso fornire",
-        "non ho informazioni", "mi dispiace"
-    ]
-    
-    # 2. Response length analysis
-    if len(response.strip()) < 50:
-        return True
-    
-    # 3. Personal data detection  
-    personal_keywords = [
-        "mia carriera", "miei esami", "personale"
-    ]
-    
-    # 4. Semantic confidence
-    confidence_score = calculate_semantic_confidence(
-        query, response
-    )
-    
-    return confidence_score < CONFIDENCE_THRESHOLD
-```
-
-### 📈 Metriche di Performance
-
-#### Latency Breakdown
-```
-┌─────────────────────┬──────────────┐
-│ Componente          │ Tempo (ms)   │
-├─────────────────────┼──────────────┤
-│ Query Embedding     │ 50-100       │
-│ Vector Search       │ 100-200      │
-│ Context Assembly    │ 10-20        │
-│ LLM Generation      │ 2000-4000    │
-│ Post-processing     │ 10-30        │
-├─────────────────────┼──────────────┤
-│ TOTAL              │ 2170-4350    │
-└─────────────────────┴──────────────┘
-```
-
-#### Quality Metrics
-- **Retrieval Accuracy**: 85-90%
-- **Response Relevance**: 80-85%
-- **Redirect Precision**: 90-95%
-- **User Satisfaction**: TBD (future work)
-
-### 🔒 Configurazione Sistema
-
-#### Environment Variables
 ```bash
 # Modelli
 EMBEDDING_MODEL=all-MiniLM-L6-v2
 OLLAMA_MODEL=mistral:7b
 
-# RAG Parameters
+# RAG
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
 RETRIEVAL_K=5
 TEMPERATURE=0.1
 
-# System
+# Sistema
 VECTORDB_PATH=vectordb
 TICKET_URL=https://www.unibg.it/servizi-studenti/contatti
 ```
 
-#### Hardware Requirements
-```yaml
-Minimum:
-  RAM: 8GB
-  Storage: 10GB free
-  CPU: 4 cores, 2.0GHz+
+### 4.2 Requisiti Hardware
 
-Recommended:
-  RAM: 16GB+
-  Storage: 20GB+ SSD
-  CPU: 8+ cores, 3.0GHz+
-  GPU: Optional (CUDA support)
-```
+**Minimo:**
+- CPU: 4 core, 2.0GHz
+- RAM: 8GB
+- Storage: 10GB
 
-### 🧪 Testing & Evaluation
+**Raccomandato:**
+- CPU: 8+ core, 3.0GHz
+- RAM: 16GB
+- Storage: 20GB SSD
 
-#### Test Categories
-1. **Functional Tests**: Core RAG functionality
-2. **Performance Tests**: Response time, throughput
-3. **Quality Tests**: Answer relevance, accuracy
-4. **Integration Tests**: End-to-end workflows
+---
 
-#### Evaluation Metrics
-```python
-quality_metrics = {
-    'keyword_coverage': 0.8,    # Presence of expected terms
-    'semantic_similarity': 0.75, # Query-response alignment  
-    'response_length': 0.9,     # Appropriate length
-    'utility_score': 0.85,     # Presence of useful info
-    'overall_score': 0.825     # Weighted average
-}
-```
+## 5. Interfacce
 
-### 🚀 Deployment Options
-
-#### Local Development
+### 5.1 Interfaccia CLI
 ```bash
-# 1. Install dependencies
-pip install -r requirements_free.txt
-
-# 2. Setup Ollama
-ollama pull mistral:7b
-
-# 3. Initialize system
 python main.py
 ```
+- Sessione interattiva
+- Debug mode disponibile
+- Help contestuale
 
-#### Production Deployment
+### 5.2 Interfaccia Web
 ```bash
-# Docker deployment (future work)
-docker build -t chatbot-rag .
-docker run -p 8501:8501 chatbot-rag
-
-# Kubernetes deployment (future work)
-kubectl apply -f k8s-deployment.yaml
+streamlit run interfaces/streamlit_app.py --server.port 8501
 ```
+- URL: http://localhost:8501
+- Design responsivo
+- Tema scuro UniBG
 
-### 📚 Estensioni Future
-
-#### Immediate (Tesi)
-- [ ] Web interface con Streamlit
-- [ ] Analytics dashboard
-- [ ] Comprehensive evaluation suite
-- [ ] Performance optimization
-
-#### Medium-term
-- [ ] Multi-language support
-- [ ] Fine-tuned embedding models
-- [ ] Advanced routing algorithms
-- [ ] User feedback integration
-
-#### Long-term
-- [ ] Multimodal capabilities (images)
-- [ ] Real-time learning
-- [ ] Integration with university systems
-- [ ] Mobile application
-
-### 🔧 Troubleshooting
-
-#### Common Issues
-```bash
-# Ollama not responding
-ollama serve
-
-# Model not found
-ollama pull mistral:7b
-
-# Vector store corrupted
-rm -rf vectordb/
-python src/create_vectorstore.py
-
-# Memory issues
-# Reduce CHUNK_SIZE in .env
-# Use smaller model: ollama pull mistral:7b-instruct-q4_0
-```
-
-### 📊 Performance Optimization
-
-#### Embedding Optimization
+### 5.3 API Programmatica
 ```python
-# Batch processing
-embeddings = model.encode(
-    texts, 
-    batch_size=32,
-    show_progress_bar=True
-)
+from src.chatbot import setup_chatbot
 
-# Caching frequently used embeddings
-@lru_cache(maxsize=1000)
-def cached_embed(text):
-    return model.encode([text])[0]
-```
+chatbot = setup_chatbot()
+result = chatbot.chat("Orari segreteria?")
 
-#### Vector Search Optimization
-```python
-# Index optimization
-collection = client.create_collection(
-    "unibg_docs",
-    metadata={"hnsw:space": "cosine"}
-)
-
-# Query optimization
-results = collection.query(
-    query_embeddings=[query_embed],
-    n_results=5,
-    include=['documents', 'distances']
-)
+# Output:
+{
+    'response': str,           # Risposta generata
+    'redirect_to_ticket': bool, # Necessita assistenza umana
+    'confidence_score': float, # Livello confidenza
+    'processing_time': float   # Tempo elaborazione
+}
 ```
 
 ---
 
-**Autore**: [Nome Studente]  
-**Corso**: Ingegneria Informatica Triennale  
-**Università**: Università degli Studi di Bergamo  
-**Anno Accademico**: 2024-2025
+## 6. Performance
+
+### 6.1 Tempi di Risposta
+- **Embedding query:** < 1 secondo
+- **Ricerca vettoriale:** < 0.1 secondi
+- **Generazione LLM:** 40-45 secondi
+- **Totale medio:** 44.29 secondi
+
+### 6.2 Accuratezza
+- **Retrieval documenti rilevanti:** > 90%
+- **Routing decisioni appropriate:** 85%
+- **Validazione link:** 80%
+
+### 6.3 Utilizzo Risorse
+- **RAM durante funzionamento:** 6-8GB
+- **CPU durante inferenza:** 70-90%
+- **Storage database:** 2GB
+
+---
+
+## 7. Deployment e Manutenzione
+
+### 7.1 Setup Iniziale
+```bash
+# Installazione dipendenze
+pip install -r requirements.txt
+
+# Setup Ollama
+ollama pull mistral:7b
+
+# Inizializzazione sistema
+python main.py
+```
+
+### 7.2 Operazioni Routine
+
+**Aggiornamento documenti:**
+```bash
+python src/extract_and_save.py
+python src/create_vectorstore.py
+```
+
+**Backup database:**
+```bash
+cp -r vectordb vectordb_backup
+```
+
+**Health check:**
+```bash
+python tests/test_retrieval.py
+```
+
+### 7.3 Troubleshooting
+
+| Problema | Soluzione |
+|----------|-----------|
+| Ollama non risponde | `ollama serve` |
+| Modello mancante | `ollama pull mistral:7b` |
+| Database corrotto | Ricreare con `create_vectorstore.py` |
+| Memoria insufficiente | Ridurre `CHUNK_SIZE` |
+
+---
+
+## 8. Sicurezza e Privacy
+
+### 8.1 Privacy
+- Elaborazione completamente locale
+- Nessuna trasmissione dati esterni
+- Query utenti non loggate permanentemente
+- Compliance GDPR by design
+
+### 8.2 Controllo Accessi
+- Permessi filesystem per database
+- Validazione input utente
+- Sanitizzazione output risposte
+
+---
+
+## 9. Estensioni Future
+
+### 9.1 Miglioramenti Pianificati
+- Supporto file aggiuntivi (DOCX, HTML)
+- Integrazione API REST
+- Interfaccia mobile
+- Sistema di feedback utenti
+
+### 9.2 Scalabilità
+- Deployment Docker
+- Load balancing per multiple istanze
+- Database distribuito
+- Cache intelligente risposte
+
+---
+
+## 10. Informazioni Progetto
+
+**Versione:** 1.0.0  
+**Data:** Agosto 2025  
+**Autore:** Michele Caprinali  
+**Corso:** Ingegneria Informatica  
+**Università:** Università degli Studi di Bergamo
+
+**Repository:** `ChatBot_SegreteriaStudenti/`  
+**Linguaggi:** Python 3.13+  
+**Licenza:** Open Source

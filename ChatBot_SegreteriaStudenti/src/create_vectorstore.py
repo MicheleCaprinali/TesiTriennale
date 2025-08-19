@@ -62,11 +62,12 @@ def crea_vectorstore_free(chunk_list, persist_dir="vectordb"):
     
     return collection
 
-def search_vectorstore(query, persist_dir="vectordb", k=5):
+def search_vectorstore(query, persist_dir="vectordb", k=5, embedder=None):
     """
     Cerca nel vectorstore esistente
     """
-    embedder = LocalEmbeddings()
+    if embedder is None:
+        embedder = LocalEmbeddings()
     
     # Connetti a ChromaDB esistente
     client = chromadb.PersistentClient(path=persist_dir)

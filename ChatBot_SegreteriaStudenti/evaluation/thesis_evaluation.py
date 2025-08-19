@@ -74,7 +74,8 @@ class ThesisEvaluator:
             # Misura tempo di risposta
             start_time = time.time()
             try:
-                response = self.chatbot.query(query)
+                result = self.chatbot.chat(query)
+                response = result['response']
                 end_time = time.time()
                 
                 response_time = end_time - start_time
@@ -84,7 +85,7 @@ class ThesisEvaluator:
                 results['queries_tested'].append(query)
                 
                 # Verifica accuratezza redirect
-                is_redirect = "contattare direttamente" in response.lower() or "sportello studenti" in response.lower()
+                is_redirect = result.get('should_redirect', False)
                 correct_redirect = (is_redirect == expected_redirect)
                 results['redirect_accuracy'].append(correct_redirect)
                 

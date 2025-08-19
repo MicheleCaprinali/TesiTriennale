@@ -28,7 +28,8 @@ class ChatbotRAG:
             results = search_vectorstore(
                 query, 
                 persist_dir=self.vectordb_path, 
-                k=self.retrieval_k
+                k=self.retrieval_k,
+                embedder=self.embedder  # Passa l'embedder esistente
             )
             
             # Estrai i documenti più rilevanti
@@ -43,11 +44,33 @@ class ChatbotRAG:
             print(f"⚠️  Errore nel recupero contesto: {str(e)}")
             return ""
     
+    def validate_and_clean_response(self, response: str, context: str) -> str:
+        """Valida e pulisce la risposta rimuovendo link non validi"""
+        import re
+        
+        # Trova tutti i link nella risposta
+        url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+        response_urls = re.findall(url_pattern, response)
+        
+        # Trova tutti i link nel contesto
+        context_urls = re.findall(url_pattern, context)
+        
+        # Rimuovi link che non sono nel contesto originale
+        for url in response_urls:
+            if url not in context_urls:
+                # Link inventato dall'LLM - rimuovilo
+                response = response.replace(url, "[LINK RIMOSSO - contatta la segreteria per informazioni specifiche]")
+                print(f"⚠️  Rimosso link non valido: {url}")
+        
+        return response
+
     def generate_response(self, query: str, context: str) -> str:
         """Genera risposta usando il LLM locale"""
         try:
             response = self.llm.generate(query, context)
-            return response
+            # Valida e pulisce la risposta
+            cleaned_response = self.validate_and_clean_response(response, context)
+            return cleaned_response
         except Exception as e:
             return f"Errore nella generazione della risposta: {str(e)}"
     
@@ -58,9 +81,9 @@ class ChatbotRAG:
         print("🔍 Ricerca documenti pertinenti...")
         context = self.retrieve_context(query)
         
-        if not context:
+        if not context or len(context.strip()) < 50:
             return {
-                "response": "Mi dispiace, non ho trovato informazioni pertinenti alla tua domanda.",
+                "response": "Mi dispiace, non ho trovato informazioni pertinenti alla tua domanda nei documenti disponibili. Ti suggerisco di contattare direttamente la segreteria per un'assistenza personalizzata.",
                 "context_found": False,
                 "should_redirect": True
             }
@@ -72,6 +95,10 @@ class ChatbotRAG:
         # Step 3: Valuta se rimandare al ticket
         should_redirect = self._should_redirect_to_ticket(response, query)
         
+        # Step 4: Aggiungi suggerimento di contatto se necessario
+        if should_redirect and "contatt" not in response.lower():
+            response += "\n\nPer informazioni più specifiche o assistenza personalizzata, ti consiglio di contattare direttamente la segreteria studenti."
+        
         return {
             "response": response,
             "context_found": True,
@@ -82,37 +109,60 @@ class ChatbotRAG:
     def _should_redirect_to_ticket(self, response: str, query: str) -> bool:
         """Determina se rimandare l'utente al sistema di ticketing"""
         
-        # Frasi che indicano bassa confidenza
-        low_confidence_phrases = [
+        # Frasi che indicano bassa confidenza o necessità di assistenza personalizzata
+        redirect_indicators = [
+            "non ho informazioni sufficienti",
             "non sono sicuro",
             "non posso fornire",
-            "non ho informazioni sufficienti",
             "non so",
             "mi dispiace, non",
-            "errore nella"
+            "errore nella",
+            "contatta la segreteria",
+            "rivolgiti alla segreteria",
+            "informazioni specifiche",
+            "caso particolare",
+            "situazione personale"
         ]
         
         # Verifica lunghezza risposta (troppo corta = poco informativa)
-        if len(response.strip()) < 50:
+        if len(response.strip()) < 30:
             return True
         
         # Verifica frasi di bassa confidenza
         response_lower = response.lower()
-        for phrase in low_confidence_phrases:
-            if phrase in response_lower:
+        for indicator in redirect_indicators:
+            if indicator in response_lower:
                 return True
         
-        # Domande che richiedono dati personali/specifici
-        personal_keywords = [
-            "mia carriera", "miei esami", "mio piano", "miei crediti", 
-            "mia situazione", "personale", "specifica situazione",
-            "caso particolare", "mia iscrizione"
+        # Domande che richiedono accesso a dati personali/sistemi universitari
+        personal_query_patterns = [
+            # Carriera personale
+            "mia carriera", "miei esami", "mio piano", "miei crediti", "mia media",
+            "mia situazione", "mio libretto", "mia iscrizione", "mio stato",
+            
+            # Richieste specifiche/personali
+            "posso", "devo", "quando devo", "come faccio a", "il mio caso",
+            "la mia", "il mio", "personale", "specifica", "particolare",
+            
+            # Procedure che richiedono identificazione
+            "iscrivere esame", "presentare domanda", "richiedere certificato",
+            "pagare tassa", "modificare piano", "cambiare corso"
         ]
         
         query_lower = query.lower()
-        for keyword in personal_keywords:
-            if keyword in query_lower:
+        for pattern in personal_query_patterns:
+            if pattern in query_lower:
                 return True
+        
+        # Se la risposta è generica e la domanda sembra specifica
+        generic_response_keywords = ["in generale", "solitamente", "di solito", "normalmente"]
+        specific_question_keywords = ["quando", "come", "dove", "perché", "cosa devo"]
+        
+        has_generic_response = any(keyword in response_lower for keyword in generic_response_keywords)
+        has_specific_question = any(keyword in query_lower for keyword in specific_question_keywords)
+        
+        if has_generic_response and has_specific_question:
+            return True
         
         return False
 

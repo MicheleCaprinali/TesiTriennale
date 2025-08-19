@@ -47,11 +47,16 @@ class OllamaLLM:
             return []
     
     def generate(self, prompt: str, context: str = "") -> str:
-        """Genera risposta usando Ollama"""
+        """Genera risposta usando Ollama con retry automatico"""
         
-        # Costruisce il prompt completo
-        full_prompt = f"""Sei un assistente della Segreteria Studenti dell'Università degli Studi di Bergamo.
-Rispondi in italiano in modo professionale ma amichevole.
+        # Costruisce il prompt completo OTTIMIZZATO E CONCISO
+        full_prompt = f"""Sei l'assistente AI della Segreteria UniBG. Rispondi in italiano, modo professionale e conciso.
+
+REGOLE CRITICHE:
+- USA SOLO informazioni dal CONTESTO fornito
+- Se non hai info sufficienti: "Non ho informazioni sufficienti"
+- Link: copia ESATTAMENTE dal contesto, MAI inventare
+- Massimo 150 parole per risposta
 
 CONTESTO:
 {context}
@@ -59,7 +64,7 @@ CONTESTO:
 DOMANDA: {prompt}
 
 RISPOSTA:"""
-        
+
         payload = {
             "model": self.model,
             "prompt": full_prompt,
@@ -67,28 +72,57 @@ RISPOSTA:"""
             "options": {
                 "temperature": self.temperature,
                 "top_p": 0.9,
-                "max_tokens": 500
+                "max_tokens": 300,  # Ridotto da 500 per risposte più concise
+                "num_predict": 300,  # Limita predizione
+                "stop": ["\n\nDOMANDA:", "DOMANDA STUDENTE:", "CONTESTO:"],  # Stop tokens
+                "repeat_penalty": 1.1,  # Evita ripetizioni
+                "top_k": 40  # Limita vocabolario per velocità
             }
         }
         
-        try:
-            response = requests.post(
-                f"{self.base_url}/api/generate", 
-                json=payload,
-                timeout=60
-            )
-            
-            if response.status_code == 200:
-                result = response.json()
-                return result.get('response', 'Errore nella generazione della risposta.')
-            else:
-                return f"Errore HTTP {response.status_code}: {response.text}"
+        # Sistema di retry con timeout progressivo
+        timeouts = [15, 25, 35]  # Timeout progressivi
+        
+        for attempt, timeout in enumerate(timeouts, 1):
+            try:
+                print(f"🔄 Tentativo {attempt}/{len(timeouts)} (timeout: {timeout}s)")
                 
-        except requests.exceptions.Timeout:
-            return "Timeout: Il modello sta impiegando troppo tempo a rispondere."
-        except Exception as e:
-            return f"Errore nella comunicazione con Ollama: {str(e)}"
-    
+                response = requests.post(
+                    f"{self.base_url}/api/generate", 
+                    json=payload,
+                    timeout=timeout
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    answer = result.get('response', 'Errore nella generazione della risposta.')
+                    
+                    # Verifica che la risposta non sia vuota
+                    if answer.strip():
+                        print(f"✅ Risposta generata al tentativo {attempt}")
+                        return answer
+                    else:
+                        print(f"⚠️  Risposta vuota al tentativo {attempt}")
+                        continue
+                else:
+                    print(f"❌ HTTP {response.status_code} al tentativo {attempt}")
+                    if attempt == len(timeouts):
+                        return f"Errore HTTP {response.status_code}: {response.text}"
+                    continue
+                    
+            except requests.exceptions.Timeout:
+                print(f"⏱️  Timeout al tentativo {attempt} ({timeout}s)")
+                if attempt == len(timeouts):
+                    return "Il sistema sta impiegando troppo tempo. Riprova tra qualche momento o contatta la segreteria."
+                continue
+            except Exception as e:
+                print(f"❌ Errore al tentativo {attempt}: {str(e)}")
+                if attempt == len(timeouts):
+                    return f"Errore nella comunicazione con il sistema: {str(e)}"
+                continue
+        
+        return "Errore imprevisto nella generazione della risposta."
+
     def pull_model(self) -> bool:
         """Scarica il modello se non presente"""
         payload = {"name": self.model}

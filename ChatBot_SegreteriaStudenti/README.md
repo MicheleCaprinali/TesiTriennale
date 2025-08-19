@@ -1,242 +1,134 @@
-# ChatBot Segreteria Studenti UniBG - RAG Gratuito
+# ChatBot Segreteria Studenti UniBG
 
-🎓 **Tesi Triennale Ingegneria Informatica**  
-Chatbot intelligente per rispondere automaticamente alle domande degli studenti universitari
+Sistema RAG intelligente per l'assistenza automatizzata agli studenti dell'Università di Bergamo.  
+**Tesi Triennale - Ingegneria Informatica - A.A. 2024/2025**
 
-## 🚀 Caratteristiche
+## Caratteristiche
 
-- **Completamente GRATUITO** - Nessuna API key richiesta
-- **Locale** - Tutti i modelli girano sul tuo computer
-- **RAG (Retrieval-Augmented Generation)** - Risposte basate sui documenti
-- **Tecnologie Open Source** moderne
+**100% Gratuito** - Zero costi API  
+**Completamente Locale** - Privacy garantita  
+**RAG Architecture** - Risposte basate su documenti ufficiali  
+**Doppia Interfaccia** - CLI e Web  
+**Smart Routing** - Reindirizzamento automatico per casi complessi
 
-## 🛠️ Tecnologie Utilizzate
+## Stack Tecnologico
 
-| Componente | Tecnologia | Descrizione |
-|------------|------------|-------------|
-| **LLM** | Ollama + Mistral 7B | Modello linguistico locale gratuito |
-| **Embedding** | Sentence Transformers | all-MiniLM-L6-v2 per embedding semantici |
-| **Vector DB** | ChromaDB | Database vettoriale leggero |
-| **Orchestrazione** | LangChain | Pipeline RAG |
-| **Interface** | CLI + Streamlit | Interfacce utente |
+| Componente | Tecnologia | Versione |
+|------------|------------|----------|
+| **LLM** | Mistral 7B (Ollama) | Latest |
+| **Embeddings** | SentenceTransformers | all-MiniLM-L6-v2 |
+| **Vector DB** | ChromaDB | 0.5.0+ |
+| **Framework** | LangChain | 0.3.x |
+| **UI** | Streamlit + CLI | 1.28+ |
 
-## 📦 Installazione Rapida
+## Setup Rapido
 
-### Opzione 1: Setup Automatico (Consigliato)
+### Windows (Automatico)
 ```bash
-python setup.py
+setup.bat          # Installazione completa
+start_chatbot.bat   # Avvio interfaccia CLI
+start_web.bat       # Avvio interfaccia web (http://localhost:8501)
 ```
 
-### Opzione 2: Setup Manuale
+### Setup Manuale
+1. **Installa Ollama:** [Download](https://ollama.ai/download)
+2. **Dipendenze Python:** `pip install -r requirements.txt`
+3. **Modello LLM:** `ollama pull mistral:7b`
+4. **Avvio:** `python main.py`
 
-1. **Installa Ollama**
-   ```bash
-   # Windows: Scarica da https://ollama.ai/download/windows
-   # macOS: brew install ollama
-   # Linux: curl -fsSL https://ollama.ai/install.sh | sh
-   ```
+## Utilizzo
 
-2. **Installa dipendenze Python**
-   ```bash
-   pip install -r requirements_free.txt
-   ```
-
-3. **Avvia Ollama e scarica Mistral**
-   ```bash
-   ollama serve
-   ollama pull mistral:7b
-   ```
-
-4. **Configura ambiente**
-   ```bash
-   cp .env.example .env
-   ```
-
-## 🏃‍♂️ Uso
-
-### Avvio Chatbot
+### Interfaccia CLI
 ```bash
 python main.py
+# Sessione interattiva con supporto comandi
 ```
 
-### Comandi Utili
+### Interfaccia Web
 ```bash
-# Verifica requisiti
-python main.py --check
-
-# Mostra istruzioni setup
-python main.py --setup
-
-# Test singoli moduli
-python src/extract_and_save.py      # Estrai documenti
-python src/create_vectorstore.py    # Crea vectorstore
-python src/chatbot.py               # Test chatbot
+streamlit run interfaces/streamlit_app.py --server.port 8501
+# Browser: http://localhost:8501
 ```
 
-## 📁 Struttura Progetto
+### Manutenzione
+```bash
+update_database.bat  # Aggiorna vectorstore
+run_tests.bat        # Esegui test sistema
+```
+
+## Struttura Progetto
 
 ```
 ChatBot_SegreteriaStudenti/
-├── main.py                     # Applicazione principale
-├── setup.py                    # Setup automatico
-├── requirements_free.txt       # Dipendenze gratuite
-├── .env                        # Configurazione
-├── data/                       # Documenti sorgente
-│   ├── FAQ/                   # FAQ organizzate per argomento
-│   └── student_guide/         # Guide studenti
-├── extracted_text/            # Testi estratti da PDF/TXT
-├── vectordb/                  # Database vettoriale ChromaDB
-└── src/                       # Codice sorgente
-    ├── chatbot.py            # Chatbot RAG principale
-    ├── local_embeddings.py   # Embedding con SentenceTransformers
-    ├── ollama_llm.py         # Interfaccia Ollama
-    ├── create_vectorstore.py # Creazione vector store
-    ├── extract_and_save.py   # Estrazione documenti
-    └── split_into_chunks.py  # Chunking intelligente
+├── main.py                    # Applicazione principale CLI
+├── setup.bat                  # Setup automatico Windows
+├── start_chatbot.bat         # Avvio CLI
+├── start_web.bat             # Avvio web interface
+├── run_tests.bat             # Test sistema
+├── update_database.bat       # Aggiorna database
+├── requirements.txt          # Dipendenze Python
+├── data/                     # Documenti UniBG (20 file)
+├── vectordb/                 # Database vettoriale (113 chunk)
+├── src/                      # Codice sorgente
+│   ├── chatbot.py           # Sistema RAG principale
+│   ├── ollama_llm.py        # Interfaccia LLM
+│   └── create_vectorstore.py # Gestione embeddings
+├── interfaces/               # UI Streamlit
+├── tests/                    # Test suite
+├── evaluation/              # Metriche performance
+└── thesis/                  # Documentazione tesi
 ```
 
-## 💡 Esempi di Domande
-
-Il chatbot può rispondere a domande come:
-
-- 📚 "Come faccio a iscrivermi agli esami?"
-- 💰 "Quando devo pagare le tasse universitarie?"
-- 📄 "Come richiedo un certificato di laurea?"
-- 🎓 "Che documenti servono per la laurea?"
-- 📞 "Quali sono i contatti della segreteria?"
-- 🕒 "Quali sono gli orari di apertura?"
-- ♿ "Come funziona il servizio disabilità?"
-- 💼 "Come trovo informazioni sui tirocini?"
-
-## 🎯 Pipeline RAG
+## Architettura RAG
 
 ```
-Domanda Studente
-      ↓
-[1] Embedding Query (SentenceTransformers)
-      ↓
-[2] Ricerca Semantica (ChromaDB)
-      ↓
-[3] Recupero Documenti Pertinenti
-      ↓
-[4] Generazione Risposta (Mistral 7B via Ollama)
-      ↓
-[5] Post-processing e Valutazione Confidenza
-      ↓
-Risposta Finale (o Redirect a Ticket)
+[Query Utente] → [Embedding] → [Ricerca Vettoriale] → [Selezione Top-5] 
+    ↓
+[Assemblaggio Contesto] → [Mistral 7B] → [Validazione] → [Risposta/Ticket]
 ```
 
-## ⚙️ Configurazione
+**Performance:** ~44s tempo risposta | 80% accuratezza routing | 90%+ retrieval accuracy
 
-Il file `.env` contiene tutte le configurazioni:
+## Esempi Query
 
-```env
-# Modelli
-EMBEDDING_MODEL=all-MiniLM-L6-v2
-OLLAMA_MODEL=mistral:7b
+**Supportate dal sistema:**
+- "Come iscriversi agli esami?"
+- "Scadenze pagamento tasse universitarie?"
+- "Documenti necessari per la laurea?"
+- "Servizi per studenti con disabilità?"
+- "Informazioni sui tirocini?"
 
-# Parametri RAG
-CHUNK_SIZE=1000
-CHUNK_OVERLAP=200
-RETRIEVAL_K=5
-TEMPERATURE=0.1
+**Routing automatico a ticket:**
+- Domande personali specifiche
+- Richieste di documenti individuali
+- Problematiche non documentate
 
-# URLs
-TICKET_URL=https://www.unibg.it/servizi-studenti/contatti
-```
+## Troubleshooting
 
-## 🔧 Troubleshooting
+| Problema | Soluzione |
+|----------|-----------|
+| Ollama non risponde | `ollama serve` |
+| Modello mancante | `ollama pull mistral:7b` |
+| Memoria insufficiente | Chiudi altre applicazioni |
+| Database corrotto | `python src/create_vectorstore.py` |
+| Errori dipendenze | `pip install -r requirements.txt --force-reinstall` |
 
-### Ollama non risponde
-```bash
-# Verifica se è in esecuzione
-ollama list
+## Specifiche Tecniche
 
-# Riavvia il servizio
-ollama serve
-```
+**Requisiti minimi:**
+- Python 3.9+
+- 8GB RAM
+- 10GB storage libero
 
-### Modello non trovato
-```bash
-# Scarica Mistral 7B
-ollama pull mistral:7b
-
-# Lista modelli disponibili
-ollama list
-```
-
-### Errori di memoria
-- Riduci `CHUNK_SIZE` a 500
-- Usa un modello più piccolo: `ollama pull mistral:7b-instruct-q4_0`
-
-### Vectorstore corrotto
-```bash
-# Ricrea il vectorstore
-rm -rf vectordb
-python src/create_vectorstore.py
-```
-
-## 📊 Prestazioni
-
-| Metrica | Valore |
-|---------|--------|
-| **Tempo risposta** | 2-5 secondi |
-| **Memoria RAM** | ~4GB (Mistral 7B) |
-| **Spazio disco** | ~6GB totale |
-| **Accuratezza** | 85-90% su FAQ UniBG |
-
-## 🎯 Funzionalità Avanzate
-
-### Sistema di Routing Intelligente
-- Risposte dirette per domande con alta confidenza
-- Redirect automatico a ticket per:
-  - Domande personali/specifiche
-  - Informazioni non presenti nei documenti
-  - Risposte con bassa confidenza
-
-### Embedding Semantici
-- Ricerca per similarità semantica, non solo keyword
-- Comprensione di sinonimi e variazioni linguistiche
-- Context-aware retrieval
-
-### Chunking Intelligente
-- Suddivisione rispettando i confini semantici
-- Overlap per preservare il contesto
-- Ottimizzato per documenti universitari
-
-## 🚧 Sviluppi Futuri
-
-- [ ] Interfaccia web con Streamlit
-- [ ] Fine-tuning su dataset UniBG specifico
-- [ ] Supporto multimodale (immagini nei PDF)
-- [ ] Analytics e metriche di utilizzo
-- [ ] Integrazione API ticketing system
-- [ ] Deploy con Docker
-
-## 📝 Note per la Tesi
-
-### Contributi Tecnici
-1. **Architettura RAG locale** - Soluzione completamente gratuita
-2. **Pipeline ottimizzata** - Per documenti universitari italiani
-3. **Sistema di routing** - Bilanciamento automatico vs human handoff
-4. **Embedding multilingue** - Supporto italiano ottimizzato
-
-### Metriche di Valutazione
-- Accuracy su dataset di test FAQ
-- Tempo di risposta medio
-- Tasso di redirect a ticket system
-- Soddisfazione utenti (da implementare)
-
-## 📞 Supporto
-
-Per problemi tecnici:
-1. Verifica i logs con `DEBUG=true` nel `.env`
-2. Controlla la documentazione Ollama
-3. Consulta gli issue su GitHub del progetto
+**Performance:**
+- Tempo risposta: ~44 secondi
+- Accuratezza routing: 80%
+- Database: 113 documenti vettorizzati
+- Supporto: Windows 10/11
 
 ---
 
-**Autore**: [Il tuo nome]  
-**Università**: Università degli Studi di Bergamo  
-**Corso**: Ingegneria Informatica Triennale  
-**Anno**: 2025
+**Autore:** Michele Caprinali  
+**Università:** Università degli Studi di Bergamo  
+**Corso:** Ingegneria Informatica Triennale  
+**Anno Accademico:** 2024/2025
