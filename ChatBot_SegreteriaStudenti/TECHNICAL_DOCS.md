@@ -128,7 +128,14 @@ TICKET_URL=https://www.unibg.it/servizi-studenti/contatti
 
 ### 5.1 Interfaccia CLI
 ```bash
+# Attiva ambiente virtuale
+.\venv\Scripts\Activate.ps1
+
+# Avvia chatbot
 python main.py
+
+# Alternativa automatica
+.\start_chatbot.bat
 ```
 - Sessione interattiva
 - Debug mode disponibile
@@ -136,7 +143,14 @@ python main.py
 
 ### 5.2 Interfaccia Web
 ```bash
+# Attiva ambiente virtuale
+.\venv\Scripts\Activate.ps1
+
+# Avvia interfaccia web
 streamlit run interfaces/streamlit_app.py --server.port 8501
+
+# Alternativa automatica
+.\start_web.bat
 ```
 - URL: http://localhost:8501
 - Design responsivo
@@ -184,13 +198,15 @@ result = chatbot.chat("Orari segreteria?")
 
 ### 7.1 Setup Iniziale
 ```bash
-# Installazione dipendenze
-pip install -r requirements.txt
+# Setup automatico (raccomandato)
+python setup.py
 
-# Setup Ollama
+# Setup manuale
+pip install -r requirements.txt
 ollama pull mistral:7b
 
-# Inizializzazione sistema
+# Attivazione ambiente e avvio
+.\venv\Scripts\Activate.ps1
 python main.py
 ```
 
@@ -198,8 +214,15 @@ python main.py
 
 **Aggiornamento documenti:**
 ```bash
+# Attiva ambiente virtuale
+.\venv\Scripts\Activate.ps1
+
+# Aggiorna documenti
 python src/extract_and_save.py
 python src/create_vectorstore.py
+
+# Alternativa automatica
+.\update_database.bat
 ```
 
 **Backup database:**

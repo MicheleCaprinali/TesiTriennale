@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 ChatBot Segreteria Studenti - Tesi Triennale Ingegneria Informatica
 Sistema per rispondere automaticamente alle domande degli studenti universitari
@@ -143,16 +144,28 @@ def chatbot_cli():
             result = chatbot.chat(domanda)
             
             # Mostra la risposta
-            print("" + result['response'])
+            response = result['response']
+            
+            # Evidenzia i link nella risposta
+            import re
+            
+            # Pattern per trovare link HTTP/HTTPS
+            url_pattern = r'(https?://[^\s<>"{}|\\^`\[\]]+)'
+            
+            # Sostituisci i link con versione evidenziata
+            highlighted_response = re.sub(url_pattern, r'🔗 \1', response)
+            
+            print("🤖 " + highlighted_response)
             
             # Se necessario, suggerisci il ticket
             if result['should_redirect']:
-                print(f"\n Per assistenza personalizzata:")
-                print(f" {os.getenv('TICKET_URL', 'https://www.unibg.it/servizi-studenti/contatti')}")
+                print(f"\n🎫 Per assistenza personalizzata:")
+                print(f"🌐 {os.getenv('TICKET_URL', 'https://www.unibg.it/servizi-studenti/contatti')}")
                 
         except Exception as e:
             print(f"❌ Errore nel processare la richiesta: {str(e)}")
-            print(" Ti consiglio di contattare direttamente la Segreteria.")
+            print("🎫 Ti consiglio di contattare direttamente la Segreteria:")
+            print(f"🌐 {os.getenv('TICKET_URL', 'https://www.unibg.it/servizi-studenti/contatti')}")
     
     return True
 

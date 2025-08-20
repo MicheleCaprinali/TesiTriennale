@@ -34,19 +34,33 @@ start_web.bat       # Avvio interfaccia web (http://localhost:8501)
 1. **Installa Ollama:** [Download](https://ollama.ai/download)
 2. **Dipendenze Python:** `pip install -r requirements.txt`
 3. **Modello LLM:** `ollama pull mistral:7b`
-4. **Avvio:** `python main.py`
+4. **Attiva ambiente virtuale:** `.\venv\Scripts\Activate.ps1` (Windows)
+5. **Avvio:** `python main.py`
 
 ## Utilizzo
 
 ### Interfaccia CLI
 ```bash
+# Attiva ambiente virtuale (importante!)
+.\venv\Scripts\Activate.ps1
+
+# Avvia chatbot
 python main.py
-# Sessione interattiva con supporto comandi
+
+# Alternativa: usa file .bat automatico
+.\start_chatbot.bat
 ```
 
 ### Interfaccia Web
 ```bash
+# Attiva ambiente virtuale
+.\venv\Scripts\Activate.ps1
+
+# Avvia interfaccia web
 streamlit run interfaces/streamlit_app.py --server.port 8501
+
+# Alternativa: usa file .bat automatico
+.\start_web.bat
 # Browser: http://localhost:8501
 ```
 

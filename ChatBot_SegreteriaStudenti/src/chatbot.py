@@ -55,12 +55,39 @@ class ChatbotRAG:
         # Trova tutti i link nel contesto
         context_urls = re.findall(url_pattern, context)
         
-        # Rimuovi link che non sono nel contesto originale
+        # Domini ufficiali UniBG da mantenere sempre
+        unibg_domains = [
+            'www.unibg.it',
+            'unibg.it'
+        ]
+        
+        # Rimuovi link che non sono nel contesto originale, eccetto quelli ufficiali UniBG
         for url in response_urls:
-            if url not in context_urls:
+            is_official_unibg = any(domain in url for domain in unibg_domains)
+            
+            if url not in context_urls and not is_official_unibg:
                 # Link inventato dall'LLM - rimuovilo
                 response = response.replace(url, "[LINK RIMOSSO - contatta la segreteria per informazioni specifiche]")
                 print(f"⚠️  Rimosso link non valido: {url}")
+            elif is_official_unibg and url not in context_urls:
+                # Link UniBG ufficiale ma con possibili errori - correggi se necessario
+                corrected_url = url
+                
+                # Rimuovi doppi slash nel percorso (ma non in https://)
+                if '//' in url and not url.startswith('https://'):
+                    parts = url.split('://', 1)
+                    if len(parts) == 2:
+                        protocol, rest = parts
+                        rest = rest.replace('//', '/')
+                        corrected_url = f"{protocol}://{rest}"
+                elif '//' in url.replace('https://', '', 1):
+                    # Doppi slash dopo il dominio
+                    corrected_url = url.replace('https://', '', 1).replace('//', '/')
+                    corrected_url = f"https://{corrected_url}"
+                
+                if corrected_url != url:
+                    response = response.replace(url, corrected_url)
+                    print(f"🔧 Corretto link UniBG: {url} → {corrected_url}")
         
         return response
 
@@ -97,7 +124,7 @@ class ChatbotRAG:
         
         # Step 4: Aggiungi suggerimento di contatto se necessario
         if should_redirect and "contatt" not in response.lower():
-            response += "\n\nPer informazioni più specifiche o assistenza personalizzata, ti consiglio di contattare direttamente la segreteria studenti."
+            response += "\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:"
         
         return {
             "response": response,

@@ -3,12 +3,20 @@
 ### **`start_chatbot.bat`**
 - **Funzione**: Avvia il chatbot in modalità console
 - **Output**: Interfaccia testuale interattiva
-- **Comando equivalente**: `python main.py`
+- **Comando equivalente**: 
+  ```bash
+  .\venv\Scripts\Activate.ps1
+  python main.py
+  ```
 
 ### **`start_web.bat`**
 - **Funzione**: Avvia l'interfaccia web Streamlit
 - **URL**: http://localhost:8501
-- **Comando equivalente**: `streamlit run interfaces/streamlit_app.py`
+- **Comando equivalente**: 
+  ```bash
+  .\venv\Scripts\Activate.ps1
+  streamlit run interfaces/streamlit_app.py
+  ```
 
 ### **`run_tests.bat`**
 - **Funzione**: Esegue tutti i test e genera le metriche

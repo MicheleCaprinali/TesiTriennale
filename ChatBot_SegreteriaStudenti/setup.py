@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Script di setup automatico per ChatBot
 Installa e configura tutto il necessario per il chatbot

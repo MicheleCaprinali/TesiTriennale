@@ -97,6 +97,14 @@ def display_message(message, is_user=True):
     message_class = "user" if is_user else "bot"
     avatar = "👤" if is_user else "🤖"
     
+    # Converti i link in formato markdown se non è un messaggio utente
+    if not is_user:
+        import re
+        # Pattern per trovare link HTTP/HTTPS
+        url_pattern = r'(https?://[^\s<>"{}|\\^`\[\]]+)'
+        # Sostituisci con formato markdown per link cliccabili
+        message = re.sub(url_pattern, r'[\1](\1)', message)
+    
     st.markdown(f"""
     <div class="chat-message {message_class}">
         <div class="avatar">{avatar}</div>
