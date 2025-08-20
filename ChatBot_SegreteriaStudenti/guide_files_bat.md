@@ -34,9 +34,6 @@
 ### **`update_database.bat`**
 - **Funzione**: Ricrea completamente il database vettoriale
 - **Quando usare**: Se modifichi i file sorgente in `data/`
-- **Processo**:
-  1. Estrazione testo da documenti
-  2. Creazione nuovo vectorstore
 - **ATTENZIONE**: Sovrascrive il database esistente
 
 ### **`setup.bat`**

@@ -7,16 +7,14 @@
 Sistema di chatbot basato su architettura RAG (Retrieval-Augmented Generation) per l'assistenza automatizzata agli studenti dell'Università di Bergamo.
 
 **Caratteristiche principali:**
-- Implementazione completamente locale (zero costi API)
+- Implementazione completamente locale
 - Tecnologie open-source
-- Privacy-first (dati non condivisi esternamente)
-- Supporto multimodale (CLI + Web)
-
+- Dati non condivisi esternamente
 ---
 
 ## 2. Architettura
 
-### 2.1 Componenti Core
+### 2.1 Componenti 
 
 | Componente | Tecnologia | Funzione |
 |------------|------------|----------|
@@ -56,26 +54,16 @@ Sistema di chatbot basato su architettura RAG (Retrieval-Augmented Generation) p
 
 **Processo:**
 1. Estrazione testo automatica
-2. Chunking intelligente (1000 caratteri, overlap 200)
-3. Generazione embeddings (384 dimensioni)
+2. Chunking intelligente (1000 caratteri)
+3. Generazione embeddings
 4. Indicizzazione in ChromaDB
 
 ### 3.2 Sistema RAG
 
-**Modello Embedding:** all-MiniLM-L6-v2
-- Dimensioni vettore: 384
-- Performance: ~100 doc/sec
-- Esecuzione: Locale su CPU
+**Modello Embedding:** all-MiniLM-L6-v2  
+**Database Vettoriale:** ChromaDB  
+**LLM:** Mistral 7B (4GB RAM)
 
-**Database Vettoriale:** ChromaDB
-- Indice: HNSW
-- Storage: ~2GB
-- Capacità: 113 documenti
-
-**LLM:** Mistral 7B
-- Memoria richiesta: 4GB RAM
-- Deployment: Ollama locale
-- Contesto massimo: 8192 token
 
 ### 3.3 Routing Intelligente
 
@@ -137,9 +125,6 @@ python main.py
 # Alternativa automatica
 .\start_chatbot.bat
 ```
-- Sessione interattiva
-- Debug mode disponibile
-- Help contestuale
 
 ### 5.2 Interfaccia Web
 ```bash
@@ -153,24 +138,6 @@ streamlit run interfaces/streamlit_app.py --server.port 8501
 .\start_web.bat
 ```
 - URL: http://localhost:8501
-- Design responsivo
-- Tema scuro UniBG
-
-### 5.3 API Programmatica
-```python
-from src.chatbot import setup_chatbot
-
-chatbot = setup_chatbot()
-result = chatbot.chat("Orari segreteria?")
-
-# Output:
-{
-    'response': str,           # Risposta generata
-    'redirect_to_ticket': bool, # Necessita assistenza umana
-    'confidence_score': float, # Livello confidenza
-    'processing_time': float   # Tempo elaborazione
-}
-```
 
 ---
 
@@ -187,11 +154,6 @@ result = chatbot.chat("Orari segreteria?")
 - **Routing decisioni appropriate:** 85%
 - **Validazione link:** 80%
 
-### 6.3 Utilizzo Risorse
-- **RAM durante funzionamento:** 6-8GB
-- **CPU durante inferenza:** 70-90%
-- **Storage database:** 2GB
-
 ---
 
 ## 7. Deployment e Manutenzione
@@ -205,9 +167,6 @@ python setup.py
 pip install -r requirements.txt
 ollama pull mistral:7b
 
-# Attivazione ambiente e avvio
-.\venv\Scripts\Activate.ps1
-python main.py
 ```
 
 ### 7.2 Operazioni Routine
@@ -230,12 +189,7 @@ python src/create_vectorstore.py
 cp -r vectordb vectordb_backup
 ```
 
-**Health check:**
-```bash
-python tests/test_retrieval.py
-```
-
-### 7.3 Troubleshooting
+### 7.3 Risoluzione Problemi
 
 | Problema | Soluzione |
 |----------|-----------|
@@ -246,41 +200,8 @@ python tests/test_retrieval.py
 
 ---
 
-## 8. Sicurezza e Privacy
-
-### 8.1 Privacy
-- Elaborazione completamente locale
-- Nessuna trasmissione dati esterni
-- Query utenti non loggate permanentemente
-- Compliance GDPR by design
-
-### 8.2 Controllo Accessi
-- Permessi filesystem per database
-- Validazione input utente
-- Sanitizzazione output risposte
-
----
-
-## 9. Estensioni Future
-
-### 9.1 Miglioramenti Pianificati
-- Supporto file aggiuntivi (DOCX, HTML)
-- Integrazione API REST
-- Interfaccia mobile
-- Sistema di feedback utenti
-
-### 9.2 Scalabilità
-- Deployment Docker
-- Load balancing per multiple istanze
-- Database distribuito
-- Cache intelligente risposte
-
----
-
-## 10. Informazioni Progetto
-
-**Versione:** 1.0.0  
-**Data:** Agosto 2025  
+## 8. Informazioni Progetto
+ 
 **Autore:** Michele Caprinali  
 **Corso:** Ingegneria Informatica  
 **Università:** Università degli Studi di Bergamo

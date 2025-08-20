@@ -1,15 +1,7 @@
 # ChatBot Segreteria Studenti UniBG
 
-Sistema RAG intelligente per l'assistenza automatizzata agli studenti dell'Università di Bergamo.  
+Sistema intelligente per l'assistenza automatizzata agli studenti dell'Università di Bergamo.  
 **Tesi Triennale - Ingegneria Informatica - A.A. 2024/2025**
-
-## Caratteristiche
-
-**100% Gratuito** - Zero costi API  
-**Completamente Locale** - Privacy garantita  
-**RAG Architecture** - Risposte basate su documenti ufficiali  
-**Doppia Interfaccia** - CLI e Web  
-**Smart Routing** - Reindirizzamento automatico per casi complessi
 
 ## Stack Tecnologico
 
@@ -89,8 +81,7 @@ ChatBot_SegreteriaStudenti/
 │   └── create_vectorstore.py # Gestione embeddings
 ├── interfaces/               # UI Streamlit
 ├── tests/                    # Test suite
-├── evaluation/              # Metriche performance
-└── thesis/                  # Documentazione tesi
+└── evaluation/              # Metriche performance
 ```
 
 ## Architettura RAG
@@ -100,8 +91,6 @@ ChatBot_SegreteriaStudenti/
     ↓
 [Assemblaggio Contesto] → [Mistral 7B] → [Validazione] → [Risposta/Ticket]
 ```
-
-**Performance:** ~44s tempo risposta | 80% accuratezza routing | 90%+ retrieval accuracy
 
 ## Esempi Query
 
@@ -117,7 +106,7 @@ ChatBot_SegreteriaStudenti/
 - Richieste di documenti individuali
 - Problematiche non documentate
 
-## Troubleshooting
+## Risoluzione problemi
 
 | Problema | Soluzione |
 |----------|-----------|
@@ -134,15 +123,9 @@ ChatBot_SegreteriaStudenti/
 - 8GB RAM
 - 10GB storage libero
 
-**Performance:**
-- Tempo risposta: ~44 secondi
-- Accuratezza routing: 80%
-- Database: 113 documenti vettorizzati
-- Supporto: Windows 10/11
-
 ---
 
 **Autore:** Michele Caprinali  
 **Università:** Università degli Studi di Bergamo  
-**Corso:** Ingegneria Informatica Triennale  
+**Corso:** Ingegneria Informatica  
 **Anno Accademico:** 2024/2025
