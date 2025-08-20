@@ -6,7 +6,14 @@ echo  ChatBot RAG - Test e Valutazione
 echo ============================================
 echo.
 echo Attivazione ambiente virtuale...
-call venv\Scripts\activate.bat
+if exist "venv\Scripts\activate.bat" (
+    call venv\Scripts\activate.bat
+) else (
+    echo [ERRORE] Ambiente virtuale non trovato!
+    echo Esegui prima: setup.bat
+    pause
+    exit /b 1
+)
 
 echo.
 echo 1- Esecuzione test di retrieval...
@@ -25,7 +32,7 @@ echo 4- Valutazione performance tesi...
 python evaluation\thesis_evaluation.py
 
 echo.
-echo ✅ Tutti i test completati!
+echo [OK] Tutti i test completati!
 echo I risultati sono salvati nella cartella 'results\'
 echo.
 echo Premi un tasto per chiudere...

@@ -8,15 +8,15 @@ echo.
 
 echo 1- Controllo ambiente virtuale...
 if not exist "venv\Scripts\activate.bat" (
-    echo ❌ Ambiente virtuale non trovato!
+    echo [ERRORE] Ambiente virtuale non trovato!
     echo Creazione nuovo ambiente virtuale...
     python -m venv venv
     if errorlevel 1 (
-        echo ❌ Errore nella creazione dell'ambiente virtuale
+        echo [ERRORE] Errore nella creazione dell'ambiente virtuale
         pause
         exit /b 1
     )
-    echo ✅ Ambiente virtuale creato
+    echo [OK] Ambiente virtuale creato
 )
 
 echo.
@@ -33,26 +33,26 @@ pip install -r requirements.txt
 
 echo.
 echo 5- Test configurazione...
-python -c "import torch, transformers, chromadb, streamlit; print('✅ Tutte le dipendenze installate correttamente')"
+python -c "import torch, transformers, chromadb, streamlit; print('[OK] Tutte le dipendenze installate correttamente')"
 
 echo.
 echo 6- Controllo Ollama...
 ollama --version > nul 2>&1
 if errorlevel 1 (
-    echo ⚠️  Ollama non trovato. Installalo da: https://ollama.ai
+    echo [WARN] Ollama non trovato. Installalo da: https://ollama.ai
 ) else (
-    echo ✅ Ollama installato
+    echo [OK] Ollama installato
     echo Verifica modello Mistral...
     ollama list | findstr mistral > nul
     if errorlevel 1 (
-        echo ⚠️  Modello Mistral non trovato. Installalo con: ollama pull mistral:7b
+        echo [WARN] Modello Mistral non trovato. Installalo con: ollama pull mistral:7b
     ) else (
-        echo ✅ Modello Mistral disponibile
+        echo [OK] Modello Mistral disponibile
     )
 )
 
 echo.
-echo ✅ Setup completato!
+echo [OK] Setup completato!
 echo.
 echo     Comandi disponibili:
 echo    - start_chatbot.bat    : Avvia chatbot console

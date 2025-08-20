@@ -6,10 +6,17 @@ echo  ChatBot RAG - Aggiornamento VectorDB
 echo ============================================
 echo.
 echo Attivazione ambiente virtuale...
-call venv\Scripts\activate.bat
+if exist "venv\Scripts\activate.bat" (
+    call venv\Scripts\activate.bat
+) else (
+    echo [ERRORE] Ambiente virtuale non trovato!
+    echo Esegui prima: setup.bat
+    pause
+    exit /b 1
+)
 
 echo.
-echo ⚠️  ATTENZIONE: Questo processo ricreerà completamente il database vettoriale
+echo [WARN] ATTENZIONE: Questo processo ricreare' completamente il database vettoriale
 echo    Tutti i dati esistenti saranno sovrascritti.
 echo.
 set /p confirm="Vuoi continuare? (S/N): "
@@ -28,7 +35,7 @@ echo 2- Creazione nuovo database vettoriale...
 python src\create_vectorstore.py
 
 echo.
-echo ✅ Database aggiornato con successo!
+echo [OK] Database aggiornato con successo!
 echo.
 echo Premi un tasto per chiudere...
 pause > nul
