@@ -21,7 +21,7 @@ echo  L'interfaccia sara' disponibile su: http://localhost:8501
 echo  Premi Ctrl+C per fermare il server
 echo.
 
-streamlit run interfaces\streamlit_app.py --server.port 8501 --server.headless true
+venv\Scripts\python.exe -m streamlit run interfaces\streamlit_app.py --server.port 8501 --server.headless true
 
 echo.
 echo Server web terminato. Premi un tasto per chiudere...

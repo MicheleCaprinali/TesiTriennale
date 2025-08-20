@@ -28,11 +28,11 @@ if /i "%confirm%" NEQ "S" (
 
 echo.
 echo 1- Estrazione testo da documenti...
-python src\extract_and_save.py
+venv\Scripts\python.exe src\extract_and_save.py
 
 echo.
 echo 2- Creazione nuovo database vettoriale...
-python src\create_vectorstore.py
+venv\Scripts\python.exe src\create_vectorstore.py
 
 echo.
 echo [OK] Database aggiornato con successo!

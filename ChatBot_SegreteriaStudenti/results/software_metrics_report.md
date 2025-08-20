@@ -1,28 +1,28 @@
-# REPORT METRICHE SOFTWARE - ChatBot RAG
+# 📊 REPORT METRICHE SOFTWARE - ChatBot RAG
 
-## SUMMARY GENERALE
+## 🎯 SUMMARY GENERALE
 
 - **File analizzati:** 13
-- **Linee di codice totali:** 1624
+- **Linee di codice totali:** 1687
 - **Classi totali:** 4
 - **Funzioni totali:** 31
 - **Import totali:** 66
-- **CC medio:** 2.60
-- **CC massimo:** 12
+- **CC medio:** 2.81
+- **CC massimo:** 14
 
-## ANALISI PER FILE
+## 📁 ANALISI PER FILE
 
 ### main.py
-- **LOC:** 229
+- **LOC:** 230
 - **Classi:** 0
 - **Funzioni:** 6
-- **CC totale:** 34
+- **CC totale:** 36
 
 ### setup.py
-- **LOC:** 259
+- **LOC:** 321
 - **Classi:** 0
 - **Funzioni:** 11
-- **CC totale:** 42
+- **CC totale:** 51
 
 ### thesis_evaluation.py
 - **LOC:** 223
@@ -94,12 +94,12 @@
 - **Funzioni:** 3
 - **CC totale:** 22
 
-## METRICHE ROBERT MARTIN
+## 🔗 METRICHE ROBERT MARTIN
 
 | Modulo | Ca (Afferent) | Ce (Efferent) | Instability |
 |--------|---------------|---------------|-------------|
 | main | 0 | 10 | 1.000 |
-| setup | 0 | 8 | 1.000 |
+| setup | 1 | 8 | 0.889 |
 | thesis_evaluation | 0 | 11 | 1.000 |
 | analytics | 0 | 6 | 1.000 |
 | create_vectorstore | 2 | 7 | 0.778 |
@@ -107,7 +107,7 @@
 | extract_file | 1 | 2 | 0.667 |
 | local_embeddings | 2 | 4 | 0.667 |
 | ollama_llm | 1 | 6 | 0.857 |
-| split_into_chunks | 2 | 2 | 0.500 |
+| split_into_chunks | 1 | 2 | 0.667 |
 | __init__ | 0 | 0 | 0.000 |
 | test_links | 0 | 4 | 1.000 |
 | test_retrieval | 0 | 4 | 1.000 |

@@ -25,15 +25,15 @@ call venv\Scripts\activate.bat
 
 echo.
 echo 3- Aggiornamento pip...
-python -m pip install --upgrade pip
+venv\Scripts\python.exe -m pip install --upgrade pip
 
 echo.
 echo 4- Installazione dipendenze...
-pip install -r requirements.txt
+venv\Scripts\python.exe -m pip install -r requirements.txt
 
 echo.
 echo 5- Test configurazione...
-python -c "import torch, transformers, chromadb, streamlit; print('[OK] Tutte le dipendenze installate correttamente')"
+venv\Scripts\python.exe -c "import torch, transformers, chromadb, streamlit; print('[OK] Tutte le dipendenze installate correttamente')"
 
 echo.
 echo 6- Controllo Ollama...

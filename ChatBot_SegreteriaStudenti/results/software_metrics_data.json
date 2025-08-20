@@ -3,42 +3,42 @@
     "files": [
       {
         "file": "main.py",
-        "lines_of_code": 229,
+        "lines_of_code": 230,
         "classes": [],
         "functions": [
           {
             "name": "check_requirements",
-            "cc": 7,
-            "lines": 8,
+            "cc": 14,
+            "lines": 12,
             "parameters": 0
           },
           {
             "name": "setup_project",
-            "cc": 12,
-            "lines": 10,
+            "cc": 6,
+            "lines": 7,
             "parameters": 0
           },
           {
             "name": "chatbot_cli",
             "cc": 8,
-            "lines": 13,
+            "lines": 12,
             "parameters": 0
           },
           {
             "name": "show_help",
             "cc": 1,
-            "lines": 11,
+            "lines": 10,
             "parameters": 0
           },
           {
             "name": "show_setup_instructions",
             "cc": 1,
-            "lines": 22,
+            "lines": 16,
             "parameters": 0
           },
           {
             "name": "main",
-            "cc": 5,
+            "cc": 6,
             "lines": 5,
             "parameters": 0
           }
@@ -52,14 +52,14 @@
           "create_vectorstore",
           "ollama_llm",
           "requests",
-          "split_into_chunks",
-          "glob"
+          "setup",
+          "re"
         ],
-        "total_cc": 34
+        "total_cc": 36
       },
       {
         "file": "setup.py",
-        "lines_of_code": 259,
+        "lines_of_code": 321,
         "classes": [],
         "functions": [
           {
@@ -106,7 +106,7 @@
           },
           {
             "name": "setup_environment",
-            "cc": 3,
+            "cc": 8,
             "lines": 4,
             "parameters": 0
           },
@@ -118,14 +118,14 @@
           },
           {
             "name": "test_chatbot",
-            "cc": 3,
+            "cc": 7,
             "lines": 3,
             "parameters": 0
           },
           {
             "name": "main",
             "cc": 8,
-            "lines": 16,
+            "lines": 17,
             "parameters": 0
           }
         ],
@@ -139,7 +139,7 @@
           "shutil",
           "chatbot"
         ],
-        "total_cc": 42
+        "total_cc": 51
       },
       {
         "file": "evaluation\\thesis_evaluation.py",
@@ -548,11 +548,11 @@
     ],
     "summary": {
       "total_files": 13,
-      "total_lines": 1624,
+      "total_lines": 1687,
       "total_classes": 4,
       "total_functions": 31,
-      "average_cc": 2.5961538461538463,
-      "max_cc": 12,
+      "average_cc": 2.8076923076923075,
+      "max_cc": 14,
       "total_imports": 66
     }
   },
@@ -563,9 +563,9 @@
       "Instability": 1.0
     },
     "setup": {
-      "Ca": 0,
+      "Ca": 1,
       "Ce": 8,
-      "Instability": 1.0
+      "Instability": 0.8888888888888888
     },
     "thesis_evaluation": {
       "Ca": 0,
@@ -603,9 +603,9 @@
       "Instability": 0.8571428571428571
     },
     "split_into_chunks": {
-      "Ca": 2,
+      "Ca": 1,
       "Ce": 2,
-      "Instability": 0.5
+      "Instability": 0.6666666666666666
     },
     "__init__": {
       "Ca": 0,
@@ -623,5 +623,5 @@
       "Instability": 1.0
     }
   },
-  "timestamp": "2025-08-19 15:57:39.459378"
+  "timestamp": "2025-08-20 12:11:59.207028"
 }
