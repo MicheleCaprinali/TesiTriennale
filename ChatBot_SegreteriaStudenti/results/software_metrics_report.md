@@ -1,6 +1,6 @@
-# 📊 REPORT METRICHE SOFTWARE - ChatBot RAG
+# REPORT METRICHE SOFTWARE - ChatBot RAG
 
-## 🎯 SUMMARY GENERALE
+## SUMMARY GENERALE
 
 - **File analizzati:** 13
 - **Linee di codice totali:** 1624
@@ -10,7 +10,7 @@
 - **CC medio:** 2.60
 - **CC massimo:** 12
 
-## 📁 ANALISI PER FILE
+## ANALISI PER FILE
 
 ### main.py
 - **LOC:** 229
@@ -94,7 +94,7 @@
 - **Funzioni:** 3
 - **CC totale:** 22
 
-## 🔗 METRICHE ROBERT MARTIN
+## METRICHE ROBERT MARTIN
 
 | Modulo | Ca (Afferent) | Ce (Efferent) | Instability |
 |--------|---------------|---------------|-------------|

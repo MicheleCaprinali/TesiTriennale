@@ -64,6 +64,20 @@ st.markdown("""
     line-height: 1.6;
     font-size: 1rem;
 }
+/* Stili per i link cliccabili */
+.chat-message .content a {
+    color: #4fc3f7 !important;
+    text-decoration: underline !important;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+.chat-message .content a:hover {
+    color: #81d4fa !important;
+    text-decoration: none !important;
+}
+.chat-message .content a:visited {
+    color: #4fc3f7 !important;
+}
 .sidebar-content {
     background-color: #2d2d2d;
     color: #e0e0e0;
@@ -97,13 +111,25 @@ def display_message(message, is_user=True):
     message_class = "user" if is_user else "bot"
     avatar = "👤" if is_user else "🤖"
     
-    # Converti i link in formato markdown se non è un messaggio utente
+    # Converti i link in HTML cliccabili se non è un messaggio utente
     if not is_user:
         import re
-        # Pattern per trovare link HTTP/HTTPS
-        url_pattern = r'(https?://[^\s<>"{}|\\^`\[\]]+)'
-        # Sostituisci con formato markdown per link cliccabili
-        message = re.sub(url_pattern, r'[\1](\1)', message)
+        # Pattern per trovare link HTTP/HTTPS (più preciso per evitare duplicazioni)
+        url_pattern = r'(?<!href=")(?<!\[)(?<!")(https?://[^\s<>"{}|\\^`\[\]]+)(?!\))'
+        # Sostituisci con link HTML cliccabili
+        message = re.sub(url_pattern, r'<a href="\1" target="_blank" style="color: #4fc3f7; text-decoration: underline;">\1</a>', message)
+        
+        # Gestisci anche eventuali link già in formato markdown [text](url)
+        markdown_link_pattern = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
+        message = re.sub(markdown_link_pattern, r'<a href="\2" target="_blank" style="color: #4fc3f7; text-decoration: underline;">\1</a>', message)
+    
+    # Escape HTML per messaggi utente per sicurezza
+    if is_user:
+        import html
+        message = html.escape(message)
+    
+    # Converti line breaks in <br> per HTML
+    message = message.replace('\n', '<br>')
     
     st.markdown(f"""
     <div class="chat-message {message_class}">

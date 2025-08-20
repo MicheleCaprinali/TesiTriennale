@@ -1,4 +1,4 @@
-#  **GUIDA AI FILE .BAT ALL'INTERNO DEL PROGETTO**
+# GUIDA AI FILE .BAT ALL'INTERNO DEL PROGETTO
 
 ### **`start_chatbot.bat`**
 - **Funzione**: Avvia il chatbot in modalità console

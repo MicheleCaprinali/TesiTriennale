@@ -286,5 +286,5 @@ python tests/test_retrieval.py
 **Università:** Università degli Studi di Bergamo
 
 **Repository:** `ChatBot_SegreteriaStudenti/`  
-**Linguaggi:** Python 3.13+  
+**Linguaggi:** Python 3.13  
 **Licenza:** Open Source

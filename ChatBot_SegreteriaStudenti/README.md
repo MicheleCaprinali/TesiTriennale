@@ -130,7 +130,7 @@ ChatBot_SegreteriaStudenti/
 ## Specifiche Tecniche
 
 **Requisiti minimi:**
-- Python 3.9+
+- Python 3.13+
 - 8GB RAM
 - 10GB storage libero
 
