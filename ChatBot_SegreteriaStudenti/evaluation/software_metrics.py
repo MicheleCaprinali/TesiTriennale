@@ -69,10 +69,10 @@ class CodeMetricsAnalyzer:
                     metrics['classes'].append(class_metrics)
                     
                 elif isinstance(node, ast.FunctionDef):
-                    if not any(isinstance(parent, ast.ClassDef) for parent in ast.walk(tree) if hasattr(parent, 'body') and node in getattr(parent, 'body', [])):
-                        func_metrics = self.analyze_function(node)
-                        metrics['functions'].append(func_metrics)
-                        metrics['total_cc'] += func_metrics['cc']
+                    # Semplifica il controllo per evitare errori AST
+                    func_metrics = self.analyze_function(node)
+                    metrics['functions'].append(func_metrics)
+                    metrics['total_cc'] += func_metrics['cc']
                         
                 elif isinstance(node, (ast.Import, ast.ImportFrom)):
                     metrics['imports'].append(self.get_import_name(node))

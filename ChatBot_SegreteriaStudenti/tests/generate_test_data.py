@@ -121,8 +121,8 @@ def save_dataset(dataset, filename="test_dataset.json"):
             'queries': dataset
         }, f, indent=2, ensure_ascii=False)
     
-    print(f"📄 Dataset salvato in: {filename}")
-    print(f"📊 {len(dataset)} query generate")
+    print(f"Dataset salvato in: {filename}")
+    print(f"{len(dataset)} query generate")
     
     # Statistiche
     categories = {}
@@ -134,21 +134,20 @@ def save_dataset(dataset, filename="test_dataset.json"):
         if item['expected_redirect']:
             redirect_count += 1
     
-    print(f"📈 Statistiche:")
+    print(f"Statistiche:")
     for cat, count in categories.items():
         print(f"  - {cat}: {count}")
-    print(f"🎫 Query che dovrebbero fare redirect: {redirect_count}")
+    print(f"Query che dovrebbero fare redirect: {redirect_count}")
 
 if __name__ == "__main__":
-    print("🧪 Generazione Dataset di Test per Tesi")
-    print("=" * 50)
+    print("Generazione Dataset di Test per Tesi")
+    print("=" * 40)
     
     # Genera dataset
     dataset = generate_test_dataset(100)
     save_dataset(dataset)
     
-    print("\n💡 Usa questo dataset per:")
+    print("\nUtilizzo dataset per:")
     print("  1. Testing automatico del chatbot")
     print("  2. Metriche per la tesi")
     print("  3. Evaluation della performance")
-    print("  4. Analisi del comportamento utente")

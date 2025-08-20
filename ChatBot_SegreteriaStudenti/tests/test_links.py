@@ -12,8 +12,8 @@ from chatbot import setup_chatbot
 def test_link_responses():
     """Testa le risposte del chatbot per domande che dovrebbero contenere link"""
     
-    print("🧪 TEST GESTIONE LINK - ChatBot RAG")
-    print("=" * 50)
+    print("TEST GESTIONE LINK - ChatBot RAG")
+    print("=" * 40)
     
     chatbot = setup_chatbot()
     if not chatbot:
@@ -30,27 +30,27 @@ def test_link_responses():
     ]
     
     for i, query in enumerate(test_queries, 1):
-        print(f"\n🔍 TEST {i}/5: {query}")
+        print(f"\nTEST {i}/5: {query}")
         print("-" * 40)
         
         result = chatbot.chat(query)
         response = result['response']
         
-        print(f"🤖 Risposta: {response}")
+        print(f"Risposta: {response}")
         
         # Verifica presenza link
         import re
         links = re.findall(r'https?://[^\s<>"{}|\\^`\[\]]+', response)
         
         if links:
-            print(f"🔗 Link trovati ({len(links)}):")
+            print(f"Link trovati ({len(links)}):")
             for link in links:
                 print(f"   • {link}")
         else:
-            print("ℹ️  Nessun link nella risposta")
+            print("Nessun link nella risposta")
         
         if result['should_redirect']:
-            print("🎫 → Suggerisce contatto segreteria")
+            print("→ Suggerisce contatto segreteria")
         
         print()
 

@@ -12,8 +12,8 @@ from create_vectorstore import search_vectorstore
 
 def test_retrieval_system():
     """Testa il sistema di retrieval semantico"""
-    print("🧪 TEST SISTEMA RAG - RETRIEVAL")
-    print("=" * 50)
+    print("TEST SISTEMA RAG - RETRIEVAL")
+    print("=" * 40)
     
     try:
         # Test queries di esempio
@@ -25,7 +25,7 @@ def test_retrieval_system():
             "Come funziona il servizio disabilità?"
         ]
         
-        print(f"🔍 Test con {len(test_queries)} query di esempio\n")
+        print(f"Test con {len(test_queries)} query di esempio\n")
         
         for i, query in enumerate(test_queries, 1):
             print(f"Query {i}: '{query}'")
@@ -42,13 +42,13 @@ def test_retrieval_system():
                 
                 for j, (doc, dist) in enumerate(zip(documents, distances)):
                     similarity = 1 - dist  # Converte distanza in similarità
-                    print(f"\n📄 Documento {j+1} (Similarità: {similarity:.2f}):")
+                    print(f"\nDocumento {j+1} (Similarità: {similarity:.2f}):")
                     print(f"   {doc[:200]}...")
                     
             else:
                 print("❌ Nessun documento trovato")
                 
-            print("\n" + "="*80 + "\n")
+            print("\n" + "="*60 + "\n")
     
     except Exception as e:
         print(f"❌ Errore nel test: {str(e)}")
@@ -58,24 +58,23 @@ def test_retrieval_system():
 
 def interactive_search():
     """Modalità interattiva per testare ricerche personalizzate"""
-    print("🔍 MODALITÀ RICERCA INTERATTIVA")
-    print("=" * 40)
-    print("💡 Scrivi una domanda per testare la ricerca semantica")
-    print("🚪 Digita 'exit' per uscire\n")
+    print("MODALITÀ RICERCA INTERATTIVA")
+    print("=" * 30)
+    print("Scrivi una domanda per testare la ricerca semantica")
+    print("Digita 'exit' per uscire\n")
     
     while True:
-        query = input("🔍 Domanda > ").strip()
+        query = input("Domanda > ").strip()
         
         if query.lower() in ['exit', 'quit', 'bye']:
-            print("👋 Test completato!")
+            print("Test completato!")
             break
             
         if not query:
             continue
             
         try:
-            print(f"\n🔍 Ricerca per: '{query}'")
-            results = search_vectorstore(query, k=5)
+            results = search_vectorstore(query, k=3)
             
             if results and 'documents' in results and results['documents']:
                 documents = results['documents'][0]
@@ -83,10 +82,10 @@ def interactive_search():
                 
                 print(f"✅ Trovati {len(documents)} documenti:")
                 
-                for i, (doc, dist) in enumerate(zip(documents[:3], distances[:3])):
+                for i, (doc, dist) in enumerate(zip(documents, distances)):
                     similarity = 1 - dist
-                    print(f"\n📄 Risultato {i+1} (Similarità: {similarity:.2f}):")
-                    print(f"   {doc[:300]}...")
+                    print(f"\nRisultato {i+1} (Similarità: {similarity:.2f}):")
+                    print(f"   {doc[:200]}...")
                     
             else:
                 print("❌ Nessun documento trovato")
@@ -94,17 +93,16 @@ def interactive_search():
         except Exception as e:
             print(f"❌ Errore: {str(e)}")
         
-        print("\n" + "-" * 60)
+        print("\n" + "-" * 40)
 
 def main():
-    print("🎓 CHATBOT UNIBG - TEST RETRIEVAL SYSTEM")
-    print("⚡ Versione senza LLM per testare il retrieval")
-    print("=" * 60)
+    print("CHATBOT UNIBG - TEST RETRIEVAL SYSTEM")
+    print("=" * 40)
     
     # Verifica che il vectorstore esista
     if not os.path.exists("vectordb"):
         print("❌ VectorStore non trovato!")
-        print("💡 Esegui prima: python src/create_vectorstore.py")
+        print("Esegui prima: python src/create_vectorstore.py")
         return
     
     try:
@@ -112,15 +110,15 @@ def main():
         if test_retrieval_system():
             print("✅ Test automatico completato con successo!\n")
             
-            # Modalità interattiva
-            response = input("🤔 Vuoi testare ricerche personalizzate? (y/n): ")
+            # Modalità interattiva opzionale
+            response = input("Testare ricerche personalizzate? (y/n): ")
             if response.lower().startswith('y'):
                 interactive_search()
         else:
             print("❌ Test automatico fallito!")
             
     except KeyboardInterrupt:
-        print("\n🛑 Test interrotto dall'utente")
+        print("\nTest interrotto dall'utente")
     except Exception as e:
         print(f"❌ Errore generale: {str(e)}")
 

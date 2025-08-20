@@ -3,7 +3,7 @@
     "files": [
       {
         "file": "main.py",
-        "lines_of_code": 230,
+        "lines_of_code": 214,
         "classes": [],
         "functions": [
           {
@@ -21,7 +21,7 @@
           {
             "name": "chatbot_cli",
             "cc": 8,
-            "lines": 12,
+            "lines": 11,
             "parameters": 0
           },
           {
@@ -59,7 +59,7 @@
       },
       {
         "file": "setup.py",
-        "lines_of_code": 321,
+        "lines_of_code": 305,
         "classes": [],
         "functions": [
           {
@@ -142,8 +142,187 @@
         "total_cc": 51
       },
       {
+        "file": "evaluation\\software_metrics.py",
+        "lines_of_code": 421,
+        "classes": [
+          {
+            "name": "CodeMetricsAnalyzer",
+            "methods": [
+              {
+                "name": "__init__",
+                "cc": 1,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_cyclomatic_complexity",
+                "cc": 6,
+                "lines": 4,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_file",
+                "cc": 7,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_class",
+                "cc": 3,
+                "lines": 9,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_function",
+                "cc": 1,
+                "lines": 3,
+                "parameters": 2
+              },
+              {
+                "name": "get_method_variables",
+                "cc": 5,
+                "lines": 4,
+                "parameters": 2
+              },
+              {
+                "name": "calculate_lcom",
+                "cc": 6,
+                "lines": 8,
+                "parameters": 2
+              },
+              {
+                "name": "get_import_name",
+                "cc": 4,
+                "lines": 3,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_project",
+                "cc": 8,
+                "lines": 13,
+                "parameters": 1
+              },
+              {
+                "name": "calculate_robert_martin_metrics",
+                "cc": 7,
+                "lines": 8,
+                "parameters": 2
+              },
+              {
+                "name": "generate_report",
+                "cc": 4,
+                "lines": 19,
+                "parameters": 3
+              },
+              {
+                "name": "create_visualizations",
+                "cc": 11,
+                "lines": 34,
+                "parameters": 3
+              }
+            ],
+            "method_count": 12,
+            "wmc": 63,
+            "lcom": 0.9696969696969697,
+            "instance_variables": 9
+          }
+        ],
+        "functions": [
+          {
+            "name": "main",
+            "cc": 3,
+            "lines": 24,
+            "parameters": 0
+          },
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_cyclomatic_complexity",
+            "cc": 6,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_file",
+            "cc": 7,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_class",
+            "cc": 3,
+            "lines": 9,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_function",
+            "cc": 1,
+            "lines": 3,
+            "parameters": 2
+          },
+          {
+            "name": "get_method_variables",
+            "cc": 5,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "calculate_lcom",
+            "cc": 6,
+            "lines": 8,
+            "parameters": 2
+          },
+          {
+            "name": "get_import_name",
+            "cc": 4,
+            "lines": 3,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_project",
+            "cc": 8,
+            "lines": 13,
+            "parameters": 1
+          },
+          {
+            "name": "calculate_robert_martin_metrics",
+            "cc": 7,
+            "lines": 8,
+            "parameters": 2
+          },
+          {
+            "name": "generate_report",
+            "cc": 4,
+            "lines": 19,
+            "parameters": 3
+          },
+          {
+            "name": "create_visualizations",
+            "cc": 11,
+            "lines": 34,
+            "parameters": 3
+          }
+        ],
+        "imports": [
+          "ast",
+          "os",
+          "sys",
+          "json",
+          "pathlib",
+          "typing",
+          "matplotlib.pyplot",
+          "seaborn",
+          "pandas"
+        ],
+        "total_cc": 66
+      },
+      {
         "file": "evaluation\\thesis_evaluation.py",
-        "lines_of_code": 223,
+        "lines_of_code": 217,
         "classes": [
           {
             "name": "ThesisEvaluator",
@@ -197,7 +376,50 @@
             "instance_variables": 8
           }
         ],
-        "functions": [],
+        "functions": [
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "load_dataset",
+            "cc": 3,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "setup_chatbot",
+            "cc": 2,
+            "lines": 3,
+            "parameters": 1
+          },
+          {
+            "name": "run_performance_test",
+            "cc": 5,
+            "lines": 9,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_performance",
+            "cc": 2,
+            "lines": 10,
+            "parameters": 2
+          },
+          {
+            "name": "generate_thesis_charts",
+            "cc": 4,
+            "lines": 36,
+            "parameters": 2
+          },
+          {
+            "name": "run_complete_evaluation",
+            "cc": 6,
+            "lines": 6,
+            "parameters": 1
+          }
+        ],
         "imports": [
           "json",
           "time",
@@ -211,11 +433,46 @@
           "chatbot",
           "random"
         ],
-        "total_cc": 0
+        "total_cc": 23
+      },
+      {
+        "file": "interfaces\\streamlit_app.py",
+        "lines_of_code": 250,
+        "classes": [],
+        "functions": [
+          {
+            "name": "initialize_chatbot",
+            "cc": 4,
+            "lines": 3,
+            "parameters": 0
+          },
+          {
+            "name": "display_message",
+            "cc": 3,
+            "lines": 7,
+            "parameters": 2
+          },
+          {
+            "name": "main",
+            "cc": 13,
+            "lines": 11,
+            "parameters": 0
+          }
+        ],
+        "imports": [
+          "streamlit",
+          "sys",
+          "os",
+          "chatbot",
+          "time",
+          "re",
+          "html"
+        ],
+        "total_cc": 20
       },
       {
         "file": "src\\analytics.py",
-        "lines_of_code": 210,
+        "lines_of_code": 180,
         "classes": [
           {
             "name": "ChatbotAnalytics",
@@ -271,6 +528,42 @@
             "parameters": 2
           },
           {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "init_database",
+            "cc": 1,
+            "lines": 7,
+            "parameters": 1
+          },
+          {
+            "name": "log_query",
+            "cc": 1,
+            "lines": 6,
+            "parameters": 6
+          },
+          {
+            "name": "log_performance",
+            "cc": 1,
+            "lines": 6,
+            "parameters": 4
+          },
+          {
+            "name": "get_stats",
+            "cc": 3,
+            "lines": 13,
+            "parameters": 2
+          },
+          {
+            "name": "export_data",
+            "cc": 2,
+            "lines": 11,
+            "parameters": 2
+          },
+          {
             "name": "decorator",
             "cc": 2,
             "lines": 2,
@@ -288,14 +581,117 @@
           "time",
           "datetime",
           "pathlib",
-          "sqlite3",
-          "random"
+          "sqlite3"
         ],
-        "total_cc": 6
+        "total_cc": 15
+      },
+      {
+        "file": "src\\chatbot.py",
+        "lines_of_code": 245,
+        "classes": [
+          {
+            "name": "ChatbotRAG",
+            "methods": [
+              {
+                "name": "__init__",
+                "cc": 1,
+                "lines": 5,
+                "parameters": 2
+              },
+              {
+                "name": "retrieve_context",
+                "cc": 5,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "validate_and_clean_response",
+                "cc": 12,
+                "lines": 8,
+                "parameters": 3
+              },
+              {
+                "name": "generate_response",
+                "cc": 2,
+                "lines": 2,
+                "parameters": 3
+              },
+              {
+                "name": "chat",
+                "cc": 5,
+                "lines": 9,
+                "parameters": 2
+              },
+              {
+                "name": "_should_redirect_to_ticket",
+                "cc": 10,
+                "lines": 14,
+                "parameters": 3
+              }
+            ],
+            "method_count": 6,
+            "wmc": 35,
+            "lcom": 0.8666666666666667,
+            "instance_variables": 8
+          }
+        ],
+        "functions": [
+          {
+            "name": "setup_chatbot",
+            "cc": 4,
+            "lines": 9,
+            "parameters": 0
+          },
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 5,
+            "parameters": 2
+          },
+          {
+            "name": "retrieve_context",
+            "cc": 5,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "validate_and_clean_response",
+            "cc": 12,
+            "lines": 8,
+            "parameters": 3
+          },
+          {
+            "name": "generate_response",
+            "cc": 2,
+            "lines": 2,
+            "parameters": 3
+          },
+          {
+            "name": "chat",
+            "cc": 5,
+            "lines": 9,
+            "parameters": 2
+          },
+          {
+            "name": "_should_redirect_to_ticket",
+            "cc": 10,
+            "lines": 14,
+            "parameters": 3
+          }
+        ],
+        "imports": [
+          "dotenv",
+          "os",
+          "local_embeddings",
+          "ollama_llm",
+          "create_vectorstore",
+          "re"
+        ],
+        "total_cc": 39
       },
       {
         "file": "src\\create_vectorstore.py",
-        "lines_of_code": 135,
+        "lines_of_code": 110,
         "classes": [],
         "functions": [
           {
@@ -342,7 +738,7 @@
       },
       {
         "file": "src\\extract_file.py",
-        "lines_of_code": 35,
+        "lines_of_code": 28,
         "classes": [],
         "functions": [
           {
@@ -360,7 +756,7 @@
       },
       {
         "file": "src\\local_embeddings.py",
-        "lines_of_code": 52,
+        "lines_of_code": 44,
         "classes": [
           {
             "name": "LocalEmbeddings",
@@ -390,18 +786,37 @@
             "instance_variables": 2
           }
         ],
-        "functions": [],
+        "functions": [
+          {
+            "name": "__init__",
+            "cc": 2,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "embed_documents",
+            "cc": 1,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "embed_query",
+            "cc": 1,
+            "lines": 3,
+            "parameters": 2
+          }
+        ],
         "imports": [
           "sentence_transformers",
           "os",
           "typing",
           "dotenv"
         ],
-        "total_cc": 0
+        "total_cc": 4
       },
       {
         "file": "src\\ollama_llm.py",
-        "lines_of_code": 185,
+        "lines_of_code": 177,
         "classes": [
           {
             "name": "OllamaLLM",
@@ -449,6 +864,36 @@
             "cc": 4,
             "lines": 9,
             "parameters": 0
+          },
+          {
+            "name": "__init__",
+            "cc": 3,
+            "lines": 3,
+            "parameters": 3
+          },
+          {
+            "name": "is_running",
+            "cc": 3,
+            "lines": 2,
+            "parameters": 1
+          },
+          {
+            "name": "list_models",
+            "cc": 4,
+            "lines": 2,
+            "parameters": 1
+          },
+          {
+            "name": "generate",
+            "cc": 9,
+            "lines": 6,
+            "parameters": 3
+          },
+          {
+            "name": "pull_model",
+            "cc": 2,
+            "lines": 3,
+            "parameters": 1
           }
         ],
         "imports": [
@@ -459,11 +904,11 @@
           "typing",
           "subprocess"
         ],
-        "total_cc": 4
+        "total_cc": 25
       },
       {
         "file": "src\\split_into_chunks.py",
-        "lines_of_code": 60,
+        "lines_of_code": 47,
         "classes": [],
         "functions": [
           {
@@ -494,6 +939,44 @@
         "total_cc": 0
       },
       {
+        "file": "tests\\generate_test_data.py",
+        "lines_of_code": 153,
+        "classes": [],
+        "functions": [
+          {
+            "name": "generate_test_dataset",
+            "cc": 2,
+            "lines": 4,
+            "parameters": 1
+          },
+          {
+            "name": "categorize_query",
+            "cc": 11,
+            "lines": 3,
+            "parameters": 1
+          },
+          {
+            "name": "is_personal_query",
+            "cc": 2,
+            "lines": 4,
+            "parameters": 1
+          },
+          {
+            "name": "save_dataset",
+            "cc": 6,
+            "lines": 10,
+            "parameters": 2
+          }
+        ],
+        "imports": [
+          "json",
+          "random",
+          "time",
+          "datetime"
+        ],
+        "total_cc": 21
+      },
+      {
         "file": "tests\\test_links.py",
         "lines_of_code": 58,
         "classes": [],
@@ -515,7 +998,7 @@
       },
       {
         "file": "tests\\test_retrieval.py",
-        "lines_of_code": 128,
+        "lines_of_code": 126,
         "classes": [],
         "functions": [
           {
@@ -533,7 +1016,7 @@
           {
             "name": "main",
             "cc": 6,
-            "lines": 5,
+            "lines": 4,
             "parameters": 0
           }
         ],
@@ -547,13 +1030,13 @@
       }
     ],
     "summary": {
-      "total_files": 13,
-      "total_lines": 1687,
-      "total_classes": 4,
-      "total_functions": 31,
-      "average_cc": 2.8076923076923075,
+      "total_files": 17,
+      "total_lines": 2625,
+      "total_classes": 6,
+      "total_functions": 79,
+      "average_cc": 2.957627118644068,
       "max_cc": 14,
-      "total_imports": 66
+      "total_imports": 91
     }
   },
   "robert_martin": {
@@ -567,20 +1050,35 @@
       "Ce": 8,
       "Instability": 0.8888888888888888
     },
+    "software_metrics": {
+      "Ca": 0,
+      "Ce": 9,
+      "Instability": 1.0
+    },
     "thesis_evaluation": {
       "Ca": 0,
       "Ce": 11,
       "Instability": 1.0
     },
-    "analytics": {
+    "streamlit_app": {
       "Ca": 0,
-      "Ce": 6,
+      "Ce": 7,
       "Instability": 1.0
     },
+    "analytics": {
+      "Ca": 0,
+      "Ce": 5,
+      "Instability": 1.0
+    },
+    "chatbot": {
+      "Ca": 5,
+      "Ce": 6,
+      "Instability": 0.5454545454545454
+    },
     "create_vectorstore": {
-      "Ca": 2,
+      "Ca": 3,
       "Ce": 7,
-      "Instability": 0.7777777777777778
+      "Instability": 0.7
     },
     "extract_and_save": {
       "Ca": 1,
@@ -593,14 +1091,14 @@
       "Instability": 0.6666666666666666
     },
     "local_embeddings": {
-      "Ca": 2,
+      "Ca": 3,
       "Ce": 4,
-      "Instability": 0.6666666666666666
+      "Instability": 0.5714285714285714
     },
     "ollama_llm": {
-      "Ca": 1,
+      "Ca": 2,
       "Ce": 6,
-      "Instability": 0.8571428571428571
+      "Instability": 0.75
     },
     "split_into_chunks": {
       "Ca": 1,
@@ -611,6 +1109,11 @@
       "Ca": 0,
       "Ce": 0,
       "Instability": 0
+    },
+    "generate_test_data": {
+      "Ca": 0,
+      "Ce": 4,
+      "Instability": 1.0
     },
     "test_links": {
       "Ca": 0,
@@ -623,5 +1126,5 @@
       "Instability": 1.0
     }
   },
-  "timestamp": "2025-08-20 12:11:59.207028"
+  "timestamp": "2025-08-20 17:26:53.000286"
 }
