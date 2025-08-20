@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 """
 ChatBot Segreteria Studenti - Tesi Triennale Ingegneria Informatica
-Sistema RAG GRATUITO per rispondere automaticamente alle domande degli studenti universitari
+Sistema per rispondere automaticamente alle domande degli studenti universitari
 
 Tecnologie utilizzate:
 - Sentence Transformers (all-MiniLM-L6-v2) per embedding
@@ -17,102 +16,94 @@ from datetime import datetime
 # Aggiungi il path per gli import
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
-from chatbot import setup_chatbot, ChatbotRAG
-from extract_and_save import process_all_documents
-from create_vectorstore import crea_vectorstore_free
-from ollama_llm import setup_ollama
+# Import con gestione errori
+try:
+    from chatbot import setup_chatbot, ChatbotRAG  # type: ignore
+    from extract_and_save import process_all_documents  # type: ignore
+    from create_vectorstore import crea_vectorstore_free  # type: ignore
+    from ollama_llm import setup_ollama  # type: ignore
+except ImportError as e:
+    print(f"❌ Errore import moduli: {e}")
+    print(" Esegui: pip install -r requirements.txt")
+    sys.exit(1)
 
 def check_requirements():
-    """Verifica requisiti del sistema"""
-    print("🔍 Verifica requisiti sistema...")
+    """Verifica requisiti minimi per il funzionamento"""
+    print(" Verifica sistema...")
     
-    requirements = []
+    checks = []
     
     # Verifica Ollama
     try:
         import requests
-        response = requests.get("http://localhost:11434/api/tags", timeout=5)
+        response = requests.get("http://localhost:11434/api/tags", timeout=3)
         if response.status_code == 200:
-            requirements.append("✅ Ollama: Disponibile")
+            models = response.json().get('models', [])
+            has_mistral = any('mistral' in model.get('name', '') for model in models)
+            if has_mistral:
+                checks.append("✅ Ollama + Mistral: Pronti")
+            else:
+                checks.append("⚠️ Ollama: Attivo, ma Mistral mancante")
         else:
-            requirements.append("❌ Ollama: Non risponde")
+            checks.append("❌ Ollama: Non risponde")
     except:
-        requirements.append("❌ Ollama: Non in esecuzione")
+        checks.append("❌ Ollama: Non in esecuzione")
     
-    # Verifica pacchetti Python
-    packages = [
-        ("sentence_transformers", "Sentence Transformers"),
-        ("chromadb", "ChromaDB"),
-        ("requests", "Requests"),
-    ]
+    # Verifica vectorstore
+    if os.path.exists("vectordb") and os.listdir("vectordb"):
+        checks.append("✅ Database vettoriale: Presente")
+    else:
+        checks.append("❌ Database vettoriale: Mancante")
     
-    for package, name in packages:
-        try:
-            __import__(package)
-            requirements.append(f"✅ {name}: Installato")
-        except ImportError:
-            requirements.append(f"❌ {name}: Mancante")
+    # Verifica documenti estratti
+    if os.path.exists("extracted_text") and os.listdir("extracted_text"):
+        checks.append("✅ Documenti estratti: Presenti")
+    else:
+        checks.append("❌ Documenti estratti: Mancanti")
     
-    for req in requirements:
-        print(f"   {req}")
+    for check in checks:
+        print(f"   {check}")
     
-    return all("✅" in req for req in requirements)
+    has_errors = any("❌" in check for check in checks)
+    if has_errors:
+        print("\n💡 Usa 'python setup.py' per il setup completo")
+        return False
+    
+    has_warnings = any("⚠️" in check for check in checks)
+    if has_warnings:
+        print("\n⚠️ Sistema parzialmente configurato")
+        return True
+        
+    return True
 
 def setup_project():
-    """Inizializzazione completa del progetto"""
-    print("🚀 SETUP CHATBOT RAG GRATUITO")
+    """Verifica rapida e recovery automatico se necessario"""
+    print(" Inizializzazione ChatBot...")
     print("=" * 50)
     
-    # Step 1: Verifica requisiti
+    # Verifica requisiti base
     if not check_requirements():
-        print("\n❌ Requisiti mancanti! Segui le istruzioni di setup.")
+        print("\n❌ Setup incompleto!")
+        print(" Esegui: python setup.py")
         return False
     
-    # Step 2: Verifica/crea file estratti
-    if not os.path.exists("extracted_text") or not os.listdir("extracted_text"):
-        print("\n📂 Estrazione documenti in corso...")
-        if not process_all_documents():
-            print("❌ Errore nell'estrazione documenti")
-            return False
-    else:
-        print("✅ File estratti già presenti")
-    
-    # Step 3: Verifica/crea vectorstore
+    # Recovery automatico vectorstore se mancante
     if not os.path.exists("vectordb") or not os.listdir("vectordb"):
-        print("\n🔄 Creazione vectorstore...")
+        print("\n🔧 Recovery automatico database...")
         try:
-            from split_into_chunks import split_text_in_chunks
-            import glob
-            
-            cartella_estratti = "extracted_text"
-            tutti_i_chunks = []
-            
-            for filepath in glob.glob(os.path.join(cartella_estratti, "*.txt")):
-                with open(filepath, "r", encoding="utf-8") as f:
-                    testo = f.read()
-                    chunks = split_text_in_chunks(testo, max_len=1000, overlap=200)
-                    tutti_i_chunks.extend(chunks)
-            
-            if tutti_i_chunks:
-                crea_vectorstore_free(tutti_i_chunks)
-                print("✅ Vectorstore creato!")
+            # Usa il setup.py per ricreare
+            import setup
+            if setup.create_vectorstore():
+                print("✅ Database ricreato!")
             else:
-                print("❌ Nessun chunk trovato")
+                print("❌ Errore nel recovery - usa setup.py manuale")
                 return False
-                
         except Exception as e:
-            print(f"❌ Errore creazione vectorstore: {str(e)}")
+            print(f"❌ Recovery fallito: {str(e)}")
+            print(" Esegui: python setup.py")
             return False
-    else:
-        print("✅ Vectorstore già presente")
     
-    # Step 4: Setup Ollama
-    print("\n🔄 Verifica setup Ollama...")
-    if not setup_ollama():
-        print("❌ Setup Ollama fallito")
-        return False
-    
-    print("\n✅ Setup completato con successo!")
+    print("✅ Sistema pronto!")
     return True
 
 def chatbot_cli():
@@ -124,20 +115,19 @@ def chatbot_cli():
         return False
     
     print("\n" + "=" * 60)
-    print("🎓 CHATBOT SEGRETERIA STUDENTI UNIBG - GRATUITO")
+    print(" CHATBOT SEGRETERIA STUDENTI UNIBG")
     print("=" * 60)
-    print("🤖 Tecnologie: Mistral 7B + SentenceTransformers + ChromaDB")
-    print("💡 Fai una domanda sull'università!")
-    print("📝 Digita 'help' per vedere esempi di domande")
-    print("🚪 Digita 'exit' per uscire")
+    print(" Fai una domanda sull'università!")
+    print(" Digita 'help' per vedere esempi di domande")
+    print(" Digita 'exit' per uscire")
     print("=" * 60)
     
     while True:
         print("\n" + "-" * 40)
-        domanda = input("👤 Studente > ").strip()
+        domanda = input(" Studente > ").strip()
         
         if domanda.lower() in ['exit', 'quit', 'bye']:
-            print("👋 Arrivederci! Buono studio!")
+            print(" Arrivederci!")
             break
             
         elif domanda.lower() == 'help':
@@ -145,7 +135,7 @@ def chatbot_cli():
             continue
             
         elif not domanda:
-            print("❓ Per favore, scrivi una domanda.")
+            print(" Scrivi una domanda.")
             continue
         
         try:
@@ -153,61 +143,54 @@ def chatbot_cli():
             result = chatbot.chat(domanda)
             
             # Mostra la risposta
-            print("🤖 " + result['response'])
+            print("" + result['response'])
             
             # Se necessario, suggerisci il ticket
             if result['should_redirect']:
-                print(f"\n🎫 Per assistenza personalizzata:")
-                print(f"🌐 {os.getenv('TICKET_URL', 'https://www.unibg.it/servizi-studenti/contatti')}")
+                print(f"\n Per assistenza personalizzata:")
+                print(f" {os.getenv('TICKET_URL', 'https://www.unibg.it/servizi-studenti/contatti')}")
                 
         except Exception as e:
             print(f"❌ Errore nel processare la richiesta: {str(e)}")
-            print("🎫 Ti consiglio di contattare direttamente la Segreteria.")
+            print(" Ti consiglio di contattare direttamente la Segreteria.")
     
     return True
 
 def show_help():
     """Mostra esempi di domande che il chatbot può gestire"""
-    print("\n💡 ESEMPI DI DOMANDE:")
+    print("\n ESEMPI DI DOMANDE:")
     print("─" * 30)
-    print("📚 'Come faccio a iscrivermi agli esami?'")
-    print("💰 'Quando devo pagare le tasse universitarie?'")
-    print("📄 'Come richiedo un certificato di laurea?'")
-    print("🎓 'Che documenti servono per la laurea?'")
-    print("📞 'Quali sono i contatti della segreteria?'")
-    print("🕒 'Quali sono gli orari di apertura?'")
-    print("♿ 'Come funziona il servizio disabilità?'")
-    print("💼 'Come trovo informazioni sui tirocini?'")
+    print(" 'Come faccio a iscrivermi agli esami?'")
+    print(" 'Quando devo pagare le tasse universitarie?'")
+    print(" 'Come richiedo un certificato di laurea?'")
+    print(" 'Che documenti servono per la laurea?'")
+    print(" 'Quali sono i contatti della segreteria?'")
+    print(" 'Come funziona il servizio disabilità?'")
+    print(" 'Come trovo informazioni sui tirocini?'")
 
 def show_setup_instructions():
     """Mostra istruzioni per il setup iniziale"""
-    print("\n📋 ISTRUZIONI SETUP:")
+    print("\n SETUP RAPIDO:")
     print("=" * 30)
-    print("1️⃣  Installa Ollama:")
-    print("    🌐 https://ollama.ai")
-    print("    💻 Scarica e installa per il tuo OS")
+    print(" Setup automatico (raccomandato):")
+    print("    python setup.py")
     print()
-    print("2️⃣  Avvia Ollama:")
-    print("    📟 ollama serve")
+    print(" Setup manuale:")
+    print("1. Installa Ollama: https://ollama.ai")
+    print("2. Avvia Ollama: ollama serve")
+    print("3. Scarica modello: ollama pull mistral:7b")
+    print("4. Installa Python deps: pip install -r requirements.txt")
+    print("5. Avvia chatbot: python main.py")
     print()
-    print("3️⃣  Scarica Mistral 7B:")
-    print("    📟 ollama pull mistral:7b")
-    print("    ⏳ (Può richiedere 10-20 minuti)")
-    print()
-    print("4️⃣  Installa dipendenze Python:")
-    print("    📟 pip install -r requirements_free.txt")
-    print()
-    print("5️⃣  Crea file .env:")
-    print("    📄 Copia .env.example in .env")
-    print()
-    print("6️⃣  Avvia il chatbot:")
-    print("    📟 python main.py")
+    print(" Documentazione completa:")
+    print("    USER_MANUAL.md")
+    print("    TECHNICAL_DOCS.md")
 
 def main():
     """Funzione principale"""
-    print("🎓 ChatBot Segreteria Studenti - Setup")
+    print(" ChatBot Segreteria Studenti - UniBG")
     
-    # Verifica argomenti
+    # Gestione argomenti
     if len(sys.argv) > 1:
         if sys.argv[1] == "--setup":
             show_setup_instructions()
@@ -215,14 +198,19 @@ def main():
         elif sys.argv[1] == "--check":
             check_requirements()
             return
+        elif sys.argv[1] == "--help":
+            print("\nComandi disponibili:")
+            print("  python main.py           # Avvia chatbot")
+            print("  python main.py --setup   # Mostra istruzioni setup")
+            print("  python main.py --check   # Verifica sistema")
+            print("  python setup.py          # Setup automatico completo")
+            return
     
-    # Setup del progetto
+    # Inizializzazione rapida
     if not setup_project():
-        print("\n❌ Setup fallito!")
-        print("� Usa 'python main.py --setup' per le istruzioni")
         return
     
-    # Avvia chatbot
+    # Avvia interfaccia chatbot
     chatbot_cli()
 
 if __name__ == "__main__":
