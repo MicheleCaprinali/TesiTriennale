@@ -13,7 +13,7 @@ from pathlib import Path
 
 def print_header(title):
     print("\n" + "="*60)
-    print(f" {title}")
+    print(f"{title}")
     print("="*60)
 
 def print_step(step, description):
@@ -22,21 +22,21 @@ def print_step(step, description):
 
 def run_command(command, description, check=True):
     """Esegue un comando e mostra il risultato"""
-    print(f" Eseguendo: {command}")
+    print(f"Eseguendo: {command}")
     try:
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
         if result.returncode == 0:
             print(f"✅ {description} completato!")
             if result.stdout.strip():
-                print(f" Output: {result.stdout.strip()}")
+                print(f"Output: {result.stdout.strip()}")
             return True
         else:
             if check:
                 print(f"❌ Errore in {description}")
-                print(f" Error: {result.stderr.strip()}")
+                print(f"Error: {result.stderr.strip()}")
                 return False
             else:
-                print(f"⚠️  {description} - continuiamo...")
+                print(f"⚠️ {description} - continuiamo...")
                 return True
     except Exception as e:
         print(f"❌ Errore esecuzione comando: {str(e)}")
@@ -58,31 +58,30 @@ def install_ollama():
 
     system = platform.system().lower()
     
-    # Verifica se Ollama è già installato
     if run_command("ollama --version", "Verifica Ollama", check=False):
         print("✅ Ollama già installato!")
         return True
     
-    print(" Ollama non trovato, installazione in corso...")
+    print("Ollama non trovato, installazione in corso...")
     
     if system == "windows":
-        print(" Sistema Windows rilevato")
-        print(" Scarica Ollama manualmente da: https://ollama.ai/download/windows")
-        print(" Premi INVIO dopo aver installato Ollama...")
+        print("Sistema Windows rilevato")
+        print("Scarica Ollama manualmente da: https://ollama.ai/download/windows")
+        print("Premi INVIO dopo aver installato Ollama...")
         input()
         return run_command("ollama --version", "Verifica installazione Ollama")
         
     elif system == "darwin":  # macOS
-        print(" Sistema macOS rilevato")
+        print("Sistema macOS rilevato")
         return run_command("brew install ollama", "Installazione Ollama via Homebrew")
         
     elif system == "linux":
-        print(" Sistema Linux rilevato")
+        print("Sistema Linux rilevato")
         return run_command("curl -fsSL https://ollama.ai/install.sh | sh", "Installazione Ollama")
     
     else:
         print(f"❌ Sistema {system} non supportato per installazione automatica")
-        print(" Installa Ollama manualmente da: https://ollama.ai")
+        print("Installa Ollama manualmente da: https://ollama.ai")
         return False
 
 def install_python_deps():
@@ -104,27 +103,24 @@ def setup_ollama_model():
     """Setup modello Mistral in Ollama"""
     print_step("3-", "Setup modello Mistral 7B")
 
-    # Avvia Ollama se non è in esecuzione
-    print(" Verifica servizio Ollama...")
+    print("Verifica servizio Ollama...")
     if not run_command("ollama list", "Verifica servizio Ollama", check=False):
-        print(" Avvio servizio Ollama...")
+        print("Avvio servizio Ollama...")
         if platform.system().lower() == "windows":
             subprocess.Popen(["ollama", "serve"], shell=True)
         else:
             subprocess.Popen(["ollama", "serve"])
         
-        print(" Attesa 5 secondi per l'avvio del servizio...")
+        print("Attesa 5 secondi per l'avvio del servizio...")
         time.sleep(5)
     
-    # Verifica se il modello è già presente
     result = subprocess.run(["ollama", "list"], capture_output=True, text=True)
     if "mistral" in result.stdout:
         print("✅ Modello Mistral già presente!")
         return True
     
-    # Scarica il modello
-    print(" Download modello Mistral 7B (questo può richiedere 10-20 minuti)...")
-    print(" Dimensione: ~4GB")
+    print("Download modello Mistral 7B (questo può richiedere 10-20 minuti)...")
+    print("Dimensione: ~4GB")
     
     return run_command("ollama pull mistral:7b", "Download modello Mistral")
 
@@ -136,13 +132,11 @@ def setup_environment():
         print("✅ File .env già presente!")
         return True
     
-    # Usa .env.example se disponibile, altrimenti crea configurazione base
     if os.path.exists(".env.example"):
         import shutil
         shutil.copy(".env.example", ".env")
         print("✅ Creato .env da .env.example")
         
-        # Aggiungi DEBUG se mancante
         with open(".env", "r", encoding="utf-8") as f:
             content = f.read()
         
@@ -153,7 +147,6 @@ def setup_environment():
         
         return True
     else:
-        # Fallback: crea configurazione base
         env_content = """# Configurazione ChatBot
 DEBUG=false
 CHUNK_SIZE=1000
@@ -163,7 +156,7 @@ TEMPERATURE=0.1
 OLLAMA_MODEL=mistral:7b
 EMBEDDING_MODEL=all-MiniLM-L6-v2
 VECTORDB_PATH=vectordb
-TICKET_URL=https://www.unibg.it/servizi-studenti/contatti
+TICKET_URL=https://helpdesk.unibg.it/
 """
         
         try:
@@ -179,21 +172,18 @@ def create_vectorstore():
     """Crea il vectorstore dai documenti"""
     print_step("5-", "Creazione vectorstore dai documenti")
     
-    # Verifica se i documenti esistono
     if not os.path.exists("data"):
         print("❌ Cartella 'data' non trovata!")
-        print(" Assicurati di aver caricato i documenti FAQ e guide")
+        print("Assicurati di aver caricato i documenti FAQ e guide")
         return False
     
-    # Estrai i documenti
     if not os.path.exists("extracted_text") or not os.listdir("extracted_text"):
-        print(" Estrazione testi dai documenti...")
+        print("Estrazione testi dai documenti...")
         if not run_command(f"{sys.executable} src/extract_and_save.py", "Estrazione documenti"):
             return False
     
-    # Crea vectorstore
     if not os.path.exists("vectordb") or not os.listdir("vectordb"):
-        print(" Creazione vectorstore (questo può richiedere alcuni minuti)...")
+        print("Creazione vectorstore (questo può richiedere alcuni minuti)...")
         return run_command(f"{sys.executable} src/create_vectorstore.py", "Creazione vectorstore")
     else:
         print("✅ Vectorstore già presente!")
@@ -204,7 +194,6 @@ def test_chatbot():
     print_step("6-", "Test del chatbot")
     
     try:
-        # Verifica che tutti i file necessari esistano
         required_files = [
             "src/chatbot.py",
             "src/ollama_llm.py", 
@@ -217,7 +206,6 @@ def test_chatbot():
                 print(f"❌ File necessario mancante: {file_path}")
                 return False
         
-        # Test import dei moduli
         sys.path.append("src")
         try:
             from chatbot import setup_chatbot  # type: ignore
@@ -226,8 +214,7 @@ def test_chatbot():
             print(f"❌ Errore import: {str(e)}")
             return False
         
-        # Test inizializzazione (senza eseguire query per velocità)
-        print(" Test inizializzazione chatbot...")
+        print("Test inizializzazione chatbot...")
         try:
             chatbot = setup_chatbot()
             if chatbot:
@@ -238,7 +225,7 @@ def test_chatbot():
                 return False
         except Exception as e:
             print(f"❌ Errore nell'inizializzazione: {str(e)}")
-            print(" Nota: Assicurati che Ollama sia in esecuzione")
+            print("Nota: Assicurati che Ollama sia in esecuzione")
             return False
             
     except Exception as e:
@@ -247,19 +234,17 @@ def test_chatbot():
 
 def main():
     print_header("SETUP AUTOMATICO CHATBOT")
-    print(" ChatBot Segreteria Studenti - UniBG")
-    print(" Tecnologie: Mistral 7B + SentenceTransformers + ChromaDB")
-    print(" Python 3.9+ richiesto")
+    print("ChatBot Segreteria Studenti - UniBg")
+    print("Tecnologie: Mistral 7B + SentenceTransformers + ChromaDB")
+    print("Python 3.13 richiesto")
     
-    # Verifica Python
     if not check_python():
         print("❌ Versione Python non compatibile!")
-        print(" Aggiorna Python a versione 3.9 o superiore")
+        print("Aggiorna Python a versione 3.13")
         return
     
     success_steps = []
     
-    # Step di installazione
     steps = [
         ("Ollama", install_ollama),
         ("Dipendenze Python", install_python_deps),
@@ -276,16 +261,15 @@ def main():
                 print(f"✅ {step_name} completato!")
             else:
                 print(f"❌ {step_name} fallito!")
-                print(" Controlla i messaggi di errore sopra")
+                print("Controlla i messaggi di errore sopra")
                 break
         except KeyboardInterrupt:
-            print("\n Setup interrotto dall'utente")
+            print("\nSetup interrotto dall'utente")
             break
         except Exception as e:
             print(f"❌ Errore inatteso in {step_name}: {str(e)}")
             break
     
-    # Riepilogo finale
     print_header("RIEPILOGO SETUP")
     print(f"✅ Step completati: {len(success_steps)}/{len(steps)}")
     
@@ -293,27 +277,27 @@ def main():
         print(f"   ✅ {step}")
     
     if len(success_steps) == len(steps):
-        print("\n SETUP COMPLETATO CON SUCCESSO!")
-        print(" ")
-        print(" Comandi disponibili:")
+        print("\nSETUP COMPLETATO CON SUCCESSO!")
+        print("")
+        print("Comandi disponibili:")
         print("   python main.py                    # Interfaccia CLI")
         print("   streamlit run interfaces/streamlit_app.py  # Interfaccia Web")
         print("   start_chatbot.bat                 # Avvio rapido CLI")
         print("   start_web.bat                     # Avvio rapido Web")
-        print(" ")
-        print(" Il sistema è pronto per l'uso!")
+        print("")
+        print("Il sistema è pronto per l'uso!")
     else:
-        print(f"\n⚠️  Setup parzialmente completato ({len(success_steps)}/{len(steps)})")
-        print(" Risolvi gli errori sopra e riprova il setup")
-        print(" ")
-        print(" Comandi utili per troubleshooting:")
+        print(f"\n⚠️ Setup parzialmente completato ({len(success_steps)}/{len(steps)})")
+        print("Risolvi gli errori sopra e riprova il setup")
+        print("")
+        print("Comandi utili per troubleshooting:")
         print("   ollama --version     # Verifica Ollama")
         print("   ollama list          # Lista modelli")
         print("   pip list             # Verifica pacchetti Python")
     
-    print("\n Documentazione di riferimento:")
-    print("    USER_MANUAL.md       - Guida utente completa")
-    print("    TECHNICAL_DOCS.md    - Documentazione tecnica")
+    print("\nDocumentazione di riferimento:")
+    print("    user_manual.md       - Guida utente completa")
+    print("    technical_doc.md    - Documentazione tecnica")
     print("    Ollama: https://ollama.ai")
     print("    Mistral: https://mistral.ai")
 

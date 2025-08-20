@@ -41,7 +41,7 @@ class ChatbotRAG:
             return ""
             
         except Exception as e:
-            print(f"⚠️  Errore nel recupero contesto: {str(e)}")
+            print(f"⚠️ Errore nel recupero contesto: {str(e)}")
             return ""
     
     def validate_and_clean_response(self, response: str, context: str) -> str:
@@ -66,11 +66,9 @@ class ChatbotRAG:
             is_official_unibg = any(domain in url for domain in unibg_domains)
             
             if url not in context_urls and not is_official_unibg:
-                # Link inventato dall'LLM - rimuovilo
                 response = response.replace(url, "[LINK RIMOSSO - contatta la segreteria per informazioni specifiche]")
-                print(f"⚠️  Rimosso link non valido: {url}")
+                print(f"⚠️ Rimosso link non valido: {url}")
             elif is_official_unibg and url not in context_urls:
-                # Link UniBG ufficiale ma con possibili errori - correggi se necessario
                 corrected_url = url
                 
                 # Rimuovi doppi slash nel percorso (ma non in https://)
@@ -87,7 +85,7 @@ class ChatbotRAG:
                 
                 if corrected_url != url:
                     response = response.replace(url, corrected_url)
-                    print(f"🔧 Corretto link UniBG: {url} → {corrected_url}")
+                    print(f"Corretto link UniBG: {url} → {corrected_url}")
         
         return response
 
@@ -95,7 +93,6 @@ class ChatbotRAG:
         """Genera risposta usando il LLM locale"""
         try:
             response = self.llm.generate(query, context)
-            # Valida e pulisce la risposta
             cleaned_response = self.validate_and_clean_response(response, context)
             return cleaned_response
         except Exception as e:
@@ -104,8 +101,7 @@ class ChatbotRAG:
     def chat(self, query: str) -> dict:
         """Pipeline completa RAG: Retrieve + Generate"""
         
-        # Step 1: Recupera contesto pertinente
-        print("🔍 Ricerca documenti pertinenti...")
+        print("Ricerca documenti pertinenti...")
         context = self.retrieve_context(query)
         
         if not context or len(context.strip()) < 50:
@@ -115,14 +111,11 @@ class ChatbotRAG:
                 "should_redirect": True
             }
         
-        # Step 2: Genera risposta
-        print("🧠 Generazione risposta...")
+        print("Generazione risposta...")
         response = self.generate_response(query, context)
         
-        # Step 3: Valuta se rimandare al ticket
         should_redirect = self._should_redirect_to_ticket(response, query)
         
-        # Step 4: Aggiungi suggerimento di contatto se necessario
         if should_redirect and "contatt" not in response.lower():
             response += "\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:"
         
@@ -195,74 +188,58 @@ class ChatbotRAG:
 
 def setup_chatbot():
     """Setup completo del chatbot"""
-    print("🚀 Setup Chatbot RAG Gratuito")
+    print("Setup Chatbot RAG Gratuito")
     print("=" * 40)
     
-    # Verifica che esistano i file estratti
     if not os.path.exists("extracted_text"):
         print("❌ Cartella 'extracted_text' non trovata!")
-        print("💡 Esegui prima 'python src/extract_and_save.py'")
+        print("Esegui prima 'python src/extract_and_save.py'")
         return None
     
-    # Verifica che esista il vectorstore
     if not os.path.exists("vectordb"):
         print("❌ Vectorstore non trovato!")
-        print("💡 Esegui prima 'python src/create_vectorstore.py'")
+        print("Esegui prima 'python src/create_vectorstore.py'")
         return None
     
-    # Verifica Ollama
     llm = OllamaLLM()
     if not llm.is_running():
         print("❌ Ollama non è in esecuzione!")
-        print("💡 Avvia Ollama con: 'ollama serve'")
-        print("💡 Scarica Mistral con: 'ollama pull mistral:7b'")
+        print("Avvia Ollama con: 'ollama serve'")
+        print("Scarica Mistral con: 'ollama pull mistral:7b'")
         return None
     
-    # Crea chatbot
     chatbot = ChatbotRAG()
     return chatbot
 
 if __name__ == "__main__":
-    # Interfaccia CLI per test
     chatbot = setup_chatbot()
     
     if not chatbot:
         print("❌ Setup fallito!")
         exit(1)
     
-    print("\n" + "=" * 60)
-    print("🎓 CHATBOT SEGRETERIA STUDENTI UNIBG - VERSIONE GRATUITA")
-    print("=" * 60)
-    print("💡 Basato su Mistral 7B + Sentence Transformers + ChromaDB")
-    print("📝 Scrivi una domanda o 'exit' per uscire")
-    print("🎫 Link ticket: " + os.getenv('TICKET_URL', 'https://www.unibg.it'))
-    print("=" * 60)
+    print("\n" + "=" * 50)
+    print("CHATBOT SEGRETERIA STUDENTI UNIBG")
+    print("=" * 50)
+    print("Scrivi una domanda o 'exit' per uscire")
+    print("=" * 50)
     
     while True:
-        print("\n" + "-" * 40)
-        query = input("👤 Studente > ").strip()
+        print("\n" + "-" * 30)
+        query = input("Studente > ").strip()
         
         if query.lower() in ['exit', 'quit', 'bye']:
-            print("👋 Arrivederci! Buono studio!")
+            print("Arrivederci!")
             break
         
         if not query:
             continue
         
-        # Elabora la domanda
         result = chatbot.chat(query)
         
-        # Mostra la risposta
         if result['should_redirect']:
-            print("🤖 " + result['response'])
-            print(f"\n🎫 Per assistenza personalizzata, apri un ticket:")
-            print(f"🌐 {os.getenv('TICKET_URL', 'https://www.unibg.it')}")
+            print("Assistente: " + result['response'])
+            print(f"\nPer assistenza personalizzata:")
+            print(f"{os.getenv('TICKET_URL', 'https://www.unibg.it')}")
         else:
-            print("🤖 " + result['response'])
-        
-        # Debug info (opzionale)
-        if os.getenv('DEBUG', '').lower() == 'true':
-            print(f"\n� Debug - Contesto trovato: {result['context_found']}")
-            print(f"🔍 Debug - Redirect suggerito: {result['should_redirect']}")
-            if result.get('context'):
-                print(f"🔍 Debug - Contesto: {result['context'][:200]}...")
+            print("Assistente: " + result['response'])

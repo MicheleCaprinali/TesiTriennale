@@ -21,15 +21,8 @@ def estrai_testo(percorso):
 if __name__ == "__main__":
     percorso_file = "data/FAQ/carriera.txt"
     try:
-        print(f"📂 Tentativo di lettura del file: {percorso_file}")
         testo = estrai_testo(percorso_file)
-        print(f"📏 Lunghezza del testo estratto: {len(testo)} caratteri")
-        if testo.strip():
-            print("✅ Testo estratto con successo! Ecco un'anteprima:")
-            print("-" * 50)
-            print(testo[:1000])
-            print("-" * 50)
-        else:
-            print("⚠️ Il file è vuoto o non contiene testo utile.")
+        print(f"Estratti {len(testo)} caratteri da {percorso_file}")
+        print(testo[:200] + "..." if len(testo) > 200 else testo)
     except Exception as e:
         print(f"❌ Errore: {e}")

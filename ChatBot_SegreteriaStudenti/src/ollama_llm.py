@@ -1,5 +1,5 @@
 """
-Modulo per gestire LLM locale con Ollama (gratuito)
+Modulo per gestire LLM locale con Ollama
 """
 
 import requests
@@ -12,7 +12,7 @@ load_dotenv()
 
 class OllamaLLM:
     """
-    Classe per interfacciarsi con Ollama per LLM locale gratuito
+    Classe per interfacciarsi con Ollama per LLM locale
     """
     
     def __init__(self, base_url: str = None, model: str = None):
@@ -50,7 +50,7 @@ class OllamaLLM:
         """Genera risposta usando Ollama con retry automatico"""
         
         # Costruisce il prompt completo OTTIMIZZATO E CONCISO
-        full_prompt = f"""Sei l'assistente AI della Segreteria UniBG. Rispondi in italiano, modo professionale e conciso.
+        full_prompt = f"""Sei l'assistente AI della Segreteria UniBg. Rispondi in italiano, modo professionale e conciso.
 
 REGOLE CRITICHE:
 - USA SOLO informazioni dal CONTESTO fornito
@@ -85,7 +85,7 @@ RISPOSTA:"""
         
         for attempt, timeout in enumerate(timeouts, 1):
             try:
-                print(f"🔄 Tentativo {attempt}/{len(timeouts)} (timeout: {timeout}s)")
+                print(f"Tentativo {attempt}/{len(timeouts)} (timeout: {timeout}s)")
                 
                 response = requests.post(
                     f"{self.base_url}/api/generate", 
@@ -97,12 +97,11 @@ RISPOSTA:"""
                     result = response.json()
                     answer = result.get('response', 'Errore nella generazione della risposta.')
                     
-                    # Verifica che la risposta non sia vuota
                     if answer.strip():
                         print(f"✅ Risposta generata al tentativo {attempt}")
                         return answer
                     else:
-                        print(f"⚠️  Risposta vuota al tentativo {attempt}")
+                        print(f"⚠️ Risposta vuota al tentativo {attempt}")
                         continue
                 else:
                     print(f"❌ HTTP {response.status_code} al tentativo {attempt}")
@@ -111,7 +110,7 @@ RISPOSTA:"""
                     continue
                     
             except requests.exceptions.Timeout:
-                print(f"⏱️  Timeout al tentativo {attempt} ({timeout}s)")
+                print(f"Timeout al tentativo {attempt} ({timeout}s)")
                 if attempt == len(timeouts):
                     return "Il sistema sta impiegando troppo tempo. Riprova tra qualche momento o contatta la segreteria."
                 continue
@@ -131,7 +130,7 @@ RISPOSTA:"""
             response = requests.post(
                 f"{self.base_url}/api/pull",
                 json=payload,
-                timeout=600  # 10 minuti per il download
+                timeout=600
             )
             return response.status_code == 200
         except:
@@ -139,25 +138,23 @@ RISPOSTA:"""
 
 def setup_ollama():
     """Setup e verifica di Ollama"""
-    print("🔄 Verifica setup Ollama...")
+    print("Verifica setup Ollama...")
     
     llm = OllamaLLM()
     
-    # Verifica se Ollama è in esecuzione
     if not llm.is_running():
         print("❌ Ollama non è in esecuzione!")
-        print("💡 Avvia Ollama con: ollama serve")
+        print("Avvia Ollama con: ollama serve")
         return False
     
     print("✅ Ollama è in esecuzione!")
     
-    # Verifica modelli disponibili
     models = llm.list_models()
-    print(f"📋 Modelli disponibili: {models}")
+    print(f"Modelli disponibili: {models}")
     
     if llm.model not in models:
-        print(f"⬇️  Scaricamento modello {llm.model}...")
-        print("⚠️  Questo può richiedere diversi minuti...")
+        print(f"Scaricamento modello {llm.model}...")
+        print("⚠️ Questo può richiedere diversi minuti...")
         if llm.pull_model():
             print("✅ Modello scaricato!")
         else:
@@ -167,19 +164,14 @@ def setup_ollama():
     return True
 
 if __name__ == "__main__":
-    # Test del modulo
     if setup_ollama():
         llm = OllamaLLM()
         
-        # Test di generazione
-        test_context = "L'università di Bergamo offre corsi di laurea in ingegneria informatica."
-        test_query = "Ci sono corsi di informatica?"
-        
-        print(f"\n🧪 Test generazione:")
-        print(f"Contesto: {test_context}")
-        print(f"Domanda: {test_query}")
+        # Test generazione con esempio generico
+        test_context = "Esempio di contesto informativo per test."
+        test_query = "Domanda di esempio?"
         
         response = llm.generate(test_query, test_context)
-        print(f"\n🤖 Risposta: {response}")
+        print(f"Test completato. Risposta di {len(response)} caratteri generata.")
     else:
         print("❌ Setup Ollama fallito!")

@@ -1,5 +1,5 @@
 """
-Sistema di Analytics per il ChatBot RAG
+Sistema di Analytics per il ChatBot
 Raccoglie metriche su performance e utilizzo
 """
 
@@ -176,35 +176,5 @@ def measure_performance(analytics_instance, operation_name):
     return decorator
 
 if __name__ == "__main__":
-    # Test del sistema di analytics
     analytics = ChatbotAnalytics()
-    
-    # Simula alcune query
-    import random
-    test_queries = [
-        "Come faccio a iscrivermi agli esami?",
-        "Quando devo pagare le tasse?",
-        "Orari della segreteria?",
-        "Come richiedere certificati?"
-    ]
-    
-    for _ in range(20):
-        query = random.choice(test_queries)
-        response = "Risposta di test per: " + query
-        response_time = random.uniform(1.5, 4.0)
-        docs_count = random.randint(3, 8)
-        should_redirect = random.choice([True, False])
-        
-        analytics.log_query(query, response, response_time, docs_count, should_redirect)
-    
-    # Mostra statistiche
-    stats = analytics.get_stats(7)
-    print("📊 Statistiche ultimi 7 giorni:")
-    print(f"  Total queries: {stats['total_queries']}")
-    print(f"  Avg response time: {stats['avg_response_time']}s")
-    print(f"  Redirect rate: {stats['redirect_rate']}%")
-    print(f"  Top queries: {stats['frequent_queries'][:5]}")
-    
-    # Esporta dati
-    export_file = analytics.export_data()
-    print(f"📄 Dati esportati in: {export_file}")
+    print("Sistema analytics inizializzato correttamente")

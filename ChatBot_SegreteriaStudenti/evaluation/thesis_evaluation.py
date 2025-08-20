@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Suite di test completa per la tesi - Performance e Accuratezza
+Test - Performance e Accuratezza
 """
 
 import json
@@ -35,7 +35,7 @@ class ThesisEvaluator:
     
     def setup_chatbot(self):
         """Inizializza il chatbot per i test"""
-        print("🤖 Inizializzazione chatbot...")
+        print("Inizializzazione chatbot...")
         try:
             self.chatbot = ChatbotRAG()
             print("✅ Chatbot inizializzato")
@@ -46,7 +46,7 @@ class ThesisEvaluator:
     
     def run_performance_test(self, sample_size=20):
         """Test di performance completo"""
-        print(f"\n🚀 PERFORMANCE TEST ({sample_size} queries)")
+        print(f"\nPERFORMANCE TEST ({sample_size} queries)")
         print("=" * 50)
         
         if not self.chatbot:
@@ -69,7 +69,7 @@ class ThesisEvaluator:
             query = query_data['query']
             expected_redirect = query_data['expected_redirect']
             
-            print(f"📝 Test {i}/{sample_size}: {query[:50]}...")
+            print(f"Test {i}/{sample_size}: {query[:50]}...")
             
             # Misura tempo di risposta
             start_time = time.time()
@@ -89,7 +89,6 @@ class ThesisEvaluator:
                 correct_redirect = (is_redirect == expected_redirect)
                 results['redirect_accuracy'].append(correct_redirect)
                 
-                # Output di debug
                 status = "✅" if correct_redirect else "❌"
                 print(f"   {status} Tempo: {response_time:.2f}s | Redirect: {is_redirect} (expected: {expected_redirect})")
                 
@@ -116,12 +115,12 @@ class ThesisEvaluator:
             'raw_data': results
         }
         
-        print(f"\n📊 RISULTATI PERFORMANCE:")
-        print(f"⏱️  Tempo medio risposta: {analysis['avg_response_time']:.2f}s")
-        print(f"⏱️  Tempo mediano: {analysis['median_response_time']:.2f}s") 
-        print(f"⏱️  Range: {analysis['min_response_time']:.2f}s - {analysis['max_response_time']:.2f}s")
-        print(f"📝 Token medi per risposta: {analysis['avg_tokens']:.1f}")
-        print(f"🎯 Accuratezza redirect: {analysis['redirect_accuracy']:.1f}%")
+        print(f"\nRISULTATI PERFORMANCE:")
+        print(f"Tempo medio risposta: {analysis['avg_response_time']:.2f}s")
+        print(f"Tempo mediano: {analysis['median_response_time']:.2f}s") 
+        print(f"Range: {analysis['min_response_time']:.2f}s - {analysis['max_response_time']:.2f}s")
+        print(f"Token medi per risposta: {analysis['avg_tokens']:.1f}")
+        print(f"Accuratezza redirect: {analysis['redirect_accuracy']:.1f}%")
         
         return analysis
     
@@ -130,7 +129,7 @@ class ThesisEvaluator:
         if not results or not results['raw_data']['response_times']:
             return
             
-        print("\n📈 Generazione grafici per tesi...")
+        print("\nGenerazione grafici per tesi...")
         
         # Set style
         plt.style.use('default')
@@ -175,46 +174,41 @@ class ThesisEvaluator:
         
         plt.tight_layout()
         plt.savefig('thesis_performance_charts.png', dpi=300, bbox_inches='tight')
-        print("📊 Grafici salvati in: thesis_performance_charts.png")
+        print("Grafici salvati in: thesis_performance_charts.png")
         
-        # Salva risultati dettagliati
         with open('thesis_performance_results.json', 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
-        print("📄 Risultati dettagliati salvati in: thesis_performance_results.json")
+        print("Risultati dettagliati salvati in: thesis_performance_results.json")
     
     def run_complete_evaluation(self):
-        """Esegue evaluation completa per la tesi"""
-        print("🎓 EVALUATION COMPLETA PER TESI")
+        """Esegue evaluation completa"""
+        print("EVALUATION COMPLETA")
         print("=" * 60)
         
-        # Test performance
         results = self.run_performance_test(sample_size=30)
         
         if results:
-            # Genera grafici
             self.generate_thesis_charts(results)
             
-            # Report finale
-            print(f"\n🏆 SUMMARY FINALE:")
-            print(f"📈 Sistema testato su {results['total_queries']} query")
-            print(f"⚡ Performance media: {results['avg_response_time']:.2f}s per query")
-            print(f"🎯 Accuratezza routing: {results['redirect_accuracy']:.1f}%")
-            print(f"📝 Completezza risposte: {results['avg_tokens']:.0f} token medi")
+            print(f"\nSUMMARY FINALE:")
+            print(f"Sistema testato su {results['total_queries']} query")
+            print(f"Performance media: {results['avg_response_time']:.2f}s per query")
+            print(f"Accuratezza routing: {results['redirect_accuracy']:.1f}%")
+            print(f"Completezza risposte: {results['avg_tokens']:.0f} token medi")
             
-            # Valutazione qualitativa
             if results['avg_response_time'] < 3.0:
                 print("✅ Performance: ECCELLENTE (< 3s)")
             elif results['avg_response_time'] < 5.0:
                 print("✅ Performance: BUONA (< 5s)")
             else:
-                print("⚠️  Performance: DA MIGLIORARE (> 5s)")
+                print("⚠️ Performance: DA MIGLIORARE (> 5s)")
                 
             if results['redirect_accuracy'] > 80:
                 print("✅ Accuratezza: ECCELLENTE (> 80%)")
             elif results['redirect_accuracy'] > 60:
                 print("✅ Accuratezza: BUONA (> 60%)")
             else:
-                print("⚠️  Accuratezza: DA MIGLIORARE (< 60%)")
+                print("⚠️ Accuratezza: DA MIGLIORARE (< 60%)")
         
         return results
 

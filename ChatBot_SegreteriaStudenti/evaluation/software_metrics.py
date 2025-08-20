@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Analisi Metriche Software - ChatBot RAG
+Analisi Metriche Software - ChatBot
 Calcola CC, WMC, LCOM e altre metriche per la tesi
 
 Metriche implementate:
@@ -175,7 +175,7 @@ class CodeMetricsAnalyzer:
     
     def analyze_project(self) -> Dict[str, Any]:
         """Analizza tutto il progetto"""
-        print("🔍 Analisi Metriche Software del Progetto")
+        print("Analisi Metriche Software del Progetto")
         print("=" * 50)
         
         project_metrics = {
@@ -204,7 +204,7 @@ class CodeMetricsAnalyzer:
         cc_values = []
         
         for file_path in python_files:
-            print(f"📝 Analizzando: {file_path.name}")
+            print(f"Analizzando: {file_path.name}")
             file_metrics = self.analyze_file(file_path)
             
             if 'error' not in file_metrics:
@@ -234,7 +234,7 @@ class CodeMetricsAnalyzer:
     
     def calculate_robert_martin_metrics(self, project_metrics: Dict) -> Dict[str, Any]:
         """Calcola metriche di Robert Martin (Ca, Ce, Instability)"""
-        print("\n📊 Calcolo metriche Robert Martin...")
+        print("\nCalcolo metriche Robert Martin...")
         
         # Mappa moduli e dipendenze
         modules = {}
@@ -270,13 +270,12 @@ class CodeMetricsAnalyzer:
     
     def generate_report(self, project_metrics: Dict, robert_martin: Dict) -> str:
         """Genera report dettagliato delle metriche"""
-        print("\n📋 Generazione report...")
+        print("\nGenerazione report...")
         
-        report = "# 📊 REPORT METRICHE SOFTWARE - ChatBot RAG\n\n"
+        report = "# REPORT METRICHE SOFTWARE - ChatBot RAG\n\n"
         
-        # Summary generale
         summary = project_metrics['summary']
-        report += f"## 🎯 SUMMARY GENERALE\n\n"
+        report += f"## SUMMARY GENERALE\n\n"
         report += f"- **File analizzati:** {summary['total_files']}\n"
         report += f"- **Linee di codice totali:** {summary['total_lines']}\n"
         report += f"- **Classi totali:** {summary['total_classes']}\n"
@@ -285,8 +284,7 @@ class CodeMetricsAnalyzer:
         report += f"- **CC medio:** {summary['average_cc']:.2f}\n"
         report += f"- **CC massimo:** {summary['max_cc']}\n\n"
         
-        # Analisi per file
-        report += "## 📁 ANALISI PER FILE\n\n"
+        report += "## ANALISI PER FILE\n\n"
         for file_metrics in project_metrics['files']:
             file_name = Path(file_metrics['file']).name
             report += f"### {file_name}\n"
@@ -295,14 +293,12 @@ class CodeMetricsAnalyzer:
             report += f"- **Funzioni:** {len(file_metrics['functions'])}\n"
             report += f"- **CC totale:** {file_metrics['total_cc']}\n"
             
-            # Dettagli classi
             for cls in file_metrics['classes']:
                 report += f"  - **Classe {cls['name']}:** WMC={cls['wmc']}, LCOM={cls['lcom']:.2f}\n"
             
             report += "\n"
         
-        # Metriche Robert Martin
-        report += "## 🔗 METRICHE ROBERT MARTIN\n\n"
+        report += "## METRICHE ROBERT MARTIN\n\n"
         report += "| Modulo | Ca (Afferent) | Ce (Efferent) | Instability |\n"
         report += "|--------|---------------|---------------|-------------|\n"
         for module, metrics in robert_martin.items():
@@ -312,11 +308,11 @@ class CodeMetricsAnalyzer:
     
     def create_visualizations(self, project_metrics: Dict, robert_martin: Dict):
         """Crea grafici delle metriche"""
-        print("\n📈 Creazione visualizzazioni...")
+        print("\nCreazione visualizzazioni...")
         
         plt.style.use('seaborn-v0_8')
         fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('📊 Metriche Software - ChatBot RAG', fontsize=16, fontweight='bold')
+        fig.suptitle('Metriche Software - ChatBot', fontsize=16, fontweight='bold')
         
         # 1. Distribuzione Cyclomatic Complexity
         cc_values = []
@@ -380,29 +376,22 @@ class CodeMetricsAnalyzer:
 
 def main():
     """Esegue analisi completa delle metriche software"""
-    print("🚀 ANALISI METRICHE SOFTWARE - CHATBOT RAG")
+    print("ANALISI METRICHE SOFTWARE - CHATBOT")
     print("=" * 60)
     
-    # Assicurati che la cartella results esista
     os.makedirs('results', exist_ok=True)
     
-    # Inizializza analyzer
     analyzer = CodeMetricsAnalyzer(".")
     
-    # Analizza progetto
     project_metrics = analyzer.analyze_project()
     
-    # Calcola metriche Robert Martin
     robert_martin = analyzer.calculate_robert_martin_metrics(project_metrics)
     
-    # Genera report
     report = analyzer.generate_report(project_metrics, robert_martin)
     
-    # Salva report
     with open('results/software_metrics_report.md', 'w', encoding='utf-8') as f:
         f.write(report)
     
-    # Salva dati JSON per ulteriori elaborazioni
     metrics_data = {
         'project_metrics': project_metrics,
         'robert_martin': robert_martin,
@@ -412,23 +401,21 @@ def main():
     with open('results/software_metrics_data.json', 'w', encoding='utf-8') as f:
         json.dump(metrics_data, f, indent=2, ensure_ascii=False)
     
-    # Crea visualizzazioni
     analyzer.create_visualizations(project_metrics, robert_martin)
     
     print(f"\n✅ ANALISI COMPLETATA!")
-    print(f"📋 Report: results/software_metrics_report.md")
-    print(f"📊 Grafici: results/software_metrics_analysis.png")
-    print(f"💾 Dati: results/software_metrics_data.json")
+    print(f"Report: results/software_metrics_report.md")
+    print(f"Grafici: results/software_metrics_analysis.png")
+    print(f"Dati: results/software_metrics_data.json")
     
-    # Mostra summary
     summary = project_metrics['summary']
-    print(f"\n🎯 HIGHLIGHTS:")
-    print(f"   📁 {summary['total_files']} file Python analizzati")
-    print(f"   📏 {summary['total_lines']} linee di codice")
-    print(f"   🏗️  {summary['total_classes']} classi")
-    print(f"   ⚙️  {summary['total_functions']} funzioni")
-    print(f"   🔢 CC medio: {summary['average_cc']:.2f}")
-    print(f"   ⚠️  CC massimo: {summary['max_cc']}")
+    print(f"\nHIGHLIGHTS:")
+    print(f"   {summary['total_files']} file Python analizzati")
+    print(f"   {summary['total_lines']} linee di codice")
+    print(f"   {summary['total_classes']} classi")
+    print(f"   {summary['total_functions']} funzioni")
+    print(f"   CC medio: {summary['average_cc']:.2f}")
+    print(f"   CC massimo: {summary['max_cc']}")
 
 if __name__ == "__main__":
     main()

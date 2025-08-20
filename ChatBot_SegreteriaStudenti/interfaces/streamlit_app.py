@@ -10,7 +10,7 @@ import time
 
 # Configurazione pagina
 st.set_page_config(
-    page_title="ChatBot UniBG",
+    page_title="ChatBot UniBg",
     page_icon="🎓",
     layout="wide"
 )
@@ -97,10 +97,11 @@ st.markdown("""
 def initialize_chatbot():
     """Inizializza il chatbot"""
     if 'chatbot' not in st.session_state:
-        with st.spinner('🔄 Inizializzazione chatbot...'):
+        with st.spinner('Inizializzazione chatbot...'):
             st.session_state.chatbot = setup_chatbot()
             if st.session_state.chatbot:
-                st.success('✅ Chatbot pronto!')
+                #st.success('✅ Chatbot pronto!')
+                pass
             else:
                 st.error('❌ Errore inizializzazione chatbot')
                 return False
@@ -139,43 +140,16 @@ def display_message(message, is_user=True):
     """, unsafe_allow_html=True)
 
 def main():
-    # Header con colori UniBG
+    #Header
     st.markdown("""
     <div class="unibg-colors">
-        <h1 style="margin: 0; text-align: center;">🎓 ChatBot Segreteria Studenti</h1>
+        <h1 style="margin: 0; text-align: center;">ChatBot Segreteria Studenti</h1>
         <p style="margin: 5px 0 0 0; text-align: center; opacity: 0.9;">Università degli Studi di Bergamo</p>
     </div>
     """, unsafe_allow_html=True)
     
     # Sidebar con informazioni
     with st.sidebar:
-        st.markdown("""
-        <div style="background: linear-gradient(135deg, #1f4e79, #2e6da4); color: white; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; text-align: center;">
-            <h3 style="margin: 0;">📊 System Info</h3>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown('<div class="sidebar-content">', unsafe_allow_html=True)
-        st.write("**🔧 Tecnologie utilizzate:**")
-        st.write("• 🧠 **Mistral 7B** (LLM locale)")
-        st.write("• 🔍 **Sentence Transformers**")
-        st.write("• 💾 **ChromaDB** Vector Store")
-        st.write("• 🔗 **RAG Architecture**")
-        st.write("• 🌐 **Streamlit** Interface")
-        
-        st.write("**📚 Database documenti:**")
-        if os.path.exists("vectordb"):
-            import chromadb
-            try:
-                client = chromadb.PersistentClient(path="vectordb")
-                collection = client.get_collection("unibg_docs")
-                doc_count = collection.count()
-                st.write(f"📄 **{doc_count} documenti** indicizzati")
-                st.write("🔍 **Semantic Search** attiva")
-            except:
-                st.write("📄 Database presente")
-        
-        st.markdown("---")
         st.write("**💡 Esempi di domande:**")
         examples = [
             "Come iscriversi agli esami?",
@@ -184,21 +158,19 @@ def main():
             "Servizi per disabili?",
             "Come richiedere certificati?"
         ]
-        
+    
         for example in examples:
             if st.button(f"▶️ {example}", key=example, use_container_width=True):
                 st.session_state.user_input = example
-        
+    
         st.markdown("---")
         st.markdown("""
         <div style="text-align: center; color: #666; font-size: 0.8rem;">
-            <p>🎓 <strong>Tesi Triennale</strong><br>
-            Ingegneria Informatica<br>
-            UniBG 2025</p>
+            <p><strong>Tesi Triennale</strong><br>
+            Ingegneria Informatica</p>
         </div>
         """, unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
+
     
     # Inizializza chatbot
     if not initialize_chatbot():
@@ -208,16 +180,16 @@ def main():
     if 'messages' not in st.session_state:
         st.session_state.messages = []
         # Messaggio di benvenuto
-        welcome_msg = """👋 Ciao! Sono il ChatBot della Segreteria Studenti UniBG.
+        welcome_msg = """Ciao! Sono il ChatBot della Segreteria Studenti UniBg.
 
 Posso aiutarti con:
-• 📚 Iscrizioni e esami
-• 💰 Tasse universitarie  
-• 📄 Certificati e documenti
-• 🏢 Contatti e orari
-• ♿ Servizi per studenti con disabilità
+• Iscrizioni e esami
+• Tasse universitarie  
+• Certificati e documenti
+• Contatti e orari
+• Servizi per studenti con disabilità
 
-Fai pure la tua domanda! 😊"""
+Fai pure la tua domanda!"""
         st.session_state.messages.append({"role": "bot", "content": welcome_msg})
     
     # Visualizza cronologia chat
@@ -243,14 +215,15 @@ Fai pure la tua domanda! 😊"""
         display_message(user_input, True)
         
         # Genera risposta
-        with st.spinner('🔍 Sto cercando la risposta...'):
+        with st.spinner('Sto cercando la risposta...'):
             try:
                 result = st.session_state.chatbot.chat(user_input)
                 response = result['response']
                 
                 # Aggiungi info sul redirect se necessario
                 if result.get('should_redirect', False):
-                    response += "\n\n🎫 **Per assistenza personalizzata, apri un ticket alla Segreteria:**\n🌐 https://www.unibg.it/servizi-studenti/contatti"
+                    response += "\n\nPer assistenza personalizzata, apri un ticket alla Segreteria:\nhttps://helpdesk.unibg.it/"
+
                 
                 # Aggiungi risposta bot
                 st.session_state.messages.append({"role": "bot", "content": response})
@@ -269,7 +242,7 @@ Fai pure la tua domanda! 😊"""
     # Footer
     st.markdown("---")
     st.markdown(
-        '<p style="text-align: center; color: #666;">🎓 Tesi Triennale Ingegneria Informatica - UniBG 2025</p>',
+        '<p style="text-align: center; color: #666;"> Tesi Triennale Ingegneria Informatica - UniBg 2024-2025</p>',
         unsafe_allow_html=True
     )
 

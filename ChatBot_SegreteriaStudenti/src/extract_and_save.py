@@ -15,10 +15,10 @@ def process_all_documents():
     
     for cartella_input in cartelle_input:
         if not os.path.exists(cartella_input):
-            print(f"⚠️  Cartella {cartella_input} non trovata, skip...")
+            print(f"⚠️ Cartella {cartella_input} non trovata, skip...")
             continue
             
-        print(f"📂 Processando documenti in: {cartella_input}")
+        print(f"Processando documenti in: {cartella_input}")
         
         for nome_file in os.listdir(cartella_input):
             percorso_file = os.path.join(cartella_input, nome_file)
@@ -42,7 +42,7 @@ def process_all_documents():
                 print(f"❌ Errore con {nome_file}: {e}")
                 total_errors += 1
     
-    print(f"\n📊 Riepilogo: {total_processed} file processati, {total_errors} errori")
+    print(f"\nRiepilogo: {total_processed} file processati, {total_errors} errori")
     return total_processed > 0
 
 if __name__ == "__main__":

@@ -1,1 +1,1 @@
-# Moduli del Chatbot RAG UniBG
+# Moduli del Chatbot UniBg
