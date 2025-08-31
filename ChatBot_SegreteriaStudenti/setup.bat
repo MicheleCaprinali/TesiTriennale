@@ -146,6 +146,7 @@ if not exist ".env" (
 
 echo.
 echo 8- Controllo Ollama...
+echo Verifica installazione Ollama...
 ollama --version > nul 2>&1
 if errorlevel 1 (
     echo [WARN] Ollama non trovato
@@ -163,25 +164,47 @@ if errorlevel 1 (
     )
 ) else (
     echo [OK] Ollama installato
-    echo Verifica modello Mistral...
-    ollama list | findstr mistral > nul 2>&1
+    
+    REM Verifica se Ollama è in esecuzione
+    echo Verifica servizio Ollama...
+    timeout /t 2 /nobreak >nul
+    ollama list >nul 2>&1
     if errorlevel 1 (
-        echo [WARN] Modello Mistral non trovato
-        echo Installalo con: ollama pull mistral:7b
+        echo [WARN] Ollama non in esecuzione
+        echo Per avviare Ollama:
+        echo 1. Cerca "Ollama" nel menu Start e aprilo
+        echo 2. Oppure esegui: ollama serve
+        echo 3. Poi rilancia questo script
         echo.
-        echo Vuoi installarlo ora? (y/n)
-        set /p choice=
-        if /i "%choice%"=="y" (
-            echo Installazione modello Mistral in corso...
-            ollama pull mistral:7b
-            if errorlevel 1 (
-                echo [WARN] Errore nell'installazione del modello
-            ) else (
-                echo [OK] Modello Mistral installato
-            )
-        )
+        echo Il setup continuerà, ma dovrai avviare Ollama manualmente
     ) else (
-        echo [OK] Modello Mistral disponibile
+        echo [OK] Ollama in esecuzione
+        echo Verifica modello Mistral...
+        
+        REM Controllo più robusto del modello Mistral
+        ollama list 2>nul | findstr /i "mistral" >nul 2>&1
+        if errorlevel 1 (
+            echo [WARN] Modello Mistral non trovato
+            echo Modelli disponibili:
+            ollama list 2>nul || echo   Nessun modello installato
+            echo.
+            echo Installalo con: ollama pull mistral:7b
+            echo.
+            echo Vuoi installarlo ora? (y/n)
+            set /p choice=
+            if /i "%choice%"=="y" (
+                echo Installazione modello Mistral in corso...
+                ollama pull mistral:7b 2>nul
+                if errorlevel 1 (
+                    echo [WARN] Errore nell'installazione del modello
+                    echo Prova manualmente: ollama pull mistral:7b
+                ) else (
+                    echo [OK] Modello Mistral installato
+                )
+            )
+        ) else (
+            echo [OK] Modello Mistral disponibile
+        )
     )
 )
 
