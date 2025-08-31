@@ -15,15 +15,22 @@ Sistema intelligente per l'assistenza automatizzata agli studenti dell'Universit
 
 ## Setup Rapido
 
+### ⚠️ **PREREQUISITO OBBLIGATORIO**
+**Prima di tutto, installa Python 3.9+:**
+1. Vai su [python.org/downloads](https://www.python.org/downloads/)
+2. Scarica Python 3.9 o superiore  
+3. **IMPORTANTE**: Durante l'installazione seleziona "Add Python to PATH"
+4. Riavvia il terminale dopo l'installazione
+
 ### Windows (Automatico)
 ```cmd
-setup.bat          # Installazione completa
+setup.bat          # Installazione completa (richiede Python installato)
 start_chatbot.bat   # Avvio interfaccia CLI
 start_web.bat       # Avvio interfaccia web (http://localhost:8501)
 ```
 
 ### Setup Manuale
-1. **Installa Python 3.13+:** [Download](https://www.python.org/downloads/)
+1. **✅ INSTALLA PYTHON 3.9+ PRIMA DI TUTTO:** [Download](https://www.python.org/downloads/)
 2. **Installa Ollama:** [Download](https://ollama.ai/download)
 3. **Crea ambiente virtuale:** `python -m venv venv`
 4. **Attiva ambiente:** `venv\Scripts\activate.bat` (CMD) o `venv\Scripts\Activate.ps1` (PowerShell)
@@ -121,7 +128,7 @@ ChatBot_SegreteriaStudenti/
 ## Specifiche Tecniche
 
 **Requisiti minimi:**
-- Python 3.13+
+- **Python 3.9+ (OBBLIGATORIO - da installare per primo)**
 - 8GB RAM
 - 10GB storage libero
 
