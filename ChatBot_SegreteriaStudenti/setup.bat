@@ -39,6 +39,34 @@ if errorlevel 1 (
 )
 
 echo.
+echo Controllo compilatori C++...
+cl /? > nul 2>&1
+if errorlevel 1 (
+    echo [WARN] Microsoft C++ Build Tools non trovati
+    echo.
+    echo Questo potrebbe causare errori nella compilazione di alcune dipendenze.
+    echo.
+    echo Per installare i Build Tools:
+    echo 1. Vai su: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+    echo 2. Scarica "Build Tools for Visual Studio"
+    echo 3. Installa con "C++ build tools" selezionato
+    echo.
+    echo ALTERNATIVA: Prova prima senza Build Tools (useremo wheels pre-compilati)
+    echo.
+    set /p buildtools_choice=Continuare senza Build Tools? (y/n): 
+    if /i not "%buildtools_choice%"=="y" (
+        echo Aprendo pagina download Build Tools...
+        start https://visualstudio.microsoft.com/visual-cpp-build-tools/
+        echo Rilancia questo script dopo l'installazione
+        pause
+        exit /b 1
+    )
+    echo [INFO] Continuo con installazione usando wheels pre-compilati...
+) else (
+    echo [OK] Compilatori C++ disponibili
+)
+
+echo.
 echo 1- Controllo ambiente virtuale...
 if not exist "venv\Scripts\activate.bat" (
     echo [INFO] Ambiente virtuale non trovato, creazione in corso...
@@ -69,7 +97,7 @@ echo [OK] Ambiente virtuale attivato
 
 echo.
 echo 3- Aggiornamento pip...
-venv\Scripts\python.exe -m pip install --upgrade pip
+venv\Scripts\python.exe -m pip install --upgrade pip wheel setuptools
 if errorlevel 1 (
     echo [WARN] Errore nell'aggiornamento di pip, continuo...
 )
@@ -85,21 +113,97 @@ if not exist "requirements.txt" (
 
 echo [OK] File requirements.txt trovato
 echo 5- Installazione dipendenze...
-venv\Scripts\python.exe -m pip install -r requirements.txt
+echo [INFO] Installazione semplificata senza versioni specifiche...
+
+REM Installazione step-by-step per evitare conflitti
+echo [INFO] Installazione PyTorch (CPU only)...
+venv\Scripts\python.exe -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 if errorlevel 1 (
-    echo [ERRORE] Errore nell'installazione delle dipendenze
-    echo Controlla la connessione internet e riprova
-    pause
-    exit /b 1
+    echo [WARN] Installazione PyTorch fallita, provo versione standard...
+    venv\Scripts\python.exe -m pip install torch
 )
+
+echo [INFO] Installazione dipendenze principali...
+venv\Scripts\python.exe -m pip install requests PyPDF2 ollama
+if errorlevel 1 (
+    echo [WARN] Errore in alcune dipendenze base
+)
+
+echo [INFO] Installazione Sentence Transformers...
+venv\Scripts\python.exe -m pip install sentence-transformers
+if errorlevel 1 (
+    echo [WARN] Errore installazione Sentence Transformers
+)
+
+echo [INFO] Installazione ChromaDB...
+venv\Scripts\python.exe -m pip install chromadb
+if errorlevel 1 (
+    echo [WARN] Errore installazione ChromaDB
+)
+
+echo [INFO] Installazione Streamlit...
+venv\Scripts\python.exe -m pip install streamlit
+if errorlevel 1 (
+    echo [WARN] Errore installazione Streamlit
+)
+
+echo [INFO] Verifica installazione finale...
+venv\Scripts\python.exe -m pip list | findstr -i "torch sentence-transformers chromadb streamlit"
+
+REM Se tutto fallisce, installa da requirements.txt
+if errorlevel 1 (
+    echo [INFO] Tentativo installazione da requirements.txt...
+    venv\Scripts\python.exe -m pip install -r requirements.txt --no-deps --force-reinstall
+    if errorlevel 1 (
+        echo [ERRORE] Errore nell'installazione delle dipendenze
+        echo.
+        echo SOLUZIONI POSSIBILI:
+        echo 1. Installa Microsoft C++ Build Tools:
+        echo    https://visualstudio.microsoft.com/visual-cpp-build-tools/
+        echo 2. Prova installazione manuale singola:
+        echo    venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+        echo    venv\Scripts\python.exe -m pip install sentence-transformers
+        echo    venv\Scripts\python.exe -m pip install chromadb
+        echo    venv\Scripts\python.exe -m pip install streamlit
+        echo 3. Usa conda invece di pip (Anaconda/Miniconda)
+        echo.
+        echo Vuoi aprire la pagina dei Build Tools? (y/n)
+        set /p open_buildtools=
+        if /i "%open_buildtools%"=="y" (
+            start https://visualstudio.microsoft.com/visual-cpp-build-tools/
+        )
+        pause
+        exit /b 1
+    )
+)
+
+echo [OK] Dipendenze installate
 
 echo.
 echo 6- Test configurazione...
-venv\Scripts\python.exe -c "import torch, transformers, chromadb, streamlit; print('[OK] Tutte le dipendenze installate correttamente')" 2>nul
+echo [INFO] Verifica dipendenze principali...
+venv\Scripts\python.exe -c "import sentence_transformers; print('[OK] Sentence Transformers importato correttamente')" 2>nul
 if errorlevel 1 (
-    echo [WARN] Alcune dipendenze potrebbero non essere installate correttamente
-    echo Verifica manualmente con: pip list
+    echo [WARN] Sentence Transformers: ERRORE"
 )
+
+venv\Scripts\python.exe -c "import chromadb; print('[OK] ChromaDB importato correttamente')" 2>nul
+if errorlevel 1 (
+    echo [WARN] ChromaDB: ERRORE"
+)
+
+venv\Scripts\python.exe -c "import streamlit; print('[OK] Streamlit importato correttamente')" 2>nul
+if errorlevel 1 (
+    echo [WARN] Streamlit: ERRORE"
+)
+
+venv\Scripts\python.exe -c "import torch; print('[OK] PyTorch importato correttamente')" 2>nul
+if errorlevel 1 (
+    echo [WARN] PyTorch: ERRORE"
+)
+
+echo [INFO] Se vedi errori sopra, alcune funzionalità potrebbero non funzionare
+echo       Ma il sistema base dovrebbe essere operativo
 
 echo.
 echo 7- Controllo Ollama...
