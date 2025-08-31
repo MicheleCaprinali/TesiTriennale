@@ -16,48 +16,50 @@ Sistema intelligente per l'assistenza automatizzata agli studenti dell'Universit
 ## Setup Rapido
 
 ### Windows (Automatico)
-```bash
+```cmd
 setup.bat          # Installazione completa
 start_chatbot.bat   # Avvio interfaccia CLI
 start_web.bat       # Avvio interfaccia web (http://localhost:8501)
 ```
 
 ### Setup Manuale
-1. **Installa Ollama:** [Download](https://ollama.ai/download)
-2. **Dipendenze Python:** `pip install -r requirements.txt`
-3. **Modello LLM:** `ollama pull mistral:7b`
-4. **Attiva ambiente virtuale:** `.\venv\Scripts\Activate.ps1` (Windows)
-5. **Avvio:** `python main.py`
+1. **Installa Python 3.13+:** [Download](https://www.python.org/downloads/)
+2. **Installa Ollama:** [Download](https://ollama.ai/download)
+3. **Crea ambiente virtuale:** `python -m venv venv`
+4. **Attiva ambiente:** `venv\Scripts\activate.bat` (CMD) o `venv\Scripts\Activate.ps1` (PowerShell)
+5. **Dipendenze Python:** `pip install -r requirements.txt`
+6. **Modello LLM:** `ollama pull mistral:7b`
+7. **Avvio:** `python main.py`
 
 ## Utilizzo
 
 ### Interfaccia CLI
-```bash
+```cmd
 # Attiva ambiente virtuale (importante!)
-.\venv\Scripts\Activate.ps1
+venv\Scripts\activate.bat
 
 # Avvia chatbot
 python main.py
 
 # Alternativa: usa file .bat automatico
-.\start_chatbot.bat
+start_chatbot.bat
 ```
 
 ### Interfaccia Web
-```bash
+```cmd
 # Attiva ambiente virtuale
-.\venv\Scripts\Activate.ps1
+venv\Scripts\activate.bat
 
 # Avvia interfaccia web
 streamlit run interfaces/streamlit_app.py --server.port 8501
 
 # Alternativa: usa file .bat automatico
-.\start_web.bat
+start_web.bat
 # Browser: http://localhost:8501
 ```
 
 ### Manutenzione
-```bash
+```cmd
 update_database.bat  # Aggiorna vectorstore
 run_tests.bat        # Esegui test sistema
 ```
