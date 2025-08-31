@@ -6,6 +6,13 @@ from local_embeddings import LocalEmbeddings
 from ollama_llm import OllamaLLM
 from create_vectorstore import search_vectorstore
 
+# Importa sistema di risposte rapide
+try:
+    from quick_responses import get_quick_response
+except ImportError:
+    def get_quick_response(query):
+        return None
+
 class ChatbotRAG:
     """
     Chatbot RAG completamente gratuito usando:
@@ -99,7 +106,18 @@ class ChatbotRAG:
             return f"Errore nella generazione della risposta: {str(e)}"
     
     def chat(self, query: str) -> dict:
-        """Pipeline completa RAG: Retrieve + Generate"""
+        """Pipeline completa RAG: Retrieve + Generate con sistema di fallback"""
+        
+        # Prima verifica se c'è una risposta rapida disponibile
+        quick_response = get_quick_response(query)
+        if quick_response:
+            print("✅ Utilizzando risposta rapida ottimizzata")
+            return {
+                "response": quick_response,
+                "context_found": True,
+                "should_redirect": False,
+                "context": "Risposta rapida dal database ottimizzato"
+            }
         
         print("Ricerca documenti pertinenti...")
         context = self.retrieve_context(query)
@@ -113,6 +131,27 @@ class ChatbotRAG:
         
         print("Generazione risposta...")
         response = self.generate_response(query, context)
+        
+        # Se la risposta indica timeout, prova una risposta basata solo sul contesto
+        if "troppo tempo" in response or "timeout" in response.lower():
+            # Genera una risposta di base basata sul contesto
+            import re
+            url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+            context_links = re.findall(url_pattern, context)
+            
+            if context_links:
+                fallback_response = f"Ho trovato informazioni pertinenti alla tua domanda. Ecco i link utili:\n\n"
+                for i, link in enumerate(context_links[:3], 1):  # Massimo 3 link
+                    fallback_response += f"🔗 **Link {i}:** {link}\n"
+                
+                fallback_response += "\nPer maggiori dettagli contatta la segreteria studenti."
+                
+                return {
+                    "response": fallback_response,
+                    "context_found": True,
+                    "should_redirect": False,
+                    "context": context[:500] + "..." if len(context) > 500 else context
+                }
         
         should_redirect = self._should_redirect_to_ticket(response, query)
         

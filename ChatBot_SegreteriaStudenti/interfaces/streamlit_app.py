@@ -115,15 +115,27 @@ def display_message(message, is_user=True):
     # Converti i link in HTML cliccabili se non è un messaggio utente
     if not is_user:
         import re
-        # Pattern per trovare link HTTP/HTTPS (più preciso per evitare duplicazioni)
-        url_pattern = r'(?<!href=")(?<!\[)(?<!")(https?://[^\s<>"{}|\\^`\[\]]+)(?!\))'
+        
+        # Pattern più accurato per trovare link HTTP/HTTPS
+        url_pattern = r'(?<!href=")(?<!\[)(?<!")(https?://[^\s<>"{}|\\^`\[\]]+?)(?=[\s\]\)]|$)'
+        
         # Sostituisci con link HTML cliccabili
-        message = re.sub(url_pattern, r'<a href="\1" target="_blank" style="color: #4fc3f7; text-decoration: underline;">\1</a>', message)
+        def replace_link(match):
+            url = match.group(1)
+            # Rimuovi caratteri di punteggiatura finali che potrebbero essere stati catturati
+            url = re.sub(r'[,.)]+$', '', url)
+            return f'<a href="{url}" target="_blank" style="color: #4fc3f7; text-decoration: underline; font-weight: bold;">{url}</a>'
+        
+        message = re.sub(url_pattern, replace_link, message)
         
         # Gestisci anche eventuali link già in formato markdown [text](url)
         markdown_link_pattern = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
-        message = re.sub(markdown_link_pattern, r'<a href="\2" target="_blank" style="color: #4fc3f7; text-decoration: underline;">\1</a>', message)
-    
+        message = re.sub(markdown_link_pattern, r'<a href="\2" target="_blank" style="color: #4fc3f7; text-decoration: underline; font-weight: bold;">\1</a>', message)
+        
+        # Migliora la formattazione con emoji e link
+        # Sostituisci i pattern di emoji link
+        message = re.sub(r'🔗\s*\*\*([^*]+)\*\*:\s*(<a[^>]+>[^<]+</a>)', r'🔗 <strong>\1:</strong> \2', message)
+        
     # Escape HTML per messaggi utente per sicurezza
     if is_user:
         import html

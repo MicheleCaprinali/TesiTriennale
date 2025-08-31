@@ -10,9 +10,9 @@ Vanno sempre messe le 2 cifre dopo la virgola: se la media è 8 deve essere indi
 Come ci si iscrive?
 
 
-Qui https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi sono descritti gli step per effettuare l'iscrizione. Attenzione: le procedure sono diverse a seconda della tipologia di corso (triennale o magistrale). Inoltre alcuni corsi sono ad accesso programmato, quindi è essenziale prendere visione dei rispettivi bandi.
+Qui https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi/sono descritti gli step per effettuare l'iscrizione. Attenzione: le procedure sono diverse a seconda della tipologia di corso (triennale o magistrale). Inoltre alcuni corsi sono ad accesso programmato, quindi è essenziale prendere visione dei rispettivi bandi.
 
-Qui https://www.unibg.it/node/10733 trovi il bando per l'ammissione ai corsi di laurea triennale ad accesso programmato.
+Qui https://www.unibg.it/node/10733/trovi il bando per l'ammissione ai corsi di laurea triennale ad accesso programmato.
 
 Come iscriversi a tempo parziale ?
 
@@ -28,22 +28,22 @@ NB lo stato occupazionale Iscr. part-time e LAVORATORE non determina l’iscrizi
 Esiste un servizio di orientamento?
 
 
-Sì, è attivo un servizio di orientamento e tutorato, a cui rivolgersi per dubbi e richieste di chiarimenti. Qui https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/pot-piani-orientamento-e-tutorato trovi tutte le informazioni.
+Sì, è attivo un servizio di orientamento e tutorato, a cui rivolgersi per dubbi e richieste di chiarimenti. Qui https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/pot-piani-orientamento-e-tutorato/trovi tutte le informazioni.
 
 Mi sono dimenticato il numero di pre-matricola, come faccio a recuperarlo?
 
 
-Qui https://www.unibg.it/sites/default/files/how_to_-_recuperare_il_numero_di_pre-matricola.pdf trovi la guida che spiega come recuperare il numero di pre-matricola.
+Qui https://www.unibg.it/sites/default/files/how_to_-_recuperare_il_numero_di_pre-matricola.pdf/trovi la guida che spiega come recuperare il numero di pre-matricola.
 
 Qual è l'offerta formativa per l'anno accademico 2024/2025?
 
 
-Qui https://www.unibg.it/studiare/ti-aiutiamo/scopri-unibg/cerca-tuo-corso-laurea , oppure qui  https://www.unibg.it/studiare/corsi/offerta-formativa  trovi le informazioni sui corsi di laurea triennali, magistrali e magistrali a ciclo unico offerti della nostra Università per l'anno accademico 2024/2025.
+Qui https://www.unibg.it/studiare/ti-aiutiamo/scopri-unibg/cerca-tuo-corso-laurea/, oppure qui  https://www.unibg.it/studiare/corsi/offerta-formativa/trovi le informazioni sui corsi di laurea triennali, magistrali e magistrali a ciclo unico offerti della nostra Università per l'anno accademico 2024/2025.
 
 Quali sono le scadenze per l'iscrizione?
 
 
-Qui https://www.unibg.it/studia-noi/iscriversi/scadenze-iscriversi trovi le scadenze, divise tra lauree triennali (o magistrali a ciclo unico) e lauree magistrali.
+Qui https://www.unibg.it/studia-noi/iscriversi/scadenze-iscriversi/trovi le scadenze, divise tra lauree triennali (o magistrali a ciclo unico) e lauree magistrali.
 
 Attenzione: per i corsi ad accesso programmato, è comunque essenziale prendere visione dei rispettivi bandi.
 
