@@ -1,30 +1,5 @@
 import os
 
-def clean_links(text):
-    """Pulisce i link malformati nel testo"""
-    import re
-    
-    # Pattern di pulizia per i link
-    patterns = [
-        # Rimuovi caratteri di chiusura dai link
-        (r'(https?://[^\s<>"{}|\\^`\[\]]+)[\),\.](?=\s|$)', r'\1'),
-        # Rimuovi link duplicati
-        (r'(https?://[^\s]+)\s+\1', r'\1'),
-        # Pulisci spazi extra tra URL e estensioni
-        (r'(https?://[^\s]+)\s+([^\s/]+)', r'\1/\2'),
-        # Normalizza slash multipli
-        (r'(https?://[^/]+)//+', r'\1/'),
-        # Rimuovi caratteri strani alla fine degli URL
-        (r'(https?://[^\s]+)[\s\n]+$', r'\1'),
-    ]
-    
-    cleaned_text = text
-    for pattern, replacement in patterns:
-        cleaned_text = re.sub(pattern, replacement, cleaned_text)
-    
-    return cleaned_text
-
-
 def estrai_testo(percorso):
     estensione = os.path.splitext(percorso)[1].lower()
     

@@ -24,7 +24,8 @@ Puoi ottenere le informazioni nei seguenti modi:
 • dalla home page, nella sezione “Studia re” 
 • all’interno delle sezioni dedicate alle varie tipologie di stud ente [ Informazioni per ] - FUTURO STUDENTE / 
 STUDENTE / LAUREATO  
-• tramite  l’Help Desk del Servizio studenti:  https://helpdesk.unibg.it/helpdesksegrestud/index.php/Per gestire le richieste di informazioni/segnalazioni e rispondere nel più breve tempo possibile, la Segreteria studenti (sed i 
+• tramite  l’Help Desk del Servizio studenti:  https://helpdesk.unibg.it/helpdesksegrestud/index.php   
+Per gestire le richieste di informazioni/segnalazioni e rispondere nel più breve tempo possibile, la Segreteria studenti (sed i 
 di Bergamo e Dalmine) utilizza infatti un sistema a ticket. Ad ogni richiesta effettuata viene assegnato un ticket (numero) 
 univo co con cui potrai seguire online lo stato di avanzamento della richiesta e visualizzare le risposte date dallo staff della 
 segreteria.  
@@ -37,11 +38,11 @@ Nella pagina web www.unibg.it/node/6977  trovi i link con le principali informaz
 studenti .  
  
 Orari di apertura  degli sportelli della Segreteria studenti  (Bergamo e Dalmine) :   
-Su prenotazione, a questo  https://logistica.unibg.it/PortalePlanning/UNIBG/-servizi   
+Su prenotazione, a questo  https://logistica.unibg.it/PortalePlanning/UNIBG -servizi   
 lunedì 13.30 - 15.30  
 giovedì 10.00 -12.00  
  
-Colloquio in videoconferenza  (su prenotazione a questo https://logistica.unibg.it/PortalePlanning/UNIBG/-servizi ) 
+Colloquio in videoconferenza  (su prenotazione a questo https://logistica.unibg.it/PortalePlanning/UNIBG -servizi ) 
 mercoledì e venerdì 10.00 -12.00  
  
 La pagina con le indicazioni della reperibilità telefonica  della Segreteria studenti è la seguente: www.unibg.it/node/9564 . 
@@ -52,7 +53,7 @@ disponibili alla pagina www.unibg.it/node/7555 .
  
 Orari dei corsi e  appelli d’ esam e, calendari didattici e prove finali  
 Tutte le informazioni e gli avvisi in relazione allo svolgimento della didattica  (lezioni, esami, lauree)  sono reperibili alla 
-pagina  https://www.unibg.it/node/6946/.  
+pagina  https://www.unibg.it/node/6946 .  
  
  
 Sedi universitarie  
@@ -61,11 +62,13 @@ Per saperne di più: www.unibg.it/node/40 .
  
  4  Per immatricolarsi  
 Scopri i corsi disponibili e tutte le informazioni su  requisiti, scadenze e modalità di immatricolazione : 
-https://www.unibg.it/studiare/iscriversi/In particolare, leggi  con attenzione i bandi di selezione , per conoscere in dettaglio modalità e tempistiche connesse 
+https://www.unibg.it/studiare/iscriversi  
+In particolare, leggi  con attenzione i bandi di selezione , per conoscere in dettaglio modalità e tempistiche connesse 
 all’accesso programmato . 
 Ti invitiamo a consultare  i passi  necessari per: pre-iscrizioni  (soltanto per Scienze della formazione primaria  e per i 
 corsi di laurea magistrali ); iscrizioni alle selezioni  (per i corsi di laurea triennali ad accesso programmato) ; 
-immatricolazioni e scadenze amministrative  in questa pagina  https://www.unibg.it/studiare/iscriversi/Per le informazioni sull’iscrizione a tempo parziale  consulta la pagina  www.unibg.it/node/6939  (voce "Part -time  "). 
+immatricolazioni e scadenze amministrative  in questa pagina  https://www.unibg.it/studiare/iscriversi  
+Per le informazioni sull’iscrizione a tempo parziale  consulta la pagina  www.unibg.it/node/6939  (voce "Part -time  "). 
 Per informazioni sulla doppia iscrizione  consulta la pagina www.unibg.it/node/6939  (voce “Doppia iscrizione”).  
  
 Contribuzione studentesca  
@@ -159,12 +162,13 @@ rinuncia/decadenza entro il termine previsto dal bando e secondo le modalità ch
 avviso.  
  
 Iscrizione a corso di laurea magistrale ad accesso libero  
-Consulta l’offerta formativa relativa alle lauree magistrali : https://www.unibg.it/studiare/iscriversi/corsi/-laurea -
+Consulta l’offerta formativa relativa alle lauree magistrali : https://www.unibg.it/studiare/iscriversi/corsi -laurea -
 magistrale -ad-accesso -libero  
 Prendi visione di  tutte le informazioni utili e delle scadenze in questa pagina : 
-https://www.unibg.it/studiare/iscriversi/Se sei già in possesso di  laurea e desideri iscriverti a d un corso di laurea magistrale  ad accesso libero , verifica 
+https://www.unibg.it/studiare/iscriversi  
+Se sei già in possesso di  laurea e desideri iscriverti a d un corso di laurea magistrale  ad accesso libero , verifica 
 anzitutto i requisiti richiesti e le modalità di verifica dell’adeguata preparazione nella bacheca del Dipartimento 
-prescelto  (consulta la pagina https://www.unibg.it/node/94/). 
+prescelto  (consulta la pagina https://www.unibg.it/node/94 ). 
  
 È possibile iscriversi a un massimo di due corsi di laurea magistrale , versando il previsto contributo di pre -
 iscrizione di € 52,00 per ogni corso di interesse.  
@@ -223,9 +227,10 @@ www.unibg.it/node/6977
  
 Iscrizione a corso di laurea magistrale ad accesso programmato  
 Consulta l’offerta formativa relativa alle lauree magistrali  e prendi visione dei bandi di ammissione  qui: 
-https://www.unibg.it/studiare/iscriversi/corsi/-laurea -magistrale -ad-accesso -programmato  
-Consulta tutte le informazioni utili e le scadenze in questa pagina: https://www.unibg.it/studiare/iscriversi/8  Verifica anzitutto i requisiti richiesti e le  modalità di verifica dell’adeguata preparazione nella bacheca del 
-Dipartimento di Scienze umane e sociali (consulta la pagina https://dsus.unibg.it/it/). 
+https://www.unibg.it/studiare/iscriversi/corsi -laurea -magistrale -ad-accesso -programmato  
+Consulta tutte le informazioni utili e le scadenze in questa pagina: https://www.unibg.it/studiare/iscriversi  
+ 8  Verifica anzitutto i requisiti richiesti e le  modalità di verifica dell’adeguata preparazione nella bacheca del 
+Dipartimento di Scienze umane e sociali (consulta la pagina https://dsus.unibg.it/it ). 
  
 1) Pre -iscrizion i 
 Dal 1° aprile  al 30 maggio 202 5 (prima finestra temporale)  
@@ -242,8 +247,10 @@ Entro il 30 settembre 2025  (seconda finestra temporale)
 Entro il 9 ottobre 2025  (a seguito di pubblicazione eventuali posti disponibili seconda finestra temporale)  
  
 Per conoscere le date dei test  o dei colloqui  e la pubblicazione dei successivi scorrimenti delle graduatorie 
-https://www.unibg.it/studiare/iscriversi/corsi/-laurea -magistrale -ad-accesso -programmato/graduatorie -
-corsi -laurea  consulta i bandi di ammissione: https://www.unibg.it/node/11212/Se risulterai collocato /a in posizione utile in graduatoria e pertanto ammesso /a al corso,  dovrai presentare 
+https://www.unibg.it/studiare/iscriversi/corsi -laurea -magistrale -ad-accesso -programmato/graduatorie -
+corsi -laurea  consulta i bandi di ammissione: https://www.unibg.it/node/11212  
+ 
+Se risulterai collocato /a in posizione utile in graduatoria e pertanto ammesso /a al corso,  dovrai presentare 
 domanda di immatricolazione unitamente al versamento della tassa regionale per il Diritto allo Studio Universitario e 
 dell’imposta di bollo assolta in modo virtuale per un totale di 156 ,00 euro.  
  
@@ -261,8 +268,8 @@ nei periodi sopra indicati e, in caso di ammissione, presentare la successiva is
 Per approfondimenti consulta la guida “Laureato”.  
  
 MyUniBg  
-Per accedere alle aree riservate del portale dell'Università consulta la pagina https://www.unibg.it/node/7528/. 
-Clicca  MyUniBg  (https://my.unibg.it//) dalla barra  in alto  a destra  in ogni pagina del sito pubblico. Il sistema 
+Per accedere alle aree riservate del portale dell'Università consulta la pagina https://www.unibg.it/node/7528 . 
+Clicca  MyUniBg  (https://my.unibg.it/ ) dalla barra  in alto  a destra  in ogni pagina del sito pubblico. Il sistema 
 riconoscerà l'utente (attraverso ID utente e Password) e lo farà accedere alle aree riservate del portale di Ateneo.  9  QUALI SONO I DATI NECESSARI PER L'AUTENTICAZIONE? Per autenticarti devi inserire ID utente e Password 
 personale nella finestra di login (ID utente corrisponde alla matricola, mentre la Password è il codice personale 
 utilizzato anche per accedere alle proce dure dello sportello Internet).  
@@ -301,7 +308,7 @@ erogati e sulle opportunità attivate rispetto all’accompagnamento  e ad inter
 I servizi offerti sono sia di tipo amministrativo (agevolazioni economiche per studenti con disabilità, contributi per 
 soggiorni all'estero, ecc.), sia di tipo didattico (supporto p sicopedagogico, stesura di PEI/PDP, reperimento testi in 
 formato digitale, tutorato alla pari, ecc.).  
-Prenota un appuntamento  (https://logistica.unibg.it/PortalePlanning/UNIBG/-servizi ) per il servizio di sportello,  lunedì 9:30 -
+Prenota un appuntamento  (https://logistica.unibg.it/PortalePlanning/UNIBG -servizi ) per il servizio di sportello,  lunedì 9:30 -
 12; mercoledì 14 -16:30 . 
 Negli stessi giorni ed orari è attiva la reperibilità telefonica: 035 2052595/ 035 205 2883  
 Per essere contattat o/a via telefono o Meet , scriv i una mail ai seguenti indirizzi:  10  servizi.disabili@unibg.it  
@@ -313,7 +320,7 @@ Per informazioni consulta la pagina web www.unibg.it/disabili
  
 È attivo, inoltre, i l Servizio di Counseling Psicologico  che si rivolge a tutti gli studenti e le studentesse universitarie 
 che, durante il percorso universitario, sperimentino situazioni di disagio personale o relazionale.  
-Tutte le informazioni utili per fruire di questo servizio sono reperibili alla pagina https://www.unibg.it/vivere/-
+Tutte le informazioni utili per fruire di questo servizio sono reperibili alla pagina https://www.unibg.it/vivere -
 unibg/opportunita/benessere -psicologico  
  
 Trovi  i principali servizi per il Diri tto allo s tudio alla pagina web www.unibg.it/dirittoallostudio   
