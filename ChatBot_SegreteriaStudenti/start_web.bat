@@ -5,23 +5,43 @@ echo ============================================
 echo  ChatBot RAG - Interfaccia Web Streamlit
 echo ============================================
 echo.
-echo Attivazione ambiente virtuale...
-if exist "venv\Scripts\activate.bat" (
-    call venv\Scripts\activate.bat
-) else (
+
+echo Verifica ambiente virtuale...
+if not exist "venv\Scripts\activate.bat" (
     echo [ERRORE] Ambiente virtuale non trovato!
-    echo Esegui prima: setup.bat
+    echo Esegui prima: setup_auto.bat
     pause
     exit /b 1
 )
 
+echo Attivazione ambiente virtuale...
+call venv\Scripts\activate.bat
+
+echo Verifica dipendenze...
+venv\Scripts\python.exe -c "import streamlit" >nul 2>&1
+if errorlevel 1 (
+    echo [ERRORE] Streamlit non installato!
+    echo Esegui: pip install -r requirements.txt
+    pause
+    exit /b 1
+)
+
+echo Verifica sistema...
+venv\Scripts\python.exe main.py --check >nul 2>&1
+if errorlevel 1 (
+    echo [WARN] Sistema non completamente configurato
+    echo Continuo comunque...
+)
+
+echo.
 echo Avvio interfaccia web...
 echo.
-echo  L'interfaccia sara' disponibile su: http://localhost:8501
-echo  Premi Ctrl+C per fermare il server
+echo  URL: http://localhost:8501
+echo  Per fermareː Ctrl+C
+echo  Per aprire browser automaticamenteː aggiungi --browser
 echo.
 
-venv\Scripts\python.exe -m streamlit run interfaces\streamlit_app.py --server.port 8501 --server.headless true
+venv\Scripts\python.exe -m streamlit run interfaces\streamlit_app.py --server.port 8501 --server.headless true --browser.serverAddress localhost
 
 echo.
 echo Server web terminato. Premi un tasto per chiudere...

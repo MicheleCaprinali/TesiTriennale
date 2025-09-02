@@ -2,6 +2,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
+import sys
+from pathlib import Path
+
+# Aggiungi il path src per import relativi
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
+
 from local_embeddings import LocalEmbeddings
 from ollama_llm import OllamaLLM
 from create_vectorstore import search_vectorstore

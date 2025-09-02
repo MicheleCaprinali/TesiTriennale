@@ -2,6 +2,36 @@
   "project_metrics": {
     "files": [
       {
+        "file": "fix_links.py",
+        "lines_of_code": 176,
+        "classes": [],
+        "functions": [
+          {
+            "name": "fix_malformed_links",
+            "cc": 8,
+            "lines": 9,
+            "parameters": 0
+          },
+          {
+            "name": "optimize_ollama_settings",
+            "cc": 3,
+            "lines": 3,
+            "parameters": 0
+          },
+          {
+            "name": "create_fast_response_fallback",
+            "cc": 3,
+            "lines": 3,
+            "parameters": 0
+          }
+        ],
+        "imports": [
+          "os",
+          "re"
+        ],
+        "total_cc": 14
+      },
+      {
         "file": "main.py",
         "lines_of_code": 214,
         "classes": [],
@@ -437,7 +467,7 @@
       },
       {
         "file": "interfaces\\streamlit_app.py",
-        "lines_of_code": 250,
+        "lines_of_code": 327,
         "classes": [],
         "functions": [
           {
@@ -447,28 +477,46 @@
             "parameters": 0
           },
           {
-            "name": "display_message",
-            "cc": 3,
+            "name": "create_clickable_links",
+            "cc": 5,
+            "lines": 7,
+            "parameters": 1
+          },
+          {
+            "name": "display_message_improved",
+            "cc": 2,
             "lines": 7,
             "parameters": 2
           },
           {
+            "name": "display_message_with_components",
+            "cc": 7,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
             "name": "main",
-            "cc": 13,
-            "lines": 11,
+            "cc": 14,
+            "lines": 12,
             "parameters": 0
+          },
+          {
+            "name": "replace_with_link",
+            "cc": 5,
+            "lines": 5,
+            "parameters": 1
           }
         ],
         "imports": [
           "streamlit",
           "sys",
           "os",
+          "re",
           "chatbot",
           "time",
-          "re",
           "html"
         ],
-        "total_cc": 20
+        "total_cc": 37
       },
       {
         "file": "src\\analytics.py",
@@ -587,7 +635,7 @@
       },
       {
         "file": "src\\chatbot.py",
-        "lines_of_code": 245,
+        "lines_of_code": 291,
         "classes": [
           {
             "name": "ChatbotRAG",
@@ -618,8 +666,8 @@
               },
               {
                 "name": "chat",
-                "cc": 5,
-                "lines": 9,
+                "cc": 10,
+                "lines": 12,
                 "parameters": 2
               },
               {
@@ -630,7 +678,7 @@
               }
             ],
             "method_count": 6,
-            "wmc": 35,
+            "wmc": 40,
             "lcom": 0.8666666666666667,
             "instance_variables": 8
           }
@@ -668,8 +716,8 @@
           },
           {
             "name": "chat",
-            "cc": 5,
-            "lines": 9,
+            "cc": 10,
+            "lines": 12,
             "parameters": 2
           },
           {
@@ -677,17 +725,27 @@
             "cc": 10,
             "lines": 14,
             "parameters": 3
+          },
+          {
+            "name": "get_quick_response",
+            "cc": 1,
+            "lines": 1,
+            "parameters": 1
           }
         ],
         "imports": [
           "dotenv",
           "os",
+          "sys",
+          "pathlib",
           "local_embeddings",
           "ollama_llm",
           "create_vectorstore",
+          "quick_responses",
+          "re",
           "re"
         ],
-        "total_cc": 39
+        "total_cc": 45
       },
       {
         "file": "src\\create_vectorstore.py",
@@ -738,9 +796,15 @@
       },
       {
         "file": "src\\extract_file.py",
-        "lines_of_code": 28,
+        "lines_of_code": 53,
         "classes": [],
         "functions": [
+          {
+            "name": "clean_links",
+            "cc": 2,
+            "lines": 6,
+            "parameters": 1
+          },
           {
             "name": "estrai_testo",
             "cc": 5,
@@ -750,9 +814,10 @@
         ],
         "imports": [
           "os",
+          "re",
           "PyPDF2"
         ],
-        "total_cc": 5
+        "total_cc": 7
       },
       {
         "file": "src\\local_embeddings.py",
@@ -907,6 +972,21 @@
         "total_cc": 25
       },
       {
+        "file": "src\\quick_responses.py",
+        "lines_of_code": 53,
+        "classes": [],
+        "functions": [
+          {
+            "name": "get_quick_response",
+            "cc": 4,
+            "lines": 4,
+            "parameters": 1
+          }
+        ],
+        "imports": [],
+        "total_cc": 4
+      },
+      {
         "file": "src\\split_into_chunks.py",
         "lines_of_code": 47,
         "classes": [],
@@ -1030,16 +1110,21 @@
       }
     ],
     "summary": {
-      "total_files": 17,
-      "total_lines": 2625,
+      "total_files": 19,
+      "total_lines": 3002,
       "total_classes": 6,
-      "total_functions": 79,
-      "average_cc": 2.957627118644068,
+      "total_functions": 88,
+      "average_cc": 3.0866141732283463,
       "max_cc": 14,
-      "total_imports": 91
+      "total_imports": 98
     }
   },
   "robert_martin": {
+    "fix_links": {
+      "Ca": 0,
+      "Ce": 2,
+      "Instability": 1.0
+    },
     "main": {
       "Ca": 0,
       "Ce": 10,
@@ -1072,8 +1157,8 @@
     },
     "chatbot": {
       "Ca": 5,
-      "Ce": 6,
-      "Instability": 0.5454545454545454
+      "Ce": 10,
+      "Instability": 0.6666666666666666
     },
     "create_vectorstore": {
       "Ca": 3,
@@ -1087,8 +1172,8 @@
     },
     "extract_file": {
       "Ca": 1,
-      "Ce": 2,
-      "Instability": 0.6666666666666666
+      "Ce": 3,
+      "Instability": 0.75
     },
     "local_embeddings": {
       "Ca": 3,
@@ -1099,6 +1184,11 @@
       "Ca": 2,
       "Ce": 6,
       "Instability": 0.75
+    },
+    "quick_responses": {
+      "Ca": 1,
+      "Ce": 0,
+      "Instability": 0.0
     },
     "split_into_chunks": {
       "Ca": 1,
@@ -1126,5 +1216,5 @@
       "Instability": 1.0
     }
   },
-  "timestamp": "2025-08-20 17:26:53.000286"
+  "timestamp": "2025-09-02 10:44:09.447428"
 }

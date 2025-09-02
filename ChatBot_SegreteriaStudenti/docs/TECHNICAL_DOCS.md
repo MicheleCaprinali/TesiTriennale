@@ -47,7 +47,63 @@ Sistema di chatbot basato su architettura RAG (Retrieval-Augmented Generation) p
 
 ## 3. Implementazione
 
-### 3.1 Preprocessing Documenti
+### 3.1 Struttura Progetto Aggiornata
+
+```
+ChatBot_SegreteriaStudenti/
+├── 🎯 APPLICAZIONE PRINCIPALE
+│   ├── main.py                    # Entry point CLI
+│   ├── start_chatbot.bat         # Launcher console
+│   └── start_web.bat             # Launcher web
+│
+├── ⚙️ SETUP E CONFIGURAZIONE
+│   ├── setup_auto.bat            # Setup automatico PC nuovo
+│   ├── setup.bat                 # Setup Windows standard
+│   ├── setup.py                  # Setup Python avanzato
+│   └── requirements.txt          # Dipendenze ottimizzate
+│
+├── 💻 CORE SYSTEM (src/)
+│   ├── chatbot.py               # 🤖 Sistema RAG principale
+│   ├── ollama_llm.py            # 🧠 LLM ottimizzato (10s medi)
+│   ├── local_embeddings.py     # 🔗 SentenceTransformers
+│   ├── create_vectorstore.py   # 📚 ChromaDB management
+│   ├── quick_responses.py      # ⚡ Cache risposte frequenti
+│   └── analytics.py            # 📊 Monitoraggio sistema
+│
+├── 🎨 INTERFACCE (interfaces/)
+│   └── streamlit_app.py         # UI web avanzata con CSS
+│
+├── 📊 EVALUATION SYSTEM (evaluation/)
+│   ├── rag_evaluation.py        # 🎯 Metriche RAG specializzate
+│   ├── performance_benchmark.py # ⚡ Test velocità (5-25 query)
+│   ├── software_metrics.py      # 📐 CC, WMC, LCOM analysis
+│   └── thesis_evaluation.py     # 📋 Evaluation standard
+│
+├── 🧪 TESTING (tests/)
+│   ├── test_retrieval.py       # 🔍 Test ricerca semantica
+│   ├── test_links.py           # 🔗 Validazione URL
+│   └── generate_test_data.py   # 📝 Generazione dataset
+│
+├── 📊 REPORT E RISULTATI (results/)
+│   ├── rag_evaluation_*.{png,md,json}     # Report RAG
+│   ├── performance_benchmark.json        # Dati velocità
+│   └── software_metrics_*.{png,md,json}  # Analisi codice
+│
+├── 📚 DOCUMENTAZIONE (docs/)
+│   ├── user_manual.md          # 👤 Manuale utente
+│   ├── TECHNICAL_DOCS.md       # 🔧 Docs tecniche
+│   ├── SETUP_GUIDE.md          # 🛠️ Setup dettagliato
+│   ├── TROUBLESHOOTING.md      # 🆘 Risoluzione problemi
+│   └── EVALUATION_REPORT.md    # 📊 Report evaluation
+│
+└── 📄 DATI E DATABASE
+    ├── data/FAQ/              # 16 file argomenti UniBG
+    ├── vectordb/              # ChromaDB (113 chunk)
+    ├── extracted_text/        # Testi preprocessati
+    └── test_dataset.json      # 100 query evaluation
+```
+
+### 3.2 Preprocessing Documenti
 
 **Input:** 20 file (PDF/TXT) dalla documentazione UniBG
 **Output:** 113 chunk semantici nel database vettoriale

@@ -2,15 +2,21 @@
 
 ## SUMMARY GENERALE
 
-- **File analizzati:** 17
-- **Linee di codice totali:** 2625
+- **File analizzati:** 19
+- **Linee di codice totali:** 3002
 - **Classi totali:** 6
-- **Funzioni totali:** 79
-- **Import totali:** 91
-- **CC medio:** 2.96
+- **Funzioni totali:** 88
+- **Import totali:** 98
+- **CC medio:** 3.09
 - **CC massimo:** 14
 
 ## ANALISI PER FILE
+
+### fix_links.py
+- **LOC:** 176
+- **Classi:** 0
+- **Funzioni:** 3
+- **CC totale:** 14
 
 ### main.py
 - **LOC:** 214
@@ -39,10 +45,10 @@
   - **Classe ThesisEvaluator:** WMC=23, LCOM=0.86
 
 ### streamlit_app.py
-- **LOC:** 250
+- **LOC:** 327
 - **Classi:** 0
-- **Funzioni:** 3
-- **CC totale:** 20
+- **Funzioni:** 6
+- **CC totale:** 37
 
 ### analytics.py
 - **LOC:** 180
@@ -52,11 +58,11 @@
   - **Classe ChatbotAnalytics:** WMC=9, LCOM=0.00
 
 ### chatbot.py
-- **LOC:** 245
+- **LOC:** 291
 - **Classi:** 1
-- **Funzioni:** 7
-- **CC totale:** 39
-  - **Classe ChatbotRAG:** WMC=35, LCOM=0.87
+- **Funzioni:** 8
+- **CC totale:** 45
+  - **Classe ChatbotRAG:** WMC=40, LCOM=0.87
 
 ### create_vectorstore.py
 - **LOC:** 110
@@ -71,10 +77,10 @@
 - **CC totale:** 7
 
 ### extract_file.py
-- **LOC:** 28
+- **LOC:** 53
 - **Classi:** 0
-- **Funzioni:** 1
-- **CC totale:** 5
+- **Funzioni:** 2
+- **CC totale:** 7
 
 ### local_embeddings.py
 - **LOC:** 44
@@ -89,6 +95,12 @@
 - **Funzioni:** 6
 - **CC totale:** 25
   - **Classe OllamaLLM:** WMC=21, LCOM=0.00
+
+### quick_responses.py
+- **LOC:** 53
+- **Classi:** 0
+- **Funzioni:** 1
+- **CC totale:** 4
 
 ### split_into_chunks.py
 - **LOC:** 47
@@ -124,18 +136,20 @@
 
 | Modulo | Ca (Afferent) | Ce (Efferent) | Instability |
 |--------|---------------|---------------|-------------|
+| fix_links | 0 | 2 | 1.000 |
 | main | 0 | 10 | 1.000 |
 | setup | 1 | 8 | 0.889 |
 | software_metrics | 0 | 9 | 1.000 |
 | thesis_evaluation | 0 | 11 | 1.000 |
 | streamlit_app | 0 | 7 | 1.000 |
 | analytics | 0 | 5 | 1.000 |
-| chatbot | 5 | 6 | 0.545 |
+| chatbot | 5 | 10 | 0.667 |
 | create_vectorstore | 3 | 7 | 0.700 |
 | extract_and_save | 1 | 2 | 0.667 |
-| extract_file | 1 | 2 | 0.667 |
+| extract_file | 1 | 3 | 0.750 |
 | local_embeddings | 3 | 4 | 0.571 |
 | ollama_llm | 2 | 6 | 0.750 |
+| quick_responses | 1 | 0 | 0.000 |
 | split_into_chunks | 1 | 2 | 0.667 |
 | __init__ | 0 | 0 | 0.000 |
 | generate_test_data | 0 | 4 | 1.000 |

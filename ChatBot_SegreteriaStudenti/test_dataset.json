@@ -1,32 +1,39 @@
 {
   "metadata": {
-    "created_at": "2025-08-20T17:19:39.960844",
+    "created_at": "2025-09-02T10:00:00.000000",
     "total_queries": 100,
+    "version": "2.0",
     "categories": [
       "servizi",
-      "lauree",
+      "lauree", 
       "generale",
       "esami",
       "tasse",
-      "contatti"
+      "contatti",
+      "performance_test",
+      "edge_cases"
     ],
-    "description": "Dataset di test per ChatBot RAG UniBG"
+    "description": "Dataset test avanzato per ChatBot RAG UniBG con metriche specializzate"
   },
   "queries": [
     {
       "id": 1,
-      "timestamp": "2025-08-11T17:19:39.958862",
+      "timestamp": "2025-09-02T10:00:00.000000",
       "query": "Come richiedo un certificato di laurea con voti?",
       "category": "lauree",
-      "expected_redirect": false,
+      "should_redirect": false,
+      "expected_topics": ["certificato", "laurea", "documentazione"],
+      "difficulty": "easy",
       "priority": "normal"
     },
     {
       "id": 2,
-      "timestamp": "2025-08-01T17:19:39.958925",
+      "timestamp": "2025-09-02T10:00:01.000000",
       "query": "Che documenti servono per iscriversi alla laurea?",
       "category": "esami",
-      "expected_redirect": false,
+      "should_redirect": false,
+      "expected_topics": ["iscrizione", "laurea", "documentazione"],
+      "difficulty": "easy",
       "priority": "normal"
     },
     {

@@ -1,0 +1,429 @@
+{
+  "timestamp": "2025-09-02T11:12:28.266435",
+  "total_queries": 25,
+  "performance": {
+    "avg_response_time": 30.74030982017517,
+    "median_response_time": 33.804444313049316,
+    "timeout_rate": 0.96,
+    "success_rate": 0.04
+  },
+  "retrieval_quality": {
+    "avg_diversity": 0.0,
+    "avg_relevance": 0.0,
+    "avg_coverage": 0.0
+  },
+  "response_quality": {
+    "avg_specificity": 0.10666666666666666,
+    "avg_completeness": 0.692,
+    "avg_clarity": 0.76,
+    "avg_length": 19.04
+  },
+  "routing_accuracy": {
+    "correct_redirects": 0,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "accuracy": 0.64
+  },
+  "detailed_results": [
+    {
+      "query": "Quali agevolazioni ci sono per studenti fuori sede?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.80748271942139,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come posso contattare la segreteria via email?",
+      "response": "Per contattare la Segreteria Studenti via email, puoi inviarvi una mail a questa indirizzo: segreteria.studenti@unibg.it",
+      "response_time": 24.741754055023193,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 15,
+        "specificity": 0.6666666666666666,
+        "completeness": 0.75,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come richiedo l'esonero per reddito delle tasse universitarie?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.1760630607605,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 34.17508363723755,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 15,
+        "specificity": 0.0,
+        "completeness": 0.75,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quanto tempo ci vuole per avere la pergamena?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.204355001449585,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Che documenti servono per iscriversi alla laurea?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.19188952445984,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come funziona il servizio di orientamento?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.195823669433594,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Cosa succede se pago le tasse in ritardo?",
+      "response": "Se si paga le tasse oltre la scadenza prevista, verrà addebitato un importo di mora in base ai giorni di ritardo. Per maggiori dettagli consulta la pagina Pagamenti tardivi.",
+      "response_time": 29.61368703842163,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 29,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quando devo pagare la seconda rata delle tasse?",
+      "response": "La seconda rata delle tasse dovrebbe essere pagata entro la scadenza del 15 maggio 2025.\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 23.41613006591797,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 26,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Dove parcheggio in università?",
+      "response": "Dove parcheggio in università? La risposta non è chiara dal contesto fornito. Potresti rivolgerti alla pagina https://www.unibg.it/studiare/contatta-segreteria per ottenere informazioni dettagliate sulle aree di parcheggio disponibili all'Università di Bergamo.",
+      "response_time": 24.34148669242859,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 29,
+        "specificity": 0.3333333333333333,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quando riceverò l'esito della mia domanda di borsa di studio?",
+      "response": "Il risultato della tua domanda di borsa di studio sarà pubblicato nel Portale del Diritto allo Studio, ma la data esatta varia ogni anno e puoi trovare le informazioni dettagliate nel bando di concorso disponibile qui: https://www.unibg.it/servizi/segreteria/borse-studio (paragrafo 8 - 9).\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 32.479695558547974,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 52,
+        "specificity": 0.6666666666666666,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Che corsi ci sono a ingegneria?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.17512559890747,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quali sono gli orari della segreteria studenti?",
+      "response": "Gli orari della Segreteria studenti sono lunedì dalle 13.30 alle 15.30 e giovedì dalle 10.00 alle 12.00, per prenotazione tramite il link https://logistica.unibg.it/PortalePlanning/UNIBG -servizi .",
+      "response_time": 26.634110927581787,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 25,
+        "specificity": 0.6666666666666666,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come ottengo la ricevuta di pagamento delle tasse?",
+      "response": "Per ottenere la ricevuta di pagamento delle tasse devi accedere al sistema PagoPA e verificare che il pagamento sia stato effettuato correttamente. Le informazioni dettagliate sulle modalità di accesso e consultazione della ricevuta sono disponibili sulla pagina Modalità di pagamento.",
+      "response_time": 30.103508949279785,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 40,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "response": "La sessione di esami straordinaria si apre nel marzo-aprile 2026, come indicato nella guida sul Calendario Didattico del tuo Dipartimento.",
+      "response_time": 32.061448097229004,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 20,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quando apre la sessione di esami straordinaria?",
+      "response": "La sessione di esami straordinaria si apre nel marzo-aprile 2026, come indicato nella guida sul Calendario Didattico dei Dipartimenti.",
+      "response_time": 6.997173547744751,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 19,
+        "specificity": 0.0,
+        "completeness": 0.95,
+        "clarity": 1.0
+      },
+      "timeout": false
+    },
+    {
+      "query": "Come ottengo la ricevuta di pagamento delle tasse?",
+      "response": "Per ottenere la ricevuta di pagamento delle tasse devi accedere al sistema PagoPA e verificare che il pagamento sia stato effettuato correttamente. Le informazioni dettagliate sulle modalità di accesso al sistema PagoPA sono disponibili sulla pagina Modalità di pagamento.",
+      "response_time": 30.077303171157837,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 39,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Posso iscrivermi a un esame se ho ancora un debito?",
+      "response": "Sì, puoi iscriversi a un esame se hai ancora un debito, ma devi prima pagare il debito in sospeso. Per ulteriori informazioni consulta la pagina relativa alle tasse e agevolazioni: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 33.632869243621826,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 42,
+        "specificity": 0.3333333333333333,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come faccio a iscrivermi agli esami di gennaio?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 34.18198347091675,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 15,
+        "specificity": 0.0,
+        "completeness": 0.75,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Posso vedere il mio libretto universitario aggiornato?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 34.18693566322327,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 15,
+        "specificity": 0.0,
+        "completeness": 0.75,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quando devo pagare la seconda rata delle tasse?",
+      "response": "La seconda rata delle tasse dovrebbe essere pagata entro la scadenza del 15 maggio 2025.\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 29.80979013442993,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 26,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Quanto tempo ci vuole per avere la pergamena?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.17013692855835,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come richiedo un certificato di laurea con voti?",
+      "response": "Per richiedere un certificato di laurea con voti, devi farne richiesta alla Segreteria studenti utilizzando l'apposito modulo reperibile alla pagina www.unibg.it/node/6673 .",
+      "response_time": 33.804444313049316,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 22,
+        "specificity": 0.0,
+        "completeness": 1.0,
+        "clarity": 1.0
+      },
+      "timeout": true
+    },
+    {
+      "query": "Come funziona l'università?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico",
+      "response_time": 34.169342279434204,
+      "expected_redirect": false,
+      "actual_redirect": false,
+      "routing_correct": true,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 4,
+        "specificity": 0.0,
+        "completeness": 0.2,
+        "clarity": 0.5
+      },
+      "timeout": true
+    },
+    {
+      "query": "Posso vedere il mio libretto universitario aggiornato?",
+      "response": "REDIRECT_TO_HUMAN - Sistema sovraccarico\n\nPer informazioni più specifiche o assistenza personalizzata, contatta la segreteria studenti:",
+      "response_time": 34.16012215614319,
+      "expected_redirect": false,
+      "actual_redirect": true,
+      "routing_correct": false,
+      "retrieval_metrics": {},
+      "response_metrics": {
+        "response_length": 15,
+        "specificity": 0.0,
+        "completeness": 0.75,
+        "clarity": 0.5
+      },
+      "timeout": true
+    }
+  ]
+}

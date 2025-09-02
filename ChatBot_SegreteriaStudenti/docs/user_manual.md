@@ -1,51 +1,60 @@
 # MANUALE UTENTE - ChatBot UniBG
 
-## INTRODUZIONE
+## 🎯 INTRODUZIONE
 
-Questo documento fornisce le istruzioni per l'utilizzo del sistema ChatBot RAG (Retrieval-Augmented Generation) per l'assistenza agli studenti dell'Università di Bergamo.
+Questo ChatBot RAG (Retrieval-Augmented Generation) fornisce assistenza automatizzata agli studenti dell'Università di Bergamo utilizzando tecnologie completamente gratuite e locali.
 
-Il sistema utilizza tecnologie completamente gratuite e locali:
-- Mistral 7B tramite Ollama (LLM)
-- SentenceTransformers (embeddings)
-- ChromaDB (database vettoriale)
-- Streamlit (interfaccia web)
+**Stack tecnologico:**
+- **Mistral 7B** (tramite Ollama) - Modello di linguaggio
+- **SentenceTransformers** - Embedding semantici  
+- **ChromaDB** - Database vettoriale
+- **Streamlit** - Interfaccia web
+- **Python 3.9+** - Linguaggio di programmazione
 
-## AVVIO RAPIDO
+## 🚀 INSTALLAZIONE PC NUOVO
 
-### Setup Iniziale
+### Prerequisiti Obbligatori
 
-Per iniziare, navigare nella cartella del progetto e attivare l'ambiente virtuale:
+**1. Installa Python 3.9+**
+- Vai su: https://www.python.org/downloads/
+- Scarica versione 3.9 o superiore
+- **CRITICO**: Seleziona "Add Python to PATH"
+- Riavvia terminale dopo installazione
 
-```powershell
-cd "TesiTriennale2025\ChatBot_SegreteriaStudenti"
-venv\Scripts\Activate.ps1
+**2. Installa Ollama**  
+- Vai su: https://ollama.ai
+- Scarica per Windows e installa
+- Riavvia terminale
+
+### Setup Automatico
+
+1. **Scompatta** il progetto in una cartella
+2. **Apri PowerShell/CMD** nella cartella  
+3. **Esegui:**
+   ```cmd
+   setup_auto.bat
+   ```
+4. **Segui** le istruzioni a schermo
+5. **Attendi** il completamento (5-10 minuti)
+
+## 💻 UTILIZZO
+
+### Avvio Console
+```cmd
+start_chatbot.bat
 ```
 
-### Verifica Prerequisiti
-
-Verificare che Ollama sia installato e il modello Mistral disponibile:
-
-```powershell
-ollama --version
-ollama list
+### Avvio Web  
+```cmd
+start_web.bat
 ```
+Poi vai su: http://localhost:8501
 
-Se Mistral non è presente, installarlo con:
-
-```powershell
-ollama pull mistral:7b
-```
-
-### Avvio del Sistema
-
-#### Interfaccia Console (CLI)
-```powershell
-python main.py
-```
-
-#### Interfaccia Web
-```powershell
-streamlit run interfaces\streamlit_app.py --server.port 8501
+### Comandi di Manutenzione
+```cmd
+run_tests.bat        # Test sistema
+update_database.bat  # Aggiorna dati
+setup.bat           # Re-setup se problemi
 ```
 
 L'interfaccia web sarà disponibile su: http://localhost:8501

@@ -47,6 +47,59 @@ class OllamaLLM:
             return []
     
     def generate(self, prompt: str, context: str = "") -> str:
+        """Genera risposta usando Ollama ottimizzato per velocità massima"""
+        
+        # Prompt ultra-conciso per velocità
+        final_prompt = f"""{context}
+
+Q: {prompt}
+A:"""
+        
+        # Parametri ultra-ottimizzati per velocità
+        data = {
+            "model": self.model,
+            "prompt": final_prompt,
+            "stream": False,
+            "options": {
+                "temperature": 0.0,     # Deterministico massimo
+                "top_p": 0.5,          # Ridotto drasticamente  
+                "num_predict": 80,      # Molto limitato
+                "num_ctx": 1024,       # Ridotto drasticamente
+                "repeat_penalty": 1.1,
+                "stop": ["Q:", "A:", "\n\n", "Human:", "Assistant:"]
+            }
+        }
+        
+        # Un solo tentativo con timeout basso
+        try:
+            print(f"Generazione risposta (timeout: 8s)...")
+            
+            response = requests.post(
+                f"{self.base_url}/api/generate",
+                json=data,
+                timeout=8  # Timeout molto aggressivo
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                answer = result.get('response', '').strip()
+                
+                if answer and len(answer) > 5:
+                    print(f"✅ Risposta generata velocemente")
+                    return answer
+                else:
+                    print(f"❌ Risposta troppo breve")
+                    return "REDIRECT_TO_HUMAN - Risposta incompleta"
+                    
+        except requests.exceptions.Timeout:
+            print(f"⏰ Timeout - sistema sovraccarico")
+            return "REDIRECT_TO_HUMAN - Sistema temporaneamente lento"
+            
+        except Exception as e:
+            print(f"❌ Errore LLM: {str(e)}")
+            return "REDIRECT_TO_HUMAN - Errore tecnico"
+        
+        return "REDIRECT_TO_HUMAN - Nessuna risposta generata"
         """Genera risposta usando Ollama con retry automatico"""
         
         # Costruisce il prompt completo OTTIMIZZATO E CONCISO
