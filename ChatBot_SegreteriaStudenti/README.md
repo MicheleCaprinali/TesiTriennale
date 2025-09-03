@@ -11,21 +11,6 @@ Sistema intelligente per l'assistenza automatizzata agli studenti dell'Universit
 | **Embeddings** | SentenceTransformers | all-MiniLM-L6-v2 |
 | **Vector DB** | ChromaDB | 0.5.0+ |
 | **Framework** | LangChain | 0.3.x |
-| **UI** | Streamlit + CLI | 1.28+ |
-
-# ChatBot Segreteria Studenti UniBG
-
-Sistema intelligente per l'assistenza automatizzata agli studenti dell'Università di Bergamo.  
-**Tesi Triennale - Ingegneria Informatica - A.A. 2024/2025**
-
-## Stack Tecnologico
-
-| Componente | Tecnologia | Versione |
-|------------|------------|----------|
-| **LLM** | Mistral 7B (Ollama) | Latest |
-| **Embeddings** | SentenceTransformers | all-MiniLM-L6-v2 |
-| **Vector DB** | ChromaDB | 0.5.0+ |
-| **Framework** | LangChain | 0.3.x |
 | **UI** | Streamlit + CLI | 1.38+ |
 
 ## 🚀 Setup per PC Nuovo (Zero Install)
@@ -153,11 +138,6 @@ ChatBot_SegreteriaStudenti/
 - "Documenti necessari per la laurea?"
 - "Servizi per studenti con disabilità?"
 - "Informazioni sui tirocini?"
-
-**Routing automatico a ticket:**
-- Domande personali specifiche
-- Richieste di documenti individuali
-- Problematiche non documentate
 
 ## 📚 Documentazione Completa
 
