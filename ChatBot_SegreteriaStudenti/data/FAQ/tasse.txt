@@ -1,88 +1,45 @@
-1. Quali tasse bisogna pagare per l'iscrizione?
-Ultimo aggiornamento 4 anni fa
+Quali tasse bisogna pagare per l'iscrizione?
+Quando ci si immatricola, si paga un contributo fisso di euro 156,00 (tassa regionale + imposta di bollo). Successivamente si dovrà pagare una tassa divisa in due rate. L'importo totale dipende dal Corso di laurea, dalla tipologia di iscrizione e, soprattutto dal valore ISEEU, che determina la fascia di reddito. Su https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi le informazioni dettagliate.
 
-Quando ci si immatricola, si paga un contributo fisso di euro 156,00 (tassa regionale + imposta di bollo).
+Come ed entro quando va acquisito l'ISEEU?
+L'attestazione ISEEU va richiesta entro il 31 Dicembre, altrimenti verrai inserito d'Ufficio nella fascia di reddito più alta. L'attestazione ISEEU può essere richiesta in ub qualsiasi CAF (Centro Assistenza Fiscale) oppure online dalla pagina Portale unico ISEE https://servizi2.inps.it/servizi/PortaleUnicoISEE/ del sito dell'INPS. Qui https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi tutte le informazioni sulle tasse.
 
-Successivamente si dovrà pagare una tassa divisa in due rate. L'importo totale dipende dal Corso di laurea, dalla tipologia di iscrizione e, soprattutto dal valore ISEEU, che determina la fascia di reddito.
+In quali casi sono esonerato totalmente dal pagamento del contributo onnicomprensivo?
+Gli studenti immatricolati nell’a.a. 2022-2023 sono esonerati totalmente dal pagamento del contributo onnicomprensivo qualora in possesso di un indicatore ISEEU di valore compreso tra € 0,00 e € 26.000,00. Per gli studenti che nell’a.a. 2022-2023 si iscrivono a un anno di corso successivo al primo fino al primo anno fuori corso oltre al requisito del valore ISEEU è richiesto il conseguimento di un certo numero di CFU nel periodo 11.08.2021 – 10.08.2022 come segue:
+- Studenti full time al secondo anno di tutti i CdL (10 CFU), al terzo anno di lauree triennali e magistrali a ciclo unico (25 CFU), al quarto e quinto di lauree magistrali a ciclo unico (25 CFU), al primo anno fuoricorso di tutti i CdL (25 CFU);
+- Studenti part time al primo anno ripetente di tutti i CdL (5 CFU), al secondo anno di tutti i CdL (12 CFU), al secondo anno ripetente di tutti i CdL (13 CFU), al terzo anno di lauree triennali e magistrali a ciclo unico (12 CFU), al terzo anno ripetente di lauree triennali e magistrali a ciclo unico (13 CFU), agli anni quarto e quinto di lauree magistrali a ciclo unico (12 CFU), al quarto e quinto anno ripetente di lauree magistrali a ciclo unico (13 CFU).
 
-Su https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi le informazioni dettagliate.
-
-2. Come ed entro quando va acquisito l'ISEEU?
-Ultimo aggiornamento un anno fa
-
-L'attestazione ISEEU va richiesta entro il 31 Dicembre, altrimenti verrai inserito d'Ufficio nella fascia di reddito più alta.
-
-L'attestazione ISEEU può essere richiesta in ub qualsiasi CAF (Centro Assistenza Fiscale) oppure online dalla pagina Portale unico ISEE  del sito dell'INPS.
-
-Qui https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi tutte le informazioni sulle tasse.
-
-3. In quali casi sono esonerato totalmente dal pagamento del contributo onnicomprensivo?
-Ultimo aggiornamento 2 anni fa
-
-Gli studenti immatricolati nell’a.a. 2022-2023 sono esonerati totalmente dal pagamento del contributo onnicomprensivo qualora in possesso di un indicatore ISEEU di valore compreso tra € 0,00 e € 26.000,00.
-
-Per gli studenti che nell’a.a. 2022-2023 si iscrivono a un anno di corso successivo al primo fino al primo anno fuori corso oltre al requisito del valore ISEEU è richiesto il conseguimento di un certo numero di CFU nel periodo 11.08.2021 – 10.08.2022 come segue:
-
-Studenti full time al secondo anno di tutti i CdL (10 CFU), al terzo anno di lauree triennali e magistrali a ciclo unico (25 CFU), al quarto e quinto di lauree magistrali a ciclo unico (25 CFU), al primo anno fuoricorso di tutti i CdL (25 CFU);
-Studenti part time al primo anno ripetente di tutti i CdL (5 CFU), al secondo anno di tutti i CdL (12 CFU), al secondo anno ripetente di tutti i CdL (13 CFU), al terzo anno di lauree triennali e magistrali a ciclo unico (12 CFU), al terzo anno ripetente di lauree triennali e magistrali a ciclo unico (13 CFU), agli anni quarto e quinto di lauree magistrali a ciclo unico (12 CFU), al quarto e quinto anno ripetente di lauree magistrali a ciclo unico (13 CFU).
-
-Domande frequenti
-Tutte le categorie » TASSE
-4. Esistono delle agevolazioni e/o possibilità di riduzione delle tasse?
-Ultimo aggiornamento 2 anni fa
-
-Si, ci sono varie tipologie di agevolazioni ed edoneri totali o parziali.
-
-Su www.unibg.it/tassestudenti trovi tutte le informazioni dettagliate. 
+Esistono delle agevolazioni e/o possibilità di riduzione delle tasse?
+Si, ci sono varie tipologie di agevolazioni ed edoneri totali o parziali. Su https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca trovi tutte le informazioni dettagliate. 
 
 Come faccio a capire se devo pagare una seconda rata di contributo onnicomprensivo?
-Ultimo aggiornamento 4 anni fa
-
 Se il totale dovuto in base al suo valore ISEEU è maggiore di 400,00 € avrai una seconda rata di contributo onnicomprensivo data dalla differenza tra l’importo dovuto e l’acconto di 400,00 € già versato.
 
 Come faccio a conoscere l'importo totale del contributo onnicomprensivo dovuto in base al mio valore ISEEU?
-Ultimo aggiornamento 4 anni fa
-
-Per conoscere l’importo totale dovuto, esclusi i 156,00 €, puoi utilizzare l’apposito simulatore pubblicato alla pagina Tasse e agevolazioni.
+Per conoscere l’importo totale dovuto, esclusi i 156,00 €, puoi utilizzare l’apposito simulatore pubblicato alla pagina Tasse e agevolazioni https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca.
 
 Come faccio a pagare la mora?
-Ultimo aggiornamento 4 anni fa
-
 Il bollettino con l’importo di mora viene generato automaticamente dal sistema solo dopo il pagamento di una rata scaduta.
 
 Come posso rateizzare la seconda rata di contributo onnicomprensivo con scadenza 15 maggio?
-Ultimo aggiornamento un anno fa
-
-Per conoscere le modalità di rateizzazione consulta la pagina Modalità di pagamento.
+Per conoscere le modalità di rateizzazione consulta la pagina Modalità di pagamento https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca/modalita-pagamento.
 
 Cosa succede se non pago le tasse entro la scadenza?
-Ultimo aggiornamento 4 anni fa
-
-Il pagamento di una rata oltre la scadenza prevista comporta l’addebito di un importo di mora in base ai giorni di ritardo, trovi tutti i dettagli alla pagina Pagamenti tardivi.
+Il pagamento di una rata oltre la scadenza prevista comporta l’addebito di un importo di mora in base ai giorni di ritardo, trovi tutti i dettagli alla pagina Pagamenti tardivi https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca/pagamenti-tardivi.
 
 Mi è stata generata una tassa alta perché non ho acquisito l'ISEEU entro la scadenza. Posso rimediare?
-Ultimo aggiornamento un anno fa
-
-Sì, puoi consegnare tardivamente l’attestazione ISEEU entro il 30 settembre 2025, con l’addebito di una sanzione di 150,00 €. Per tutti i dettagli in merito consulta la “Guida alla richiesta e alla presentazione dell'attestazione ISEEU a.a. 2024-2025” pubblicata alla pagina Tasse e agevolazioni.
+Sì, puoi consegnare tardivamente l’attestazione ISEEU entro il 30 settembre 2025, con l’addebito di una sanzione di 150,00 €. Per tutti i dettagli in merito consulta la “Guida alla richiesta e alla presentazione dell'attestazione ISEEU a.a. 2024-2025” pubblicata alla pagina Tasse e agevolazioni https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca.
 
 Posso avere una ricevuta o un documento che accerti il pagamento delle tasse universitarie per la dichiarazione dei redditi?
-Ultimo aggiornamento 4 anni fa
-
-Per richiedere una certificazione ad uso detrazione fiscale, relativa alle tasse ed ai contributi versati in un anno solare devi scaricare l’apposito modulo di “Richiesta certificazione ad uso fiscale” dalla sezione Modulistica e inviarlo con copia del tuo documento di identità. Non puoi richiedere una certificazione relativa alle tasse pagate in un anno solare prima che l’anno in questione sia concluso.
+Per richiedere una certificazione ad uso detrazione fiscale, relativa alle tasse ed ai contributi versati in un anno solare devi scaricare l’apposito modulo di “Richiesta certificazione ad uso fiscale” dalla sezione Modulistica https://www.unibg.it/studiare/contatta-segreteria/modulistica e inviarlo con copia del tuo documento di identità. Non puoi richiedere una certificazione relativa alle tasse pagate in un anno solare prima che l’anno in questione sia concluso.
 
 Quali saranno le scadenze delle rate di contributo omnicomprensivo?
-Ultimo aggiornamento un anno fa
-
-Per l'anno accademico 2021/2022, le scadenze per il pagamento del contributo omnicomprensivo sono:
-
+Per l'anno accademico, le scadenze per il pagamento del contributo omnicomprensivo sono:
 - 17 Febbraio 2025 - prima rata
-
 - 15 Maggio 2025 - seconda rata.
 
 Le  rate verranno emesse circa un mese prima della scadenza prevista per il pagamento. 
 
 Quali sono le modalità di pagamento?
-Ultimo aggiornamento 4 anni fa
-
-Devi pagare attraverso il sistema di PagoPA, per maggiori informazioni consulta la pagina Modalità di pagamento.
+Devi pagare attraverso il sistema di PagoPA, per maggiori informazioni consulta la pagina Modalità di pagamento https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca/modalita-pagamento.
 
