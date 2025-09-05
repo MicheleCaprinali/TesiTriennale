@@ -1,0 +1,616 @@
+=== REPORT LINK ESTRATTI DA studenti ===
+
+Totale link trovati: 102
+
+LINK 1:
+  Metodo: standard_link
+  Pagina: 1
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/
+--------------------------------------------------
+LINK 2:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=209
+--------------------------------------------------
+LINK 3:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=210
+--------------------------------------------------
+LINK 4:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=211
+--------------------------------------------------
+LINK 5:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=212
+--------------------------------------------------
+LINK 6:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=215
+--------------------------------------------------
+LINK 7:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=217
+--------------------------------------------------
+LINK 8:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=852
+--------------------------------------------------
+LINK 9:
+  Metodo: standard_link
+  Pagina: 4
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=218
+--------------------------------------------------
+LINK 10:
+  Metodo: standard_link
+  Pagina: 5
+  Testo: 'Link'
+  URL: https://www.unibg.it/node/6977/
+--------------------------------------------------
+LINK 11:
+  Metodo: standard_link
+  Pagina: 5
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 12:
+  Metodo: standard_link
+  Pagina: 5
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 13:
+  Metodo: standard_link
+  Pagina: 5
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 14:
+  Metodo: standard_link
+  Pagina: 7
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 15:
+  Metodo: standard_link
+  Pagina: 8
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 16:
+  Metodo: standard_link
+  Pagina: 9
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 17:
+  Metodo: standard_link
+  Pagina: 9
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 18:
+  Metodo: standard_link
+  Pagina: 9
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 19:
+  Metodo: standard_link
+  Pagina: 11
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 20:
+  Metodo: standard_link
+  Pagina: 12
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6936
+--------------------------------------------------
+LINK 21:
+  Metodo: standard_link
+  Pagina: 12
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 22:
+  Metodo: standard_link
+  Pagina: 13
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=220
+--------------------------------------------------
+LINK 23:
+  Metodo: standard_link
+  Pagina: 13
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=221
+--------------------------------------------------
+LINK 24:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/corsi-laurea-triennale-ad-accesso-programmato-test-selettivo
+--------------------------------------------------
+LINK 25:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/corsi-laurea-triennale-ad-accesso-programmato-immatricolazione-ad-esaurimento
+--------------------------------------------------
+LINK 26:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: http://sportello.unibg.it/esse3/
+--------------------------------------------------
+LINK 27:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6977
+--------------------------------------------------
+LINK 28:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6983
+--------------------------------------------------
+LINK 29:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/9363
+--------------------------------------------------
+LINK 30:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/corsi-laurea-magistrale-ad-accesso-programmato
+--------------------------------------------------
+LINK 31:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/ti-aiutiamo/contatta-segreteria
+--------------------------------------------------
+LINK 32:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 33:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6977
+--------------------------------------------------
+LINK 34:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6983
+--------------------------------------------------
+LINK 35:
+  Metodo: standard_link
+  Pagina: 14
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/corsi-laurea-magistrale-ad-accesso-libero
+--------------------------------------------------
+LINK 36:
+  Metodo: standard_link
+  Pagina: 15
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 37:
+  Metodo: standard_link
+  Pagina: 15
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6977
+--------------------------------------------------
+LINK 38:
+  Metodo: standard_link
+  Pagina: 15
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6983
+--------------------------------------------------
+LINK 39:
+  Metodo: standard_link
+  Pagina: 16
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=223
+--------------------------------------------------
+LINK 40:
+  Metodo: standard_link
+  Pagina: 16
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=224
+--------------------------------------------------
+LINK 41:
+  Metodo: standard_link
+  Pagina: 16
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=225
+--------------------------------------------------
+LINK 42:
+  Metodo: standard_link
+  Pagina: 17
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/66
+--------------------------------------------------
+LINK 43:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 44:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6977
+--------------------------------------------------
+LINK 45:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: https://www.unibg.it/sites/default/files/media/documents/2024-07-31/DICHIARAZIONE%20SOSTITUTIVA%20DI%20CERTIFICAZIONE_aggiornato%20X%20EDIT.pdf
+--------------------------------------------------
+LINK 46:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 47:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 48:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 49:
+  Metodo: standard_link
+  Pagina: 18
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 50:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 51:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tipi-iscrizione
+--------------------------------------------------
+LINK 52:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: https://www.unibg.it/sites/default/files/media/documents/2025-07-07/Modulo%20dom%20doppia%20iscrizione%20agg%207-07-2025.pdf
+--------------------------------------------------
+LINK 53:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: https://www.mur.gov.it/it/atti-e-normativa/decreto-ministeriale-n-930-del-29-07-2022
+--------------------------------------------------
+LINK 54:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: https://www.unibg.it/sites/default/files/media/documents/2025-02-10/1.%20DR%20emanazione%20regolamento%20doppia%20iscrizione%20prot.pdf
+--------------------------------------------------
+LINK 55:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 56:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 57:
+  Metodo: standard_link
+  Pagina: 19
+  Testo: 'Link'
+  URL: https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni/altre-riduzioni-e-agevolazioni
+--------------------------------------------------
+LINK 58:
+  Metodo: text_search
+  Pagina: 19
+  Testo: 'disponibili alla pagina'
+  URL: https://www.unibg.it/studiare/iscriversi/tipi-iscrizione
+--------------------------------------------------
+LINK 59:
+  Metodo: text_search
+  Pagina: 19
+  Testo: 'alla pagina https://'
+  URL: www.unibg.it/studiare/iscriversi/tipi-iscrizione
+--------------------------------------------------
+LINK 60:
+  Metodo: unibg_pattern
+  Pagina: 19
+  Testo: 'Ulteriori informazioni sono disponibili alla pagina'
+  URL: https://www.unibg.it/studiare/iscriversi/tipi-iscrizione
+--------------------------------------------------
+LINK 61:
+  Metodo: standard_link
+  Pagina: 20
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=235
+--------------------------------------------------
+LINK 62:
+  Metodo: standard_link
+  Pagina: 20
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=236
+--------------------------------------------------
+LINK 63:
+  Metodo: standard_link
+  Pagina: 20
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=238
+--------------------------------------------------
+LINK 64:
+  Metodo: standard_link
+  Pagina: 20
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=239
+--------------------------------------------------
+LINK 65:
+  Metodo: standard_link
+  Pagina: 21
+  Testo: 'Link'
+  URL: https://www.unibg.it/node/94
+--------------------------------------------------
+LINK 66:
+  Metodo: standard_link
+  Pagina: 22
+  Testo: 'Link'
+  URL: https://helpdesk.unibg.it/helpdesksegrestud/
+--------------------------------------------------
+LINK 67:
+  Metodo: standard_link
+  Pagina: 22
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 68:
+  Metodo: standard_link
+  Pagina: 23
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/94
+--------------------------------------------------
+LINK 69:
+  Metodo: standard_link
+  Pagina: 24
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 70:
+  Metodo: standard_link
+  Pagina: 24
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 71:
+  Metodo: standard_link
+  Pagina: 24
+  Testo: 'Link'
+  URL: mailto:appelliorari.umanistiche@unibg.it
+--------------------------------------------------
+LINK 72:
+  Metodo: standard_link
+  Pagina: 24
+  Testo: 'Link'
+  URL: mailto:appelliorari.lingue@unibg.it
+--------------------------------------------------
+LINK 73:
+  Metodo: standard_link
+  Pagina: 24
+  Testo: 'Link'
+  URL: mailto:appelliorari.caniana@unibg.it
+--------------------------------------------------
+LINK 74:
+  Metodo: standard_link
+  Pagina: 24
+  Testo: 'Link'
+  URL: mailto:appelliorari.dalmine@unibg.it
+--------------------------------------------------
+LINK 75:
+  Metodo: standard_link
+  Pagina: 25
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 76:
+  Metodo: standard_link
+  Pagina: 25
+  Testo: 'Link'
+  URL: https://helpdesk.unibg.it/helpdesksegrestud/index.php
+--------------------------------------------------
+LINK 77:
+  Metodo: standard_link
+  Pagina: 25
+  Testo: 'Link'
+  URL: https://logistica.unibg.it/PortalePlanning/UNIBG-servizi/index.php
+--------------------------------------------------
+LINK 78:
+  Metodo: standard_link
+  Pagina: 25
+  Testo: 'Link'
+  URL: https://www.unibg.it/sites/default/files/modulistica/documentiesentibollo.pdf
+--------------------------------------------------
+LINK 79:
+  Metodo: standard_link
+  Pagina: 25
+  Testo: 'Link'
+  URL: http://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 80:
+  Metodo: standard_link
+  Pagina: 26
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=244
+--------------------------------------------------
+LINK 81:
+  Metodo: standard_link
+  Pagina: 26
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=246
+--------------------------------------------------
+LINK 82:
+  Metodo: standard_link
+  Pagina: 26
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=247
+--------------------------------------------------
+LINK 83:
+  Metodo: standard_link
+  Pagina: 26
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=249
+--------------------------------------------------
+LINK 84:
+  Metodo: standard_link
+  Pagina: 26
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=250
+--------------------------------------------------
+LINK 85:
+  Metodo: standard_link
+  Pagina: 26
+  Testo: 'Link'
+  URL: https://elearning15.unibg.it/mod/book/view.php?id=593&chapterid=251
+--------------------------------------------------
+LINK 86:
+  Metodo: standard_link
+  Pagina: 27
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/frequentare/laurearsi
+--------------------------------------------------
+LINK 87:
+  Metodo: text_search
+  Pagina: 27
+  Testo: 'consulta la pagina'
+  URL: https://www.unibg.it/studiare/frequentare/laurearsi
+--------------------------------------------------
+LINK 88:
+  Metodo: text_search
+  Pagina: 27
+  Testo: 'la pagina https://'
+  URL: www.unibg.it/studiare/frequentare/laurearsi
+--------------------------------------------------
+LINK 89:
+  Metodo: unibg_pattern
+  Pagina: 27
+  Testo: 'Per maggiori informazioni consulta la pagina'
+  URL: https://www.unibg.it/studiare/frequentare/laurearsi
+--------------------------------------------------
+LINK 90:
+  Metodo: standard_link
+  Pagina: 28
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/frequentare/laurearsi
+--------------------------------------------------
+LINK 91:
+  Metodo: standard_link
+  Pagina: 29
+  Testo: 'Link'
+  URL: https://sportello.unibg.it/Home.do
+--------------------------------------------------
+LINK 92:
+  Metodo: standard_link
+  Pagina: 29
+  Testo: 'Link'
+  URL: http://www.unibg.it/node/6977
+--------------------------------------------------
+LINK 93:
+  Metodo: standard_link
+  Pagina: 29
+  Testo: 'Link'
+  URL: https://helpdesk.unibg.it/helpdesksegrestud/?lang=it
+--------------------------------------------------
+LINK 94:
+  Metodo: standard_link
+  Pagina: 29
+  Testo: 'Link'
+  URL: https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca
+--------------------------------------------------
+LINK 95:
+  Metodo: standard_link
+  Pagina: 30
+  Testo: 'Link'
+  URL: https://www.unibg.it/vivere-unibg/eventi-istituzionali
+--------------------------------------------------
+LINK 96:
+  Metodo: standard_link
+  Pagina: 30
+  Testo: 'Link'
+  URL: https://www.unibg.it/vivere-unibg/eventi-istituzionali
+--------------------------------------------------
+LINK 97:
+  Metodo: standard_link
+  Pagina: 30
+  Testo: 'Link'
+  URL: https://logistica.unibg.it/PortalePlanning/UNIBG-servizi/index.php
+--------------------------------------------------
+LINK 98:
+  Metodo: standard_link
+  Pagina: 30
+  Testo: 'Link'
+  URL: https://helpdesk.unibg.it/helpdesksegrestud/?lang=it
+--------------------------------------------------
+LINK 99:
+  Metodo: standard_link
+  Pagina: 30
+  Testo: 'Link'
+  URL: http://www.unibg.it/segremoduli
+--------------------------------------------------
+LINK 100:
+  Metodo: standard_link
+  Pagina: 30
+  Testo: 'Link'
+  URL: https://www.unibg.it/sites/default/files/media/documents/2022-08-01/RICHIESTA%20SPEDIZIONE%20COMPILABILE_aggiornato.pdf
+--------------------------------------------------
+LINK 101:
+  Metodo: standard_link
+  Pagina: 31
+  Testo: 'Link'
+  URL: https://helpdesk.unibg.it/helpdesksegrestud/?lang=it
+--------------------------------------------------
+LINK 102:
+  Metodo: standard_link
+  Pagina: 31
+  Testo: 'Link'
+  URL: https://helpdesk.unibg.it/helpdesksegrestud/?lang=it
+--------------------------------------------------

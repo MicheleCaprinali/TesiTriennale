@@ -3,7 +3,6 @@ Modulo per gestire LLM locale con Ollama
 """
 
 import requests
-import json
 import os
 from dotenv import load_dotenv
 from typing import Dict, Any
@@ -47,37 +46,38 @@ class OllamaLLM:
             return []
     
     def generate(self, prompt: str, context: str = "") -> str:
-        """Genera risposta usando Ollama ottimizzato per velocità massima"""
+        """Genera risposta usando Ollama con qualità bilanciata"""
         
-        # Prompt ultra-conciso per velocità
-        final_prompt = f"""{context}
+        # Prompt molto semplice e diretto
+        final_prompt = f"""Contesto: {context}
 
-Q: {prompt}
-A:"""
+Domanda: {prompt}
+
+Risposta (includi link specifici):"""
         
-        # Parametri ultra-ottimizzati per velocità
+        # Parametri per incoraggiare uso dei link
         data = {
             "model": self.model,
             "prompt": final_prompt,
             "stream": False,
             "options": {
-                "temperature": 0.0,     # Deterministico massimo
-                "top_p": 0.5,          # Ridotto drasticamente  
-                "num_predict": 80,      # Molto limitato
-                "num_ctx": 1024,       # Ridotto drasticamente
-                "repeat_penalty": 1.1,
-                "stop": ["Q:", "A:", "\n\n", "Human:", "Assistant:"]
+                "temperature": 0.2,     # Leggermente più creativo
+                "top_p": 0.8,          # Più varietà nelle risposte
+                "num_predict": 200,     
+                "num_ctx": 1500,       
+                "repeat_penalty": 1.0,  # Ridotto per non penalizzare link ripetuti
+                "stop": ["Domanda:", "Contesto:"]
             }
         }
         
-        # Un solo tentativo con timeout basso
+        # Un solo tentativo con timeout aumentato per ricerca ibrida
         try:
-            print(f"Generazione risposta (timeout: 8s)...")
+            print(f"Generazione risposta (timeout: 45s)...")
             
             response = requests.post(
                 f"{self.base_url}/api/generate",
                 json=data,
-                timeout=8  # Timeout molto aggressivo
+                timeout=45  # Timeout aumentato per ricerca ibrida
             )
             
             if response.status_code == 200:
@@ -93,7 +93,7 @@ A:"""
                     
         except requests.exceptions.Timeout:
             print(f"⏰ Timeout - sistema sovraccarico")
-            return "REDIRECT_TO_HUMAN - Sistema temporaneamente lento"
+            return "REDIRECT_TO_HUMAN - Sistema temporaneamente lento (provare più tardi)"
             
         except Exception as e:
             print(f"❌ Errore LLM: {str(e)}")

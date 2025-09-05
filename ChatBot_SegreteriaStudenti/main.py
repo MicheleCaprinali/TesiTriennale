@@ -20,7 +20,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 # Import con gestione errori
 try:
     from chatbot import setup_chatbot, ChatbotRAG  # type: ignore
-    from extract_and_save import process_all_documents  # type: ignore
     from create_vectorstore import crea_vectorstore_free  # type: ignore
     from ollama_llm import setup_ollama  # type: ignore
 except ImportError as e:

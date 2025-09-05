@@ -32,74 +32,119 @@ class ChatbotRAG:
         self.vectordb_path = vectordb_path
         self.embedder = LocalEmbeddings()
         self.llm = OllamaLLM()
-        self.retrieval_k = int(os.getenv('RETRIEVAL_K', 5))
+        self.retrieval_k = int(os.getenv('RETRIEVAL_K', 10))  # Aumentato per migliorare recall
         
         print("✅ Chatbot RAG gratuito inizializzato!")
     
-    def retrieve_context(self, query: str) -> str:
-        """Recupera contesto pertinente dal vectorstore"""
+    def search_by_keywords_simple(self, query: str) -> list:
+        """Ricerca semplificata per parole chiave specifiche"""
         try:
+            import chromadb
+            client = chromadb.PersistentClient(path=self.vectordb_path)
+            collection = client.get_collection(os.getenv('VECTORDB_COLLECTION', 'unibg_docs'))
+            
+            # Ottieni tutti i documenti (cache questa operazione in futuro)
+            all_results = collection.get()
+            
+            # Mappa diretta per termini critici
+            keyword_patterns = {
+                'alloggi': 'vivere-unibg/spazi-e-servizi/alloggi',
+                'residenze': 'residenze universitarie',
+                'mensa': 'servizio-ristorazione',
+                'borse': 'borse-studio'
+            }
+            
+            # Cerca pattern specifici
+            matching_docs = []
+            query_lower = query.lower()
+            
+            for doc in all_results['documents']:
+                for term, pattern in keyword_patterns.items():
+                    if term in query_lower and pattern in doc.lower():
+                        matching_docs.append(doc)
+                        break  # Un documento per query
+                if len(matching_docs) >= 1:  # Trova solo il primo documento rilevante
+                    break
+            
+            return matching_docs
+            
+        except Exception as e:
+            print(f"⚠️ Errore ricerca keyword: {str(e)}")
+            return []
+    
+    def retrieve_context(self, query: str) -> str:
+        """Recupera contesto pertinente dal vectorstore con ricerca ibrida semplificata"""
+        try:
+            # 1. Ricerca vettoriale semantica
             results = search_vectorstore(
                 query, 
                 persist_dir=self.vectordb_path, 
-                k=self.retrieval_k,
-                embedder=self.embedder  # Passa l'embedder esistente
+                k=8,  # Ridotto per velocità
+                embedder=self.embedder
             )
             
-            # Estrai i documenti più rilevanti
-            if results and 'documents' in results and results['documents']:
-                documents = results['documents'][0]  # Prima lista di risultati
-                context = "\n\n".join(documents)
-                return context
+            context_parts = []
             
-            return ""
+            # Estrai documenti dalla ricerca vettoriale
+            if results and 'documents' in results and results['documents']:
+                documents = results['documents'][0]
+                context_parts.extend(documents)
+                print(f"📄 Trovati {len(documents)} documenti")
+            
+            # 2. Ricerca keyword SOLO per termini critici
+            critical_terms = ['alloggi', 'residenze universitarie', 'mensa', 'borse di studio']
+            if any(term in query.lower() for term in critical_terms):
+                keyword_results = self.search_by_keywords_simple(query)
+                if keyword_results:
+                    context_parts.extend(keyword_results[:2])  # Max 2 documenti aggiuntivi
+                    print(f"🔍 +{len(keyword_results[:2])} documenti keyword")
+            
+            # Limita il contesto per velocità
+            context = "\n\n".join(context_parts[:10])  # Max 10 documenti
+            
+            return context
             
         except Exception as e:
-            print(f"⚠️ Errore nel recupero contesto: {str(e)}")
+            print(f"⚠️ Errore recupero contesto: {str(e)}")
             return ""
     
     def validate_and_clean_response(self, response: str, context: str) -> str:
-        """Valida e pulisce la risposta rimuovendo link non validi"""
+        """Valida e pulisce la risposta - VERSIONE INTELLIGENTE"""
         import re
         
-        # Trova tutti i link nella risposta
-        url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+        # Trova tutti i link nella risposta (pattern più preciso)
+        url_pattern = r'https?://[^\s<>"\[\](){}|\\^`]+'
         response_urls = re.findall(url_pattern, response)
         
-        # Trova tutti i link nel contesto
-        context_urls = re.findall(url_pattern, context)
+        # Trova tutti i link nel contesto (pulendo i punti finali)
+        context_urls_raw = re.findall(url_pattern, context)
+        context_urls = [url.rstrip('.').rstrip(',').rstrip(';') for url in context_urls_raw]
         
-        # Domini ufficiali UniBG da mantenere sempre
-        unibg_domains = [
-            'www.unibg.it',
-            'unibg.it'
-        ]
+        print(f"🔍 Link nel contesto (puliti): {context_urls}")
+        print(f"🔍 Link nella risposta: {response_urls}")
         
-        # Rimuovi link che non sono nel contesto originale, eccetto quelli ufficiali UniBG
+        # VALIDAZIONE INTELLIGENTE: confronta URL normalizzati
         for url in response_urls:
-            is_official_unibg = any(domain in url for domain in unibg_domains)
+            url_clean = url.rstrip('.').rstrip(',').rstrip(';')
             
-            if url not in context_urls and not is_official_unibg:
-                response = response.replace(url, "[LINK RIMOSSO - contatta la segreteria per informazioni specifiche]")
-                print(f"⚠️ Rimosso link non valido: {url}")
-            elif is_official_unibg and url not in context_urls:
-                corrected_url = url
+            # Verifica se il link pulito è presente nel contesto pulito
+            if url_clean in context_urls:
+                print(f"✅ Link valido mantenuto: {url}")
+            else:
+                # Verifica anche match parziali per domini UniBG
+                is_valid_partial = False
+                if 'unibg.it' in url_clean:
+                    for context_url in context_urls:
+                        # Confronto intelligente per URL simili
+                        if context_url.replace('www.', '').replace('https://', '') in url_clean.replace('www.', '').replace('https://', '') or \
+                           url_clean.replace('www.', '').replace('https://', '') in context_url.replace('www.', '').replace('https://', ''):
+                            print(f"✅ Link valido (match parziale): {url}")
+                            is_valid_partial = True
+                            break
                 
-                # Rimuovi doppi slash nel percorso (ma non in https://)
-                if '//' in url and not url.startswith('https://'):
-                    parts = url.split('://', 1)
-                    if len(parts) == 2:
-                        protocol, rest = parts
-                        rest = rest.replace('//', '/')
-                        corrected_url = f"{protocol}://{rest}"
-                elif '//' in url.replace('https://', '', 1):
-                    # Doppi slash dopo il dominio
-                    corrected_url = url.replace('https://', '', 1).replace('//', '/')
-                    corrected_url = f"https://{corrected_url}"
-                
-                if corrected_url != url:
-                    response = response.replace(url, corrected_url)
-                    print(f"Corretto link UniBG: {url} → {corrected_url}")
+                if not is_valid_partial:
+                    response = response.replace(url, "[INFORMAZIONI DISPONIBILI PRESSO LA SEGRETERIA]")
+                    print(f"⚠️ Rimosso link non valido: {url}")
         
         return response
 
