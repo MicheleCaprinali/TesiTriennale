@@ -73,7 +73,7 @@ echo.
 echo INIZIALIZZAZIONE DATABASE...
 if not exist "vectordb" (
     echo Creazione database vettoriale...
-    venv\Scripts\python.exe -c "import sys; sys.path.append('src'); from create_vectorstore import crea_vectorstore_free; crea_vectorstore_free()"
+    venv\Scripts\python.exe src\create_vectorstore.py
     echo [OK] Database inizializzato
 ) else (
     echo [OK] Database esistente

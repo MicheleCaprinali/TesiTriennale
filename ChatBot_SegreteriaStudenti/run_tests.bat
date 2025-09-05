@@ -35,12 +35,16 @@ echo 4- Analisi metriche software...
 venv\Scripts\python.exe evaluation\software_metrics.py
 
 echo.
-echo 5- *** EVALUATION RAG AVANZATA ***
+echo 5- Performance benchmark...
+venv\Scripts\python.exe evaluation\performance_benchmark.py
+
+echo.
+echo 6- *** EVALUATION RAG AVANZATA ***
 echo Questo test richiede 5-10 minuti...
 venv\Scripts\python.exe evaluation\rag_evaluation.py
 
 echo.
-echo 6- Evaluation tesi standard...
+echo 7- Evaluation tesi standard...
 venv\Scripts\python.exe evaluation\thesis_evaluation.py
 
 echo.
@@ -49,19 +53,13 @@ echo  TEST COMPLETATI!
 echo ============================================
 echo.
 echo REPORT GENERATI:
+echo   - results/performance_benchmark.json
 echo   - results/rag_evaluation_advanced.png
 echo   - results/rag_evaluation_report.md  
 echo   - results/software_metrics_analysis.png
 echo   - results/thesis_performance_charts.png
 echo.
 echo Controlla la cartella results/ per tutti i report.
-echo.
-echo Premi un tasto per chiudere...
-pause > nul
-
-echo.
-echo [OK] Tutti i test completati!
-echo I risultati sono salvati nella cartella 'results\'
 echo.
 echo Premi un tasto per chiudere...
 pause > nul

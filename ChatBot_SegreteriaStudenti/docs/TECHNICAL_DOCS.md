@@ -1,98 +1,130 @@
 # Documentazione Tecnica
 ## ChatBot RAG per Supporto Studenti UniBG
-
+**Versione aggiornata - Settembre 2025**
 
 ## 1. Panoramica Sistema
 
-Sistema di chatbot basato su architettura RAG (Retrieval-Augmented Generation) per l'assistenza automatizzata agli studenti dell'Università di Bergamo.
+Sistema di chatbot basato su architettura RAG (Retrieval-Augmented Generation) ottimizzato per l'assistenza automatizzata agli studenti dell'Università di Bergamo.
 
 **Caratteristiche principali:**
-- Implementazione completamente locale
-- Tecnologie open-source
-- Dati non condivisi esternamente
+- Implementazione completamente locale e gratuita
+- Tecnologie open-source ottimizzate per velocità
+- Dati non condivisi esternamente (privacy completa)
+- Database ottimizzato (352KB vs ~1MB originale)
+- Ricerca ibrida semantica + keyword
+- Sistema di validazione link intelligente
 ---
 
-## 2. Architettura
+## 2. Architettura Ottimizzata
 
-### 2.1 Componenti 
+### 2.1 Stack Tecnologico 
 
-| Componente | Tecnologia | Funzione |
-|------------|------------|----------|
-| **LLM** | Mistral 7B + Ollama | Generazione risposte |
-| **Embeddings** | SentenceTransformers | Vettorizzazione testi |
-| **Vector DB** | ChromaDB | Ricerca semantica |
-| **Interface** | Streamlit + CLI | Interazione utente |
+| Componente | Tecnologia | Versione | Ottimizzazioni |
+|------------|------------|----------|----------------|
+| **LLM** | Mistral 7B + Ollama | Latest | Timeout 30s, num_predict 150 |
+| **Embeddings** | SentenceTransformers | all-MiniLM-L6-v2 | Modello lightweight locale |
+| **Vector DB** | ChromaDB | 0.5.0+ | k=2 per ricerca rapida |
+| **Text Splitting** | LangChain | 0.3.x | Chunking intelligente |
+| **Interface** | Streamlit | 1.38+ | UI nero/azzurro, link cliccabili |
+| **PDF Processing** | PyPDF2 + Custom | Latest | Link extraction avanzata |
 
-### 2.2 Flusso Elaborazione
+### 2.2 Flusso Elaborazione Ibrido
 
 ```
 [Query Utente] 
     ↓
-[Embedding Query]
+[Ricerca Rapida k=2] → [Embedding Query] → [Ricerca Semantica ChromaDB]
+    ↓                                              ↓
+[Keyword Search] ←------ [Termini Critici] ← [Controllo Termini]
     ↓
-[Ricerca Similarità]
+[Merge Risultati (max 3 documenti)]
     ↓
-[Selezione Top-5 Documenti]
+[Assemblaggio Contesto Ottimizzato]
     ↓
-[Assemblaggio Contesto]
+[Generazione LLM (30s timeout)]
     ↓
-[Generazione LLM]
+[Validazione Link Intelligente]
     ↓
-[Validazione + Routing]
-    ↓
-[Risposta Finale]
+[Risposta Finale + Fallback]
 ```
 
 ---
 
-## 3. Implementazione
+## 3. Database Ottimizzato
 
-### 3.1 Struttura Progetto Aggiornata
+### 3.1 Composizione Dataset
+
+**📊 Dimensioni Finali (Settembre 2025):**
+```
+SORGENTI DATI:
+├── 📄 FAQ (16 file)                    ~50KB
+│   ├── ✅ contatti_utili_*             # Contatti specifici
+│   ├── ✅ messaggi_importanti          # Avvisi aggiornati  
+│   ├── ✅ servizio_disabilità_dsa      # Servizi accessibilità
+│   ├── ✅ tirocini                     # Info pratiche stage
+│   ├── ✅ varie                        # Info uniche
+│   └── ...11 altri file essenziali
+│
+└── 📚 PDF Enhanced (4 guide)          ~352KB
+    ├── futuri_studenti_enhanced.txt    128KB (↓ da ~200KB)
+    ├── laureati_enhanced.txt           132KB (↓ da ~180KB)  
+    ├── studenti_enhanced.txt            64KB (↓ da ~150KB)
+    └── guide_2025-2026_enhanced.txt     26KB (↓ da ~40KB)
+
+TOTALE DATASET: ~402KB (vs ~1MB originale)
+COMPRESSIONE: ~60% riduzione dimensioni
+```
+
+### 3.2 Ottimizzazioni Applicate
+
+**🧹 Pulizia Contenuti:**
+- Rimossi header/footer ripetitivi
+- Eliminati menu navigazione ridondanti  
+- Puliti link decorativi non funzionali
+- Mantenuti solo link contestuali essenziali
+
+**⚡ Ottimizzazioni Velocità:**
+- k=2 nella ricerca vettoriale (vs k=8 originale)
+- max 3 documenti nel contesto (vs 10+ originale)
+- Timeout LLM: 30s (vs 60s originale)
+- num_predict: 150 (vs 400 originale)
+
+### 3.3 Struttura Progetti
 
 ```
 ChatBot_SegreteriaStudenti/
-├── 🎯 APPLICAZIONE PRINCIPALE
+├── 🎯 CORE SYSTEM
 │   ├── main.py                    # Entry point CLI
-│   ├── start_chatbot.bat         # Launcher console
-│   └── start_web.bat             # Launcher web
+│   ├── start_chatbot.bat         # Launcher console  
+│   ├── start_web.bat             # Launcher web ottimizzato
+│   └── update_database.bat       # Regen DB veloce
 │
-├── ⚙️ SETUP E CONFIGURAZIONE
-│   ├── setup_auto.bat            # Setup automatico PC nuovo
-│   ├── setup.bat                 # Setup Windows standard
-│   ├── setup.py                  # Setup Python avanzato
-│   └── requirements.txt          # Dipendenze ottimizzate
+├── 💻 ENGINE (src/)
+│   ├── chatbot.py               # 🤖 RAG ibrido (2-step search)
+│   ├── ollama_llm.py            # 🧠 LLM ottimizzato velocità
+│   ├── enhanced_link_extractor.py # 🔗 Link processing avanzato
+│   ├── create_vectorstore.py   # 📚 ChromaDB ottimizzato
+│   ├── local_embeddings.py     # 🎯 SentenceTransformers
+│   └── quick_responses.py      # ⚡ Cache risposte frequenti
 │
-├── 💻 CORE SYSTEM (src/)
-│   ├── chatbot.py               # 🤖 Sistema RAG principale
-│   ├── ollama_llm.py            # 🧠 LLM ottimizzato (10s medi)
-│   ├── local_embeddings.py     # 🔗 SentenceTransformers
-│   ├── create_vectorstore.py   # 📚 ChromaDB management
-│   ├── quick_responses.py      # ⚡ Cache risposte frequenti
-│   └── analytics.py            # 📊 Monitoraggio sistema
+├── 🎨 UI (interfaces/)
+│   └── streamlit_app.py         # Interface nero/azzurro moderna
 │
-├── 🎨 INTERFACCE (interfaces/)
-│   └── streamlit_app.py         # UI web avanzata con CSS
+├── 📊 DATA (ottimizzati)
+│   ├── data/FAQ/               # FAQ essenziali (50KB)
+│   ├── extracted_text/         # PDF enhanced (352KB)  
+│   └── vectordb/              # ChromaDB ottimizzato
 │
-├── 📊 EVALUATION SYSTEM (evaluation/)
-│   ├── rag_evaluation.py        # 🎯 Metriche RAG specializzate
-│   ├── performance_benchmark.py # ⚡ Test velocità (5-25 query)
-│   ├── software_metrics.py      # 📐 CC, WMC, LCOM analysis
-│   └── thesis_evaluation.py     # 📋 Evaluation standard
+├── 🧪 EVALUATION & TESTING
+│   ├── evaluation/            # Sistema valutazione completo
+│   ├── tests/                # Test funzionali
+│   └── results/             # Report e metriche
 │
-├── 🧪 TESTING (tests/)
-│   ├── test_retrieval.py       # 🔍 Test ricerca semantica
-│   ├── test_links.py           # 🔗 Validazione URL
-│   └── generate_test_data.py   # 📝 Generazione dataset
-│
-├── 📊 REPORT E RISULTATI (results/)
-│   ├── rag_evaluation_*.{png,md,json}     # Report RAG
-│   ├── performance_benchmark.json        # Dati velocità
-│   └── software_metrics_*.{png,md,json}  # Analisi codice
-│
-├── 📚 DOCUMENTAZIONE (docs/)
-│   ├── user_manual.md          # 👤 Manuale utente
-│   ├── TECHNICAL_DOCS.md       # 🔧 Docs tecniche
-│   ├── SETUP_GUIDE.md          # 🛠️ Setup dettagliato
+└── 📚 DOCS
+    ├── README.md              # Setup e usage
+    ├── TECHNICAL_DOCS.md      # Architettura (questo file)
+    └── user_manual.md         # Guida utente
+```
 │   ├── TROUBLESHOOTING.md      # 🆘 Risoluzione problemi
 │   └── EVALUATION_REPORT.md    # 📊 Report evaluation
 │

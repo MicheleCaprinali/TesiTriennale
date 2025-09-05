@@ -46,46 +46,45 @@ class OllamaLLM:
             return []
     
     def generate(self, prompt: str, context: str = "") -> str:
-        """Genera risposta usando Ollama con qualità bilanciata"""
+        """Genera risposta usando Ollama con parametri ottimizzati per risposte complete"""
         
-        # Prompt molto semplice e diretto
+        # Prompt semplice e diretto
         final_prompt = f"""Contesto: {context}
 
 Domanda: {prompt}
 
-Risposta (includi link specifici):"""
+Risposta completa (includi tutti i dettagli e link):"""
         
-        # Parametri per incoraggiare uso dei link
+        # Parametri ottimizzati per VELOCITÀ MASSIMA
         data = {
             "model": self.model,
             "prompt": final_prompt,
             "stream": False,
             "options": {
-                "temperature": 0.2,     # Leggermente più creativo
-                "top_p": 0.8,          # Più varietà nelle risposte
-                "num_predict": 200,     
-                "num_ctx": 1500,       
-                "repeat_penalty": 1.0,  # Ridotto per non penalizzare link ripetuti
+                "temperature": 0.1,     # Bassa per consistenza
+                "top_p": 0.8,          
+                "num_predict": 150,     # Ridotto per velocità
+                "num_ctx": 1024,       # Ridotto per velocità
+                "repeat_penalty": 1.1,  
                 "stop": ["Domanda:", "Contesto:"]
             }
         }
         
-        # Un solo tentativo con timeout aumentato per ricerca ibrida
         try:
-            print(f"Generazione risposta (timeout: 45s)...")
+            print(f"Generazione risposta (timeout: 30s)...")
             
             response = requests.post(
                 f"{self.base_url}/api/generate",
                 json=data,
-                timeout=45  # Timeout aumentato per ricerca ibrida
+                timeout=30  # Timeout ridotto per velocità
             )
             
             if response.status_code == 200:
                 result = response.json()
                 answer = result.get('response', '').strip()
                 
-                if answer and len(answer) > 5:
-                    print(f"✅ Risposta generata velocemente")
+                if answer and len(answer) > 10:
+                    print(f"✅ Risposta generata ({len(answer)} caratteri)")
                     return answer
                 else:
                     print(f"❌ Risposta troppo breve")
@@ -93,23 +92,24 @@ Risposta (includi link specifici):"""
                     
         except requests.exceptions.Timeout:
             print(f"⏰ Timeout - sistema sovraccarico")
-            return "REDIRECT_TO_HUMAN - Sistema temporaneamente lento (provare più tardi)"
+            return "REDIRECT_TO_HUMAN - Sistema temporaneamente lento, riprova tra qualche secondo"
             
         except Exception as e:
             print(f"❌ Errore LLM: {str(e)}")
             return "REDIRECT_TO_HUMAN - Errore tecnico"
         
         return "REDIRECT_TO_HUMAN - Nessuna risposta generata"
-        """Genera risposta usando Ollama con retry automatico"""
+
+    def generate_with_retry(self, prompt: str, context: str = "") -> str:
+        """Genera risposta con retry automatico e timeout progressivi"""
         
-        # Costruisce il prompt completo OTTIMIZZATO E CONCISO
-        full_prompt = f"""Sei l'assistente AI della Segreteria UniBg. Rispondi in italiano, modo professionale e conciso.
+        full_prompt = f"""Sei l'assistente AI della Segreteria UniBg. Rispondi in italiano, modo professionale e completo.
 
 REGOLE CRITICHE:
 - USA SOLO informazioni dal CONTESTO fornito
 - Se non hai info sufficienti: "Non ho informazioni sufficienti"
 - Link: copia ESATTAMENTE dal contesto, MAI inventare
-- Massimo 150 parole per risposta
+- Fornisci risposte complete e dettagliate
 
 CONTESTO:
 {context}
@@ -124,42 +124,43 @@ RISPOSTA:"""
             "stream": False,
             "options": {
                 "temperature": self.temperature,
-                "top_p": 0.9,
-                "max_tokens": 300,  # Ridotto da 500 per risposte più concise
-                "num_predict": 300,  # Limita predizione
-                "stop": ["\n\nDOMANDA:", "DOMANDA STUDENTE:", "CONTESTO:"],  # Stop tokens
-                "repeat_penalty": 1.1,  # Evita ripetizioni
-                "top_k": 40  # Limita vocabolario per velocità
+                "top_p": 0.8,
+                "num_predict": 150,  # Ridotto per velocità
+                "num_ctx": 1024,     # Ridotto per velocità
+                "stop": ["\n\nDOMANDA:", "DOMANDA STUDENTE:", "CONTESTO:"],
+                "repeat_penalty": 1.1,
+                "top_k": 20  # Ridotto per velocità
             }
         }
         
-        # Sistema di retry con timeout progressivo
-        timeouts = [15, 25, 35]  # Timeout progressivi
+        # Sistema di retry con timeout ottimizzati per velocità
+        timeouts = [10, 20, 30]  # Timeout ridotti per velocità
         
         for attempt, timeout in enumerate(timeouts, 1):
             try:
                 print(f"Tentativo {attempt}/{len(timeouts)} (timeout: {timeout}s)")
                 
                 response = requests.post(
-                    f"{self.base_url}/api/generate", 
+                    f"{self.base_url}/api/generate",
                     json=payload,
                     timeout=timeout
                 )
                 
                 if response.status_code == 200:
                     result = response.json()
-                    answer = result.get('response', 'Errore nella generazione della risposta.')
+                    answer = result.get('response', '').strip()
                     
-                    if answer.strip():
+                    if answer and len(answer) > 20:
                         print(f"✅ Risposta generata al tentativo {attempt}")
                         return answer
                     else:
                         print(f"⚠️ Risposta vuota al tentativo {attempt}")
-                        continue
+                        if attempt < len(timeouts):
+                            continue
                 else:
                     print(f"❌ HTTP {response.status_code} al tentativo {attempt}")
                     if attempt == len(timeouts):
-                        return f"Errore HTTP {response.status_code}: {response.text}"
+                        return f"Errore del server ({response.status_code}). Riprova più tardi."
                     continue
                     
             except requests.exceptions.Timeout:
@@ -175,56 +176,78 @@ RISPOSTA:"""
         
         return "Errore imprevisto nella generazione della risposta."
 
-    def pull_model(self) -> bool:
-        """Scarica il modello se non presente"""
-        payload = {"name": self.model}
-        
+    def pull_model(self, model_name: str) -> Dict[str, Any]:
+        """Scarica un modello da Ollama"""
         try:
             response = requests.post(
                 f"{self.base_url}/api/pull",
-                json=payload,
-                timeout=600
+                json={"name": model_name}
             )
-            return response.status_code == 200
-        except:
-            return False
+            return {
+                "success": response.status_code == 200,
+                "message": response.json() if response.status_code == 200 else response.text
+            }
+        except Exception as e:
+            return {"success": False, "error": str(e)}
 
-def setup_ollama():
-    """Setup e verifica di Ollama"""
-    print("Verifica setup Ollama...")
-    
-    llm = OllamaLLM()
-    
-    if not llm.is_running():
-        print("❌ Ollama non è in esecuzione!")
-        print("Avvia Ollama con: ollama serve")
-        return False
-    
-    print("✅ Ollama è in esecuzione!")
-    
-    models = llm.list_models()
-    print(f"Modelli disponibili: {models}")
-    
-    if llm.model not in models:
-        print(f"Scaricamento modello {llm.model}...")
-        print("⚠️ Questo può richiedere diversi minuti...")
-        if llm.pull_model():
-            print("✅ Modello scaricato!")
-        else:
-            print("❌ Errore nel download del modello")
-            return False
-    
-    return True
+    def delete_model(self, model_name: str) -> Dict[str, Any]:
+        """Elimina un modello da Ollama"""
+        try:
+            response = requests.delete(
+                f"{self.base_url}/api/delete",
+                json={"name": model_name}
+            )
+            return {
+                "success": response.status_code == 200,
+                "message": "Modello eliminato con successo" if response.status_code == 200 else response.text
+            }
+        except Exception as e:
+            return {"success": False, "error": str(e)}
 
-if __name__ == "__main__":
-    if setup_ollama():
-        llm = OllamaLLM()
-        
-        # Test generazione con esempio generico
-        test_context = "Esempio di contesto informativo per test."
-        test_query = "Domanda di esempio?"
-        
-        response = llm.generate(test_query, test_context)
-        print(f"Test completato. Risposta di {len(response)} caratteri generata.")
-    else:
-        print("❌ Setup Ollama fallito!")
+    def get_model_info(self, model_name: str = None) -> Dict[str, Any]:
+        """Ottiene informazioni su un modello specifico"""
+        target_model = model_name or self.model
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/show",
+                json={"name": target_model}
+            )
+            if response.status_code == 200:
+                return {"success": True, "data": response.json()}
+            return {"success": False, "error": f"Modello {target_model} non trovato"}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+
+    def health_check(self) -> Dict[str, Any]:
+        """Verifica completa dello stato di Ollama"""
+        try:
+            # Test connessione
+            response = requests.get(f"{self.base_url}/api/tags", timeout=10)
+            if response.status_code != 200:
+                return {"healthy": False, "error": f"HTTP {response.status_code}"}
+            
+            # Test modelli disponibili
+            models = self.list_models()
+            if not models:
+                return {"healthy": False, "error": "Nessun modello disponibile"}
+            
+            # Test se il modello corrente è disponibile
+            current_model_available = any(self.model in model for model in models)
+            if not current_model_available:
+                return {
+                    "healthy": False, 
+                    "error": f"Modello '{self.model}' non disponibile",
+                    "available_models": models
+                }
+            
+            return {
+                "healthy": True,
+                "base_url": self.base_url,
+                "model": self.model,
+                "available_models": models
+            }
+            
+        except requests.exceptions.Timeout:
+            return {"healthy": False, "error": "Timeout nella connessione"}
+        except Exception as e:
+            return {"healthy": False, "error": str(e)}

@@ -75,11 +75,11 @@ class ChatbotRAG:
     def retrieve_context(self, query: str) -> str:
         """Recupera contesto pertinente dal vectorstore con ricerca ibrida semplificata"""
         try:
-            # 1. Ricerca vettoriale semantica
+            # 1. Ricerca vettoriale semantica (ridotta per velocità)
             results = search_vectorstore(
                 query, 
                 persist_dir=self.vectordb_path, 
-                k=8,  # Ridotto per velocità
+                k=3,  # Drasticamente ridotto per database grande
                 embedder=self.embedder
             )
             

@@ -7,109 +7,106 @@ import re
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from chatbot import setup_chatbot
-import time
 
 # Configurazione pagina
 st.set_page_config(
-    page_title="ChatBot UniBg",
+    page_title="ChatBot UniBg - Segreteria Studenti",
     page_icon="🎓",
     layout="wide"
 )
 
-# CSS personalizzato con stili migliorati per i link
+# CSS personalizzato con palette nero e azzurro
 st.markdown("""
 <style>
-/* Theme scuro generale */
+/* Theme scuro con palette nero e azzurro */
 .stApp {
     background-color: #1a1a1a;
+    color: #ffffff;
 }
-.main-header {
-    text-align: center;
-    color: #4fc3f7;
-    border-bottom: 2px solid #1f4e79;
-    padding-bottom: 10px;
+
+/* Header principale */
+.unibg-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #1976d2 100%);
+    padding: 20px;
+    border-radius: 10px;
     margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+    border: 1px solid #4fc3f7;
 }
+
+/* Stili per i messaggi chat */
 .chat-message {
     padding: 1rem;
-    border-radius: 0.8rem;
+    border-radius: 10px;
     margin-bottom: 1rem;
     display: flex;
-    border: 1px solid #444;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #333;
+    background-color: #2d2d2d;
 }
+
 .chat-message.user {
     background-color: #1e3a5f;
-    color: #ffffff;
     border-left: 4px solid #4fc3f7;
 }
+
 .chat-message.bot {
     background-color: #2d2d2d;
-    color: #e0e0e0;
-    border-left: 4px solid #4caf50;
+    border-left: 4px solid #1976d2;
 }
+
 .chat-message .avatar {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     margin-right: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    background-color: #333333;
-    border: 2px solid #555;
+    font-size: 1.4rem;
+    background-color: #1976d2;
+    color: white;
+    border: 2px solid #4fc3f7;
 }
+
+.chat-message.user .avatar {
+    background-color: #4fc3f7;
+    border-color: #1976d2;
+}
+
 .chat-message .content {
     flex: 1;
     line-height: 1.6;
     font-size: 1rem;
+    color: #ffffff;
 }
-/* Stili migliorati per i link cliccabili */
+
+/* Stili per i link */
 .chat-message .content a {
     color: #4fc3f7 !important;
     text-decoration: underline !important;
-    transition: all 0.3s ease;
     font-weight: 600;
-    border-radius: 3px;
     padding: 2px 4px;
+    border-radius: 4px;
     background-color: rgba(79, 195, 247, 0.1);
-}
-.chat-message .content a:hover {
-    color: #ffffff !important;
-    background-color: rgba(79, 195, 247, 0.3);
-    text-decoration: none !important;
-}
-.chat-message .content a:visited {
-    color: #4fc3f7 !important;
-}
-/* Stili per link buttons */
-.link-button {
-    display: inline-block;
-    background-color: #4fc3f7;
-    color: white !important;
-    padding: 8px 16px;
-    border-radius: 6px;
-    text-decoration: none !important;
-    font-weight: bold;
-    margin: 5px 5px 5px 0;
     transition: all 0.3s ease;
-    border: 2px solid #4fc3f7;
 }
-.link-button:hover {
-    background-color: #81d4fa;
-    border-color: #81d4fa;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(79, 195, 247, 0.3);
+
+.chat-message .content a:hover {
+    color: #81d4fa !important;
+    background-color: rgba(79, 195, 247, 0.2);
+    text-decoration: none !important;
 }
-/* Personalizzazioni UniBg */
-.unibg-colors {
-    background: linear-gradient(135deg, #1f4e79 0%, #4fc3f7 100%);
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    border: 1px solid #333;
+    color: #4fc3f7;
+    margin-top: 20px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -127,44 +124,23 @@ def initialize_chatbot():
     return True
 
 def create_clickable_links(text):
-    """Converte URLs in link cliccabili e formatta il testo"""
-    
-    # Pattern per trovare URLs
+    """Converte URLs in link cliccabili HTML standard"""
+    # Pattern migliorato per trovare URLs
     url_pattern = r'(https?://[^\s<>"{}|\\^`\[\]]+)'
     
-    def replace_with_link(match):
+    def replace_url(match):
         url = match.group(1)
-        # Pulisci caratteri finali problematici
-        url = re.sub(r'[,.)]+$', '', url)
-        
-        # Estrai nome dominio per display più carino
-        domain_match = re.search(r'//([^/]+)', url)
-        if domain_match:
-            domain = domain_match.group(1)
-            if 'unibg.it' in domain:
-                display_text = f"🎓 {domain}"
-            elif 'helpdesk' in domain:
-                display_text = f"🆘 {domain}"
-            elif 'logistica' in domain:
-                display_text = f"📅 {domain}"
-            else:
-                display_text = domain
-        else:
-            display_text = url
-        
-        return f'<a href="{url}" target="_blank" class="link-button">{display_text}</a>'
+        # Rimuovi punteggiatura finale
+        url = re.sub(r'[,.!?;)]+$', '', url)
+        return f'<a href="{url}" target="_blank">{url}</a>'
     
-    # Sostituisci URLs con link button
-    text_with_links = re.sub(url_pattern, replace_with_link, text)
-    
-    # Gestisci markdown links [text](url) se presenti
-    markdown_pattern = r'\[([^\]]+)\]\((https?://[^\)]+)\)'
-    text_with_links = re.sub(markdown_pattern, r'<a href="\2" target="_blank" class="link-button">\1</a>', text_with_links)
+    # Sostituisci URLs con link HTML semplici
+    text_with_links = re.sub(url_pattern, replace_url, text)
     
     return text_with_links
 
 def display_message_improved(message, is_user=True):
-    """Versione migliorata per visualizzare messaggi con link cliccabili"""
+    """Visualizza messaggi con link cliccabili"""
     message_class = "user" if is_user else "bot"
     avatar = "👤" if is_user else "🤖"
     
@@ -179,9 +155,6 @@ def display_message_improved(message, is_user=True):
     # Converti line breaks
     message = message.replace('\n', '<br>')
     
-    # Migliora formattazione con emoji
-    message = re.sub(r'•\s*', '• ', message)  # Normalizza bullet points
-    
     st.markdown(f"""
     <div class="chat-message {message_class}">
         <div class="avatar">{avatar}</div>
@@ -189,45 +162,28 @@ def display_message_improved(message, is_user=True):
     </div>
     """, unsafe_allow_html=True)
 
-def display_message_with_components(message, is_user=True):
-    """Alternativa usando componenti nativi Streamlit"""
-    
-    if is_user:
-        with st.chat_message("user"):
-            st.write(message)
-    else:
-        with st.chat_message("assistant"):
-            # Dividi il messaggio in parti testo e link
-            parts = re.split(r'(https?://[^\s<>"{}|\\^`\[\]]+)', message)
-            
-            for part in parts:
-                if part.startswith('http'):
-                    # È un link
-                    url = re.sub(r'[,.)]+$', '', part)
-                    st.markdown(f"🔗 [{url}]({url})")
-                else:
-                    # È testo normale
-                    if part.strip():
-                        st.write(part)
-
 def main():
     # Header
     st.markdown("""
-    <div class="unibg-colors">
-        <h1 style="margin: 0; text-align: center;">ChatBot Segreteria Studenti</h1>
-        <p style="margin: 5px 0 0 0; text-align: center; opacity: 0.9;">Università degli Studi di Bergamo</p>
+    <div class="unibg-header">
+        <h1 style="margin: 0; text-align: center;">🎓 ChatBot Segreteria Studenti</h1>
+        <p style="margin: 10px 0 0 0; text-align: center; opacity: 0.9;">Università degli Studi di Bergamo</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Sidebar con informazioni
+    # Sidebar con esempi di domande
     with st.sidebar:
-        st.write("**💡 Esempi di domande:**")
+        st.markdown("### 💡 Esempi di domande")
+        
         examples = [
             "Come iscriversi agli esami?",
-            "Quando pagare le tasse?",
-            "Orari della segreteria?",
-            "Servizi per disabili?",
-            "Come richiedere certificati?"
+            "Quando pagare le tasse universitarie?",
+            "Orari della segreteria studenti?", 
+            "Servizi per studenti con disabilità?",
+            "Come richiedere certificati?",
+            "Informazioni su alloggi universitari?",
+            "Procedure per la laurea?",
+            "Contatti segreteria"
         ]
         
         for example in examples:
@@ -236,19 +192,16 @@ def main():
         
         st.markdown("---")
         
-        # Opzioni visualizzazione
-        st.write("**⚙️ Modalità visualizzazione:**")
-        display_mode = st.radio(
-            "Scegli modalità:",
-            ["🎨 Avanzata (HTML)", "🔗 Nativa (Streamlit)"],
-            key="display_mode"
-        )
-        
-        st.markdown("---")
+        # Informazioni progetto
         st.markdown("""
-        <div style="text-align: center; color: #666; font-size: 0.8rem;">
-            <p><strong>Tesi Triennale</strong><br>
-            Ingegneria Informatica</p>
+        <div style="background-color: #2d2d2d; padding: 15px; border-radius: 8px; border: 1px solid #4fc3f7;">
+            <h4 style="color: #4fc3f7; text-align: center; margin-bottom: 10px;">📖 Progetto Tesi</h4>
+            <p style="text-align: center; color: #ffffff; font-size: 0.9rem; margin: 0;">
+                <strong>RAG ChatBot</strong><br>
+                Tesi Triennale<br>
+                Ingegneria Informatica<br>
+                UniBg 2024-2025
+            </p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -259,30 +212,26 @@ def main():
     # Inizializza cronologia chat
     if 'messages' not in st.session_state:
         st.session_state.messages = []
-        welcome_msg = """Ciao! Sono il ChatBot della Segreteria Studenti UniBg.
+        welcome_msg = """Ciao! 👋 Sono il ChatBot della Segreteria Studenti UniBg.
 
-Posso aiutarti con:
-• Iscrizioni e esami
-• Tasse universitarie  
-• Certificati e documenti
-• Contatti e orari
-• Servizi per studenti con disabilità
+Posso aiutarti con informazioni su:
+• 📚 Iscrizioni e gestione esami
+• 💰 Tasse universitarie e pagamenti
+• 📄 Certificati e documenti ufficiali
+• 📞 Contatti e orari degli uffici
+• ♿ Servizi per studenti con disabilità
+• 🏠 Alloggi e servizi universitari
+• 🎓 Procedure di laurea
 
-Fai pure la tua domanda!"""
+Scrivi la tua domanda qui sotto! 🚀"""
         st.session_state.messages.append({"role": "bot", "content": welcome_msg})
-    
-    # Scegli funzione di display
-    if st.session_state.get("display_mode", "🎨 Avanzata (HTML)") == "🎨 Avanzata (HTML)":
-        display_func = display_message_improved
-    else:
-        display_func = display_message_with_components
     
     # Visualizza cronologia chat
     chat_container = st.container()
     with chat_container:
         for message in st.session_state.messages:
             is_user = message["role"] == "user"
-            display_func(message["content"], is_user)
+            display_message_improved(message["content"], is_user)
     
     # Input utente
     user_input = st.chat_input("Scrivi la tua domanda...")
@@ -317,11 +266,12 @@ Fai pure la tua domanda!"""
         st.rerun()
     
     # Footer
-    st.markdown("---")
-    st.markdown(
-        '<p style="text-align: center; color: #666;"> Tesi Triennale Ingegneria Informatica - UniBg 2024-2025</p>',
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <div class="footer">
+        🎓 RAG ChatBot per Segreteria Studenti UniBg<br>
+        <small>Tesi Triennale Ingegneria Informatica • A.A. 2024-2025</small>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

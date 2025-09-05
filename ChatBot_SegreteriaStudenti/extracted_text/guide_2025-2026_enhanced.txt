@@ -1,41 +1,5 @@
-
-
-=== PAGINA 1 ===
-
-1  
-S
+GUIDA SINTETICA  PER LO STUDENTE 
  
-GUIDA 
-SINTETICA  
-PER LO STUDENTE 
- 
- 
-
-
-=== PAGINA 2 ===
-
-2  
- 
-INDICE  
-Informazioni principali, avvisi e modulistica ...................................................................... 3 
-Sedi universitarie...................................................................................................................... 3 
-Per immatricolarsi .................................................................................................................... 4 
-Contribuzione studentesca (https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca) ................................................................................................... 4 
-Richiesta certificati .................................................................................................................. 4 
-Valutazione carriere pregresse ............................................................................................. 4 
-Iscrizione a corso di laurea magistrale ad accesso libero ............................................... 6 
-Iscrizione a corso di laurea magistrale ad accesso programmato ................................ 8 
-MyUniBg ......................................................................................................................................9 
-Rete Wi-Fi ....................................................................................................................................9 
-Altri servizi ..................................................................................................................................9 
- 
- 
- 
-
-
-=== PAGINA 3 ===
-
-3  
 Informazioni principali, avvisi e modulistica  
 Puoi trovare tutte le informazioni utili per l’iscrizione e lo svolgimento del tuo percorso di studio sul sito (www.unibg.it) www.unibg.it 
   
@@ -84,11 +48,6 @@ Sedi universitarie
 Nella home page www.unibg.it  trovi le indicazioni e le informazioni per tutte le sedi universitarie. 
 Per saperne di più: (www.unibg.it/node/40.) www.unibg.it/node/40. 
  
- 
-
-
-=== PAGINA 4 ===
-
 4  
 Per immatricolarsi  
 Scopri i corsi disponibili e tutte le informazioni su requisiti, scadenze e modalità di immatricolazione: (https://www.unibg.it/studiare/iscriversi) 
@@ -132,9 +91,6 @@ Se sei già in possesso di laurea e desideri conseguirne un’altra di primo liv
 magistrale a ciclo unico in Giurisprudenza, devi presentare la domanda esclusivamente online dopo il sostenimento 
 del TOLC e, per i corsi di laurea ad accesso programmato, dopo il collocamento utile in graduatoria, seguendo 
 le indicazioni per il conseguimento di seconda laurea (6 agosto–3 ottobre 2025, 31 ottobre 2025 per i laureati in 
-
-
-=== PAGINA 5 ===
 
 5  
 Diritto per l’impresa nazionale e internazionale che desiderano chiedere l’abbreviazione di corso per il conseguimento 
@@ -180,10 +136,6 @@ ammessi all'anno di corso successivo a quello di iscrizione 2024-2025, in base a
 candidature pervenute e ai posti disponibili da coprire tramite trasferimento. Per gli studenti iscritti fuori corso, la 
 competente struttura didattica valuterà l'anno di corso cui iscrivere lo studente sulla base di un'analisi qualitativa e 
 quantitativa del percorso svolto. 
- 
-
-
-=== PAGINA 6 ===
 
 6  
 Re-immatricolazione a seguito di rinuncia/decadenza  
@@ -243,10 +195,6 @@ hanno già sostenuto il colloquio in fase di pre-valutazione);
 3) Immatricolazioni: dal 29 settembre al 15 ottobre 2025 (per le immatricolazioni oltre tale termine andrà addebitata 
 la sanzione per il ritardo). 
  
-
-
-=== PAGINA 7 ===
-
 7  
 Terza finestra temporale 
 1) Pre-iscrizioni: dal 1° al 30 settembre 2025 
@@ -295,10 +243,6 @@ Consulta l’offerta formativa relativa alle lauree magistrali e prendi visione 
 https://www.unibg.it/studiare/iscriversi/corsi-laurea-magistrale-ad-accesso-programmato 
 Consulta tutte le informazioni utili e le scadenze in questa pagina: https://www.unibg.it/studiare/iscriversi 
  
-
-
-=== PAGINA 8 ===
-
 8  
 Verifica anzitutto i requisiti richiesti e le modalità di verifica dell’adeguata preparazione nella bacheca del 
 Dipartimento di Scienze umane e sociali (consulta la pagina (https://dsus.unibg.it/it) https://dsus.unibg.it/it). 
@@ -343,9 +287,6 @@ MyUniBg
 Per accedere alle aree riservate del portale dell'Università consulta la pagina (https://www.unibg.it/node/7528.) https://www.unibg.it/node/7528. 
 Clicca MyUniBg (https://my.unibg.it/) dalla barra in alto a destra in ogni pagina del sito pubblico. Il sistema 
 riconoscerà l'utente (attraverso ID utente e Password) e lo farà accedere alle aree riservate del portale di Ateneo.  
-
-
-=== PAGINA 9 ===
 
 9  
 QUALI SONO I DATI NECESSARI PER L'AUTENTICAZIONE? Per autenticarti devi inserire ID utente e Password 
@@ -394,9 +335,6 @@ Prenota un appuntamento ( (https://logistica.unibg.it/PortalePlanning/UNIBG-serv
 Negli stessi giorni ed orari è attiva la reperibilità telefonica: 035 2052595/035 2052883 
 Per essere contattato/a via telefono o Meet, scrivi una mail ai seguenti indirizzi: 
 
-
-=== PAGINA 10 ===
-
 10  
 servizi.disabili@unibg.it 
 servizi.dsa@unibg.it 
@@ -424,9 +362,7 @@ Servizio abitativo
 Servizio ristorazione 
 Da non perdere il Top 10 Student Program, qui: (www.unibg.it/node/8508) www.unibg.it/node/8508 
  
- 
 Biblioteche dell’Ateneo: trovi tutte le informazioni nel sito (servizibibliotecari.unibg.it) servizibibliotecari.unibg.it 
- 
  
 Il Centro stampa opera all'interno delle sedi universitarie ed è affidato in concessione alla Società Alba S.r.l.; nel sito 
 web sono illustrate le funzionalità offerte.  
@@ -439,10 +375,3 @@ Informazioni e contatti alla pagina (www.unibg.it/node/6934) www.unibg.it/node/6
 Ti ricordiamo che puoi effettuare una collaborazione per un massimo di 200 ore presso gli uffici dell’Ateneo nel 
 corso di ogni anno accademico: (www.unibg.it/node/6926) www.unibg.it/node/6926 
 Trovi le informazioni sui Bandi per gli studenti e i laureati alla pagina (www.unibg.it/node/126) www.unibg.it/node/126
-
-
-=== PAGINA 11 ===
-
- 
-U 
- 

@@ -1,74 +1,6 @@
-
-
-=== PAGINA 1 ===
-
-Stampa libro
 a.a. 2025-2026 GUIDA DELLO STUDENTE - STUDENTI
-Sito:
-e-learning Unibg
-Corso:
-Guida studenti Unibg
-Libro:
-a.a. 2025-2026 GUIDA DELLO STUDENTE - STUDENTI
-Stampato da:
-Utente ospite
-Data:
-venerdì, 5 settembre 2025, 16:56
-
-
-=== PAGINA 2 ===
-
-Descrizione
-A.A. 2025-2026 GUIDA DELLO STUDENTE - STUDENTI
-
-
-=== PAGINA 3 ===
-
-Sommario
-1. RINNOVO ISCRIZIONE E CONTRIBUZIONE STUDENTESCA (https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca)
-Rinnovo dell'iscrizione
-Ammissione al secondo anno di corso
-Variazione di status
-Rateizzazione pagamenti
-Scadenza Attestazione ISEEU
-Importi aggiuntivi per ritardati pagamenti
-Contributo onnicomprensivo
-Scadenze amministrative
-2. PASSAGGI DI CORSO E TRASFERIMENTI IN USCITA
-Passaggio di corso (triennale/magistrale)
-Trasferimento in uscita
-3. SOSPENSIONE, DECADENZA E RINUNCIA AGLI STUDI
-Decadenza dagli studi universitari
-Rinuncia agli studi
-Sospensione degli studi e contemporanea iscrizione a due corsi di studio
-4. PIANI DI STUDIO ED ESAMI DI PROFITTO
-Compilazione del piano e scadenze
-Inserimento insegnamenti soprannumerari
-Esami di profitto: informazioni utili
-Prenotazione degli appelli
-5. RILASCIO CERTIFICATI
-6. ESAMI DI LAUREA E PROVE FINALI
-Per conseguire il titolo
-I passi per laurearsi
-Presentazione della domanda di prova finale
-Modalità ritiro pergamena di laurea
-Rinvio della discussione della prova finale
-
-
-=== PAGINA 4 ===
 
 1. RINNOVO ISCRIZIONE E CONTRIBUZIONE STUDENTESCA
-- Rinnovo dell'iscrizione
-- Ammissione al secondo anno di corso
-- Variazione di status
-- Rateizzazione pagamenti
-- Scadenza Attestazione ISEEU
-- Importi aggiuntivi per ritardati pagamenti
-- Contributo onnicomprensivo
-- Scadenze amministrative
-
-
-=== PAGINA 5 ===
 
 Rinnovo dell'iscrizione
 Il rinnovo dell’iscrizione avviene mediante il pagamento della tassa regionale per il Diritto allo Studio Universitario e dell'imposta di bollo assolta in modo virtuale nel periodo 1 agosto - 3 ottobre 2025.
@@ -98,9 +30,6 @@ sessione dell'a.a. 2025-2026 dovrai corrispondere la tassa regionale e l'imposta
 previste scadenze.
 Per approfondimenti, consulta la pagina Contribuzione studentesca.
 
-
-=== PAGINA 6 ===
-
 Ammissione al secondo anno di corso
 Per essere ammesso nel 2025-2026 al secondo anno di un corso di laurea triennale o a un corso di laurea magistrale a ciclo unico dovrai aver superato tutti gli eventuali OFA entro il primo anno
 accademico (30 settembre 2025). Il rinnovo dell’iscrizione avviene con il pagamento della tassa regionale per il Diritto allo Studio Universitario e dell'imposta di bollo assolta in modo virtuale del secondo
@@ -111,9 +40,6 @@ Se ti sei immatricolato a tempo pieno nel 2024-2025 ad un corso di laurea magis
 dell'imposta di bollo assolta in modo virtuale indipendentemente dal numero di esami sostenuti; nel caso in cui nel 2024-2025 ti fossi iscritto con modalità part-time, ti iscriverai per il 2025-2026 al primo
 anno ripetente.
 
-
-=== PAGINA 7 ===
-
 Variazione di status
 Se ti sei iscritto con modalità part-time, puoi chiedere di tornare al regime di iscrizione a tempo pieno, una volta completata un'annualità intera (es. primo anno + primo anno ripetente) se desideri
 completare il tuo percorso di studio e conseguire il titolo anticipatamente rispetto a quanto previsto per la condizione a tempo parziale.
@@ -123,10 +49,6 @@ Importante: la variazione di status è consentita per una sola volta durante il
 L’eventuale cambiamento di regime, che potrai richiedere entro il termine per il rinnovo dell’iscrizione all’anno accademico successivo, ti sarà concesso previa verifica dei requisiti e della
 compatibilità con il percorso scelto.
 Il modulo di variazione di status è disponibile alla pagina Modulistica dal 1° agosto 2025.
- 
-
-
-=== PAGINA 8 ===
 
 Rateizzazione pagamenti
 Le scadenze per i pagamenti sono le seguenti:
@@ -167,9 +89,6 @@ In presenza di situazioni debitorie, lo studente, per poter riprendere gli stud
 tasse un piano di rateizzazione degli stessi. Per importi arretrati relativi ad anni accademici precedenti è possibile presentare istanza di rateizzazione indipendentemente dall'importo dovuto.
 Per approfondimenti consulta la pagina web Contribuzione studentesca.
 
-
-=== PAGINA 9 ===
-
 Scadenza Attestazione ISEEU
 La fascia di contribuzione viene determinata in base all'attestazione ISEEU applicabile alle prestazioni per il Diritto allo Studio universitario. All’interno del REGOLAMENTO PER LA CONTRIBUZIONE
 STUDENTESCA a.a. 2025-2026, reperibile alla pagina Contribuzione studentesca, puoi confrontare il valore del tuo ISEE con la tabella delle fasce contributive.
@@ -187,9 +106,6 @@ programmato. 
 Se risulterai già in possesso di un'attestazione ISEEU per prestazioni universitarie, prodotta nel corso del 2025 ai fini dell'attribuzione tardiva della fascia contributiva nel corso dell'anno accademico
 precedente, non dovrai richiedere una nuova attestazione per l'a.a. 2025-2026, stante la validità di quella già in tuo possesso.
 Per approfondimenti, visita la pagina Contribuzione studentesca.
-
-
-=== PAGINA 10 ===
 
 Importi aggiuntivi per ritardati pagamenti
 In caso di pagamento del contributo onnicomprensivo successivamente alla scadenza prevista, si applicano i seguenti importi aggiuntivi:
@@ -210,28 +126,14 @@ l'esclusione dalla procedura di selezione senza la possibilità di effettuare un
 Nel caso di mancato pagamento delle rate di contributo onnicomprensivo entro 30 giorni dalla scadenza, è previsto il blocco alla prenotazione agli appelli d'esame; lo studente non in regola con il
 pagamento delle tasse universitarie non può accedere alla prova finale di laurea.
 
-
-=== PAGINA 11 ===
-
 Contributo onnicomprensivo
 Puoi trovare tutte le informazioni sul calcolo del contributo onnicomprensivo annuale e su eventuali agevolazioni alla pagina web Contribuzione studentesca.
-
-
-=== PAGINA 12 ===
 
 Scadenze amministrative
 Trovi tutte le scadenze amministrative previste per l’anno accademico 2025-2026 alla pagina Iscriversi.
 Per le scadenze relative a tasse e contributi consulta la pagina Contribuzione studentesca.
 
-
-=== PAGINA 13 ===
-
 2. PASSAGGI DI CORSO E TRASFERIMENTI IN USCITA
-- Passaggio di corso (triennale/magistrale)
-- Trasferimento in uscita
-
-
-=== PAGINA 14 ===
 
 Passaggio di corso (triennale/magistrale)
 CORSI DI LAUREA TRIENNALI E MAGISTRALI A CICLO UNICO 
@@ -318,9 +220,6 @@ fino a 29 cfu riconosciuti: ammissione al I anno di corso
 da 30 cfu riconosciuti: ammissione al II anno di corso
 Per l'individuazione dell'anno di ammissione, si farà riferimento ai cfu in esubero rispetto a quelli necessari per l'ammissione al corso di laurea magistrale.
 
-
-=== PAGINA 15 ===
-
 Trasferimento in uscita
 Se desideri trasferirti presso un altro ateneo non sei tenuto a rinnovare l'iscrizione all'a.a. 2025-2026 presso l'Università degli studi di Bergamo: devi compilare la domanda indirizzata al
 Rettore esclusivamente online nel periodo 14 luglio – 3 ottobre 2025, fatte salve le scadenze e le modalità di iscrizione stabilite dai vari atenei.
@@ -344,16 +243,7 @@ Se ti sei immatricolato nel 2025-2026, non è consentito effettuare il trasferim
 Lo studente che si è trasferito ad altra Università non può fare ritorno all’Università di Bergamo prima che sia intercorso un anno solare, salvo che la domanda sia giustificata da gravi motivi.
 In ogni caso si consiglia agli interessati di verificare le disposizioni relative ai trasferimenti in vigore presso i vari atenei.
 
-
-=== PAGINA 16 ===
-
 3. SOSPENSIONE, DECADENZA E RINUNCIA AGLI STUDI
-- Sospensione degli studi e contemporanea iscrizione a due corsi di studio
-- Decadenza dagli studi universitari
-- Rinuncia agli studi
-
-
-=== PAGINA 17 ===
 
 Decadenza dagli studi universitari
 Se sei uno studente fuori corso iscritto ad un corso attivato ai sensi del D.M. 509/99 o ante D.M. 509/99 incorri nella decadenza dallo status di studente universitario se non sostieni (anche con
@@ -373,9 +263,6 @@ Il decorso del termine per la decadenza si interrompe in caso di passaggio ad un
 Attenzione: per gli studenti con invalidità civile pari o superiore al 66%, gli studenti in possesso dei benefici di cui alla Legge 104/1992 e gli studenti con diagnosi di disturbo specifico di apprendimento
 (DSA) possono essere deliberati specifici termini di decadenza dagli Organi competenti.
 Consulta il Regolamento (Regolamento in materia di decadenza dagli studi universitari).
-
-
-=== PAGINA 18 ===
 
 Rinuncia agli studi
 Se sei intenzionato a rinunciare agli studi (decadendo dallo status di studente universitario), accedi allo Sportello internet per effettuare la procedura online di Rinuncia agli studi (clicca "Carriera" e
@@ -421,9 +308,6 @@ N.B: l’istanza di rinuncia agli studi si intende perfezionata solo se lo stude
 domanda; il bollettino di € 16,00 viene generato automaticamente al termine della procedura online ed è reperibile nella sezione Segreteria > Pagamenti dello Sportello internet.
 In caso di mancato pagamento dei 16,00 euro entro il termine indicato, l’istanza decade e verrà considerata come non presentata.
  In caso di rinuncia agli studi si procederà alla chiusura della carriera solo dopo il saldo di tutti gli importi che risultano dovuti, anche in caso di sottoscrizione di un piano di rateizzazione.
-
-
-=== PAGINA 19 ===
 
 Sospensione degli studi e contemporanea iscrizione a due corsi di studio
 Se sei iscritto ad un corso di laurea, laurea magistrale a ciclo unico o laurea specialistica/magistrale e intendi proseguire i tuoi studi presso un’Università straniera o un’Accademia militare o presso i corsi
@@ -473,16 +357,7 @@ Per approfondimenti consulta la pagina Altre riduzioni e agevolazioni.
 NB: Gli studenti che si immatricolano nell'a.a. 2025-2026 ai corsi di laurea triennali, magistrali e magistrali a ciclo unico non possono sospendere gli studi per l'anno accademico 2025-2026.
 
 
-=== PAGINA 20 ===
-
 4. PIANI DI STUDIO ED ESAMI DI PROFITTO
-- Compilazione del piano e scadenze
-- Inserimento insegnamenti soprannumerari
-- Esami di profitto: informazioni utili
-- Prenotazione degli appelli
-
-
-=== PAGINA 21 ===
 
 Compilazione del piano e scadenze
 All’inizio di ogni anno accademico devi presentare, o eventualmente modificare, il tuo piano di studio, secondo i limiti imposti dal piano stesso, entro le scadenze fissate dal Senato Accademico.
@@ -495,9 +370,6 @@ Per le modalità di compilazione ti invitiamo a consultare gli avvisi pubblicati
 N.B. La presentazione del piano di studio oltre le scadenze previste comporterà il pagamento di una sanzione di euro 50,00 (ad eccezione di chi è in attesa di delibera avendo presentato istanza di
 abbreviazione carriera).
 
-
-=== PAGINA 22 ===
-
 Inserimento insegnamenti soprannumerari
 Per richiedere l’inserimento di insegnamenti in soprannumero, devi trasmettere via ticket alla Segreteria studenti, entro la scadenza prevista per la compilazione del piano di studio, un’istanza
 in carta libera indirizzata al Consiglio di corso di studio con l’indicazione degli insegnamenti (precisando denominazione, codice, numero di cfu) e la relativa motivazione.
@@ -508,9 +380,6 @@ Di tali crediti si terrà conto in sede di calcolo della media di laurea, su ric
 magistrale, a un massimo di 40 cfu per i corsi di laurea magistrale a ciclo unico, purché in coerenza con l'ordinamento didattico del corso di studi dell'anno accademico di immatricolazione.
 Lo studente che ha inserito esami soprannumerari può richiedere di eliminarli dalla propria carriera, se non già sostenuti con esito positivo, non oltre il termine previsto per la presentazione della
 domanda di ammissione alla prova finale.
-
-
-=== PAGINA 23 ===
 
 Esami di profitto: informazioni utili
 La verifica della preparazione degli studenti consiste in esami orali e/o scritti o test, che si svolgono nei periodi previsti dai Calendari didattici in date (appelli d’esame) pubblicate nelle
@@ -538,9 +407,6 @@ settembre 2026 verrà disposto il blocco amministrativo della carriera.
 Attenzione: lo studente è tenuto a conoscere il modello di riferimento del proprio piano di studio, pubblicato nella bacheca delle singole strutture didattiche e le norme dell’Ordinamento
 didattico del proprio Corso di studio ed è il solo responsabile dell’annullamento degli esami sostenuti in violazione di tali norme.
 
-
-=== PAGINA 24 ===
-
 Prenotazione degli appelli
 Per effettuare l’iscrizione all’appello d’esame devi utilizzare lo sportello internet (http://www.unibg.it/node/6977), anche presso le postazioni installate nelle varie sedi universitarie.
 La prenotazione è obbligatoria e deve essere effettuata entro il quinto giorno antecedente la data fissata per l’esame (per tutti i Dipartimenti e la Scuola di Ingegneria). 
@@ -567,8 +433,6 @@ oltre la data comunicata dal docente; in mancanza di esplicito rifiuto, l’esit
 PROVE ORALI oppure esami che si concludono con una prova orale: potrai prendere esclusivamente visione dell’esito dell’esame senza poter effettuare alcuna scelta.
 
 
-=== PAGINA 25 ===
-
 5. RILASCIO CERTIFICATI
 Per ottenere un certificato in bollo, destinato a privati (o per uso estero), dovrai compilare l’apposita richiesta di certificato disponibile nella Sezione “Moduli stampabili” della Segreteria studenti alla
 pagina Modulistica ed inviarla via ticket dal tuo indirizzo istituzionale (Ticket), richiedendo di poter assolvere virtualmente i contributi per le marche da bollo. Gli importi (pari a 16,00 euro per la richiesta
@@ -585,18 +449,7 @@ Dalla tua pagina personale dello Sportello internet potrai stampare l’autoce
 - tasse pagate nell’anno solare.
 
 
-=== PAGINA 26 ===
-
 6. ESAMI DI LAUREA E PROVE FINALI
-- Per conseguire il titolo
-- I passi per laurearsi
-- Presentazione della domanda di prova finale
-- Ritiro diploma originale di studi medi
-- Modalità ritiro pergamena di laurea
-- Rinvio della discussione della prova finale
-
-
-=== PAGINA 27 ===
 
 Per conseguire il titolo
 TESI DI LAUREA – VECCHIO ORDINAMENTO (ante D.M. 509/99) 
@@ -627,17 +480,11 @@ Trovi le informazioni su esami di laurea e prove finali, comprese le regole tipo
 Ti invitiamo a verificare il Regolamento didattico del tuo corso di studio accedendo al sito dell’Ateneo.
 Per maggiori informazioni consulta la pagina (https://www.unibg.it/studiare/frequentare/laurearsi) https://www.unibg.it/studiare/frequentare/laurearsi
 
-
-=== PAGINA 28 ===
-
 I passi per laurearsi
 La domanda di approvazione del titolo provvisorio della tesi di laurea/prova finale o la domanda di assegnazione dell’argomento, ove previste, devono essere presentate entro i termini fissati dalle
 competenti strutture didattiche (consulta il Calendario didattico del tuo Dipartimento per le modalità di presentazione della domanda e le relative scadenze).
 Prendi visione degli avvisi pubblicati alla pagina Prove finali/Tesi di laurea del tuo Dipartimento (Dipartimento di...> Studiare>Calendari>Prove finali/Tesi di laurea).
 Per approfondimenti consulta la pagina Laurearsi - note operative.
-
-
-=== PAGINA 29 ===
 
 Presentazione della domanda di prova finale
 Per compilare la domanda di prova finale online devi accedere allo Sportello internet della tua pagina personale (sezione “Laurea”) e seguire la procedura indicata nella Guida alla compilazione della
@@ -660,9 +507,6 @@ Se, non essendoti laureato entro la sessione di marzo/aprile 2026, ti iscriverai
 le sovrattasse per gli importi corrisposti oltre le scadenze fissate.
 Per approfondimenti consulta la pagina Contribuzione studentesca.
 
-
-=== PAGINA 30 ===
-
 Modalità ritiro pergamena di laurea
 Il diploma originale di laurea viene consegnato ai laureati triennali in occasione della cerimonia di proclamazione relativa alla propria sessione di prove finali; ai laureati magistrali e magistrali a ciclo
 unico, invece, in occasione del Graduation Day, riferito alla propria sessione di laurea, che l’Ateneo organizza annualmente. 
@@ -671,9 +515,6 @@ I laureati che non sono interessati a partecipare agli eventi sopraindicati o no
 afferenza e la voce "Ritiro pergamena"), presentando un documento d'identità in corso di validità all'atto del ritiro;
 - richiedere l’invio al proprio domicilio. In questo caso è necessario versare con modalità PagoPA il relativo contributo per la spedizione, da richiedere via Ticket, e successivamente, con la stessa
 modalità, inviare il modulo disponibile alla pagina Modulistica >"Richiesta spedizione pergamena di Laurea" debitamente compilato e firmato. 
-
-
-=== PAGINA 31 ===
 
 Rinvio della discussione della prova finale
 In caso di rinvio della discussione della prova finale dovrai anzitutto informare tempestivamente la Segreteria studenti via Ticket, anche nel caso in cui tu abbia compilato soltanto il primo step
@@ -684,5 +525,3 @@ contributo di € 32,00, dovrai versare l'importo relativo all'imposta di bollo 
 dovrà essere nuovamente pagato).
 Attenzione: se conseguirai il titolo successivamente alla sessione di laurea straordinaria di marzo/aprile 2026 sarai tenuto al pagamento delle quote di tassa regionale ed imposta di bollo, nonché
 del contributo onnicomprensivo, dovuti per l’intero a.a. 2025-2026.
- 
- 

@@ -1,87 +1,8 @@
-
-
-=== PAGINA 1 ===
-
-Stampa libro
 a.a. 2025-2026 GUIDA DELLO STUDENTE - FUTURI STUDENTI
-Sito:
-e-learning Unibg
-Corso:
-Guida studenti Unibg
-Libro:
-a.a. 2025-2026 GUIDA DELLO STUDENTE - FUTURI STUDENTI
-Stampato da:
-Utente ospite
-Data:
-venerdì, 5 settembre 2025, 16:51
-
-
-=== PAGINA 2 ===
-
-Descrizione
-A.A. 2025-2026 GUIDA DELLO STUDENTE - FUTURI STUDENTI
-
-
-=== PAGINA 3 ===
-
-Sommario
-1. IMMATRICOLARSI: DOVE E QUANDO
-Segreteria studenti: dove e quando
-Scadenze amministrative anno accademico 2025-2026
-2. OFFERTA FORMATIVA E REGISTRAZIONE AL PORTALE DI ATENEO
-Offerta formativa anno accademico 2025-2026
-Corso di laurea magistrale quinquennale a ciclo unico in Scienze della formazione primaria: informazioni utili
-Registrati al portale dell'Università (Sportello internet (http://www.unibg.it/node/6977))
-3. PROGETTO PA 110 E LODE
-4. L'ABC DELLA PROCEDURA DI IMMATRICOLAZIONE
-Titoli necessari per l'immatricolazione
-Corsi di laurea e laurea magistrale a ciclo unico ad accesso libero
-Corsi di laurea ad accesso programmato
-Obblighi formativi aggiuntivi (OFA)
-Studenti con titolo conseguito all'estero: i passi per iscriversi ad un corso di laurea
-Corsi di laurea magistrale ad accesso libero
-Corsi di laurea magistrale ad accesso programmato
-Studenti con titolo conseguito all'estero: i passi per iscriversi ad un corso di laurea magistrale
-5. TESSERA UNIVERSITARIA FLASH UP STUDIO
-6. IMMATRICOLAZIONE PART-TIME
-Condizioni per iscriversi come studente part-time
-Presentazione della domanda di iscrizione a tempo parziale
-Qual è la contribuzione prevista per gli studenti part-time?
-È possibile effettuare una variazione di status da tempo pieno a part-time o viceversa?
-7. ABBREVIAZIONE DI CARRIERA (lauree triennali e quinquennali a ciclo unico)
-Se ti trasferisci da un altro Ateneo
-Per iscriverti a una seconda laurea
-Riconoscimento titolo estero
-Abbreviazione di corso
-Re-immatricolazione a seguito di rinuncia/decadenza
-8. ISCRIZIONE A CORSI SINGOLI a.a. 2024-2025
-9. ISCRIZIONE A CORSI SINGOLI a.a. 2025-2026
-10. CONTRIBUZIONE STUDENTESCA (https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca)
-Rateizzazione pagamenti
-Scadenza Attestazione ISEEU
-Importi aggiuntivi per ritardati pagamenti
-Contributo onnicomprensivo
-Borse di studio
-11. PIANI DI STUDIO - LEZIONI - ESAMI
-Piano di studio e periodo di compilazione
-Inserimento insegnamenti soprannumerari
-Programmi d'esame e orario di ricevimento docenti
-Orari delle lezioni
-Esami di profitto: informazioni utili
-Prenotazioni degli appelli
-12. RINUNCIA AGLI STUDI UNIVERSITARI
-Procedura online di rinuncia agli studi
-Contribuzione per studenti rinunciatari
-
-
-=== PAGINA 4 ===
 
 1. IMMATRICOLARSI: DOVE E QUANDO
 - Segreteria studenti: dove e quando
 - Scadenze amministrative a.a. 2025-2026
-
-
-=== PAGINA 5 ===
 
 Segreteria studenti: dove e quando
 La Segreteria studenti è raggiungibile:
@@ -102,25 +23,13 @@ Per orientarti nella scelta del tuo corso di studio, consulta le iniziative offe
 Al fine di contrastare gli stereotipi di genere, la nostra Università reputa importante anche esercitare un impegno linguistico. Laddove in questo documento, per semplificazione, è usato il maschile, è da
 intendersi con valore inclusivo riferito a tutte le persone operanti nell'ambito della comunità accademica.
 
-
-=== PAGINA 6 ===
-
 Scadenze amministrative anno accademico 2025-2026
 Presta attenzione alle scadenze amministrative previste per l'a.a. 2025-2026:
 Iscriversi: in questa pagina trovi tutte le informazioni e le scadenze per iscriverti ai corsi di laurea triennali, magistrali a ciclo unico (ad accesso libero e programmato) e a tutti i corsi di laurea magistrale
 (ad accesso libero e programmato) offerti dall'Ateneo.
 Qui troverai anche informazioni utili sui TOLC, sulle varie tipologie di iscrizione e un richiamo alle pagine Contribuzione studentesca (https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca) e Diritto allo Studio.
 
-
-=== PAGINA 7 ===
-
 2. OFFERTA FORMATIVA E REGISTRAZIONE AL PORTALE DI ATENEO
-- Offerta formativa anno accademico 2025-2026
-- Corso di laurea magistrale quinquennale a ciclo unico in Scienze della formazione primaria: informazioni utili
-- Registrati al portale dell'Università (sportello internet (http://www.unibg.it/node/6977))
-
-
-=== PAGINA 8 ===
 
 Offerta formativa anno accademico 2025-2026
 Per scoprire l'offerta formativa dell'Ateneo per l'a.a. 2025-2026, visita le seguenti pagine:
@@ -130,9 +39,6 @@ Se sei interessato al corso di laurea in Scienze politiche e strategie globali, 
 quest'ultima in quanto sede amministrativa del corso.
 Se sei interessato al corso di laurea magistrale interateneo, a ciclo unico della durata di 6 anni, in Medicine and Surgery (accesso programmato nazionale), erogato in lingua inglese, rivolgiti
 all’Università degli studi di Milano-Bicocca.
-
-
-=== PAGINA 9 ===
 
 Corso di laurea magistrale quinquennale a ciclo unico in Scienze della formazione primaria: informazioni utili
 Il corso di laurea magistrale in Scienze della formazione primaria è a numero programmato a livello nazionale: il numero di posti, la data, i contenuti e le modalità della prova selettiva sono
@@ -161,10 +67,6 @@ sarà effettuata a distanza.
 STUDENTI CON STATUS DI RIFUGIATO
 La dichiarazione di valore potrà essere richiesta gratuitamente all'ente nazionale CIMEA.IT: (https://www.cimea.it/pagina-cimea-for-refugees)
 https://www.cimea.it/pagina-cimea-for-refugees
-  
-
-
-=== PAGINA 10 ===
 
 Registrati al portale dell'Università (SPORTELLO INTERNET (http://www.unibg.it/node/6977) (http://www.unibg.it/node/6977))
 Per utilizzare i servizi online offerti dall’Ateneo, devi innanzitutto accedere allo Sportello internet e registrarti.
@@ -197,9 +99,6 @@ In caso di cessazione della carriera o mancato rinnovo dell'iscrizione, la case
 dopodiché saranno automaticamente disattivati previa notifica ad un mese dalla disattivazione.
 L'accesso allo Sportello internet resterà invece attivo anche dopo tale periodo e potrai utilizzarlo per consultazioni, stampa di autodichiarazioni e future iscrizioni a concorsi/corsi di laurea.
 
-
-=== PAGINA 11 ===
-
 3. PROGETTO PA 110 E LODE
 Il 7 ottobre 2021 è stato siglato un protocollo tra il Ministro per la Pubblica amministrazione, Renato Brunetta, e la Ministra dell’Università e della Ricerca, Maria Cristina Messa, in base al quale i
 dipendenti pubblici possono iscriversi a condizioni agevolate a corsi di laurea, Master e corsi di specializzazione di interesse per le attività delle amministrazioni pubbliche.
@@ -208,22 +107,7 @@ una serie di corsi di formazione universitaria a tutti i dipendenti pubblici, pr
 L'8 novembre 2024 è stato sottoscritto dal Ministro per la PA un nuovo Protocollo d'intesa con UniBg.
 Tutte le informazioni sono reperibili alla pagina PA 110 e lode
 
-
-=== PAGINA 12 ===
-
 4. L'ABC DELLA PROCEDURA DI IMMATRICOLAZIONE
-- Titoli necessari per l'immatricolazione
-- Corsi di laurea e laurea magistrale a ciclo unico ad accesso libero
-- Corsi di laurea ad accesso programmato
-- Obblighi formativi aggiuntivi (OFA)
-- Studenti con titolo conseguito all'estero: i passi per iscriversi ad un corso di laurea
-- Corsi di laurea magistrale ad accesso libero
-- Corsi di laurea magistrale ad accesso programmato
-- Studenti con titolo conseguito all'estero: i passi per iscriversi a un corso di laurea magistrale 
- 
-
-
-=== PAGINA 13 ===
 
 Titoli necessari per l'immatricolazione
 LAUREA TRIENNALE E LAUREA A CICLO UNICO
@@ -242,9 +126,6 @@ titolo di studio conseguito all’estero, riconosciuto idoneo
 previa verifica del possesso dei requisiti curriculari e dell'adeguatezza della preparazione personale.
 Costituiscono requisiti curriculari, secondo quanto stabilito dallo specifico ordinamento didattico di ciascun corso di studio, il titolo di laurea conseguito in determinate classi e le competenze e
 conoscenze acquisite nel percorso formativo pregresso, espresse sotto forma di crediti riferiti a specifici settori scientifico-disciplinari.
-
-
-=== PAGINA 14 ===
 
 Corsi di laurea e laurea magistrale a ciclo unico ad accesso libero
 I corsi di laurea triennale e magistrale a ciclo unico ad accesso libero per l'anno accademico 2025-2026 sono i seguenti:
@@ -272,9 +153,6 @@ Se sei già stato iscritto per l'anno accademico 2024-2025 ad un altro corso di
 specifico richiesto per l'ammissione al corso di laurea di interesse, salvo che tu lo abbia già sostenuto in data successiva al 1° gennaio 2024.
 Per approfondimenti sui TOLC consulta la pagina del CISIA.
 
-
-=== PAGINA 15 ===
-
 Corsi di laurea ad accesso programmato
 I corsi di laurea triennale ad accesso programmato per l'a.a. 2025-2026 sono i seguenti:
 Economia - 400 posti complessivi (TOLC-E) - corso di laurea triennale con immatricolazione ad esaurimento posti
@@ -296,9 +174,6 @@ d’ingresso (diverso dal TOLC) si svolgerà il 12 settembre 2025.
 Se sei interessato al corso di laurea ad accesso programmato in Scienze politiche e strategie globali, che l'Università degli studi di Bergamo ha attivato in collaborazione con l'Università Vita-Salute
 San Raffaele, rivolgiti a quest'ultima in quanto sede amministrativa del corso.
 
-
-=== PAGINA 16 ===
-
 Obblighi formativi aggiuntivi (OFA)
 La verifica della preparazione iniziale viene effettuata tramite il TOLC (TOLC-E, TOLC-I, TOLC-PSI e TOLC-SU).
 Durante il primo anno di corso è prevista l'organizzazione di attività formative finalizzate al recupero dell'eventuale debito formativo risultante dal TOLC. Al termine di tali corsi verranno effettuate delle
@@ -309,9 +184,6 @@ Se sei uno studente iscritto al primo anno di corso con tipologia di iscrizione 
 Le modalità di assolvimento degli OFA e l'indicazione dei punteggi soglia da raggiungere nei TOLC per essere ammessi senza OFA sono disponibili nella pagina del corso di laurea prescelto, alla voce
 Iscriversi>ASSOLVERE GLI OFA (oppure Iscriversi>OFA).
 Per i corsi di laurea ad accesso programmato il TOLC costituisce test di verifica della preparazione iniziale (controlla i punteggi soglia nel bando di tuo interesse).
-
-
-=== PAGINA 17 ===
 
 Studenti con titolo conseguito all'estero: i passi per iscriversi ad un corso di laurea
 1. CORSI DI LAUREA E DI LAUREA MAGISTRALE A CICLO UNICO AD ACCESSO LIBERO
@@ -393,10 +265,6 @@ Se sei uno studente internazionale puoi far riferimento alla pagina dell'Uffici
 BORSE DI STUDIO
 Trovi tutte le informazioni relative alle borse di studio alla pagina delle borse di studio: (https://www.unibg.it/servizi/segreteria/borse-studio) https://www.unibg.it/servizi/segreteria/borse-studio
  
-
-
-=== PAGINA 18 ===
-
 Corsi di laurea magistrale ad accesso libero
  
 I corsi di laurea magistrale ad accesso libero per il 2025-2026 sono i seguenti:
@@ -465,9 +333,6 @@ afferenza per tutte le informazioni utili.
 Per approfondimenti consulta la pagina (https://www.unibg.it/studiare/iscriversi/passi-iscriversi/corsi-laurea-magistrale-pre-iscrizioni-e-immatricolazioni) 
 https://www.unibg.it/studiare/iscriversi/passi-iscriversi/corsi-laurea-magistrale-pre-iscrizioni-e-immatricolazioni
 
-
-=== PAGINA 19 ===
-
 Corsi di laurea magistrale ad accesso programmato
 I corsi di laurea magistrale ad accesso programmato per l'anno accademico 2025-2026 sono i seguenti:
 Psicologia clinica (curriculum Psicologia clinica + curriculum Psicologia della salute nei contesti sociali) - 100 posti - Lingua di erogazione: Italiano
@@ -511,9 +376,6 @@ esami dopo il conseguimento della laurea, previa iscrizione ai corsi singoli (se
 Se intendi richiedere il trasferimento da altra Università, il passaggio da altro corso di laurea specialistica/magistrale, il conseguimento di seconda laurea magistrale, l'abbreviazione di corso o la re-
 immatricolazione a seguito di rinuncia/decadenza, sei tenuto ad effettuare prima la pre-iscrizione e, in caso di ammissione e collocamento utile in graduatoria, potrai presentare la successiva
 istanza entro la prevista scadenza.
-
-
-=== PAGINA 20 ===
 
 Studenti con titolo conseguito all'estero: i passi per iscriversi ad un corso di laurea magistrale
 1. CORSI DI LAUREA MAGISTRALE AD ACCESSO LIBERO
@@ -610,9 +472,6 @@ pubblicati alla pagina Non EU Students).
 In seguito, se ti sarai collocato utilmente in graduatoria, dovrai:
 1. compilare la domanda di pre-iscrizione sul portale Universitaly;
 
-
-=== PAGINA 21 ===
-
 2. compilare la domanda di pre-iscrizione online sul sito dell’Ateneo e versare il contributo di 52,00 euro richiesto (la guida alla pre-iscrizione online è reperibile alla pagina della Segreteria Studenti,
 al paragrafo "Guide alle procedure online");
 3. stampare la domanda di pre-iscrizione dal portale Universitaly, non appena ottenuta l’approvazione da parte dell’Ateneo;
@@ -631,10 +490,6 @@ tramite la piattaforma ARDI accompagnato dall'Attestato di verifica CIMEA;
 il Transcript of records o il Diploma supplement tradotto in lingua italiana o inglese;
 il visto per studio, il passaporto e il codice fiscale.
  
-
-
-=== PAGINA 22 ===
-
 5. TESSERA UNIVERSITARIA FLASH UP STUDIO
 Gli studenti dell'Università
 degli studi di Bergamo avranno a disposizione la tessera universitaria Flash Up
@@ -706,17 +561,7 @@ in sede.
 Per maggiori informazioni visita la pagina Convenzioni
 e sconti.
 
-
-=== PAGINA 23 ===
-
 6. IMMATRICOLAZIONE PART-TIME
-- Condizioni per iscriversi come studente part-time
-- Presentazione della domanda di iscrizione a tempo parziale
-- Qual è la contribuzione prevista per gli studenti part-time?
-- È possibile effettuare una variazione di status da tempo pieno a part-time o viceversa?
-
-
-=== PAGINA 24 ===
 
 Condizioni per iscriversi come studente part-time
 Puoi richiedere l'iscrizione a tempo parziale se sei iscritto IN CORSO ai corsi di laurea, di laurea magistrale a ciclo unico e di laurea magistrale e rientri in una delle seguenti categorie:
@@ -743,9 +588,6 @@ Studente impegnato in attività artistica a livello professionale Tale condizion
 Per approfondimenti consulta i Tipi di Iscrizione, prestando attenzione alla voce "Part-time".
 Trovi il Regolamento di Ateneo per le iscrizioni degli studenti con regime di studio a tempo parziale alla pagina Studenti.
 
-
-=== PAGINA 25 ===
-
 Presentazione della domanda di iscrizione a tempo parziale
 I corsi di studio potranno definire il percorso formativo a tempo parziale attraverso la predisposizione di specifici piani di studio, dettagliati in termini di distribuzione degli insegnamenti per i singoli periodi
 di frequenza e con un numero di CFU pari al 50% di quanto previsto per ogni anno accademico per gli studenti impegnati a tempo pieno.
@@ -762,16 +604,10 @@ NB: Se sei iscritto con modalità part-time, dovrai aver completato tutte le a
 magistrali, 5° anno ripetente per i corsi di laurea magistrali a ciclo unico) prima di poter presentare la domanda di tesi di laurea/prova finale. Dovrai pertanto attendere di essere iscritto all’ultimo anno di
 corso per la seconda volta (ripetente).
 
-
-=== PAGINA 26 ===
-
 Qual è la contribuzione prevista per gli studenti part-time?
 Se intendi iscriverti a tempo parziale, dovrai versare per intero la rata relativa alla tassa regionale e al bollo; otterrai una riduzione del 50% del contributo onnicomprensivo dovuto,
 secondo l’indicatore ISEEU da richiedere ogni anno.
 Se chiederai di passare dall’iscrizione a tempo pieno all’iscrizione a tempo parziale non potrai richiedere alcun rimborso per gli anni accademici precedenti.
-
-
-=== PAGINA 27 ===
 
 È possibile effettuare una variazione di status da tempo pieno a part-time o viceversa?
 Puoi chiedere di tornare al regime di iscrizione a tempo pieno se desideri completare il tuo percorso di studio e conseguire il titolo anticipatamente rispetto a quanto previsto per la condizione a tempo
@@ -786,18 +622,7 @@ al primo, Variazione status da Part-Time a Tempo pieno - studenti iscritti ad an
 Google Form per la variazione di status da tempo pieno a tempo parziale: Modulo Google
 Google Form per la variazione di status da tempo parziale a tempo pieno: Modulo Google
 
-
-=== PAGINA 28 ===
-
 7. ABBREVIAZIONE DI CARRIERA (lauree triennali e quinquennali a ciclo unico)
-- Se ti trasferisci da un altro Ateneo
-- Per iscriverti a una seconda laurea
-- Riconoscimento titolo estero
-- Abbreviazione di corso
-- Re-immatricolazione a seguito di rinuncia/decadenza
-
-
-=== PAGINA 29 ===
 
 Se ti trasferisci da un altro Ateneo
 Dovrai richiedere al tuo ateneo di provenienza il rilascio del foglio di congedo e presentare la domanda di trasferimento in ingresso presso l'Università di Bergamo entro il 3 ottobre 2025 se avrai
@@ -839,10 +664,6 @@ da 81 a 134 cfu riconosciuti: ammissione al III anno di corso
 da 135 a 226 cfu riconosciuti: ammissione al IV anno di corso
 da 227 cfu riconosciuti: ammissione al V anno di corso
  
-
-
-=== PAGINA 30 ===
-
 Per iscriverti a una seconda laurea
 Per effettuare istanza di CONSEGUIMENTO SECONDA LAUREA (6 agosto – 3 ottobre 2025) devi anzitutto aver sostenuto il previsto TOLC e, in caso di iscrizione ad un corso di laurea ad
 accesso programmato che utilizza il TOLC come strumento di selezione, esserti collocato utilmente in graduatoria, accettando il posto e completando l'immatricolazione entro il termine di
@@ -893,9 +714,6 @@ da 81 a 134 cfu riconosciuti: ammissione al III anno di corso
 da 135 a 226 cfu riconosciuti: ammissione al IV anno di corso
 da 227 cfu riconosciuti: ammissione al V anno di corso.
 
-
-=== PAGINA 31 ===
-
 Riconoscimento titolo estero
 STUDENTI ITALIANI, COMUNITARI E NON COMUNITARI REGOLARMENTE SOGGIORNANTI IN ITALIA
 Se sei uno studente italiano, comunitario o non comunitario regolarmente soggiornante in Italia puoi presentare direttamente all’Università, dal 6 agosto ed entro il 3 ottobre 2025, la
@@ -929,11 +747,6 @@ In caso di mancato riconoscimento del titolo potrai iscriverti ad un corso di la
 saranno riconosciuti.
 Per richieste di chiarimento apri un ticket: Help Desk studenti (menu Segreteria Studenti Stranieri).
  
- 
-
-
-=== PAGINA 32 ===
-
 Abbreviazione di corso
 Per chiedere il riconoscimento di esami superati come corsi singoli (oppure di esami sostenuti presso università estere senza aver conseguito il relativo titolo) devi effettuare istanza di ABBREVIAZIONE
 DI CORSO, da presentare nel periodo 6 agosto – 3 ottobre 2025, seguendo le indicazioni sotto riportate.
@@ -982,9 +795,6 @@ da 36 a 80 cfu riconosciuti: ammissione al II anno di corso
 da 81 a 134 cfu riconosciuti: ammissione al III anno di corso
 da 135 a 226 cfu riconosciuti: ammissione al IV anno di corso
 da 227 cfu riconosciuti: ammissione al V anno di corso
-
-
-=== PAGINA 33 ===
 
 Re-immatricolazione a seguito di rinuncia/decadenza
 Per effettuare istanza di RE-IMMATRICOLAZIONE A SEGUITO DI RINUNCIA/DECADENZA, da presentare nel periodo 6 agosto – 3 ottobre 2025, devi anzitutto aver sostenuto il previsto TOLC e,
@@ -1040,9 +850,6 @@ da 81 a 134 cfu riconosciuti: ammissione al III anno di corso
 da 135 a 226 cfu riconosciuti: ammissione al IV anno di corso
 da 227 cfu riconosciuti: ammissione al V anno di corso
 
-
-=== PAGINA 34 ===
-
 8. ISCRIZIONE A CORSI SINGOLI a.a. 2024-2025
 TITOLO DI STUDIO RICHIESTO
 Il titolo di studio richiesto per l'iscrizione a singoli moduli e insegnamenti attivati all'interno dei corsi di studio di primo e secondo livello è quello richiesto per l'iscrizione al corso stesso.
@@ -1096,9 +903,6 @@ Ai fini dell'integrazione dei crediti formativi necessari per accedere all'inseg
 STUDENTE ISCRITTO CON RISERVA AD UN CORSO DI LAUREA MAGISTRALE
 Se sei iscritto con riserva ad un corso di laurea magistrale e non conseguirai la laurea di primo livello presso l'Ateneo entro la sessione di laurea di marzo-aprile 2025 ma avrai nel frattempo frequentato
 gli insegnamenti del corso di laurea magistrale, potrai sostenere i relativi esami dopo il conseguimento della laurea, previa iscrizione ai corsi singoli (senza oneri aggiuntivi se sei studente UniBg).
-
-
-=== PAGINA 35 ===
 
 9. ISCRIZIONE A CORSI SINGOLI a.a. 2025-2026
 TITOLO DI STUDIO RICHIESTO
@@ -1161,18 +965,7 @@ STUDENTE ISCRITTO CON RISERVA AD UN CORSO DI LAUREA MAGISTRALE
 Se sei iscritto con riserva ad un corso di laurea magistrale e non conseguirai la laurea di primo livello presso l'Ateneo entro la sessione di laurea di marzo-aprile 2026 ma avrai nel frattempo frequentato
 gli insegnamenti del corso di laurea magistrale, potrai sostenere i relativi esami dopo il conseguimento della laurea, previa iscrizione ai corsi singoli (senza oneri aggiuntivi se sei studente UniBg).
 
-
-=== PAGINA 36 ===
-
 10. CONTRIBUZIONE STUDENTESCA
-- Rateizzazione pagamenti
-- Scadenza Attestazione ISEEU
-- Importi aggiuntivi per ritardati pagamenti
-- Contributo onnicomprensivo
-- Borse di studio
-
-
-=== PAGINA 37 ===
 
 Rateizzazione pagamenti
 Le scadenze per i pagamenti sono le seguenti:
@@ -1213,9 +1006,6 @@ In presenza di situazioni debitorie, lo studente, per poter riprendere gli stud
 tasse un piano di rateizzazione degli stessi. Per importi arretrati relativi ad anni accademici precedenti è possibile presentare istanza di rateizzazione indipendentemente dall'importo dovuto.
 Per approfondimenti consulta la pagina web Contribuzione studentesca.
 
-
-=== PAGINA 38 ===
-
 Scadenza Attestazione ISEEU
 La fascia di contribuzione viene determinata in base all'attestazione ISEEU applicabile alle prestazioni per il Diritto allo Studio universitario. All’interno del REGOLAMENTO PER LA CONTRIBUZIONE
 STUDENTESCA a.a. 2025-2026, reperibile alla pagina Contribuzione studentesca, puoi confrontare il valore del tuo ISEE con la tabella delle fasce contributive.
@@ -1234,10 +1024,6 @@ Se risulterai già in possesso di un'attestazione ISEEU per prestazioni univers
 precedente, non dovrai richiedere una nuova attestazione per l'a.a. 2025-2026, stante la validità di quella già in tuo possesso.
 Per approfondimenti, visita la pagina Contribuzione studentesca.
  
-
-
-=== PAGINA 39 ===
-
 Importi aggiuntivi per ritardati pagamenti
 In caso di pagamento del contributo onnicomprensivo successivamente alla scadenza prevista, si applicano i seguenti importi aggiuntivi:
 € 20,00 per i pagamenti effettuati entro i 30 giorni successivi alla scadenza;
@@ -1257,32 +1043,14 @@ l'esclusione dalla procedura di selezione senza la possibilità di effettuare un
 Nel caso di mancato pagamento delle rate di contributo onnicomprensivo entro 30 giorni dalla scadenza, è previsto il blocco alla prenotazione agli appelli d'esame; lo studente non in regola con il
 pagamento delle tasse universitarie non può accedere alla prova finale di laurea.
 
-
-=== PAGINA 40 ===
-
 Contributo onnicomprensivo
 Puoi trovare tutte le informazioni sul calcolo del contributo onnicomprensivo annuale e su eventuali agevolazioni alla pagina web Contribuzione studentesca.
-
-
-=== PAGINA 41 ===
 
 Borse di studio
 Puoi trovare ogni informazione utile per la richiesta di una borsa di studio alla pagina web Borse di studio.
 
 
-=== PAGINA 42 ===
-
 11. PIANI DI STUDIO - LEZIONI - ESAMI
-- Piano di studio e periodo di compilazione
-- Inserimento insegnamenti soprannumerari
-- Programmi d'esame e orario di ricevimento docenti
-- Orari delle lezioni
-- Esami di profitto: informazioni utili
-- Prenotazione degli appelli
- 
-
-
-=== PAGINA 43 ===
 
 Piano di studio e periodo di compilazione
 Il piano di studio è lo strumento di pianificazione della tua carriera universitaria.
@@ -1303,9 +1071,6 @@ Consiglio di corso di studio: Modulo per la richiesta al Consiglio di corso di s
 N.B. La presentazione del piano di studio oltre le scadenze previste comporterà il pagamento di una sanzione di euro 50,00 (ad eccezione di chi è in attesa di delibera avendo presentato istanza di
 abbreviazione carriera).
 
-
-=== PAGINA 44 ===
-
 Inserimento insegnamenti soprannumerari
 Per richiedere l’inserimento di insegnamenti in soprannumero, devi trasmettere alla Segreteria studenti via ticket Help Desk Studenti, entro la scadenza prevista per la compilazione del piano di
 studio, un’istanza in carta libera indirizzata al Consiglio di corso di studio con l’indicazione degli insegnamenti (precisando denominazione, codice, numero di cfu) e la relativa motivazione.
@@ -1317,22 +1082,13 @@ magistrale, a un massimo di 40 cfu per i corsi di laurea magistrale a ciclo unic
 Lo studente che ha inserito esami soprannumerari può richiedere di eliminarli dalla propria carriera, se non già sostenuti con esito positivo, non oltre il termine previsto per la presentazione della
 domanda di ammissione alla prova finale.
 
-
-=== PAGINA 45 ===
-
 Programmi d'esame e orario di ricevimento docenti
 Puoi trovare i programmi degli esami e gli orari di ricevimento dei docenti nella pagina dei singoli corsi di studio, rispettivamente nella sezione Studiare>Insegnamenti attivi e Studiare>Docenti.
 Per ogni insegnamento sono pubblicati il corrispondente programma e la bibliografia.
 NB: Verifica sempre eventuali variazioni di orario di ricevimento dei docenti.
 
-
-=== PAGINA 46 ===
-
 Orari delle lezioni
 Puoi trovare gli orari delle lezioni alla pagina web del Portale Studenti.
-
-
-=== PAGINA 47 ===
 
 Esami di profitto: informazioni utili
 La verifica della preparazione degli studenti consiste in esami orali e/o scritti o test, che si svolgono nei periodi previsti dai Calendari didattici in date (appelli d’esame) pubblicate nelle bacheche dei
@@ -1357,9 +1113,6 @@ Qualsiasi infrazione alle disposizioni predette comporta irrevocabilmente l’an
 Ti ricordiamo che in caso di mancato pagamento delle rate del contributo onnicomprensivo entro 30 giorni dalla scadenza è previsto il blocco amministrativo della carriera.
 NB: Lo studente è tenuto a conoscere il modello di riferimento del proprio piano di studio, pubblicato nella bacheca delle singole strutture didattiche e le norme dell’Ordinamento didattico del proprio
 Corso di studio ed è il solo responsabile dell’annullamento degli esami sostenuti in violazione di tali norme.
-
-
-=== PAGINA 48 ===
 
 Prenotazioni degli appelli
 Per effettuare l’iscrizione all’appello d’esame devi utilizzare lo Sportello Internet.
@@ -1386,17 +1139,7 @@ PROVE SCRITTE (silenzio-assenso): accedendo all’area riservata “Bacheca esi
 oltre la data comunicata dal docente; in mancanza di esplicito rifiuto, l’esito della prova s’intenderà accettato;
 PROVE ORALI oppure esami che si concludono con una prova orale: potrai prendere esclusivamente visione dell’esito dell’esame senza poter effettuare alcuna scelta.
 
-
-=== PAGINA 49 ===
-
 12. RINUNCIA AGLI STUDI UNIVERSITARI
-- Procedura online di rinuncia agli studi
-- Contribuzione per studenti rinunciatari
- 
- 
-
-
-=== PAGINA 50 ===
 
 Procedura online di rinuncia agli studi
 Se sei intenzionato a rinunciare agli studi (decadendo dallo status di studente universitario), accedi allo Sportello internet per effettuare la procedura online di Rinuncia agli studi (clicca "Carriera" e
@@ -1411,9 +1154,6 @@ Modulistica>Dichiarazione sostitutiva di certificazione.
 N.B: l’istanza di rinuncia agli studi si intende perfezionata solo se lo studente procede al pagamento della marca da bollo, pari a € 16,00, entro i 30 giorni successivi data di presentazione della
 domanda; il bollettino di € 16,00 viene generato automaticamente al termine della procedura online ed è reperibile nella sezione Segreteria > Pagamenti dello Sportello internet. 
 In caso di mancato pagamento dei 16,00 euro entro il termine indicato, l’istanza decade e verrà considerata come non presentata.
-
-
-=== PAGINA 51 ===
 
 Contribuzione per studenti rinunciatari
 Il pagamento dell’importo € 156,00 perfeziona automaticamente l’immatricolazione al corso di studi o il rinnovo dell’iscrizione per l’a.a. 2025-2026;

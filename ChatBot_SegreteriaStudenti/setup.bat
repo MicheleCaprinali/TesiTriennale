@@ -64,7 +64,7 @@ if errorlevel 1 (
 
 echo.
 echo 6- Test configurazione...
-venv\Scripts\python.exe -c "import torch, transformers, chromadb, streamlit; print('[OK] Tutte le dipendenze installate correttamente')"
+venv\Scripts\python.exe -c "import sentence_transformers, chromadb, streamlit; print('[OK] Dipendenze core installate correttamente')"
 if errorlevel 1 (
     echo [WARN] Alcune dipendenze potrebbero non essere installate correttamente
 )
@@ -111,7 +111,7 @@ if not exist "data\FAQ" (
 
 if not exist "vectordb" (
     echo [INFO] Database vettoriale non trovato - creazione automatica...
-    venv\Scripts\python.exe -c "import sys; sys.path.append('src'); from create_vectorstore import crea_vectorstore_free; crea_vectorstore_free()"
+    venv\Scripts\python.exe src\create_vectorstore.py
     if errorlevel 1 (
         echo [WARN] Creazione database fallita - esegui: python src/create_vectorstore.py
     ) else (
@@ -133,18 +133,6 @@ echo.
 echo     NOTE:
 echo    - Se Ollama non è installato, installalo da https://ollama.ai
 echo    - Dopo aver installato Ollama: ollama pull mistral:7b
-echo.
-echo Premi un tasto per chiudere...
-pause > nul
-
-echo.
-echo [OK] Setup completato!
-echo.
-echo     Comandi disponibili:
-echo    - start_chatbot.bat    : Avvia chatbot console
-echo    - start_web.bat        : Avvia interfaccia web
-echo    - run_tests.bat        : Esegui tutti i test
-echo    - update_database.bat  : Aggiorna database
 echo.
 echo Premi un tasto per chiudere...
 pause > nul
