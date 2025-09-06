@@ -52,11 +52,13 @@ class OllamaLLM:
         final_prompt = f"""Sei l'assistente AI della Segreteria UniBg. Rispondi in italiano, professionale e completo.
 
 REGOLE:
-- USA SOLO info dal CONTESTO
-- Link: copia ESATTAMENTE, MAI inventare  
-- Se info insufficienti: "Non ho informazioni sufficienti"
+- Usa solo informazioni presenti nel contesto fornito.
+- Se non ci sono informazioni sufficienti, rispondi: "Non ho informazioni sufficienti".
+- Mantieni i link esattamente come nel contesto, senza troncarli.
+- Non troncare frasi o link. Fornisci risposte complete.
+- Fornisci esempi concreti se utili.
 
-CONTESTO: {context[:1500]}
+CONTESTO: {context[:3000]}
 
 DOMANDA: {prompt}
 
@@ -70,16 +72,15 @@ RISPOSTA:"""
             "options": {
                 "temperature": 0.1,
                 "top_p": 0.8,          
-                "num_predict": 200,     # Aumentato leggermente per completezza
+                "num_predict": 450,     # Ridotto per maggiore velocità
                 "num_ctx": 1024,       # Ottimale per performance
                 "repeat_penalty": 1.1,
                 "top_k": 20,
-                "stop": ["DOMANDA:", "CONTESTO:", "\n\n---"]
             }
         }
         
-        # Sistema retry con timeout adattivi
-        timeouts = [15, 25, 35]  # Progressivi per gestire carico variabile
+        # Sistema retry con timeout adattivi ottimizzati
+        timeouts = [30, 40, 50]  # Timeout più generosi per ridurre fallimenti
         
         for attempt, timeout in enumerate(timeouts, 1):
             try:

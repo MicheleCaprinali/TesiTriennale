@@ -26,13 +26,6 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo Verifica sistema...
-venv\Scripts\python.exe main.py --check >nul 2>&1
-if errorlevel 1 (
-    echo [WARN] Sistema non completamente configurato
-    echo Continuo comunque...
-)
-
 echo.
 echo Avvio interfaccia web...
 echo.
