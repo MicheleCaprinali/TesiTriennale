@@ -1,59 +1,67 @@
 import os
+import glob
 import chromadb
 from chromadb.config import Settings
-from local_embeddings import LocalEmbeddings
 from dotenv import load_dotenv
+
+from local_embeddings import LocalEmbeddings
+from split_into_chunks import split_text_in_chunks
 
 load_dotenv()
 
+
+def clean_text(text: str) -> str:
+    """Normalizza spazi e ritorni a capo per migliorare la consistenza"""
+    return " ".join(text.split())
+
+
 def crea_vectorstore_free(chunk_list, persist_dir="vectordb"):
     """
-    Crea vectorstore usando ChromaDB e Sentence Transformers
+    Crea un vectorstore usando ChromaDB e Sentence Transformers
     """
     print(f"Creazione vectorstore in {persist_dir}...")
-    
+
     embedder = LocalEmbeddings()
-    
+
     # Configura ChromaDB
     client = chromadb.PersistentClient(
         path=persist_dir,
-        settings=Settings(
-            anonymized_telemetry=False
-        )
+        settings=Settings(anonymized_telemetry=False),
     )
-    
+
     # Nome della collection
-    collection_name = os.getenv('VECTORDB_COLLECTION', 'unibg_docs')
-    
+    collection_name = os.getenv("VECTORDB_COLLECTION", "unibg_docs")
+
     try:
         client.delete_collection(collection_name)
         print(f"Collection '{collection_name}' esistente rimossa")
-    except:
+    except Exception:
         pass
-    
+
     collection = client.create_collection(
         name=collection_name,
-        metadata={"description": "Documenti UniBg per chatbot"}
+        metadata={"description": "Documenti UniBg per chatbot"},
     )
-    
+
     print(f"Preparazione di {len(chunk_list)} chunk...")
-    
+
     embeddings = embedder.embed_documents(chunk_list)
-    
-    ids = [f"chunk_{i}" for i in range(len(chunk_list))]
-    
+
+    ids = [f"{collection_name}_chunk_{i}" for i in range(len(chunk_list))]
+
     print("Salvataggio nel vectorstore...")
     collection.add(
         documents=chunk_list,
         embeddings=embeddings,
         ids=ids,
-        metadatas=[{"source": f"chunk_{i}"} for i in range(len(chunk_list))]
+        metadatas=[{"source": f"chunk_{i}"} for i in range(len(chunk_list))],
     )
-    
+
     print(f"✅ Vectorstore creato con {len(chunk_list)} documenti!")
     print(f"Percorso: {os.path.abspath(persist_dir)}")
-    
+
     return collection
+
 
 def search_vectorstore(query, persist_dir="vectordb", k=5, embedder=None):
     """
@@ -61,77 +69,66 @@ def search_vectorstore(query, persist_dir="vectordb", k=5, embedder=None):
     """
     if embedder is None:
         embedder = LocalEmbeddings()
-    
-    # Connetti a ChromaDB esistente
+
     client = chromadb.PersistentClient(path=persist_dir)
-    collection_name = os.getenv('VECTORDB_COLLECTION', 'unibg_docs')
+    collection_name = os.getenv("VECTORDB_COLLECTION", "unibg_docs")
     collection = client.get_collection(collection_name)
-    
-    # Crea embedding per la query
+
     query_embedding = embedder.embed_query(query)
-    
-    # Cerca documenti simili
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=k
-    )
-    
+
+    results = collection.query(query_embeddings=[query_embedding], n_results=k)
     return results
 
+
 if __name__ == "__main__":
-    from split_into_chunks import split_text_in_chunks
-    import glob
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    cartella_faq = os.path.join(BASE_DIR, "../data/FAQ")
+    cartella_estratti = os.path.join(BASE_DIR, "../extracted_text")
 
     print("🚀 RICOSTRUZIONE DATABASE VETTORIALE CON LINK")
     print("=" * 50)
-    
+
     tutti_i_chunks = []
     file_processati = 0
-    
-    # 1. Processa file FAQ (già ben formattati)
-    cartella_faq = "data/FAQ"
-    
+
+    # 1. Processa file FAQ
     if os.path.exists(cartella_faq):
         print(f"\n📁 ELABORAZIONE FAQ da {cartella_faq}")
         for filepath in glob.glob(os.path.join(cartella_faq, "*.txt")):
             filename = os.path.basename(filepath)
             print(f"   📄 {filename}")
-            
+
             with open(filepath, "r", encoding="utf-8") as f:
-                testo = f.read()
-                
-            if testo.strip():
+                testo = clean_text(f.read())
+
+            if testo:
                 chunks = split_text_in_chunks(testo, max_len=1000, overlap=200)
-                # Aggiungi metadata per identificare la fonte
                 for i, chunk in enumerate(chunks):
                     tutti_i_chunks.append(f"[FAQ-{filename.replace('.txt', '')}] {chunk}")
                 file_processati += 1
                 print(f"      ✅ {len(chunks)} chunk estratti")
     else:
         print(f"⚠️ Cartella FAQ {cartella_faq} non trovata")
-    
-    # 2. Processa file PDF Enhanced (con link migliorati)
-    cartella_enhanced = "extracted_text"
-    
-    if os.path.exists(cartella_enhanced):
-        print(f"\n📁 ELABORAZIONE PDF ENHANCED da {cartella_enhanced}")
-        for filepath in glob.glob(os.path.join(cartella_enhanced, "*_enhanced.txt")):
+
+    # 2. Processa file PDF estratti
+    if os.path.exists(cartella_estratti):
+        print(f"\n📁 ELABORAZIONE PDF ESTRATTI da {cartella_estratti}")
+        for filepath in glob.glob(os.path.join(cartella_estratti, "*_extracted.txt")):
             filename = os.path.basename(filepath)
             print(f"   📄 {filename}")
-            
+
             with open(filepath, "r", encoding="utf-8") as f:
-                testo = f.read()
-                
-            if testo.strip():
+                testo = clean_text(f.read())
+
+            if testo:
                 chunks = split_text_in_chunks(testo, max_len=1000, overlap=200)
-                # Aggiungi metadata per identificare la fonte
-                fonte = filename.replace('_enhanced.txt', '')
+                fonte = filename.replace("_extracted.txt", "")
                 for i, chunk in enumerate(chunks):
                     tutti_i_chunks.append(f"[PDF-{fonte}] {chunk}")
                 file_processati += 1
                 print(f"      ✅ {len(chunks)} chunk estratti")
     else:
-        print(f"⚠️ Cartella Enhanced {cartella_enhanced} non trovata")
+        print(f"⚠️ Cartella estratti {cartella_estratti} non trovata")
 
     # 3. Crea vectorstore
     if tutti_i_chunks:
@@ -139,14 +136,19 @@ if __name__ == "__main__":
         print(f"   File processati: {file_processati}")
         print(f"   Chunk totali: {len(tutti_i_chunks)}")
         print(f"\n🔧 Creazione vectorstore...")
-        
+
         vectordb = crea_vectorstore_free(tutti_i_chunks)
-        
-        # Test funzionalità ricerca
+
+        # Test ricerca
         print(f"\n🧪 Test del database...")
         results = search_vectorstore("segreteria studenti")
-        print(f"   ✅ Test completato: {len(results['documents'][0])} risultati trovati")
-        
+        if results["documents"]:
+            print(f"   ✅ Trovati {len(results['documents'][0])} risultati")
+            for doc, score in zip(results["documents"][0], results["distances"][0]):
+                print(f"   - ({score:.4f}) {doc[:100]}...")
+        else:
+            print("   ⚠️ Nessun risultato trovato")
+
         print(f"\n🎉 DATABASE VETTORIALE COMPLETATO!")
         print(f"   Documenti con link integrati: {len(tutti_i_chunks)}")
     else:

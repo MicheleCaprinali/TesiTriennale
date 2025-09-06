@@ -28,14 +28,10 @@ if /i "%confirm%" NEQ "S" (
 
 echo.
 echo 1- Ricostruzione completa database vettoriale...
-echo    (include estrazione automatica da FAQ + PDF enhanced)
+echo    (include estrazione automatica da FAQ + PDF)
 venv\Scripts\python.exe src\create_vectorstore.py
 
 echo.
 echo [OK] Database aggiornato con successo!
-echo    - FAQ processate automaticamente
-echo    - PDF enhanced processati automaticamente  
-echo    - Database vettoriale ricreato completamente
-echo.
 echo Premi un tasto per chiudere...
 pause > nul
