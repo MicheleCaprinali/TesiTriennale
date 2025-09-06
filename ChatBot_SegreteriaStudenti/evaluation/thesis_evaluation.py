@@ -67,7 +67,7 @@ class ThesisEvaluator:
         
         for i, query_data in enumerate(sample_queries, 1):
             query = query_data['query']
-            expected_redirect = query_data['expected_redirect']
+            expected_redirect = query_data.get('expected_redirect', query_data.get('should_redirect', False))
             
             print(f"Test {i}/{sample_size}: {query[:50]}...")
             

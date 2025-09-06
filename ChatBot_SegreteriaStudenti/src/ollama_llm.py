@@ -46,99 +46,44 @@ class OllamaLLM:
             return []
     
     def generate(self, prompt: str, context: str = "") -> str:
-        """Genera risposta usando Ollama con parametri ottimizzati per risposte complete"""
+        """Genera risposta con sistema di retry ottimizzato e timeout adattivi"""
         
-        # Prompt semplice e diretto
-        final_prompt = f"""Contesto: {context}
+        # Prompt ottimizzato per performance e qualità
+        final_prompt = f"""Sei l'assistente AI della Segreteria UniBg. Rispondi in italiano, professionale e completo.
 
-Domanda: {prompt}
+REGOLE:
+- USA SOLO info dal CONTESTO
+- Link: copia ESATTAMENTE, MAI inventare  
+- Se info insufficienti: "Non ho informazioni sufficienti"
 
-Risposta completa (includi tutti i dettagli e link):"""
-        
-        # Parametri ottimizzati per VELOCITÀ MASSIMA
-        data = {
-            "model": self.model,
-            "prompt": final_prompt,
-            "stream": False,
-            "options": {
-                "temperature": 0.1,     # Bassa per consistenza
-                "top_p": 0.8,          
-                "num_predict": 150,     # Ridotto per velocità
-                "num_ctx": 1024,       # Ridotto per velocità
-                "repeat_penalty": 1.1,  
-                "stop": ["Domanda:", "Contesto:"]
-            }
-        }
-        
-        try:
-            print(f"Generazione risposta (timeout: 30s)...")
-            
-            response = requests.post(
-                f"{self.base_url}/api/generate",
-                json=data,
-                timeout=30  # Timeout ridotto per velocità
-            )
-            
-            if response.status_code == 200:
-                result = response.json()
-                answer = result.get('response', '').strip()
-                
-                if answer and len(answer) > 10:
-                    print(f"✅ Risposta generata ({len(answer)} caratteri)")
-                    return answer
-                else:
-                    print(f"❌ Risposta troppo breve")
-                    return "REDIRECT_TO_HUMAN - Risposta incompleta"
-                    
-        except requests.exceptions.Timeout:
-            print(f"⏰ Timeout - sistema sovraccarico")
-            return "REDIRECT_TO_HUMAN - Sistema temporaneamente lento, riprova tra qualche secondo"
-            
-        except Exception as e:
-            print(f"❌ Errore LLM: {str(e)}")
-            return "REDIRECT_TO_HUMAN - Errore tecnico"
-        
-        return "REDIRECT_TO_HUMAN - Nessuna risposta generata"
-
-    def generate_with_retry(self, prompt: str, context: str = "") -> str:
-        """Genera risposta con retry automatico e timeout progressivi"""
-        
-        full_prompt = f"""Sei l'assistente AI della Segreteria UniBg. Rispondi in italiano, modo professionale e completo.
-
-REGOLE CRITICHE:
-- USA SOLO informazioni dal CONTESTO fornito
-- Se non hai info sufficienti: "Non ho informazioni sufficienti"
-- Link: copia ESATTAMENTE dal contesto, MAI inventare
-- Fornisci risposte complete e dettagliate
-
-CONTESTO:
-{context}
+CONTESTO: {context[:1500]}
 
 DOMANDA: {prompt}
 
 RISPOSTA:"""
-
+        
+        # Parametri ottimizzati per velocità e qualità
         payload = {
             "model": self.model,
-            "prompt": full_prompt,
+            "prompt": final_prompt,
             "stream": False,
             "options": {
-                "temperature": self.temperature,
-                "top_p": 0.8,
-                "num_predict": 150,  # Ridotto per velocità
-                "num_ctx": 1024,     # Ridotto per velocità
-                "stop": ["\n\nDOMANDA:", "DOMANDA STUDENTE:", "CONTESTO:"],
+                "temperature": 0.1,
+                "top_p": 0.8,          
+                "num_predict": 200,     # Aumentato leggermente per completezza
+                "num_ctx": 1024,       # Ottimale per performance
                 "repeat_penalty": 1.1,
-                "top_k": 20  # Ridotto per velocità
+                "top_k": 20,
+                "stop": ["DOMANDA:", "CONTESTO:", "\n\n---"]
             }
         }
         
-        # Sistema di retry con timeout ottimizzati per velocità
-        timeouts = [10, 20, 30]  # Timeout ridotti per velocità
+        # Sistema retry con timeout adattivi
+        timeouts = [15, 25, 35]  # Progressivi per gestire carico variabile
         
         for attempt, timeout in enumerate(timeouts, 1):
             try:
-                print(f"Tentativo {attempt}/{len(timeouts)} (timeout: {timeout}s)")
+                print(f"🔄 Tentativo {attempt}/{len(timeouts)} (timeout: {timeout}s)")
                 
                 response = requests.post(
                     f"{self.base_url}/api/generate",
@@ -150,31 +95,86 @@ RISPOSTA:"""
                     result = response.json()
                     answer = result.get('response', '').strip()
                     
-                    if answer and len(answer) > 20:
-                        print(f"✅ Risposta generata al tentativo {attempt}")
+                    # Validazione risposta migliorata
+                    if answer and len(answer) > 15 and not answer.startswith('Non ho'):
+                        print(f"✅ Risposta generata ({len(answer)} caratteri, tentativo {attempt})")
+                        return answer
+                    elif answer and 'Non ho informazioni' in answer:
+                        print(f"⚠️ Informazioni insufficienti nel database")
                         return answer
                     else:
-                        print(f"⚠️ Risposta vuota al tentativo {attempt}")
+                        print(f"⚠️ Risposta inadeguata al tentativo {attempt}")
                         if attempt < len(timeouts):
                             continue
+                            
                 else:
                     print(f"❌ HTTP {response.status_code} al tentativo {attempt}")
                     if attempt == len(timeouts):
-                        return f"Errore del server ({response.status_code}). Riprova più tardi."
-                    continue
+                        return f"REDIRECT_TO_HUMAN - Errore server (HTTP {response.status_code})"
                     
             except requests.exceptions.Timeout:
-                print(f"Timeout al tentativo {attempt} ({timeout}s)")
+                print(f"⏰ Timeout {timeout}s al tentativo {attempt}")
                 if attempt == len(timeouts):
-                    return "Il sistema sta impiegando troppo tempo. Riprova tra qualche momento o contatta la segreteria."
-                continue
+                    return "REDIRECT_TO_HUMAN - Sistema sovraccarico, riprova tra qualche secondo"
+                    
+            except requests.exceptions.ConnectionError:
+                print(f"🔌 Errore connessione al tentativo {attempt}")
+                if attempt == len(timeouts):
+                    return "REDIRECT_TO_HUMAN - Errore di connessione al servizio"
+                    
             except Exception as e:
-                print(f"❌ Errore al tentativo {attempt}: {str(e)}")
+                print(f"❌ Errore imprevisto al tentativo {attempt}: {str(e)}")
                 if attempt == len(timeouts):
-                    return f"Errore nella comunicazione con il sistema: {str(e)}"
-                continue
+                    return f"REDIRECT_TO_HUMAN - Errore tecnico: {str(e)[:100]}"
         
-        return "Errore imprevisto nella generazione della risposta."
+        return "REDIRECT_TO_HUMAN - Impossibile generare risposta dopo tutti i tentativi"
+
+    def get_performance_stats(self) -> Dict[str, Any]:
+        """Ottieni statistiche di performance del sistema Ollama"""
+        try:
+            # Test di velocità con query semplice
+            import time
+            start_time = time.time()
+            
+            test_payload = {
+                "model": self.model,
+                "prompt": "Test di velocità: rispondi solo 'OK'",
+                "stream": False,
+                "options": {
+                    "temperature": 0,
+                    "num_predict": 5,
+                    "num_ctx": 256
+                }
+            }
+            
+            response = requests.post(
+                f"{self.base_url}/api/generate",
+                json=test_payload,
+                timeout=10
+            )
+            
+            response_time = time.time() - start_time
+            
+            if response.status_code == 200:
+                return {
+                    "healthy": True,
+                    "response_time": round(response_time, 2),
+                    "model": self.model,
+                    "performance": "Veloce" if response_time < 3 else "Normale" if response_time < 8 else "Lento"
+                }
+            else:
+                return {
+                    "healthy": False,
+                    "error": f"HTTP {response.status_code}",
+                    "response_time": response_time
+                }
+                
+        except Exception as e:
+            return {
+                "healthy": False,
+                "error": str(e),
+                "performance": "Non disponibile"
+            }
 
     def pull_model(self, model_name: str) -> Dict[str, Any]:
         """Scarica un modello da Ollama"""

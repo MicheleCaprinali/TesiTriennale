@@ -32,6 +32,27 @@ QUICK_RESPONSES = {
 Per maggiori dettagli contatta l'Ufficio Tirocini al (+39 035 205 2265)"""
     },
     
+    "segreteria_orari": {
+        "keywords": ["orari segreteria", "quando aperta", "orario sportello"],
+        "response": """**Orari Segreteria Studenti:**
+
+📍 **Sede Bergamo** (via dei Caniana, 2):
+• **Lunedì:** 13:30-15:30
+• **Giovedì:** 10:00-12:00
+
+📍 **Sede Dalmine** (via Einstein, 2):
+• **Lunedì:** 13:30-15:30  
+• **Giovedì:** 10:00-12:00
+
+📞 **Telefono:** Lunedì-Venerdì 10:30-12:00
+
+🎥 **Videoconferenza:**
+• **Mercoledì:** 10:00-12:00
+• **Venerdì:** 10:00-12:00
+
+🎫 **Per richieste:** https://helpdesk.unibg.it/helpdesksegrestud/"""
+    },
+    
     "pdf_conversion": {
         "keywords": ["pdf", "pdf/a", "convertire", "conversione"],
         "response": """Per convertire file in PDF/A:

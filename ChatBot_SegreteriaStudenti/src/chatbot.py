@@ -79,7 +79,7 @@ class ChatbotRAG:
             results = search_vectorstore(
                 query, 
                 persist_dir=self.vectordb_path, 
-                k=3,  # Drasticamente ridotto per database grande
+                k=2,  # Drasticamente ridotto per database grande
                 embedder=self.embedder
             )
             
@@ -331,6 +331,6 @@ if __name__ == "__main__":
         if result['should_redirect']:
             print("Assistente: " + result['response'])
             print(f"\nPer assistenza personalizzata:")
-            print(f"{os.getenv('TICKET_URL', 'https://www.unibg.it')}")
+            print(f"{os.getenv('TICKET_URL', 'https://helpdesk.unibg.it/')}")
         else:
             print("Assistente: " + result['response'])

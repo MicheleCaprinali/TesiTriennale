@@ -1,0 +1,536 @@
+{
+  "project_metrics": {
+    "files": [
+      {
+        "file": "performance_benchmark.py",
+        "lines_of_code": 159,
+        "classes": [
+          {
+            "name": "PerformanceBenchmark",
+            "methods": [
+              {
+                "name": "__init__",
+                "cc": 1,
+                "lines": 2,
+                "parameters": 1
+              },
+              {
+                "name": "setup",
+                "cc": 2,
+                "lines": 3,
+                "parameters": 1
+              },
+              {
+                "name": "quick_performance_test",
+                "cc": 14,
+                "lines": 11,
+                "parameters": 2
+              }
+            ],
+            "method_count": 3,
+            "wmc": 17,
+            "lcom": 0.0,
+            "instance_variables": 3
+          }
+        ],
+        "functions": [
+          {
+            "name": "main",
+            "cc": 3,
+            "lines": 6,
+            "parameters": 0
+          },
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 2,
+            "parameters": 1
+          },
+          {
+            "name": "setup",
+            "cc": 2,
+            "lines": 3,
+            "parameters": 1
+          },
+          {
+            "name": "quick_performance_test",
+            "cc": 14,
+            "lines": 11,
+            "parameters": 2
+          }
+        ],
+        "imports": [
+          "time",
+          "sys",
+          "os",
+          "statistics",
+          "json",
+          "datetime",
+          "chatbot"
+        ],
+        "total_cc": 20
+      },
+      {
+        "file": "rag_evaluation.py",
+        "lines_of_code": 454,
+        "classes": [
+          {
+            "name": "RAGEvaluator",
+            "methods": [
+              {
+                "name": "__init__",
+                "cc": 1,
+                "lines": 3,
+                "parameters": 2
+              },
+              {
+                "name": "load_dataset",
+                "cc": 3,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "setup_chatbot",
+                "cc": 2,
+                "lines": 3,
+                "parameters": 1
+              },
+              {
+                "name": "evaluate_retrieval_quality",
+                "cc": 8,
+                "lines": 12,
+                "parameters": 4
+              },
+              {
+                "name": "evaluate_response_quality",
+                "cc": 7,
+                "lines": 13,
+                "parameters": 3
+              },
+              {
+                "name": "comprehensive_evaluation",
+                "cc": 17,
+                "lines": 20,
+                "parameters": 3
+              },
+              {
+                "name": "generate_advanced_report",
+                "cc": 10,
+                "lines": 43,
+                "parameters": 2
+              },
+              {
+                "name": "generate_text_report",
+                "cc": 15,
+                "lines": 15,
+                "parameters": 2
+              }
+            ],
+            "method_count": 8,
+            "wmc": 63,
+            "lcom": 0.8928571428571429,
+            "instance_variables": 8
+          }
+        ],
+        "functions": [
+          {
+            "name": "main",
+            "cc": 5,
+            "lines": 6,
+            "parameters": 0
+          },
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 3,
+            "parameters": 2
+          },
+          {
+            "name": "load_dataset",
+            "cc": 3,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "setup_chatbot",
+            "cc": 2,
+            "lines": 3,
+            "parameters": 1
+          },
+          {
+            "name": "evaluate_retrieval_quality",
+            "cc": 8,
+            "lines": 12,
+            "parameters": 4
+          },
+          {
+            "name": "evaluate_response_quality",
+            "cc": 7,
+            "lines": 13,
+            "parameters": 3
+          },
+          {
+            "name": "comprehensive_evaluation",
+            "cc": 17,
+            "lines": 20,
+            "parameters": 3
+          },
+          {
+            "name": "generate_advanced_report",
+            "cc": 10,
+            "lines": 43,
+            "parameters": 2
+          },
+          {
+            "name": "generate_text_report",
+            "cc": 15,
+            "lines": 15,
+            "parameters": 2
+          }
+        ],
+        "imports": [
+          "json",
+          "time",
+          "sys",
+          "os",
+          "datetime",
+          "statistics",
+          "matplotlib.pyplot",
+          "seaborn",
+          "pandas",
+          "typing",
+          "numpy",
+          "chatbot",
+          "random"
+        ],
+        "total_cc": 68
+      },
+      {
+        "file": "software_metrics.py",
+        "lines_of_code": 421,
+        "classes": [
+          {
+            "name": "CodeMetricsAnalyzer",
+            "methods": [
+              {
+                "name": "__init__",
+                "cc": 1,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_cyclomatic_complexity",
+                "cc": 6,
+                "lines": 4,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_file",
+                "cc": 7,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_class",
+                "cc": 3,
+                "lines": 9,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_function",
+                "cc": 1,
+                "lines": 3,
+                "parameters": 2
+              },
+              {
+                "name": "get_method_variables",
+                "cc": 5,
+                "lines": 4,
+                "parameters": 2
+              },
+              {
+                "name": "calculate_lcom",
+                "cc": 6,
+                "lines": 8,
+                "parameters": 2
+              },
+              {
+                "name": "get_import_name",
+                "cc": 4,
+                "lines": 3,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_project",
+                "cc": 8,
+                "lines": 13,
+                "parameters": 1
+              },
+              {
+                "name": "calculate_robert_martin_metrics",
+                "cc": 7,
+                "lines": 8,
+                "parameters": 2
+              },
+              {
+                "name": "generate_report",
+                "cc": 4,
+                "lines": 19,
+                "parameters": 3
+              },
+              {
+                "name": "create_visualizations",
+                "cc": 11,
+                "lines": 34,
+                "parameters": 3
+              }
+            ],
+            "method_count": 12,
+            "wmc": 63,
+            "lcom": 0.9696969696969697,
+            "instance_variables": 9
+          }
+        ],
+        "functions": [
+          {
+            "name": "main",
+            "cc": 3,
+            "lines": 24,
+            "parameters": 0
+          },
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_cyclomatic_complexity",
+            "cc": 6,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_file",
+            "cc": 7,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_class",
+            "cc": 3,
+            "lines": 9,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_function",
+            "cc": 1,
+            "lines": 3,
+            "parameters": 2
+          },
+          {
+            "name": "get_method_variables",
+            "cc": 5,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "calculate_lcom",
+            "cc": 6,
+            "lines": 8,
+            "parameters": 2
+          },
+          {
+            "name": "get_import_name",
+            "cc": 4,
+            "lines": 3,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_project",
+            "cc": 8,
+            "lines": 13,
+            "parameters": 1
+          },
+          {
+            "name": "calculate_robert_martin_metrics",
+            "cc": 7,
+            "lines": 8,
+            "parameters": 2
+          },
+          {
+            "name": "generate_report",
+            "cc": 4,
+            "lines": 19,
+            "parameters": 3
+          },
+          {
+            "name": "create_visualizations",
+            "cc": 11,
+            "lines": 34,
+            "parameters": 3
+          }
+        ],
+        "imports": [
+          "ast",
+          "os",
+          "sys",
+          "json",
+          "pathlib",
+          "typing",
+          "matplotlib.pyplot",
+          "seaborn",
+          "pandas"
+        ],
+        "total_cc": 66
+      },
+      {
+        "file": "thesis_evaluation.py",
+        "lines_of_code": 217,
+        "classes": [
+          {
+            "name": "ThesisEvaluator",
+            "methods": [
+              {
+                "name": "__init__",
+                "cc": 1,
+                "lines": 4,
+                "parameters": 2
+              },
+              {
+                "name": "load_dataset",
+                "cc": 3,
+                "lines": 2,
+                "parameters": 2
+              },
+              {
+                "name": "setup_chatbot",
+                "cc": 2,
+                "lines": 3,
+                "parameters": 1
+              },
+              {
+                "name": "run_performance_test",
+                "cc": 5,
+                "lines": 9,
+                "parameters": 2
+              },
+              {
+                "name": "analyze_performance",
+                "cc": 2,
+                "lines": 10,
+                "parameters": 2
+              },
+              {
+                "name": "generate_thesis_charts",
+                "cc": 4,
+                "lines": 36,
+                "parameters": 2
+              },
+              {
+                "name": "run_complete_evaluation",
+                "cc": 6,
+                "lines": 6,
+                "parameters": 1
+              }
+            ],
+            "method_count": 7,
+            "wmc": 23,
+            "lcom": 0.8571428571428572,
+            "instance_variables": 8
+          }
+        ],
+        "functions": [
+          {
+            "name": "__init__",
+            "cc": 1,
+            "lines": 4,
+            "parameters": 2
+          },
+          {
+            "name": "load_dataset",
+            "cc": 3,
+            "lines": 2,
+            "parameters": 2
+          },
+          {
+            "name": "setup_chatbot",
+            "cc": 2,
+            "lines": 3,
+            "parameters": 1
+          },
+          {
+            "name": "run_performance_test",
+            "cc": 5,
+            "lines": 9,
+            "parameters": 2
+          },
+          {
+            "name": "analyze_performance",
+            "cc": 2,
+            "lines": 10,
+            "parameters": 2
+          },
+          {
+            "name": "generate_thesis_charts",
+            "cc": 4,
+            "lines": 36,
+            "parameters": 2
+          },
+          {
+            "name": "run_complete_evaluation",
+            "cc": 6,
+            "lines": 6,
+            "parameters": 1
+          }
+        ],
+        "imports": [
+          "json",
+          "time",
+          "sys",
+          "os",
+          "datetime",
+          "statistics",
+          "matplotlib.pyplot",
+          "seaborn",
+          "pandas",
+          "chatbot",
+          "random"
+        ],
+        "total_cc": 23
+      }
+    ],
+    "summary": {
+      "total_files": 4,
+      "total_lines": 1251,
+      "total_classes": 4,
+      "total_functions": 33,
+      "average_cc": 2.8095238095238093,
+      "max_cc": 17,
+      "total_imports": 40
+    }
+  },
+  "robert_martin": {
+    "performance_benchmark": {
+      "Ca": 0,
+      "Ce": 7,
+      "Instability": 1.0
+    },
+    "rag_evaluation": {
+      "Ca": 0,
+      "Ce": 13,
+      "Instability": 1.0
+    },
+    "software_metrics": {
+      "Ca": 0,
+      "Ce": 9,
+      "Instability": 1.0
+    },
+    "thesis_evaluation": {
+      "Ca": 0,
+      "Ce": 11,
+      "Instability": 1.0
+    }
+  },
+  "timestamp": "2025-09-06 11:56:42.348988"
+}
