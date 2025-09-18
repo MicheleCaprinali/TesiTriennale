@@ -36,8 +36,8 @@ def save_chunks_to_file(chunks, output_file):
 
 if __name__ == "__main__":
     # CORREZIONE: percorso corretto basato sulla struttura del progetto
-    cartella_estratti = "data/testi_estratti"
-    output_chunks_file = "data/chunks_debug.txt"
+    cartella_estratti = "../data/testi_estratti"
+    output_chunks_file = "../data/chunks_debug.txt"
     tutti_i_chunks = []
 
     if not os.path.exists(cartella_estratti):

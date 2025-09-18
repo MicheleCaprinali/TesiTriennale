@@ -1,9 +1,6 @@
-# 📋 tesi/documentazione/README.md
-
 # 🤖 **CHATBOT SEGRETERIA STUDENTI - GUIDA UTENTE**
 
-> Sistema intelligente per assistenza automatica agli studenti universitari  
-> Tesi Triennale - Caprinali Michele
+> Sistema RAG intelligente per assistenza automatica agli studenti universitari  
 
 ## 🎯 **COSA FA QUESTO CHATBOT?**
 
@@ -16,11 +13,6 @@ Il chatbot risponde automaticamente alle domande più frequenti degli studenti s
 - 📚 **Carriera universitaria**
 - 🎯 **Orientamento e tirocini**
 
-**Esempi di domande:**
-- *"Come mi iscrivo all'esame di Analisi?"*
-- *"Quando devo pagare le tasse?"*
-- *"Come richiedo il certificato di iscrizione?"*
-
 ---
 
 # 🚀 **GUIDA RAPIDA - INIZIA SUBITO**
@@ -32,9 +24,6 @@ Il chatbot risponde automaticamente alle domande più frequenti degli studenti s
 # Naviga nella cartella principale
 cd Chatbot_SegreteriaStudenti
 
-# Verifica struttura progetto
-dir  # Windows
-ls   # Linux/Mac
 ```
 
 ### **2️⃣ Attiva Ambiente Virtuale (GIÀ ESISTENTE)**
@@ -58,12 +47,12 @@ python -c "import chromadb, ollama; print('Dipendenze OK')"
 ### **🖥️ Modalità Console (Sistema Principale)**
 ```bash
 # Avvia il chatbot principale
-python src/ollama_llm.py
+python main.py
 ```
 
 ### **🌐 Modalità Streamlit (Interface Web)**
 ```bash
-# Avvia interface web moderna
+# Avvia interface web 
 streamlit run interfaccia/streamlit.py
 # Apri browser su: http://localhost:8501
 ```
@@ -73,53 +62,6 @@ streamlit run interfaccia/streamlit.py
 # Test rapido del sistema
 python src/creazione_vectorstore.py
 ```
-
----
-
-# 💬 **COME USARE IL CHATBOT**
-
-## **🎯 DOMANDE DI ESEMPIO PER CATEGORIA:**
-
-### **📝 ISCRIZIONI E LEZIONI:**
-```
-"Come posso iscrivermi all'esame di Matematica?"
-"Qual è la scadenza per l'iscrizione agli esami?"
-"Come funziona l'iscrizione agli appelli?"
-"Dove trovo il calendario degli esami?"
-```
-
-### **💳 TASSE E PAGAMENTI:**
-```
-"Quando devo pagare le tasse universitarie?"
-"Quali sono i metodi di pagamento accettati?"
-"Come richiedo la riduzione delle tasse?"
-"Dove trovo la mia situazione tasse?"
-```
-
-### **📄 ATTESTATI E DOCUMENTI:**
-```
-"Come richiedo il certificato di iscrizione?"
-"Quanto tempo ci vuole per il diploma di laurea?"
-"Come ottengo la pergamena di laurea?"
-"Posso richiedere duplicati di documenti?"
-```
-
-### **🎓 CARRIERA E SERVIZI:**
-```
-"Come accedo ai servizi per studenti disabili?"
-"Dove trovo informazioni sui tirocini?"
-"Come funziona il servizio orientamento?"
-"Come richiedo il riconoscimento crediti?"
-```
-
-### **🕐 CONTATTI E INFORMAZIONI:**
-```
-"Quali sono gli orari della segreteria?"
-"Come contatto la segreteria per urgenze?"
-"Dove trovo i contatti dell'università?"
-"Come accedo al sito web UniBG?"
-```
-
 ---
 
 # 🛠️ **RISOLUZIONE PROBLEMI**
@@ -173,51 +115,6 @@ rmdir /s vectordb  # Windows
 # Ricrea database
 python src/creazione_vectorstore.py
 ```
-
-### **📁 File mancanti?**
-```bash
-# Verifica presenza cartelle principali
-ls data/FAQ/                    # Dati FAQ
-ls data/guida_dello_studente/   # Guide PDF
-ls vectordb/                    # Database vettoriale
-ls src/                         # Codice sorgente
-```
-
----
-
-# 🧪 **TESTING E VALIDAZIONE**
-
-## **🔬 TEST AUTOMATICO COMPLETO**
-```bash
-# Assicurati che l'ambiente sia attivo
-chatbot_env\Scripts\activate  # Windows
-source chatbot_env/bin/activate  # Linux/Mac
-
-# Esegui test scientifico
-cd tesi/testing
-python test_scientifico.py
-```
-
-## **📊 GENERA GRAFICI TESI**
-```bash
-# Grafici principali per tesi
-cd tesi
-python generazione_grafici.py
-
-# Grafici risultati testing  
-cd tesi/testing
-python grafici_testing_results.py
-```
-
-## **📈 VISUALIZZA RISULTATI**
-```bash
-# I grafici sono salvati in:
-ls tesi/grafici/           # 8 grafici principali
-ls tesi/testing/grafici_testing/  # 4 grafici testing
-
-# Tutti disponibili in formato PNG e PDF
-```
-
 ---
 
 # 📁 **STRUTTURA REALE PROGETTO**
@@ -265,63 +162,6 @@ ls tesi/testing/grafici_testing/  # 4 grafici testing
 
 ---
 
-# 🎓 **DIPENDENZE REALI INSTALLATE**
-
-## **📦 PACCHETTI PRINCIPALI (già installati in chatbot_env):**
-```
-🤖 chromadb==1.0.20           # Database vettoriale
-🤖 ollama                     # LLM interface  
-📊 streamlit                  # Web interface
-🧮 matplotlib                 # Grafici
-🧮 seaborn                    # Visualizzazioni
-📈 plotly==5.x                # Grafici interattivi
-🔢 numpy                      # Calcoli numerici
-🐼 pandas                     # Data manipulation
-📊 scipy                      # Statistiche
-🧠 transformers               # NLP models
-🎯 altair==5.5.0              # Visualizzazioni
-⚡ uvicorn                    # Server ASGI
-🎨 colorama                   # Output colorato
-```
-
----
-
-# 💬 **MODALITÀ DI UTILIZZO**
-
-## **🖥️ MODALITÀ 1: Console Interattiva**
-```bash
-# Attiva ambiente
-chatbot_env\Scripts\activate
-
-# Avvia chatbot
-python src/ollama_llm.py
-
-# Interagisci direttamente
-```
-
-## **🌐 MODALITÀ 2: Web Interface (CONSIGLIATA)**
-```bash
-# Attiva ambiente  
-chatbot_env\Scripts\activate
-
-# Avvia interface web
-streamlit run interfaccia/streamlit.py
-
-# Apri browser: http://localhost:8501
-# Interface moderna e user-friendly
-```
-
-## **🔧 MODALITÀ 3: Testing Scientifico**
-```bash
-# Per sviluppatori e valutatori
-cd tesi/testing
-python test_scientifico.py
-
-# Output: accuracy, grafici, report
-```
-
----
-
 # 📊 **RISULTATI RAGGIUNTI (REALI)**
 
 ## **🏆 PERFORMANCE SISTEMA:**
@@ -339,46 +179,15 @@ python test_scientifico.py
 
 ---
 
-# 🎉 **INIZIA ORA!**
-
-## **🚀 QUICK START:**
-```bash
-# 1. Naviga nel progetto
-cd Chatbot_SegreteriaStudenti
-
-# 2. Attiva ambiente (già configurato)
-chatbot_env\Scripts\activate
-
-# 3. Avvia interface web moderna
-streamlit run interfaccia/streamlit.py
-
-# 4. Apri browser su localhost:8501
-
-# 5. Fai la tua prima domanda!
-"Ciao, come mi iscrivo agli esami?"
-```
-
-## **📱 OPPURE MODALITÀ CONSOLE:**
-```bash
-# Modalità console diretta
-python src/ollama_llm.py
-```
-
-**Il sistema è già completo e funzionante! 🤖✨**
-
----
-
 # 🆘 **SUPPORTO**
 
 ## **📞 CONTATTI:**
 - 🎓 **Studente**: Caprinali Michele  
-- 📧 **Email**: [inserire email]
+- 📧 **Email**: m.caprinali@studenti.unibg.it
 - 📚 **Documentazione**: `tesi/documentazione/`
 - 🐛 **Issue**: Repository GitHub
 
 ## **📖 RISORSE:**
 - **Guida Tecnica**: `tesi/documentazione/TECHNICAL_GUIDE.md`
 - **Testing Report**: `tesi/testing/grafici_testing/TESTING_FINAL_REPORT.md`  
-- **Grafici Tesi**: `tesi/grafici/` (8 grafici professionali)
-
-**Buon utilizzo del chatbot UniBG! 🎓🤖**
+- **Grafici Tesi**: `tesi/grafici/`
