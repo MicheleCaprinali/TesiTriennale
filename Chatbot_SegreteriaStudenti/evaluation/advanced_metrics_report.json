@@ -1,0 +1,66 @@
+{
+  "timestamp": "2025-09-30 20:58:27",
+  "analysis_type": "WMC e LCOM Analysis",
+  "metrics": {
+    "file_analizzati": 7,
+    "classi_analizzate": 4,
+    "wmc_scores": [
+      23,
+      23,
+      89,
+      11
+    ],
+    "lcom_scores": [
+      97.8,
+      60.0,
+      70.0,
+      90.5
+    ],
+    "dettagli_classi": [
+      {
+        "nome_classe": "LinkEnhancer",
+        "file": "link_enhancer.py",
+        "wmc": 23,
+        "lcom": 97.8,
+        "numero_metodi": 10,
+        "valutazione_wmc": "Medio",
+        "valutazione_lcom": "Coesione Molto Bassa"
+      },
+      {
+        "nome_classe": "LocalEmbeddings",
+        "file": "local_embeddings.py",
+        "wmc": 23,
+        "lcom": 60.0,
+        "numero_metodi": 6,
+        "valutazione_wmc": "Medio",
+        "valutazione_lcom": "Coesione Bassa"
+      },
+      {
+        "nome_classe": "OllamaLLM",
+        "file": "ollama_llm.py",
+        "wmc": 89,
+        "lcom": 70.0,
+        "numero_metodi": 16,
+        "valutazione_wmc": "Alto",
+        "valutazione_lcom": "Coesione Bassa"
+      },
+      {
+        "nome_classe": "PromptOptimizer",
+        "file": "prompt_templates.py",
+        "wmc": 11,
+        "lcom": 90.5,
+        "numero_metodi": 7,
+        "valutazione_wmc": "Basso",
+        "valutazione_lcom": "Coesione Molto Bassa"
+      }
+    ],
+    "wmc_medio": 36.5,
+    "wmc_massimo": 89,
+    "wmc_minimo": 11,
+    "lcom_medio": 79.575,
+    "lcom_massimo": 97.8,
+    "lcom_minimo": 60.0,
+    "valutazione_wmc": "Buono",
+    "valutazione_lcom": "Da migliorare"
+  }
+}
