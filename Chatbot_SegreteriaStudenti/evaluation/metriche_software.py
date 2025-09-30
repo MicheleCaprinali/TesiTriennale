@@ -63,9 +63,10 @@ class NativeSoftwareAnalyzer:
         # Calcola metriche derivate
         total_metrics['avg_lines_per_file'] = total_metrics['total_lines'] / max(len(python_files), 1)
         total_metrics['code_to_comment_ratio'] = (total_metrics['comment_lines'] / max(total_metrics['code_lines'], 1)) * 100
-        total_metrics['complexity_score'] = self._calculate_complexity_score(total_metrics)
-        total_metrics['maintainability_score'] = self._calculate_maintainability_score(total_metrics)
-        total_metrics['quality_grade'] = self._get_quality_grade(total_metrics)
+        
+        # Analisi dettagliata complessità ciclomatica
+        total_metrics['complexity_analysis'] = self._analyze_complexity_distribution(total_metrics)
+        total_metrics['complexity_stats'] = self._calculate_complexity_stats(total_metrics)
         
         self.results = total_metrics
         
@@ -108,7 +109,7 @@ class NativeSoftwareAnalyzer:
                         if func_length > 50:
                             long_functions += 1
                         
-                        # Stima complessità (if, for, while, try)
+                        # Calcola complessità ciclomatica dettagliata
                         complexity = self._estimate_function_complexity(node)
                         if complexity > 10:
                             complexity_issues += 1
@@ -127,7 +128,8 @@ class NativeSoftwareAnalyzer:
                 'classes': classes,
                 'long_functions': long_functions,
                 'complexity_issues': complexity_issues,
-                'avg_line_length': sum(len(line) for line in lines) / max(total_lines, 1)
+                'avg_line_length': sum(len(line) for line in lines) / max(total_lines, 1),
+                'complexity_details': self._get_file_complexity_details(tree) if 'tree' in locals() else []
             }
             
         except Exception as e:
@@ -154,79 +156,144 @@ class NativeSoftwareAnalyzer:
             return 0
     
     def _estimate_function_complexity(self, func_node):
-        """Stima complessità ciclomatica di una funzione"""
-        complexity = 1  # Base complexity
+        """Calcola complessità ciclomatica dettagliata di una funzione"""
+        complexity = 1  # Complessità base
         
         for node in ast.walk(func_node):
-            # Incrementa per ogni decisione
-            if isinstance(node, (ast.If, ast.While, ast.For, ast.Try, ast.With)):
+            # Incrementa per ogni decisione e costrutto di controllo
+            if isinstance(node, ast.If):
+                complexity += 1
+            elif isinstance(node, ast.While):
+                complexity += 1
+            elif isinstance(node, ast.For):
+                complexity += 1
+            elif isinstance(node, ast.Try):
+                complexity += 1
+            elif isinstance(node, ast.With):
+                complexity += 1
+            elif isinstance(node, ast.ExceptHandler):
                 complexity += 1
             elif isinstance(node, ast.BoolOp):
+                # Per operatori booleani (and, or)
                 complexity += len(node.values) - 1
+            elif isinstance(node, ast.Compare) and len(node.ops) > 1:
+                # Per confronti multipli (a < b < c)
+                complexity += len(node.ops) - 1
         
         return complexity
     
-    def _calculate_complexity_score(self, metrics):
-        """Calcola score complessità (0-10, più alto = migliore)"""
-        base_score = 10.0
+    def _get_file_complexity_details(self, tree):
+        """Estrae dettagli complessità per ogni funzione nel file"""
+        complexity_details = []
         
-        # Penalità per problemi complessità
-        if metrics['complexity_issues'] > 5:
-            base_score -= 3.0
-        elif metrics['complexity_issues'] > 2:
-            base_score -= 1.5
-        elif metrics['complexity_issues'] > 0:
-            base_score -= 0.5
-            
-        # Penalità per funzioni lunghe
-        if metrics['long_functions'] > 3:
-            base_score -= 2.0
-        elif metrics['long_functions'] > 1:
-            base_score -= 1.0
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef):
+                complexity = self._estimate_function_complexity(node)
+                complexity_details.append({
+                    'function_name': node.name,
+                    'complexity': complexity,
+                    'line_start': node.lineno,
+                    'level': self._classify_complexity_level(complexity)
+                })
         
-        return max(0.0, base_score)
+        return complexity_details
     
-    def _calculate_maintainability_score(self, metrics):
-        """Calcola score manutenibilità"""
-        base_score = 10.0
-        
-        # Bonus per buona documentazione
-        if metrics['code_to_comment_ratio'] >= 15:
-            base_score += 1.0
-        elif metrics['code_to_comment_ratio'] >= 10:
-            base_score += 0.5
-        elif metrics['code_to_comment_ratio'] < 5:
-            base_score -= 1.0
-        
-        # Penalità per file troppo grandi
-        if metrics['avg_lines_per_file'] > 500:
-            base_score -= 2.0
-        elif metrics['avg_lines_per_file'] > 300:
-            base_score -= 1.0
-        
-        return max(0.0, min(10.0, base_score))
-    
-    def _get_quality_grade(self, metrics):
-        """Determina voto qualità complessivo"""
-        complexity_score = metrics['complexity_score']
-        maintainability_score = metrics['maintainability_score']
-        
-        avg_score = (complexity_score + maintainability_score) / 2
-        
-        if avg_score >= 8.5:
-            return "A - Eccellente"
-        elif avg_score >= 7.0:
-            return "B - Buono"
-        elif avg_score >= 6.0:
-            return "C - Sufficiente"
+    def _classify_complexity_level(self, complexity):
+        """Classifica livello di complessità"""
+        if complexity <= 5:
+            return "Bassa"
+        elif complexity <= 10:
+            return "Media"
+        elif complexity <= 15:
+            return "Alta"
         else:
-            return "D - Da migliorare"
+            return "Molto Alta"
+    
+    def _analyze_complexity_distribution(self, metrics):
+        """Analizza distribuzione della complessità nel progetto"""
+        all_complexities = []
+        
+        for file_detail in metrics['file_details']:
+            if 'complexity_details' in file_detail:
+                for func_detail in file_detail['complexity_details']:
+                    all_complexities.append(func_detail['complexity'])
+        
+        if not all_complexities:
+            return {
+                'total_functions': 0,
+                'avg_complexity': 0,
+                'max_complexity': 0,
+                'min_complexity': 0,
+                'distribution': {}
+            }
+        
+        return {
+            'total_functions': len(all_complexities),
+            'avg_complexity': sum(all_complexities) / len(all_complexities),
+            'max_complexity': max(all_complexities),
+            'min_complexity': min(all_complexities),
+            'distribution': self._calculate_complexity_distribution(all_complexities)
+        }
+    
+    def _calculate_complexity_distribution(self, complexities):
+        """Calcola distribuzione percentuale complessità"""
+        if not complexities:
+            return {}
+            
+        total = len(complexities)
+        
+        low = sum(1 for c in complexities if c <= 5)
+        medium = sum(1 for c in complexities if 6 <= c <= 10)
+        high = sum(1 for c in complexities if 11 <= c <= 15)
+        very_high = sum(1 for c in complexities if c > 15)
+        
+        return {
+            'bassa_1_5': round((low / total) * 100, 1),
+            'media_6_10': round((medium / total) * 100, 1),
+            'alta_11_15': round((high / total) * 100, 1),
+            'molto_alta_16+': round((very_high / total) * 100, 1)
+        }
+    
+    def _calculate_complexity_stats(self, metrics):
+        """Calcola statistiche dettagliate complessità"""
+        complexity_analysis = metrics['complexity_analysis']
+        
+        if complexity_analysis['total_functions'] == 0:
+            return {
+                'qualita_complessita': 'N/A',
+                'funzioni_problematiche': 0,
+                'percentuale_buona_qualita': 0
+            }
+        
+        total_functions = complexity_analysis['total_functions']
+        good_quality_functions = sum(1 for file_detail in metrics['file_details'] 
+                                   if 'complexity_details' in file_detail
+                                   for func_detail in file_detail['complexity_details']
+                                   if func_detail['complexity'] <= 10)
+        
+        percentage_good = (good_quality_functions / total_functions) * 100
+        problematic_functions = total_functions - good_quality_functions
+        
+        if percentage_good >= 90:
+            quality_level = "Eccellente"
+        elif percentage_good >= 80:
+            quality_level = "Buona"
+        elif percentage_good >= 70:
+            quality_level = "Sufficiente"
+        else:
+            quality_level = "Da migliorare"
+        
+        return {
+            'qualita_complessita': quality_level,
+            'funzioni_problematiche': problematic_functions,
+            'percentuale_buona_qualita': round(percentage_good, 1)
+        }
     
     def _print_results(self, metrics):
         """Stampa risultati console"""
         
-        print(f"\n📈 RISULTATI ANALISI")
-        print("=" * 40)
+        print(f"\n📈 RISULTATI ANALISI METRICHE SOFTWARE")
+        print("=" * 50)
         
         print(f"📊 **METRICHE GENERALI:**")
         print(f"   File analizzati: {metrics['files']}")
@@ -236,46 +303,75 @@ class NativeSoftwareAnalyzer:
         print(f"   Righe vuote: {metrics['blank_lines']:,}")
         
         print(f"\n🏗️ **STRUTTURA CODICE:**")
-        print(f"   Funzioni: {metrics['functions']}")
+        print(f"   Funzioni totali: {metrics['functions']}")
         print(f"   Classi: {metrics['classes']}")
         print(f"   Media righe/file: {metrics['avg_lines_per_file']:.1f}")
-        
-        print(f"\n📋 **QUALITÀ CODICE:**")
         print(f"   Rapporto commenti/codice: {metrics['code_to_comment_ratio']:.1f}%")
+        
+        # Analisi complessità dettagliata
+        complexity_analysis = metrics['complexity_analysis']
+        complexity_stats = metrics['complexity_stats']
+        
+        print(f"\n🔍 **ANALISI COMPLESSITÀ CICLOMATICA:**")
+        print(f"   Funzioni analizzate: {complexity_analysis['total_functions']}")
+        print(f"   Complessità media: {complexity_analysis['avg_complexity']:.2f}")
+        print(f"   Complessità massima: {complexity_analysis['max_complexity']}")
+        print(f"   Complessità minima: {complexity_analysis['min_complexity']}")
+        
+        print(f"\n📊 **DISTRIBUZIONE COMPLESSITÀ:**")
+        distribution = complexity_analysis['distribution']
+        print(f"   Bassa (1-5): {distribution.get('bassa_1_5', 0)}%")
+        print(f"   Media (6-10): {distribution.get('media_6_10', 0)}%")
+        print(f"   Alta (11-15): {distribution.get('alta_11_15', 0)}%")
+        print(f"   Molto Alta (16+): {distribution.get('molto_alta_16+', 0)}%")
+        
+        print(f"\n� **VALUTAZIONE QUALITÀ COMPLESSITÀ:**")
+        print(f"   Qualità complessiva: {complexity_stats['qualita_complessita']}")
+        print(f"   Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
+        print(f"   Funzioni problematiche (>10): {complexity_stats['funzioni_problematiche']}")
+        
+        print(f"\n� **ALTRE METRICHE:**")
         print(f"   Funzioni lunghe (>50 righe): {metrics['long_functions']}")
-        print(f"   Funzioni complesse: {metrics['complexity_issues']}")
+        print(f"   Funzioni molto complesse (>10): {metrics['complexity_issues']}")
         
-        print(f"\n🎯 **SCORE QUALITÀ:**")
-        print(f"   Complessità: {metrics['complexity_score']:.1f}/10")
-        print(f"   Manutenibilità: {metrics['maintainability_score']:.1f}/10")
-        print(f"   **Voto finale: {metrics['quality_grade']}**")
+        # Dettagli funzioni più complesse
+        print(f"\n🔍 **FUNZIONI PIÙ COMPLESSE:**")
+        all_functions = []
+        for file_detail in metrics['file_details']:
+            if 'complexity_details' in file_detail:
+                for func_detail in file_detail['complexity_details']:
+                    all_functions.append({
+                        'file': file_detail['file_name'],
+                        'function': func_detail['function_name'],
+                        'complexity': func_detail['complexity'],
+                        'level': func_detail['level']
+                    })
         
-        # Valutazione per tesi
-        print(f"\n📚 **VALUTAZIONE PER TESI TRIENNALE:**")
-        if "Eccellente" in metrics['quality_grade']:
-            print("   ✅ CODICE DI ALTA QUALITÀ - Perfetto per tesi")
-        elif "Buono" in metrics['quality_grade']:
-            print("   ✅ CODICE DI BUONA QUALITÀ - Adatto per tesi")
-        elif "Sufficiente" in metrics['quality_grade']:
-            print("   🟡 CODICE ACCETTABILE - Sufficiente per tesi")
-        else:
-            print("   ⚠️ CODICE DA MIGLIORARE - Alcune ottimizzazioni consigliate")
+        # Ordina per complessità decrescente e mostra top 5
+        all_functions.sort(key=lambda x: x['complexity'], reverse=True)
+        for i, func in enumerate(all_functions[:5]):
+            print(f"   {i+1}. {func['function']} ({func['file']}): {func['complexity']} - {func['level']}")
+        
+        print(f"\n✅ ANALISI COMPLESSITÀ COMPLETATA")
+        print(f"   Focus su misurazione accurata complessità ciclomatica")
+        print(f"   Dati pronti per grafici tesi ✅")
     
     def _save_results(self, metrics):
         """Salva risultati per la tesi"""
         
         report = {
             'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
-            'analysis_type': 'Native Python Metrics',
+            'analysis_type': 'Metriche Software - Focus Complessità Ciclomatica',
             'project_root': str(self.project_root),
             'summary': {
-                'quality_grade': metrics['quality_grade'],
-                'complexity_score': metrics['complexity_score'],
-                'maintainability_score': metrics['maintainability_score'],
                 'total_files': metrics['files'],
                 'total_lines': metrics['total_lines'],
-                'code_lines': metrics['code_lines']
+                'code_lines': metrics['code_lines'],
+                'total_functions': metrics['functions'],
+                'total_classes': metrics['classes']
             },
+            'complexity_analysis': metrics['complexity_analysis'],
+            'complexity_stats': metrics['complexity_stats'],
             'detailed_metrics': metrics,
             'thesis_ready': True
         }
@@ -289,6 +385,8 @@ if __name__ == "__main__":
     analyzer = NativeSoftwareAnalyzer()
     results = analyzer.analyze_project()
     
-    print(f"\n🏆 ANALISI COMPLETATA!")
-    print(f"   Voto qualità: {results['quality_grade']}")
-    print(f"   Pronto per inclusione in tesi ✅")
+    print(f"\n🏆 ANALISI COMPLESSITÀ CICLOMATICA COMPLETATA!")
+    complexity_stats = results['complexity_stats']
+    print(f"   Qualità complessità: {complexity_stats['qualita_complessita']}")
+    print(f"   Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
+    print(f"   Dati pronti per grafici tesi ✅")
