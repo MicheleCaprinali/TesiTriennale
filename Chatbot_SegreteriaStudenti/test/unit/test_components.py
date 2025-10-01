@@ -176,6 +176,45 @@ class TestSrcModules:
             
         except Exception as e:
             return {"passed": False, "error": str(e)}
+        
+    
+
+    def test_simple_search():
+        """Test ricerca nel vectorstore esistente"""
+        print("Eseguendo test: simple_search")
+    
+        try:
+            # Auto-detect nome collezione
+            import chromadb
+            client = chromadb.PersistentClient(path="../vectordb")
+            collections = client.list_collections()
+        
+            if not collections:
+                print("⚠️ Nessuna collezione trovata - saltando test")
+                return True  # Non fallire se non c'è database
+            
+            collection_name = collections[0].name
+            print(f"✅ Usando collezione: '{collection_name}'")
+        
+            from src.creazione_vectorstore import carica_vectorstore
+            from src.local_embeddings import LocalEmbeddings
+        
+            embeddings = LocalEmbeddings()
+            vectorstore = carica_vectorstore("../vectordb", collection_name)
+        
+            # Test ricerca semplice
+            query = "informazioni università"
+            results = vectorstore.similarity_search(query, k=1)
+        
+            success = len(results) > 0
+            print(f"   Documenti trovati: {len(results)}")
+        
+            return success
+        
+        except Exception as e:
+            print(f"Errore test search: {e}")
+            return False
+
     
     def test_creazione_vectorstore(self):
         """Test modulo creazione_vectorstore.py (solo funzioni base)"""

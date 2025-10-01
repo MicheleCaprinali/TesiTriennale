@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-10-01T17:51:12.852382",
+  "timestamp": "2025-10-01T19:38:30.334428",
   "test_type": "unit",
   "tests": {
     "local_embeddings_module": {
       "status": "PASS",
-      "execution_time": 14.028636,
+      "execution_time": 39.431704,
       "details": {
         "passed": true,
         "embedding_size": 384,
@@ -15,7 +15,7 @@
     },
     "dividi_chunks_module": {
       "status": "PASS",
-      "execution_time": 0.234673,
+      "execution_time": 0.285276,
       "details": {
         "passed": false,
         "error": "Got a larger chunk overlap (200) than chunk size (100), should be smaller."
@@ -23,7 +23,7 @@
     },
     "ollama_llm_module": {
       "status": "PASS",
-      "execution_time": 0.026221,
+      "execution_time": 0.030479,
       "details": {
         "passed": true,
         "class_initialized": true,
@@ -33,7 +33,7 @@
     },
     "prompt_templates_module": {
       "status": "PASS",
-      "execution_time": 3e-05,
+      "execution_time": 9.7e-05,
       "details": {
         "passed": true,
         "prompt_length": 706,
@@ -44,7 +44,7 @@
     },
     "creazione_vectorstore_module": {
       "status": "PASS",
-      "execution_time": 0.746458,
+      "execution_time": 0.818287,
       "details": {
         "passed": true,
         "clean_text_works": true,

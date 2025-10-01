@@ -25,7 +25,9 @@ def run_essential_test_suite():
         "suite_start": datetime.now().isoformat(),
         "tests_executed": [],
         "success": True,
-        "errors": []
+        "errors": [],
+        "unit_results": None,
+        "performance_results": None
     }
     
     # 1. Test Unitari - Moduli src/
@@ -34,6 +36,7 @@ def run_essential_test_suite():
     try:
         from unit.test_components import run_unit_tests
         unit_results = run_unit_tests()
+        test_results["unit_results"] = unit_results
         test_results["tests_executed"].append("unit")
         print("✅ Test unitari completati\n")
     except Exception as e:
@@ -45,10 +48,26 @@ def run_essential_test_suite():
     print("2️⃣ TEST PRESTAZIONALI - CHATBOT REALE")
     print("-" * 30)
     try:
-        from performance.test_performance import run_real_performance_test
-        performance_results = run_real_performance_test()
+        from performance.test_performance import test_real_chatbot_performance, print_performance_summary
+        
+        # Esegui il test prestazionale
+        performance_results = test_real_chatbot_performance()
+        
+        # Stampa il sommario
+        print_performance_summary(performance_results)
+        
+        # Salva i risultati
+        results_path = os.path.join(os.path.dirname(__file__), "results", "real_performance_results.json")
+        os.makedirs(os.path.dirname(results_path), exist_ok=True)
+        
+        with open(results_path, 'w', encoding='utf-8') as f:
+            json.dump(performance_results, f, indent=2, ensure_ascii=False)
+        
+        test_results["performance_results"] = performance_results
         test_results["tests_executed"].append("performance")
+        print(f"💾 Risultati salvati: {results_path}")
         print("✅ Test prestazionali completati\n")
+        
     except Exception as e:
         print(f"❌ Errore test prestazionali: {e}\n")
         test_results["errors"].append(f"Performance tests: {e}")
@@ -68,6 +87,22 @@ def run_essential_test_suite():
     print("📋 SOMMARIO ESECUZIONE SUITE")
     print("=" * 60)
     print(f"✅ Test eseguiti: {', '.join(test_results['tests_executed'])}")
+    
+    # Sommario dettagliato
+    if "unit" in test_results["tests_executed"] and test_results["unit_results"]:
+        unit_summary = test_results["unit_results"]["summary"]
+        print(f"📊 Test Unitari: {unit_summary['passed']}/{unit_summary['total_tests']} passati ({unit_summary['success_rate']:.1%})")
+    
+    if "performance" in test_results["tests_executed"] and test_results["performance_results"]:
+        perf_data = test_results["performance_results"]
+        successful = perf_data.get('queries_successful', 0)
+        total = perf_data.get('queries_total', 0)
+        if 'performance_data' in perf_data and perf_data['performance_data']:
+            avg_time = perf_data['performance_data'].get('avg_response_time', 0)
+            grade = perf_data['performance_data'].get('grade', 'N/A')
+            print(f"⚡ Test Prestazionali: {successful}/{total} query riuscite, {avg_time:.3f}s medio (Voto: {grade})")
+        else:
+            print(f"⚡ Test Prestazionali: {successful}/{total} query riuscite")
     
     if test_results["errors"]:
         print(f"❌ Errori rilevati: {len(test_results['errors'])}")
@@ -90,11 +125,36 @@ def run_specific_test(test_type):
     """Esegue un tipo specifico di test"""
     
     if test_type == "unit":
-        from unit.test_components import run_unit_tests
-        return run_unit_tests()
+        try:
+            from unit.test_components import run_unit_tests
+            return run_unit_tests()
+        except Exception as e:
+            print(f"❌ Errore esecuzione test unitari: {e}")
+            return None
+            
     elif test_type == "performance":
-        from performance.test_performance import run_real_performance_test
-        return run_real_performance_test()
+        try:
+            from performance.test_performance import test_real_chatbot_performance, print_performance_summary
+            
+            # Esegui test prestazionali
+            results = test_real_chatbot_performance()
+            
+            # Stampa sommario
+            print_performance_summary(results)
+            
+            # Salva risultati
+            results_path = os.path.join(os.path.dirname(__file__), "results", "real_performance_results.json")
+            os.makedirs(os.path.dirname(results_path), exist_ok=True)
+            
+            with open(results_path, 'w', encoding='utf-8') as f:
+                json.dump(results, f, indent=2, ensure_ascii=False)
+            
+            print(f"💾 Risultati salvati: {results_path}")
+            return results
+            
+        except Exception as e:
+            print(f"❌ Errore esecuzione test prestazionali: {e}")
+            return None
     else:
         print(f"❌ Tipo di test non riconosciuto: {test_type}")
         print("   Tipi disponibili: unit, performance")

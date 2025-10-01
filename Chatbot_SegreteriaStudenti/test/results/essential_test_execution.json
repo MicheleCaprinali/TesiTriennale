@@ -1,0 +1,11 @@
+{
+  "suite_start": "2025-10-01T17:51:12.846593",
+  "tests_executed": [
+    "unit"
+  ],
+  "success": false,
+  "errors": [
+    "Performance tests: 'avg_response_time'"
+  ],
+  "suite_end": "2025-10-01T19:01:54.664350"
+}

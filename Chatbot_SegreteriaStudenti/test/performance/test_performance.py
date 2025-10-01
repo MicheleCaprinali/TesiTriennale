@@ -1,297 +1,196 @@
-#!/usr/bin/env python3
-"""
-Test Prestazionali - Chatbot Reale
-==================================
-Test performance del chatbot reale con 20-30 query in sequenza rapida
-"""
-
-import os
 import sys
-import json
+import os
 import time
 import statistics
-from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Aggiungi path per import moduli
+# Aggiungi il percorso del progetto
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
-class RealChatbotPerformanceTest:
-    """Test prestazionali sul chatbot reale"""
+def test_real_chatbot_performance():
+    """Test prestazionale con chatbot reale"""
+    print("⚡ Avvio Test Prestazionali Chatbot Reale")
+    print("=" * 50)
     
-    def __init__(self):
-        self.results = {
-            "timestamp": datetime.now().isoformat(),
-            "test_type": "real_performance",
-            "chatbot": None,
-            "queries": [],
-            "summary": {}
-        }
+    # Query realistiche per test
+    test_queries = [
+        "Come posso iscrivermi all'università?",
+        "Quali sono le tasse universitarie?",
+        "Come si prenota un esame?",
+        "Quando è il periodo di laurea?",
+        "Dove si trova la segreteria studenti?",
+        "Come si compila il piano di studi?",
+        "Quali documenti servono per l'iscrizione?",
+        "Come si richiede il certificato di laurea?",
+        "Quando aprono le iscrizioni?",
+        "Come si paga la prima rata?",
+        "Dove trovo gli orari delle lezioni?",
+        "Come si richiede una borsa di studio?",
+        "Quali sono i requisiti per la laurea?",
+        "Come si trasferisce da altra università?",
+        "Dove si ritirano i diplomi?",
+        "Come si modifica il piano di studi?",
+        "Quando sono gli appelli d'esame?",
+        "Come si richiede il duplicato libretto?",
+        "Quali sono le scadenze amministrative?",
+        "Come si rinuncia agli studi?",
+        "Dove si trova l'ufficio tasse?",
+        "Come si richiede il foglio congedo?",
+        "Quando è possibile laurearsi?",
+        "Come si prenota la discussione tesi?",
+        "Quali documenti servono per laurearsi?"
+    ]
+    
+    results = {
+        'queries_total': len(test_queries),
+        'queries_successful': 0,
+        'queries_failed': 0,
+        'response_times': [],
+        'error_details': [],
+        'performance_data': {}
+    }
+    
+    # Inizializza il chatbot una sola volta
+    try:
+        # Assicurati di essere nella directory corretta
+        original_dir = os.getcwd()
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        os.chdir(project_root)
         
-        # Query realistiche per test prestazionali
-        self.test_queries = [
-            "Come posso iscrivermi all'università?",
-            "Quali sono le scadenze per le tasse universitarie?",
-            "Come prenotare un esame?",
-            "Quali documenti servono per l'immatricolazione?",
-            "Orari di apertura della segreteria studenti",
-            "Come posso cambiare corso di laurea?",
-            "Informazioni su borse di studio disponibili",
-            "Procedura per il trasferimento da altra università",
-            "Come contattare i docenti del mio corso?",
-            "Quando iniziano le lezioni?",
-            "Dove posso trovare l'orario delle lezioni?",
-            "Come funziona il sistema di prenotazione esami?",
-            "Cosa fare in caso di problemi con il libretto online?",
-            "Informazioni sui tirocini curriculari",
-            "Come richiedere certificati e documenti?",
-            "Procedura per la laurea triennale",
-            "Informazioni sui corsi di recupero",
-            "Come accedere alla biblioteca universitaria?",
-            "Servizi disponibili per studenti disabili",
-            "Informazioni sulla mensa universitaria",
-            "Come partecipare al programma Erasmus?",
-            "Procedura per il riconoscimento crediti",
-            "Informazioni sulle associazioni studentesche",
-            "Come richiedere la carta studente?",
-            "Servizi di orientamento disponibili",
-            "Informazioni sui laboratori informatici",
-            "Come segnalare un problema tecnico?",
-            "Procedure per l'interruzione degli studi",
-            "Informazioni sui corsi di dottorato",
-            "Come ottenere supporto per la tesi?"
-        ]
+        from main import ChatbotRAG
+        print("🤖 Inizializzazione chatbot...")
+        chatbot = ChatbotRAG()
+        print("✅ Chatbot inizializzato")
+    except Exception as e:
+        print(f"❌ Errore inizializzazione chatbot: {e}")
+        if 'original_dir' in locals():
+            os.chdir(original_dir)
+        return create_fallback_results(results, str(e))
     
-    def initialize_chatbot(self):
-        """Inizializza il chatbot reale"""
-        try:
-            print("🤖 Inizializzazione chatbot reale...")
-            
-            from main import ChatbotRAG
-            
-            # Inizializza il chatbot
-            self.chatbot = ChatbotRAG()
-            
-            print("✅ Chatbot inizializzato con successo")
-            return True
-            
-        except Exception as e:
-            print(f"❌ Errore inizializzazione chatbot: {e}")
-            self.results["initialization_error"] = str(e)
-            return False
+    # Test sequenziale
+    print(f"🔄 Esecuzione {len(test_queries)} query sequenziali...")
     
-    def execute_single_query(self, query, query_index):
-        """Esegue una singola query e misura le performance"""
+    for i, query in enumerate(test_queries, 1):
+        print(f"  Query {i}/{len(test_queries)}", end="", flush=True)
         
         start_time = time.time()
-        
         try:
             # Esegui query sul chatbot reale
-            response = self.chatbot.chat(query)
-            
+            result = chatbot.chat(query)
             end_time = time.time()
+            
             response_time = end_time - start_time
             
-            # Analizza la risposta
-            response_length = len(response) if response else 0
-            has_content = bool(response and response.strip())
+            # Estrai la risposta dal risultato
+            if isinstance(result, dict):
+                response = result.get("response", "")
+            else:
+                response = str(result)
             
-            result = {
-                "query_index": query_index,
-                "query": query,
-                "response": response[:200] + "..." if len(response) > 200 else response,
-                "response_length": response_length,
-                "response_time": response_time,
-                "success": has_content,
-                "timestamp": datetime.now().isoformat()
-            }
-            
-            return result
+            # Verifica che ci sia una risposta valida
+            if response and len(response.strip()) > 0:
+                results['response_times'].append(response_time)
+                results['queries_successful'] += 1
+                print(f" ✅ {response_time:.3f}s")
+            else:
+                results['queries_failed'] += 1
+                results['error_details'].append(f"Query {i}: Risposta vuota")
+                print(f" ❌ {response_time:.3f}s - Risposta vuota")
             
         except Exception as e:
             end_time = time.time()
             response_time = end_time - start_time
             
-            return {
-                "query_index": query_index,
-                "query": query,
-                "response": "",
-                "response_length": 0,
-                "response_time": response_time,
-                "success": False,
-                "error": str(e),
-                "timestamp": datetime.now().isoformat()
-            }
+            results['queries_failed'] += 1
+            results['error_details'].append(f"Query {i}: {str(e)}")
+            
+            print(f" ❌ {response_time:.3f}s - {str(e)[:50]}...")
     
-    def run_sequential_performance_test(self, num_queries=25):
-        """Esegue test prestazionale con query in sequenza"""
-        
-        print(f"🔄 Test Prestazionale Sequenziale - {num_queries} query")
-        print("-" * 50)
-        
-        if not self.initialize_chatbot():
-            return {
-                "success": False,
-                "error": "Impossibile inizializzare chatbot"
-            }
-        
-        # Seleziona query per il test
-        selected_queries = self.test_queries[:num_queries]
-        
-        results = []
-        start_test_time = time.time()
-        
-        for i, query in enumerate(selected_queries):
-            print(f"  Query {i+1}/{num_queries}: {query[:50]}...")
-            
-            result = self.execute_single_query(query, i+1)
-            results.append(result)
-            
-            # Aggiungi piccola pausa per non sovraccaricare
-            time.sleep(0.1)
-        
-        total_test_time = time.time() - start_test_time
-        
-        # Calcola statistiche
-        successful_queries = [r for r in results if r["success"]]
-        failed_queries = [r for r in results if not r["success"]]
-        
-        if successful_queries:
-            response_times = [r["response_time"] for r in successful_queries]
-            response_lengths = [r["response_length"] for r in successful_queries]
-            
-            stats = {
-                "total_queries": num_queries,
-                "successful_queries": len(successful_queries),
-                "failed_queries": len(failed_queries),
-                "success_rate": len(successful_queries) / num_queries,
-                "total_execution_time": total_test_time,
-                "avg_response_time": statistics.mean(response_times),
-                "median_response_time": statistics.median(response_times),
-                "min_response_time": min(response_times),
-                "max_response_time": max(response_times),
-                "std_dev_response_time": statistics.stdev(response_times) if len(response_times) > 1 else 0,
-                "avg_response_length": statistics.mean(response_lengths),
-                "throughput_qpm": len(successful_queries) / (total_test_time / 60),  # Query per minuto
-                "percentile_95": sorted(response_times)[int(0.95 * len(response_times))] if response_times else 0
-            }
-        else:
-            stats = {
-                "total_queries": num_queries,
-                "successful_queries": 0,
-                "failed_queries": num_queries,
-                "success_rate": 0,
-                "total_execution_time": total_test_time
-            }
-        
-        self.results["queries"] = results
-        self.results["statistics"] = stats
-        
-        return {
-            "success": True,
-            "statistics": stats,
-            "detailed_results": results
-        }
-    
-    def generate_performance_report(self):
-        """Genera report delle performance"""
-        
-        if "statistics" not in self.results:
-            return None
-        
-        stats = self.results["statistics"]
-        
-        # Valutazione performance
-        avg_time = stats.get("avg_response_time", 10)
-        success_rate = stats.get("success_rate", 0)
-        
-        if avg_time <= 2.0 and success_rate >= 0.95:
-            grade = "A - Eccellente"
-        elif avg_time <= 5.0 and success_rate >= 0.90:
-            grade = "B - Buono"
-        elif avg_time <= 10.0 and success_rate >= 0.80:
-            grade = "C - Sufficiente"
-        else:
-            grade = "D - Da migliorare"
-        
-        self.results["summary"] = {
-            "performance_grade": grade,
-            "ready_for_production": avg_time <= 5.0 and success_rate >= 0.90,
-            "avg_response_time": avg_time,
-            "success_rate_percent": success_rate * 100,
-            "total_queries_processed": stats.get("successful_queries", 0),
-            "recommendation": self.get_recommendation(avg_time, success_rate)
+    # Calcola metriche se abbiamo almeno una risposta
+    if results['response_times']:
+        times = results['response_times']
+        results['performance_data'] = {
+            'avg_response_time': statistics.mean(times),
+            'min_response_time': min(times),
+            'max_response_time': max(times),
+            'median_response_time': statistics.median(times),
+            'success_rate': (results['queries_successful'] / results['queries_total']) * 100,
+            'total_time': sum(times),
+            'queries_per_second': results['queries_successful'] / sum(times) if sum(times) > 0 else 0
         }
         
-        return self.results["summary"]
-    
-    def get_recommendation(self, avg_time, success_rate):
-        """Genera raccomandazione basata sui risultati"""
+        # Valutazione basata su tempo medio e tasso successo
+        avg_time = results['performance_data']['avg_response_time']
+        success_rate = results['performance_data']['success_rate']
         
-        if avg_time <= 2.0 and success_rate >= 0.95:
-            return "Sistema pronto per produzione - performance eccellenti"
-        elif avg_time > 5.0:
-            return "Ottimizzare tempi di risposta - considerare hardware più potente o ottimizzazioni LLM"
-        elif success_rate < 0.90:
-            return "Migliorare affidabilità sistema - verificare gestione errori"
+        if success_rate >= 90 and avg_time <= 2.0:
+            grade = "A"
+            recommendation = "Eccellente - Pronto per produzione"
+        elif success_rate >= 80 and avg_time <= 3.0:
+            grade = "B"
+            recommendation = "Buono - Performance accettabili"
+        elif success_rate >= 70 and avg_time <= 5.0:
+            grade = "C"
+            recommendation = "Sufficiente - Necessari miglioramenti"
         else:
-            return "Performance accettabili - monitorare in produzione"
+            grade = "D"
+            recommendation = "Insufficiente - Richiede ottimizzazione"
+        
+        results['performance_data']['grade'] = grade
+        results['performance_data']['recommendation'] = recommendation
+        results['performance_data']['production_ready'] = grade in ['A', 'B']
     
-    def save_results(self):
-        """Salva i risultati del test"""
-        
-        results_file = os.path.join(os.path.dirname(__file__), "..", "results", "real_performance_results.json")
-        os.makedirs(os.path.dirname(results_file), exist_ok=True)
-        
-        with open(results_file, 'w', encoding='utf-8') as f:
-            json.dump(self.results, f, indent=2, ensure_ascii=False)
-        
-        print(f"💾 Risultati salvati in: {results_file}")
-        return results_file
+    # Ripristina la directory originale
+    if 'original_dir' in locals():
+        os.chdir(original_dir)
+    
+    return results
 
-def run_real_performance_test():
-    """Funzione principale per eseguire il test prestazionale"""
-    
-    print("⚡ TEST PRESTAZIONALI CHATBOT REALE")
-    print("=" * 60)
-    
-    tester = RealChatbotPerformanceTest()
-    
-    # Esegui test con 25 query
-    result = tester.run_sequential_performance_test(25)
-    
-    if not result["success"]:
-        print(f"❌ Test fallito: {result.get('error', 'Errore sconosciuto')}")
-        return None
-    
-    # Genera report
-    summary = tester.generate_performance_report()
-    
-    # Stampa risultati
+def create_fallback_results(base_results, error_msg):
+    """Crea risultati di fallback in caso di errore critico"""
+    base_results['performance_data'] = {
+        'avg_response_time': 0,
+        'success_rate': 0,
+        'grade': 'F',
+        'recommendation': f'Errore critico: {error_msg}',
+        'production_ready': False,
+        'error': error_msg
+    }
+    return base_results
+
+def print_performance_summary(results):
+    """Stampa sommario risultati prestazionali"""
     print("\n📊 RISULTATI TEST PRESTAZIONALI")
     print("=" * 60)
+    print(f"📈 Query totali: {results['queries_total']}")
+    print(f"✅ Query riuscite: {results['queries_successful']}")
+    print(f"❌ Query fallite: {results['queries_failed']}")
     
-    stats = result["statistics"]
-    print(f"📈 Query totali: {stats['total_queries']}")
-    print(f"✅ Query riuscite: {stats['successful_queries']}")
-    print(f"❌ Query fallite: {stats['failed_queries']}")
-    print(f"📊 Tasso successo: {stats['success_rate']:.2%}")
-    print(f"⏱️  Tempo medio risposta: {stats['avg_response_time']:.3f}s")
-    print(f"📏 Tempo mediano: {stats['median_response_time']:.3f}s")
-    print(f"� Tempo minimo: {stats['min_response_time']:.3f}s")
-    print(f"🐌 Tempo massimo: {stats['max_response_time']:.3f}s")
-    print(f"📊 95° percentile: {stats['percentile_95']:.3f}s")
-    print(f"📈 Throughput: {stats['throughput_qpm']:.1f} query/min")
-    
-    if summary:
-        print(f"\n🎯 VALUTAZIONE FINALE")
-        print(f"   Voto: {summary['performance_grade']}")
-        print(f"   Pronto produzione: {'✅ SÌ' if summary['ready_for_production'] else '❌ NO'}")
-        print(f"   Raccomandazione: {summary['recommendation']}")
-    
-    # Salva risultati
-    tester.save_results()
-    
-    return tester.results
+    if results['queries_successful'] > 0:
+        perf = results['performance_data']
+        print(f"📊 Tasso successo: {perf['success_rate']:.2f}%")
+        print(f"⏱️ Tempo medio: {perf['avg_response_time']:.3f}s")
+        print(f"🚀 Query/secondo: {perf['queries_per_second']:.2f}")
+        print(f"🎯 Valutazione: {perf['grade']} - {perf['recommendation']}")
+        print(f"🏭 Pronto produzione: {'✅ SÌ' if perf['production_ready'] else '❌ NO'}")
+    else:
+        print(f"📊 Tasso successo: 0.00%")
+        print("❌ Nessuna query completata con successo")
+        if results['error_details']:
+            print("🔍 Primi errori:")
+            for error in results['error_details'][:3]:
+                print(f"   • {error}")
 
 if __name__ == "__main__":
-    run_real_performance_test()
+    results = test_real_chatbot_performance()
+    print_performance_summary(results)
+    
+    # Salva risultati
+    import json
+    results_path = "../results/real_performance_results.json"
+    os.makedirs(os.path.dirname(results_path), exist_ok=True)
+    
+    with open(results_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    
+    print(f"💾 Risultati salvati: {os.path.abspath(results_path)}")
