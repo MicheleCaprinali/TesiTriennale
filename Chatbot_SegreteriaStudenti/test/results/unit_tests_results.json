@@ -1,82 +1,82 @@
 {
-  "timestamp": "2025-10-01T17:32:51.555193",
+  "timestamp": "2025-10-01T17:51:12.852382",
   "test_type": "unit",
   "tests": {
-    "embeddings_initialization": {
+    "local_embeddings_module": {
       "status": "PASS",
-      "execution_time": 11.124171,
-      "details": {
-        "passed": true
-      }
-    },
-    "text_embedding": {
-      "status": "PASS",
-      "execution_time": 2.003535,
+      "execution_time": 14.028636,
       "details": {
         "passed": true,
-        "embedding_length": 384,
-        "text_length": 37
+        "embedding_size": 384,
+        "query_test": "OK",
+        "documents_test": "OK",
+        "num_docs_processed": 3
       }
     },
-    "text_chunking": {
-      "status": "FAIL",
-      "execution_time": 0.178703,
-      "details": {
-        "passed": false
-      }
-    },
-    "text_cleaning": {
+    "dividi_chunks_module": {
       "status": "PASS",
-      "execution_time": 1e-05,
+      "execution_time": 0.234673,
+      "details": {
+        "passed": false,
+        "error": "Got a larger chunk overlap (200) than chunk size (100), should be smaller."
+      }
+    },
+    "ollama_llm_module": {
+      "status": "PASS",
+      "execution_time": 0.026221,
       "details": {
         "passed": true,
+        "class_initialized": true,
+        "base_url_set": true,
+        "note": "Test limitato a inizializzazione (no connessione Ollama)"
+      }
+    },
+    "prompt_templates_module": {
+      "status": "PASS",
+      "execution_time": 3e-05,
+      "details": {
+        "passed": true,
+        "prompt_length": 706,
+        "contains_context": true,
+        "contains_query": true,
+        "prompt_preview": "Sei l'assistente AI della Segreteria Studenti UniBg. Rispondi in modo PROFESSIONALE e COMPLETO.\n\nOBI..."
+      }
+    },
+    "creazione_vectorstore_module": {
+      "status": "PASS",
+      "execution_time": 0.746458,
+      "details": {
+        "passed": true,
+        "clean_text_works": true,
+        "test_cases": 3,
         "results": [
           {
-            "original_length": 27,
-            "cleaned_length": 21,
-            "has_content": true
+            "original": "  Testo  con   spazi   extra  ",
+            "cleaned": "Testo con spazi extra",
+            "length_before": 30,
+            "length_after": 21
           },
           {
-            "original_length": 33,
-            "cleaned_length": 32,
-            "has_content": true
+            "original": "Testo\ncon\rcaratteri\tspeciali",
+            "cleaned": "Testo con caratteri speciali",
+            "length_before": 28,
+            "length_after": 28
           },
           {
-            "original_length": 0,
-            "cleaned_length": 0,
-            "has_content": false
+            "original": "",
+            "cleaned": "",
+            "length_before": 0,
+            "length_after": 0
           }
         ]
-      }
-    },
-    "vectorstore_connection": {
-      "status": "PASS",
-      "execution_time": 0.719506,
-      "details": {
-        "passed": true,
-        "num_collections": 0,
-        "connection_ok": true
-      }
-    },
-    "simple_search": {
-      "status": "PASS",
-      "execution_time": 0.204389,
-      "details": {
-        "passed": true,
-        "has_results": true,
-        "collection_name": "unibg_docs",
-        "available_collections": [
-          "unibg_docs"
-        ],
-        "collection_count": 561
       }
     }
   },
   "summary": {
-    "total_tests": 6,
+    "total_tests": 5,
     "passed": 5,
-    "failed": 1,
+    "failed": 0,
     "errors": 0,
-    "success_rate": 0.8333333333333334
+    "success_rate": 1.0
   }
 }

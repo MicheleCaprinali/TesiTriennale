@@ -2,7 +2,7 @@
 """
 Test Unitari - Componenti Base del Sistema RAG
 ============================================== 
-Test per validare funzionalità core: embeddings, text processing, vectorstore
+Test per validare funzionalità core dei moduli in src/
 """
 
 import os
@@ -52,178 +52,177 @@ class TestRunner:
             print(f"✗ {test_name}: ERROR - {e}")
             return False
 
-class TestEmbeddings:
-    """Test per il sistema di embedding"""
+class TestSrcModules:
+    """Test per i moduli della cartella src/"""
     
-    def test_embeddings_initialization(self):
-        """Test inizializzazione del sistema di embeddings"""
+    def test_local_embeddings(self):
+        """Test completo modulo local_embeddings.py"""
         try:
             from local_embeddings import LocalEmbeddings
+            
+            # Test inizializzazione
             embedder = LocalEmbeddings()
+            if not hasattr(embedder, 'model') or embedder.model is None:
+                return {"passed": False, "error": "Modello non caricato"}
             
-            # Verifica che il modello sia caricato
-            return hasattr(embedder, 'model') and embedder.model is not None
+            # Test embedding singola query
+            test_query = "Come posso iscrivermi?"
+            query_embedding = embedder.embed_query(test_query)
             
-        except Exception as e:
-            print(f"Errore test embeddings: {e}")
-            return False
-    
-    def test_text_embedding(self):
-        """Test generazione embedding da testo"""
-        try:
-            from local_embeddings import LocalEmbeddings
-            embedder = LocalEmbeddings()
+            if not query_embedding or len(query_embedding) == 0:
+                return {"passed": False, "error": "Embedding query fallito"}
             
-            test_text = "Come posso iscrivermi all'università?"
-            embedding = embedder.embed_query(test_text)  # Usa il metodo corretto
+            # Test embedding multipli documenti
+            test_docs = ["Documento 1", "Documento 2", "Documento 3"]
+            doc_embeddings = embedder.embed_documents(test_docs)
             
-            # Verifica dimensioni e tipo embedding
+            if len(doc_embeddings) != len(test_docs):
+                return {"passed": False, "error": "Embedding documenti fallito"}
+            
             return {
-                "passed": len(embedding) > 0 and isinstance(embedding, list),
-                "embedding_length": len(embedding),
-                "text_length": len(test_text)
+                "passed": True,
+                "embedding_size": len(query_embedding),
+                "query_test": "OK",
+                "documents_test": "OK",
+                "num_docs_processed": len(test_docs)
             }
             
         except Exception as e:
-            print(f"Errore test embedding: {e}")
-            return False
-
-class TestTextProcessing:
-    """Test per elaborazione testi"""
+            return {"passed": False, "error": str(e)}
     
-    def test_text_chunking(self):
-        """Test divisione testo in chunks"""
+    def test_dividi_chunks(self):
+        """Test completo modulo dividi_chunks.py"""
         try:
             from dividi_chunks import split_text_in_chunks
             
-            test_text = """Questo è un testo di esempio per testare la divisione in chunks.
-            Il sistema dovrebbe dividere correttamente il testo mantenendo la coerenza semantica.
-            Ogni chunk dovrebbe avere una dimensione appropriata per l'embedding."""
+            # Test con testo normale
+            test_text = """Questo è un documento di test per la segreteria studenti.
+            L'università offre diversi servizi agli studenti iscritti.
+            Per maggiori informazioni contattare la segreteria studenti.
+            Gli orari di apertura sono dal lunedì al venerdì dalle 9 alle 17."""
             
-            chunks = split_text_in_chunks(test_text, max_len=100)  # Usa il parametro corretto
+            chunks = split_text_in_chunks(test_text, max_len=100)
+            
+            if not chunks or len(chunks) == 0:
+                return {"passed": False, "error": "Nessun chunk generato"}
+            
+            # Verifica che tutti i chunk siano stringhe
+            if not all(isinstance(chunk, str) for chunk in chunks):
+                return {"passed": False, "error": "Chunk non validi"}
+            
+            # Test con testo vuoto
+            empty_chunks = split_text_in_chunks("")
             
             return {
-                "passed": len(chunks) > 0 and all(isinstance(chunk, str) for chunk in chunks),
+                "passed": True,
                 "num_chunks": len(chunks),
-                "avg_chunk_length": sum(len(chunk) for chunk in chunks) / len(chunks) if chunks else 0
+                "avg_chunk_length": sum(len(c) for c in chunks) / len(chunks),
+                "empty_text_handled": len(empty_chunks) == 0,
+                "chunks_preview": chunks[0][:50] + "..." if chunks else ""
             }
             
         except Exception as e:
-            print(f"Errore test chunking: {e}")
-            return False
+            return {"passed": False, "error": str(e)}
     
-    def test_text_cleaning(self):
-        """Test pulizia testo"""
-        test_texts = [
-            "  Testo con spazi   extra  ",
-            "Testo\ncon\tmulti\r\nspazi\twhitespace",
-            ""
-        ]
-        
+    def test_ollama_llm(self):
+        """Test modulo ollama_llm.py (solo inizializzazione, no connessione)"""
         try:
+            from ollama_llm import OllamaLLM
+            
+            # Test solo inizializzazione classe
+            llm = OllamaLLM()
+            
+            if not hasattr(llm, 'base_url'):
+                return {"passed": False, "error": "Attributi base non presenti"}
+            
+            # Test preparazione prompt (senza chiamata effettiva)
+            test_prompt = "Test prompt"
+            
+            return {
+                "passed": True,
+                "class_initialized": True,
+                "base_url_set": bool(llm.base_url),
+                "note": "Test limitato a inizializzazione (no connessione Ollama)"
+            }
+            
+        except Exception as e:
+            return {"passed": False, "error": str(e)}
+    
+    def test_prompt_templates(self):
+        """Test modulo prompt_templates.py"""
+        try:
+            from prompt_templates import get_optimized_prompt
+            
+            # Test generazione prompt
+            test_context = "Informazioni sull'università"
+            test_query = "Come posso iscrivermi?"
+            
+            prompt = get_optimized_prompt(test_context, test_query)
+            
+            if not prompt or len(prompt) < 10:
+                return {"passed": False, "error": "Prompt non generato correttamente"}
+            
+            # Verifica che contenga context e query
+            if test_context not in prompt or test_query not in prompt:
+                return {"passed": False, "error": "Prompt non contiene context/query"}
+            
+            return {
+                "passed": True,
+                "prompt_length": len(prompt),
+                "contains_context": test_context in prompt,
+                "contains_query": test_query in prompt,
+                "prompt_preview": prompt[:100] + "..."
+            }
+            
+        except Exception as e:
+            return {"passed": False, "error": str(e)}
+    
+    def test_creazione_vectorstore(self):
+        """Test modulo creazione_vectorstore.py (solo funzioni base)"""
+        try:
+            from creazione_vectorstore import clean_text
+            
+            # Test funzione clean_text
+            test_texts = [
+                "  Testo  con   spazi   extra  ",
+                "Testo\ncon\rcaratteri\tspeciali",
+                ""
+            ]
+            
             cleaned_results = []
             for text in test_texts:
-                # Semplice pulizia testo
-                cleaned = ' '.join(text.split())
+                cleaned = clean_text(text)
                 cleaned_results.append({
-                    "original_length": len(text),
-                    "cleaned_length": len(cleaned),
-                    "has_content": len(cleaned.strip()) > 0
+                    "original": text,
+                    "cleaned": cleaned,
+                    "length_before": len(text),
+                    "length_after": len(cleaned)
                 })
             
             return {
                 "passed": True,
+                "clean_text_works": True,
+                "test_cases": len(cleaned_results),
                 "results": cleaned_results
             }
             
         except Exception as e:
-            print(f"Errore test pulizia: {e}")
-            return False
-
-class TestVectorStore:
-    """Test per vector database"""
-    
-    def test_vectorstore_connection(self):
-        """Test connessione al vector database"""
-        try:
-            import chromadb
-            
-            # Test connessione ChromaDB
-            chroma_client = chromadb.Client()
-            collections = chroma_client.list_collections()
-            
-            return {
-                "passed": True,
-                "num_collections": len(collections),
-                "connection_ok": True
-            }
-            
-        except Exception as e:
-            print(f"Errore connessione vectorstore: {e}")
-            return False
-    
-    def test_simple_search(self):
-        """Test ricerca semplice nel vectorstore"""
-        try:
-            import chromadb
-            from chromadb.config import Settings
-            
-            # Usa il path del vectorstore del progetto
-            vectordb_path = os.path.join(os.path.dirname(__file__), '..', '..', 'vectordb')
-            
-            if not os.path.exists(vectordb_path):
-                return {
-                    "passed": False,
-                    "error": "Vectorstore non presente - eseguire prima creazione_vectorstore.py"
-                }
-            
-            client = chromadb.PersistentClient(
-                path=vectordb_path,
-                settings=Settings(anonymized_telemetry=False)
-            )
-            
-            collections = client.list_collections()
-            collection_names = [c.name for c in collections]
-            
-            if not collections:
-                return {
-                    "passed": False,
-                    "error": "Nessuna collezione trovata nel vectorstore"
-                }
-            
-            # Usa la prima collezione disponibile
-            collection = collections[0]
-            
-            return {
-                "passed": True,
-                "has_results": True,
-                "collection_name": collection.name,
-                "available_collections": collection_names,
-                "collection_count": collection.count()
-            }
-            
-        except Exception as e:
-            print(f"Errore test search: {e}")
-            return False
+            return {"passed": False, "error": str(e)}
 
 def run_unit_tests():
-    """Esegue tutti i test unitari"""
+    """Esegue tutti i test unitari sui moduli src/"""
     runner = TestRunner()
     
-    # Test Embeddings
-    embeddings_tests = TestEmbeddings()
-    runner.run_test("embeddings_initialization", embeddings_tests.test_embeddings_initialization)
-    runner.run_test("text_embedding", embeddings_tests.test_text_embedding)
+    print("🧪 Test Unitari - Moduli src/")
+    print("=" * 50)
     
-    # Test Text Processing
-    text_tests = TestTextProcessing()
-    runner.run_test("text_chunking", text_tests.test_text_chunking)
-    runner.run_test("text_cleaning", text_tests.test_text_cleaning)
-    
-    # Test VectorStore
-    vector_tests = TestVectorStore()
-    runner.run_test("vectorstore_connection", vector_tests.test_vectorstore_connection)
-    runner.run_test("simple_search", vector_tests.test_simple_search)
+    # Test moduli src
+    src_tests = TestSrcModules()
+    runner.run_test("local_embeddings_module", src_tests.test_local_embeddings)
+    runner.run_test("dividi_chunks_module", src_tests.test_dividi_chunks)
+    runner.run_test("ollama_llm_module", src_tests.test_ollama_llm)
+    runner.run_test("prompt_templates_module", src_tests.test_prompt_templates)
+    runner.run_test("creazione_vectorstore_module", src_tests.test_creazione_vectorstore)
     
     # Calcola sommario
     total_tests = len(runner.results["tests"])

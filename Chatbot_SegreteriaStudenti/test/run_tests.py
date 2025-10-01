@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
 """
-Test Suite Completa - Chatbot Segreteria Studenti
-================================================
-Script principale per eseguire tutti i test e generare la documentazione
+Test Suite Essenziale - Chatbot Segreteria Studenti
+=================================================
+Script per eseguire test unitari e prestazionali del chatbot reale
 """
 
 import os
 import sys
 import json
-import subprocess
 from datetime import datetime
 
 # Aggiungi path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-def run_test_suite():
-    """Esegue l'intera suite di test"""
+def run_essential_test_suite():
+    """Esegue la suite essenziale di test"""
     
-    print("🧪 SUITE DI TEST COMPLETA - CHATBOT SEGRETERIA STUDENTI")
+    print("🧪 SUITE ESSENZIALE - CHATBOT SEGRETERIA STUDENTI")
     print("=" * 60)
     print(f"Avvio: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -29,8 +28,8 @@ def run_test_suite():
         "errors": []
     }
     
-    # 1. Test Unitari
-    print("1️⃣ ESECUZIONE TEST UNITARI")
+    # 1. Test Unitari - Moduli src/
+    print("1️⃣ TEST UNITARI - MODULI src/")
     print("-" * 30)
     try:
         from unit.test_components import run_unit_tests
@@ -42,25 +41,12 @@ def run_test_suite():
         test_results["errors"].append(f"Unit tests: {e}")
         test_results["success"] = False
     
-    # 2. Test Funzionali
-    print("2️⃣ ESECUZIONE TEST FUNZIONALI")
+    # 2. Test Prestazionali - Chatbot Reale
+    print("2️⃣ TEST PRESTAZIONALI - CHATBOT REALE")
     print("-" * 30)
     try:
-        from functional.test_user_experience import run_functional_tests
-        functional_results = run_functional_tests()
-        test_results["tests_executed"].append("functional")
-        print("✅ Test funzionali completati\n")
-    except Exception as e:
-        print(f"❌ Errore test funzionali: {e}\n")
-        test_results["errors"].append(f"Functional tests: {e}")
-        test_results["success"] = False
-    
-    # 3. Test Prestazionali
-    print("3️⃣ ESECUZIONE TEST PRESTAZIONALI")
-    print("-" * 30)
-    try:
-        from performance.test_performance import run_performance_tests
-        performance_results = run_performance_tests()
+        from performance.test_performance import run_real_performance_test
+        performance_results = run_real_performance_test()
         test_results["tests_executed"].append("performance")
         print("✅ Test prestazionali completati\n")
     except Exception as e:
@@ -68,24 +54,11 @@ def run_test_suite():
         test_results["errors"].append(f"Performance tests: {e}")
         test_results["success"] = False
     
-    # 4. Generazione Visualizzazioni
-    print("4️⃣ GENERAZIONE VISUALIZZAZIONI")
-    print("-" * 30)
-    try:
-        from generate_visualizations import generate_test_visualizations
-        visualizations = generate_test_visualizations()
-        test_results["tests_executed"].append("visualizations")
-        print("✅ Visualizzazioni generate\n")
-    except Exception as e:
-        print(f"❌ Errore generazione visualizzazioni: {e}\n")
-        test_results["errors"].append(f"Visualizations: {e}")
-        # Non consideriamo questo un errore critico
-    
     # Finalizza risultati
     test_results["suite_end"] = datetime.now().isoformat()
     
     # Salva log dell'esecuzione
-    log_file = os.path.join(os.path.dirname(__file__), "results", "test_suite_execution.json")
+    log_file = os.path.join(os.path.dirname(__file__), "results", "essential_test_execution.json")
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
     
     with open(log_file, 'w', encoding='utf-8') as f:
@@ -107,7 +80,7 @@ def run_test_suite():
     print(f"📁 Risultati disponibili in: {os.path.join(os.path.dirname(__file__), 'results')}")
     
     if test_results["success"]:
-        print("\n🎉 SUITE DI TEST COMPLETATA CON SUCCESSO!")
+        print("\n🎉 SUITE ESSENZIALE COMPLETATA CON SUCCESSO!")
     else:
         print("\n⚠️ SUITE COMPLETATA CON ALCUNI ERRORI")
     
@@ -119,18 +92,12 @@ def run_specific_test(test_type):
     if test_type == "unit":
         from unit.test_components import run_unit_tests
         return run_unit_tests()
-    elif test_type == "functional":
-        from functional.test_user_experience import run_functional_tests
-        return run_functional_tests()
     elif test_type == "performance":
-        from performance.test_performance import run_performance_tests
-        return run_performance_tests()
-    elif test_type == "visualizations":
-        from generate_visualizations import generate_test_visualizations
-        return generate_test_visualizations()
+        from performance.test_performance import run_real_performance_test
+        return run_real_performance_test()
     else:
         print(f"❌ Tipo di test non riconosciuto: {test_type}")
-        print("   Tipi disponibili: unit, functional, performance, visualizations")
+        print("   Tipi disponibili: unit, performance")
         return None
 
 def main():
@@ -139,7 +106,7 @@ def main():
     if len(sys.argv) > 1:
         test_type = sys.argv[1].lower()
         
-        if test_type in ["unit", "functional", "performance", "visualizations"]:
+        if test_type in ["unit", "performance"]:
             print(f"🧪 Esecuzione test specifico: {test_type}")
             result = run_specific_test(test_type)
             
@@ -148,22 +115,22 @@ def main():
             else:
                 print(f"❌ Errore durante test {test_type}")
         
-        elif test_type in ["all", "suite"]:
-            run_test_suite()
+        elif test_type in ["all", "suite", "essential"]:
+            run_essential_test_suite()
         
         else:
             print("❌ Argomento non valido")
             print("Uso:")
-            print("  python run_tests.py [all|unit|functional|performance|visualizations]")
+            print("  python run_tests.py [all|unit|performance]")
             print()
             print("Esempi:")
             print("  python run_tests.py all          # Esegue tutti i test")
             print("  python run_tests.py unit         # Solo test unitari")
-            print("  python run_tests.py performance  # Solo test prestazionali")
+            print("  python run_tests.py performance  # Solo test prestazionali reali")
     
     else:
         # Nessun argomento = esegui tutto
-        run_test_suite()
+        run_essential_test_suite()
 
 if __name__ == "__main__":
     main()

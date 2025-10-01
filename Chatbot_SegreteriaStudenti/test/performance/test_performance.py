@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Test Prestazionali - Performance e Scalabilità
-==============================================
-Test per misurare tempi di risposta, throughput e comportamento sotto carico
+Test Prestazionali - Chatbot Reale
+==================================
+Test performance del chatbot reale con 20-30 query in sequenza rapida
 """
 
 import os
@@ -11,354 +11,287 @@ import json
 import time
 import statistics
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import threading
 
 # Aggiungi path per import moduli
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
-class PerformanceTestRunner:
-    """Gestisce l'esecuzione dei test prestazionali"""
+class RealChatbotPerformanceTest:
+    """Test prestazionali sul chatbot reale"""
     
     def __init__(self):
         self.results = {
             "timestamp": datetime.now().isoformat(),
-            "test_type": "performance",
-            "tests": {},
+            "test_type": "real_performance",
+            "chatbot": None,
+            "queries": [],
             "summary": {}
         }
         
-        # Set di query per test prestazionali
-        self.performance_queries = [
+        # Query realistiche per test prestazionali
+        self.test_queries = [
             "Come posso iscrivermi all'università?",
-            "Quali sono le scadenze per le tasse?",
+            "Quali sono le scadenze per le tasse universitarie?",
             "Come prenotare un esame?",
-            "Orari della segreteria studenti",
-            "Requisiti per la laurea",
-            "Documenti necessari per l'iscrizione",
-            "Costi universitari",
-            "Come cambiare corso di laurea",
-            "Procedure per trasferimento",
-            "Informazioni su borse di studio",
-            "Come contattare i docenti",
-            "Calendario accademico",
-            "Aule e laboratori disponibili",
-            "Servizi per studenti disabili",
-            "Procedura per tesi di laurea",
-            "Erasmus e mobilità internazionale",
-            "Tirocini e stage",
-            "Servizi biblioteca",
-            "Mensa universitaria",
-            "Trasporti pubblici per università",
-            "Alloggi per studenti",
-            "Associazioni studentesche",
-            "Corsi di recupero",
-            "Valutazione carriera pregressa",
-            "Riconoscimento crediti formativi"
+            "Quali documenti servono per l'immatricolazione?",
+            "Orari di apertura della segreteria studenti",
+            "Come posso cambiare corso di laurea?",
+            "Informazioni su borse di studio disponibili",
+            "Procedura per il trasferimento da altra università",
+            "Come contattare i docenti del mio corso?",
+            "Quando iniziano le lezioni?",
+            "Dove posso trovare l'orario delle lezioni?",
+            "Come funziona il sistema di prenotazione esami?",
+            "Cosa fare in caso di problemi con il libretto online?",
+            "Informazioni sui tirocini curriculari",
+            "Come richiedere certificati e documenti?",
+            "Procedura per la laurea triennale",
+            "Informazioni sui corsi di recupero",
+            "Come accedere alla biblioteca universitaria?",
+            "Servizi disponibili per studenti disabili",
+            "Informazioni sulla mensa universitaria",
+            "Come partecipare al programma Erasmus?",
+            "Procedura per il riconoscimento crediti",
+            "Informazioni sulle associazioni studentesche",
+            "Come richiedere la carta studente?",
+            "Servizi di orientamento disponibili",
+            "Informazioni sui laboratori informatici",
+            "Come segnalare un problema tecnico?",
+            "Procedure per l'interruzione degli studi",
+            "Informazioni sui corsi di dottorato",
+            "Come ottenere supporto per la tesi?"
         ]
     
-    def simulate_chatbot_query(self, query):
-        """Simula l'esecuzione di una query al chatbot"""
+    def initialize_chatbot(self):
+        """Inizializza il chatbot reale"""
+        try:
+            print("🤖 Inizializzazione chatbot reale...")
+            
+            from main import ChatbotRAG
+            
+            # Inizializza il chatbot
+            self.chatbot = ChatbotRAG()
+            
+            print("✅ Chatbot inizializzato con successo")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Errore inizializzazione chatbot: {e}")
+            self.results["initialization_error"] = str(e)
+            return False
+    
+    def execute_single_query(self, query, query_index):
+        """Esegue una singola query e misura le performance"""
+        
         start_time = time.time()
         
         try:
-            # Simula il caricamento del modello (solo la prima volta)
-            if not hasattr(self, '_model_loaded'):
-                time.sleep(0.5)  # Simula caricamento modello
-                self._model_loaded = True
-            
-            # Simula embedding della query
-            time.sleep(0.05)  # Simula tempo embedding
-            
-            # Simula ricerca nel vectorstore
-            time.sleep(0.03)  # Simula ricerca semantica
-            
-            # Simula generazione risposta LLM
-            time.sleep(0.2)   # Simula inferenza LLM
+            # Esegui query sul chatbot reale
+            response = self.chatbot.chat(query)
             
             end_time = time.time()
             response_time = end_time - start_time
             
-            # Simula risposta
-            response = f"Risposta simulata per: {query[:50]}..."
+            # Analizza la risposta
+            response_length = len(response) if response else 0
+            has_content = bool(response and response.strip())
             
-            return {
-                "success": True,
+            result = {
+                "query_index": query_index,
+                "query": query,
+                "response": response[:200] + "..." if len(response) > 200 else response,
+                "response_length": response_length,
                 "response_time": response_time,
-                "query_length": len(query),
-                "response_length": len(response),
+                "success": has_content,
                 "timestamp": datetime.now().isoformat()
             }
+            
+            return result
             
         except Exception as e:
+            end_time = time.time()
+            response_time = end_time - start_time
+            
             return {
+                "query_index": query_index,
+                "query": query,
+                "response": "",
+                "response_length": 0,
+                "response_time": response_time,
                 "success": False,
                 "error": str(e),
-                "response_time": time.time() - start_time,
                 "timestamp": datetime.now().isoformat()
             }
     
-    def test_sequential_performance(self, num_queries=25):
-        """Test prestazioni con query sequenziali"""
-        print(f"🔄 Test Sequential - {num_queries} query")
+    def run_sequential_performance_test(self, num_queries=25):
+        """Esegue test prestazionale con query in sequenza"""
         
-        selected_queries = self.performance_queries[:num_queries]
+        print(f"🔄 Test Prestazionale Sequenziale - {num_queries} query")
+        print("-" * 50)
+        
+        if not self.initialize_chatbot():
+            return {
+                "success": False,
+                "error": "Impossibile inizializzare chatbot"
+            }
+        
+        # Seleziona query per il test
+        selected_queries = self.test_queries[:num_queries]
+        
         results = []
-        
-        start_time = time.time()
+        start_test_time = time.time()
         
         for i, query in enumerate(selected_queries):
-            print(f"  Query {i+1}/{num_queries}", end="\r")
-            result = self.simulate_chatbot_query(query)
-            results.append(result)
-        
-        total_time = time.time() - start_time
-        
-        # Calcola statistiche
-        successful_results = [r for r in results if r["success"]]
-        response_times = [r["response_time"] for r in successful_results]
-        
-        if response_times:
-            stats = {
-                "total_queries": num_queries,
-                "successful_queries": len(successful_results),
-                "failed_queries": num_queries - len(successful_results),
-                "total_execution_time": total_time,
-                "avg_response_time": statistics.mean(response_times),
-                "median_response_time": statistics.median(response_times),
-                "min_response_time": min(response_times),
-                "max_response_time": max(response_times),
-                "std_dev_response_time": statistics.stdev(response_times) if len(response_times) > 1 else 0,
-                "throughput_qps": len(successful_results) / total_time,
-                "success_rate": len(successful_results) / num_queries
-            }
-        else:
-            stats = {
-                "total_queries": num_queries,
-                "successful_queries": 0,
-                "failed_queries": num_queries,
-                "success_rate": 0
-            }
-        
-        print(f"\n  ✓ Completato: {stats.get('avg_response_time', 0):.3f}s tempo medio")
-        
-        return {
-            "test_type": "sequential",
-            "statistics": stats,
-            "raw_results": results
-        }
-    
-    def test_concurrent_performance(self, num_queries=20, max_workers=5):
-        """Test prestazioni con query concorrenti"""
-        print(f"⚡ Test Concurrent - {num_queries} query, {max_workers} worker")
-        
-        selected_queries = self.performance_queries[:num_queries]
-        results = []
-        
-        start_time = time.time()
-        
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            # Sottometti tutte le query
-            future_to_query = {
-                executor.submit(self.simulate_chatbot_query, query): query 
-                for query in selected_queries
-            }
+            print(f"  Query {i+1}/{num_queries}: {query[:50]}...")
             
-            # Raccogli risultati
-            completed = 0
-            for future in as_completed(future_to_query):
-                query = future_to_query[future]
-                try:
-                    result = future.result()
-                    results.append(result)
-                except Exception as e:
-                    results.append({
-                        "success": False,
-                        "error": str(e),
-                        "response_time": 0
-                    })
-                
-                completed += 1
-                print(f"  Completate {completed}/{num_queries}", end="\r")
-        
-        total_time = time.time() - start_time
-        
-        # Calcola statistiche
-        successful_results = [r for r in results if r["success"]]
-        response_times = [r["response_time"] for r in successful_results]
-        
-        if response_times:
-            stats = {
-                "total_queries": num_queries,
-                "successful_queries": len(successful_results),
-                "failed_queries": num_queries - len(successful_results),
-                "max_workers": max_workers,
-                "total_execution_time": total_time,
-                "avg_response_time": statistics.mean(response_times),
-                "median_response_time": statistics.median(response_times),
-                "min_response_time": min(response_times),
-                "max_response_time": max(response_times),
-                "std_dev_response_time": statistics.stdev(response_times) if len(response_times) > 1 else 0,
-                "throughput_qps": len(successful_results) / total_time,
-                "success_rate": len(successful_results) / num_queries,
-                "concurrency_efficiency": (len(successful_results) / total_time) / max_workers
-            }
-        else:
-            stats = {
-                "total_queries": num_queries,
-                "successful_queries": 0,
-                "failed_queries": num_queries,
-                "success_rate": 0
-            }
-        
-        print(f"\n  ✓ Completato: {stats.get('throughput_qps', 0):.2f} QPS")
-        
-        return {
-            "test_type": "concurrent",
-            "statistics": stats,
-            "raw_results": results
-        }
-    
-    def test_load_patterns(self):
-        """Test con diversi pattern di carico"""
-        print("📈 Test Pattern di Carico")
-        
-        patterns = [
-            {"name": "low_load", "queries": 10, "workers": 1},
-            {"name": "medium_load", "queries": 20, "workers": 3},
-            {"name": "high_load", "queries": 30, "workers": 5}
-        ]
-        
-        pattern_results = {}
-        
-        for pattern in patterns:
-            print(f"  Test {pattern['name']}: {pattern['queries']} query, {pattern['workers']} worker")
-            
-            result = self.test_concurrent_performance(
-                num_queries=pattern["queries"],
-                max_workers=pattern["workers"]
-            )
-            
-            pattern_results[pattern["name"]] = result
-            
-            # Pausa tra test
-            time.sleep(1)
-        
-        return pattern_results
-    
-    def test_memory_behavior(self, iterations=5):
-        """Test comportamento memoria con query ripetute"""
-        print(f"🧠 Test Memoria - {iterations} iterazioni")
-        
-        test_query = "Come posso iscrivermi all'università?"
-        results = []
-        
-        for i in range(iterations):
-            print(f"  Iterazione {i+1}/{iterations}", end="\r")
-            result = self.simulate_chatbot_query(test_query)
+            result = self.execute_single_query(query, i+1)
             results.append(result)
             
-            # Simula piccola pausa
+            # Aggiungi piccola pausa per non sovraccaricare
             time.sleep(0.1)
         
-        # Analizza trend tempi di risposta
-        response_times = [r["response_time"] for r in results if r["success"]]
+        total_test_time = time.time() - start_test_time
         
-        if len(response_times) > 1:
-            # Calcola se c'è degradazione o miglioramento
-            first_half = response_times[:len(response_times)//2]
-            second_half = response_times[len(response_times)//2:]
+        # Calcola statistiche
+        successful_queries = [r for r in results if r["success"]]
+        failed_queries = [r for r in results if not r["success"]]
+        
+        if successful_queries:
+            response_times = [r["response_time"] for r in successful_queries]
+            response_lengths = [r["response_length"] for r in successful_queries]
             
-            first_avg = statistics.mean(first_half)
-            second_avg = statistics.mean(second_half)
-            
-            performance_trend = (second_avg - first_avg) / first_avg * 100
+            stats = {
+                "total_queries": num_queries,
+                "successful_queries": len(successful_queries),
+                "failed_queries": len(failed_queries),
+                "success_rate": len(successful_queries) / num_queries,
+                "total_execution_time": total_test_time,
+                "avg_response_time": statistics.mean(response_times),
+                "median_response_time": statistics.median(response_times),
+                "min_response_time": min(response_times),
+                "max_response_time": max(response_times),
+                "std_dev_response_time": statistics.stdev(response_times) if len(response_times) > 1 else 0,
+                "avg_response_length": statistics.mean(response_lengths),
+                "throughput_qpm": len(successful_queries) / (total_test_time / 60),  # Query per minuto
+                "percentile_95": sorted(response_times)[int(0.95 * len(response_times))] if response_times else 0
+            }
         else:
-            performance_trend = 0
+            stats = {
+                "total_queries": num_queries,
+                "successful_queries": 0,
+                "failed_queries": num_queries,
+                "success_rate": 0,
+                "total_execution_time": total_test_time
+            }
         
-        print(f"\n  ✓ Trend performance: {performance_trend:+.1f}%")
+        self.results["queries"] = results
+        self.results["statistics"] = stats
         
         return {
-            "iterations": iterations,
-            "results": results,
-            "performance_trend_percent": performance_trend,
-            "avg_response_time": statistics.mean(response_times) if response_times else 0
+            "success": True,
+            "statistics": stats,
+            "detailed_results": results
         }
+    
+    def generate_performance_report(self):
+        """Genera report delle performance"""
+        
+        if "statistics" not in self.results:
+            return None
+        
+        stats = self.results["statistics"]
+        
+        # Valutazione performance
+        avg_time = stats.get("avg_response_time", 10)
+        success_rate = stats.get("success_rate", 0)
+        
+        if avg_time <= 2.0 and success_rate >= 0.95:
+            grade = "A - Eccellente"
+        elif avg_time <= 5.0 and success_rate >= 0.90:
+            grade = "B - Buono"
+        elif avg_time <= 10.0 and success_rate >= 0.80:
+            grade = "C - Sufficiente"
+        else:
+            grade = "D - Da migliorare"
+        
+        self.results["summary"] = {
+            "performance_grade": grade,
+            "ready_for_production": avg_time <= 5.0 and success_rate >= 0.90,
+            "avg_response_time": avg_time,
+            "success_rate_percent": success_rate * 100,
+            "total_queries_processed": stats.get("successful_queries", 0),
+            "recommendation": self.get_recommendation(avg_time, success_rate)
+        }
+        
+        return self.results["summary"]
+    
+    def get_recommendation(self, avg_time, success_rate):
+        """Genera raccomandazione basata sui risultati"""
+        
+        if avg_time <= 2.0 and success_rate >= 0.95:
+            return "Sistema pronto per produzione - performance eccellenti"
+        elif avg_time > 5.0:
+            return "Ottimizzare tempi di risposta - considerare hardware più potente o ottimizzazioni LLM"
+        elif success_rate < 0.90:
+            return "Migliorare affidabilità sistema - verificare gestione errori"
+        else:
+            return "Performance accettabili - monitorare in produzione"
+    
+    def save_results(self):
+        """Salva i risultati del test"""
+        
+        results_file = os.path.join(os.path.dirname(__file__), "..", "results", "real_performance_results.json")
+        os.makedirs(os.path.dirname(results_file), exist_ok=True)
+        
+        with open(results_file, 'w', encoding='utf-8') as f:
+            json.dump(self.results, f, indent=2, ensure_ascii=False)
+        
+        print(f"💾 Risultati salvati in: {results_file}")
+        return results_file
 
-def run_performance_tests():
-    """Esegue tutti i test prestazionali"""
-    runner = PerformanceTestRunner()
+def run_real_performance_test():
+    """Funzione principale per eseguire il test prestazionale"""
     
-    print("⚡ Avvio Test Prestazionali")
-    print("=" * 50)
+    print("⚡ TEST PRESTAZIONALI CHATBOT REALE")
+    print("=" * 60)
     
-    # Test sequenziale
-    sequential_result = runner.test_sequential_performance(25)
-    runner.results["tests"]["sequential"] = sequential_result
+    tester = RealChatbotPerformanceTest()
     
-    # Test concorrente
-    concurrent_result = runner.test_concurrent_performance(20, 5)
-    runner.results["tests"]["concurrent"] = concurrent_result
+    # Esegui test con 25 query
+    result = tester.run_sequential_performance_test(25)
     
-    # Test pattern di carico
-    load_patterns_result = runner.test_load_patterns()
-    runner.results["tests"]["load_patterns"] = load_patterns_result
+    if not result["success"]:
+        print(f"❌ Test fallito: {result.get('error', 'Errore sconosciuto')}")
+        return None
     
-    # Test memoria
-    memory_result = runner.test_memory_behavior(5)
-    runner.results["tests"]["memory_behavior"] = memory_result
+    # Genera report
+    summary = tester.generate_performance_report()
     
-    # Calcola sommario generale
-    seq_stats = sequential_result["statistics"]
-    conc_stats = concurrent_result["statistics"]
+    # Stampa risultati
+    print("\n📊 RISULTATI TEST PRESTAZIONALI")
+    print("=" * 60)
     
-    runner.results["summary"] = {
-        "sequential_performance": {
-            "avg_response_time": seq_stats.get("avg_response_time", 0),
-            "throughput_qps": seq_stats.get("throughput_qps", 0),
-            "success_rate": seq_stats.get("success_rate", 0)
-        },
-        "concurrent_performance": {
-            "avg_response_time": conc_stats.get("avg_response_time", 0),
-            "throughput_qps": conc_stats.get("throughput_qps", 0),
-            "success_rate": conc_stats.get("success_rate", 0),
-            "concurrency_efficiency": conc_stats.get("concurrency_efficiency", 0)
-        },
-        "memory_behavior": {
-            "performance_trend": memory_result.get("performance_trend_percent", 0),
-            "stable_performance": abs(memory_result.get("performance_trend_percent", 0)) < 10
-        },
-        "overall_assessment": {
-            "ready_for_production": (
-                seq_stats.get("avg_response_time", 10) < 2.0 and
-                seq_stats.get("success_rate", 0) > 0.95 and
-                conc_stats.get("success_rate", 0) > 0.90
-            ),
-            "performance_grade": "A" if seq_stats.get("avg_response_time", 10) < 1.0 else 
-                                "B" if seq_stats.get("avg_response_time", 10) < 2.0 else 
-                                "C" if seq_stats.get("avg_response_time", 10) < 5.0 else "D"
-        }
-    }
+    stats = result["statistics"]
+    print(f"📈 Query totali: {stats['total_queries']}")
+    print(f"✅ Query riuscite: {stats['successful_queries']}")
+    print(f"❌ Query fallite: {stats['failed_queries']}")
+    print(f"📊 Tasso successo: {stats['success_rate']:.2%}")
+    print(f"⏱️  Tempo medio risposta: {stats['avg_response_time']:.3f}s")
+    print(f"📏 Tempo mediano: {stats['median_response_time']:.3f}s")
+    print(f"� Tempo minimo: {stats['min_response_time']:.3f}s")
+    print(f"🐌 Tempo massimo: {stats['max_response_time']:.3f}s")
+    print(f"📊 95° percentile: {stats['percentile_95']:.3f}s")
+    print(f"📈 Throughput: {stats['throughput_qpm']:.1f} query/min")
+    
+    if summary:
+        print(f"\n🎯 VALUTAZIONE FINALE")
+        print(f"   Voto: {summary['performance_grade']}")
+        print(f"   Pronto produzione: {'✅ SÌ' if summary['ready_for_production'] else '❌ NO'}")
+        print(f"   Raccomandazione: {summary['recommendation']}")
     
     # Salva risultati
-    results_file = os.path.join(os.path.dirname(__file__), "..", "results", "performance_tests_results.json")
-    os.makedirs(os.path.dirname(results_file), exist_ok=True)
+    tester.save_results()
     
-    with open(results_file, 'w', encoding='utf-8') as f:
-        json.dump(runner.results, f, indent=2, ensure_ascii=False)
-    
-    # Stampa sommario finale
-    print(f"\n📊 Sommario Test Prestazionali:")
-    print(f"   Sequenziale: {runner.results['summary']['sequential_performance']['avg_response_time']:.3f}s avg, "
-          f"{runner.results['summary']['sequential_performance']['throughput_qps']:.2f} QPS")
-    print(f"   Concorrente: {runner.results['summary']['concurrent_performance']['avg_response_time']:.3f}s avg, "
-          f"{runner.results['summary']['concurrent_performance']['throughput_qps']:.2f} QPS")
-    print(f"   Trend memoria: {runner.results['summary']['memory_behavior']['performance_trend']:+.1f}%")
-    print(f"   Valutazione: {runner.results['summary']['overall_assessment']['performance_grade']}")
-    print(f"   Pronto produzione: {'✓' if runner.results['summary']['overall_assessment']['ready_for_production'] else '✗'}")
-    print(f"   Risultati salvati in: {results_file}")
-    
-    return runner.results
+    return tester.results
 
 if __name__ == "__main__":
-    run_performance_tests()
+    run_real_performance_test()
