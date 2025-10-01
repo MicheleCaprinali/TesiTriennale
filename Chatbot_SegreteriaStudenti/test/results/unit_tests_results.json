@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-10-01T17:32:51.555193",
+  "test_type": "unit",
+  "tests": {
+    "embeddings_initialization": {
+      "status": "PASS",
+      "execution_time": 11.124171,
+      "details": {
+        "passed": true
+      }
+    },
+    "text_embedding": {
+      "status": "PASS",
+      "execution_time": 2.003535,
+      "details": {
+        "passed": true,
+        "embedding_length": 384,
+        "text_length": 37
+      }
+    },
+    "text_chunking": {
+      "status": "FAIL",
+      "execution_time": 0.178703,
+      "details": {
+        "passed": false
+      }
+    },
+    "text_cleaning": {
+      "status": "PASS",
+      "execution_time": 1e-05,
+      "details": {
+        "passed": true,
+        "results": [
+          {
+            "original_length": 27,
+            "cleaned_length": 21,
+            "has_content": true
+          },
+          {
+            "original_length": 33,
+            "cleaned_length": 32,
+            "has_content": true
+          },
+          {
+            "original_length": 0,
+            "cleaned_length": 0,
+            "has_content": false
+          }
+        ]
+      }
+    },
+    "vectorstore_connection": {
+      "status": "PASS",
+      "execution_time": 0.719506,
+      "details": {
+        "passed": true,
+        "num_collections": 0,
+        "connection_ok": true
+      }
+    },
+    "simple_search": {
+      "status": "PASS",
+      "execution_time": 0.204389,
+      "details": {
+        "passed": true,
+        "has_results": true,
+        "collection_name": "unibg_docs",
+        "available_collections": [
+          "unibg_docs"
+        ],
+        "collection_count": 561
+      }
+    }
+  },
+  "summary": {
+    "total_tests": 6,
+    "passed": 5,
+    "failed": 1,
+    "errors": 0,
+    "success_rate": 0.8333333333333334
+  }
+}

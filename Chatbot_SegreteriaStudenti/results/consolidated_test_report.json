@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "generated_at": "2025-10-01T17:30:04.800678",
+    "test_suite_version": "1.0",
+    "purpose": "Documentazione Tesi Triennale - Chatbot Segreteria Studenti"
+  },
+  "executive_summary": {
+    "overall_success_rate": 0,
+    "total_tests_executed": 0,
+    "tests_passed": 0,
+    "system_ready_for_production": false,
+    "key_metrics": {
+      "avg_response_time": 0,
+      "max_throughput": 0,
+      "functional_quality_avg": 0
+    }
+  },
+  "detailed_results": {
+    "unit_tests": null,
+    "functional_tests": null,
+    "performance_tests": null
+  },
+  "recommendations": [
+    "Sistema performante e pronto per deployment"
+  ]
+}
