@@ -1,35 +1,33 @@
-# Crea: metriche_software_native.py
-
 """
-Analisi metriche software usando solo Python standard
-Perfetto per tesi triennale - zero dipendenze esterne
+Analisi metriche software per tesi triennale
+Focus su complessità ciclomatica e qualità del codice
 """
 
-import os
 import ast
 import time
 import json
 from pathlib import Path
-import re
 
 class NativeSoftwareAnalyzer:
     """Analizzatore metriche software con Python nativo"""
     
-    def __init__(self, project_root="../src"):
+    def __init__(self, project_root=".."):
         self.project_root = Path(project_root)
         self.results = {}
         
     def analyze_project(self):
-        """Analizza progetto completo"""
+        """Analizza progetto completo con focus su complessità ciclomatica"""
         
-        print("📊 ANALISI METRICHE SOFTWARE - VERSIONE NATIVA")
-        print("=" * 55)
+        print("ANALISI METRICHE SOFTWARE")
+        print("=" * 30)
         
-        # Trova tutti i file Python
-        python_files = list(self.project_root.rglob("*.py"))
-        print(f"📁 File Python trovati: {len(python_files)}")
+        # Analizza file specifici del chatbot
+        python_files = self._get_chatbot_files()
+        print(f"File Python analizzati: {len(python_files)}")
+        for f in python_files:
+            print(f"  - {f.relative_to(self.project_root)}")
         
-        # Analizza ogni file
+        # Analizza metriche di base per ogni file
         total_metrics = {
             'files': len(python_files),
             'total_lines': 0,
@@ -45,12 +43,12 @@ class NativeSoftwareAnalyzer:
         
         for py_file in python_files:
             if py_file.name.startswith('__'):
-                continue  # Salta __init__.py e __pycache__
+                continue  # Salta file system Python
                 
             file_metrics = self._analyze_file(py_file)
             total_metrics['file_details'].append(file_metrics)
             
-            # Somma metriche
+            # Accumula statistiche totali
             total_metrics['total_lines'] += file_metrics['total_lines']
             total_metrics['code_lines'] += file_metrics['code_lines']
             total_metrics['comment_lines'] += file_metrics['comment_lines']
@@ -60,26 +58,46 @@ class NativeSoftwareAnalyzer:
             total_metrics['complexity_issues'] += file_metrics['complexity_issues']
             total_metrics['long_functions'] += file_metrics['long_functions']
         
-        # Calcola metriche derivate
+        # Calcola statistiche derivate per analisi qualitativa
         total_metrics['avg_lines_per_file'] = total_metrics['total_lines'] / max(len(python_files), 1)
         total_metrics['code_to_comment_ratio'] = (total_metrics['comment_lines'] / max(total_metrics['code_lines'], 1)) * 100
         
-        # Analisi dettagliata complessità ciclomatica
+        # Analisi complessità ciclomatica dettagliata
         total_metrics['complexity_analysis'] = self._analyze_complexity_distribution(total_metrics)
         total_metrics['complexity_stats'] = self._calculate_complexity_stats(total_metrics)
         
         self.results = total_metrics
         
-        # Report console
         self._print_results(total_metrics)
-        
-        # Salva risultati
         self._save_results(total_metrics)
         
         return total_metrics
     
+    def _get_chatbot_files(self):
+        """Ottiene lista file Python del chatbot da analizzare"""
+        files_to_analyze = []
+        
+        # 1. File principale
+        main_file = self.project_root / "main.py"
+        if main_file.exists():
+            files_to_analyze.append(main_file)
+        
+        # 2. Tutti i file src/
+        src_dir = self.project_root / "src"
+        if src_dir.exists():
+            for py_file in src_dir.glob("*.py"):
+                if not py_file.name.startswith('__'):
+                    files_to_analyze.append(py_file)
+        
+        # 3. Interfaccia Streamlit
+        streamlit_file = self.project_root / "interfaccia" / "streamlit.py"
+        if streamlit_file.exists():
+            files_to_analyze.append(streamlit_file)
+        
+        return files_to_analyze
+    
     def _analyze_file(self, file_path):
-        """Analizza singolo file Python"""
+        """Analizza singolo file Python per metriche di base"""
         
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
@@ -87,19 +105,19 @@ class NativeSoftwareAnalyzer:
             
             lines = content.split('\n')
             
-            # Conteggi base
+            # Conteggi linee base
             total_lines = len(lines)
             blank_lines = sum(1 for line in lines if not line.strip())
             comment_lines = sum(1 for line in lines if line.strip().startswith('#'))
             code_lines = total_lines - blank_lines - comment_lines
             
-            # Analisi AST per funzioni e classi
+            # Analisi AST per strutture
             try:
                 tree = ast.parse(content)
                 functions = sum(1 for node in ast.walk(tree) if isinstance(node, ast.FunctionDef))
                 classes = sum(1 for node in ast.walk(tree) if isinstance(node, ast.ClassDef))
                 
-                # Rileva funzioni lunghe (>50 righe)
+                # Conta funzioni problematiche
                 long_functions = 0
                 complexity_issues = 0
                 
@@ -109,7 +127,7 @@ class NativeSoftwareAnalyzer:
                         if func_length > 50:
                             long_functions += 1
                         
-                        # Calcola complessità ciclomatica dettagliata
+                        # Calcola complessità ciclomatica
                         complexity = self._estimate_function_complexity(node)
                         if complexity > 10:
                             complexity_issues += 1
@@ -156,11 +174,11 @@ class NativeSoftwareAnalyzer:
             return 0
     
     def _estimate_function_complexity(self, func_node):
-        """Calcola complessità ciclomatica dettagliata di una funzione"""
-        complexity = 1  # Complessità base
+        """Calcola complessità ciclomatica di una funzione"""
+        complexity = 1  # Base
         
         for node in ast.walk(func_node):
-            # Incrementa per ogni decisione e costrutto di controllo
+            # Conta decisioni e costrutti di controllo
             if isinstance(node, ast.If):
                 complexity += 1
             elif isinstance(node, ast.While):
@@ -174,16 +192,16 @@ class NativeSoftwareAnalyzer:
             elif isinstance(node, ast.ExceptHandler):
                 complexity += 1
             elif isinstance(node, ast.BoolOp):
-                # Per operatori booleani (and, or)
+                # Operatori booleani (and, or)
                 complexity += len(node.values) - 1
             elif isinstance(node, ast.Compare) and len(node.ops) > 1:
-                # Per confronti multipli (a < b < c)
+                # Confronti multipli (a < b < c)
                 complexity += len(node.ops) - 1
         
         return complexity
     
     def _get_file_complexity_details(self, tree):
-        """Estrae dettagli complessità per ogni funzione nel file"""
+        """Estrae dettagli complessità per ogni funzione"""
         complexity_details = []
         
         for node in ast.walk(tree):
@@ -255,7 +273,7 @@ class NativeSoftwareAnalyzer:
         }
     
     def _calculate_complexity_stats(self, metrics):
-        """Calcola statistiche dettagliate complessità"""
+        """Calcola statistiche qualitative complessità"""
         complexity_analysis = metrics['complexity_analysis']
         
         if complexity_analysis['total_functions'] == 0:
@@ -274,6 +292,7 @@ class NativeSoftwareAnalyzer:
         percentage_good = (good_quality_functions / total_functions) * 100
         problematic_functions = total_functions - good_quality_functions
         
+        # Classifica qualità complessiva
         if percentage_good >= 90:
             quality_level = "Eccellente"
         elif percentage_good >= 80:
@@ -290,52 +309,52 @@ class NativeSoftwareAnalyzer:
         }
     
     def _print_results(self, metrics):
-        """Stampa risultati console"""
+        """Stampa risultati analisi"""
         
-        print(f"\n📈 RISULTATI ANALISI METRICHE SOFTWARE")
-        print("=" * 50)
+        print(f"\nRISULTATI ANALISI METRICHE SOFTWARE")
+        print("=" * 40)
         
-        print(f"📊 **METRICHE GENERALI:**")
+        print(f"METRICHE GENERALI:")
         print(f"   File analizzati: {metrics['files']}")
         print(f"   Righe totali: {metrics['total_lines']:,}")
         print(f"   Righe di codice: {metrics['code_lines']:,}")
         print(f"   Righe commenti: {metrics['comment_lines']:,}")
         print(f"   Righe vuote: {metrics['blank_lines']:,}")
         
-        print(f"\n🏗️ **STRUTTURA CODICE:**")
+        print(f"\nSTRUTTURA CODICE:")
         print(f"   Funzioni totali: {metrics['functions']}")
         print(f"   Classi: {metrics['classes']}")
         print(f"   Media righe/file: {metrics['avg_lines_per_file']:.1f}")
         print(f"   Rapporto commenti/codice: {metrics['code_to_comment_ratio']:.1f}%")
         
-        # Analisi complessità dettagliata
+        # Analisi complessità
         complexity_analysis = metrics['complexity_analysis']
         complexity_stats = metrics['complexity_stats']
         
-        print(f"\n🔍 **ANALISI COMPLESSITÀ CICLOMATICA:**")
+        print(f"\nANALISI COMPLESSITÀ CICLOMATICA:")
         print(f"   Funzioni analizzate: {complexity_analysis['total_functions']}")
         print(f"   Complessità media: {complexity_analysis['avg_complexity']:.2f}")
         print(f"   Complessità massima: {complexity_analysis['max_complexity']}")
         print(f"   Complessità minima: {complexity_analysis['min_complexity']}")
         
-        print(f"\n📊 **DISTRIBUZIONE COMPLESSITÀ:**")
+        print(f"\nDISTRIBUZIONE COMPLESSITÀ:")
         distribution = complexity_analysis['distribution']
         print(f"   Bassa (1-5): {distribution.get('bassa_1_5', 0)}%")
         print(f"   Media (6-10): {distribution.get('media_6_10', 0)}%")
         print(f"   Alta (11-15): {distribution.get('alta_11_15', 0)}%")
         print(f"   Molto Alta (16+): {distribution.get('molto_alta_16+', 0)}%")
         
-        print(f"\n� **VALUTAZIONE QUALITÀ COMPLESSITÀ:**")
+        print(f"\nVALUTAZIONE QUALITÀ:")
         print(f"   Qualità complessiva: {complexity_stats['qualita_complessita']}")
         print(f"   Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
         print(f"   Funzioni problematiche (>10): {complexity_stats['funzioni_problematiche']}")
         
-        print(f"\n� **ALTRE METRICHE:**")
+        print(f"\nALTRE METRICHE:")
         print(f"   Funzioni lunghe (>50 righe): {metrics['long_functions']}")
         print(f"   Funzioni molto complesse (>10): {metrics['complexity_issues']}")
         
-        # Dettagli funzioni più complesse
-        print(f"\n🔍 **FUNZIONI PIÙ COMPLESSE:**")
+        # Top 5 funzioni più complesse
+        print(f"\nFUNZIONI PIÙ COMPLESSE:")
         all_functions = []
         for file_detail in metrics['file_details']:
             if 'complexity_details' in file_detail:
@@ -347,22 +366,23 @@ class NativeSoftwareAnalyzer:
                         'level': func_detail['level']
                     })
         
-        # Ordina per complessità decrescente e mostra top 5
         all_functions.sort(key=lambda x: x['complexity'], reverse=True)
         for i, func in enumerate(all_functions[:5]):
             print(f"   {i+1}. {func['function']} ({func['file']}): {func['complexity']} - {func['level']}")
         
-        print(f"\n✅ ANALISI COMPLESSITÀ COMPLETATA")
-        print(f"   Focus su misurazione accurata complessità ciclomatica")
-        print(f"   Dati pronti per grafici tesi ✅")
+        print(f"\nAnalisi completata - Dati pronti per tesi")
     
     def _save_results(self, metrics):
-        """Salva risultati per la tesi"""
+        """Salva risultati JSON per tesi"""
+        
+        results_dir = Path("../results")
+        results_dir.mkdir(exist_ok=True)
         
         report = {
             'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
-            'analysis_type': 'Metriche Software - Focus Complessità Ciclomatica',
+            'analysis_type': 'Metriche Software - Complessità Ciclomatica',
             'project_root': str(self.project_root),
+            'analyzed_files': [str(f.relative_to(self.project_root)) for f in self._get_chatbot_files()],
             'summary': {
                 'total_files': metrics['files'],
                 'total_lines': metrics['total_lines'],
@@ -376,17 +396,18 @@ class NativeSoftwareAnalyzer:
             'thesis_ready': True
         }
         
-        with open('native_software_metrics.json', 'w', encoding='utf-8') as f:
+        output_file = results_dir / 'metriche_software_results.json'
+        with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
         
-        print(f"\n💾 Report salvato in: native_software_metrics.json")
+        print(f"Report salvato in: {output_file}")
 
 if __name__ == "__main__":
     analyzer = NativeSoftwareAnalyzer()
     results = analyzer.analyze_project()
     
-    print(f"\n🏆 ANALISI COMPLESSITÀ CICLOMATICA COMPLETATA!")
+    print(f"\nANALISI COMPLETATA!")
     complexity_stats = results['complexity_stats']
-    print(f"   Qualità complessità: {complexity_stats['qualita_complessita']}")
-    print(f"   Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
-    print(f"   Dati pronti per grafici tesi ✅")
+    print(f"Qualità complessità: {complexity_stats['qualita_complessita']}")
+    print(f"Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
+    print(f"Dati pronti per tesi")

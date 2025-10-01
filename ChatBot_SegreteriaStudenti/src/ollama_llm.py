@@ -16,19 +16,19 @@ from typing import Dict, Any
 try:
     from prompt_templates import get_optimized_prompt
     PROMPT_OPTIMIZATION = True
-    print("✅ Sistema prompt ottimizzati caricato")
+    print("Sistema prompt ottimizzati caricato")
 except ImportError as e:
     PROMPT_OPTIMIZATION = False
-    print(f"⚠️ Prompt optimization non disponibile: {e}")
+    print(f"Prompt optimization non disponibile: {e}")
 
 
 try:
     from link_enhancer import LinkEnhancer
     LINK_ENHANCEMENT_AVAILABLE = True
-    print("✅ Sistema link automatico caricato")
+    print("Sistema link automatico caricato")
 except ImportError as e:
     LINK_ENHANCEMENT_AVAILABLE = False
-    print(f"⚠️ Link enhancement non disponibile: {e}")
+    print(f"Link enhancement non disponibile: {e}")
 
 load_dotenv()
 
@@ -43,6 +43,7 @@ class OllamaLLM:
     """
     
     def __init__(self, base_url: str = None, model: str = None):
+        """Inizializza il client LLM per comunicazione con Ollama"""
         self.base_url = base_url or os.getenv('OLLAMA_BASE_URL', 'http://localhost:11434')
         self.model = model or os.getenv('OLLAMA_MODEL', 'mistral:7b')
         self.temperature = float(os.getenv('TEMPERATURE', '0.1'))
@@ -65,7 +66,7 @@ class OllamaLLM:
         logger.info(f"Inizializzato OllamaLLM: {self.base_url}, modello: {self.model}")
     
     def is_running(self) -> bool:
-        """Verifica se Ollama è in esecuzione"""
+        """Verifica se il servizio Ollama è attivo e raggiungibile"""
         try:
             response = requests.get(f"{self.base_url}/api/tags", timeout=5)
             return response.status_code == 200
@@ -83,11 +84,11 @@ class OllamaLLM:
                 return False
     
     def check_connection(self) -> bool:
-        """Metodo compatibilità per main.py"""
+        """Metodo di compatibilità per main.py - verifica connessione Ollama"""
         return self.is_running()
     
     def list_models(self) -> list:
-        """Lista i modelli disponibili in Ollama"""
+        """Restituisce l'elenco dei modelli LLM disponibili in Ollama"""
         try:
             response = requests.get(f"{self.base_url}/api/tags", timeout=10)
             if response.status_code == 200:
@@ -216,7 +217,7 @@ class OllamaLLM:
         return "REDIRECT_TO_HUMAN - Impossibile generare risposta dopo tutti i tentativi"
     
     def _get_fallback_prompt(self, prompt: str, context: str) -> str:
-        """Prompt di fallback se l'ottimizzazione non è disponibile"""
+        """Genera prompt di fallback quando l'ottimizzazione avanzata non è disponibile"""
         return f"""Sei l'assistente AI della Segreteria Studenti dell'Università di Bergamo.
 
 CONTESTO: {context}
@@ -233,7 +234,7 @@ ISTRUZIONI:
 RISPOSTA:"""
     
     def _process_response(self, answer: str, original_prompt: str) -> str:
-        """Post-processing della risposta per migliorarne la qualità"""
+        """Post-elabora la risposta per migliorarne qualità e formato"""
         
         if not answer:
             return "Mi dispiace, non sono riuscito a generare una risposta appropriata."
@@ -258,7 +259,7 @@ RISPOSTA:"""
         return answer
     
     def _remove_repetitions(self, text: str) -> str:
-        """Rimuove ripetizioni eccessive nel testo"""
+        """Rimuove ripetizioni eccessive e ridondanze nel testo generato"""
         lines = text.split('\n')
         unique_lines = []
         seen_lines = set()
@@ -274,7 +275,7 @@ RISPOSTA:"""
         return '\n'.join(unique_lines)
     
     def _is_valid_response(self, answer: str) -> bool:
-        """Verifica se la risposta è valida e utile"""
+        """Valuta se la risposta generata è utile e di qualità sufficiente"""
         
         if not answer or len(answer.strip()) < 10:
             return False
@@ -295,7 +296,7 @@ RISPOSTA:"""
         return True
     
     def get_performance_stats(self) -> Dict[str, Any]:
-        """Ottieni statistiche di performance del sistema"""
+        """Restituisce statistiche dettagliate sulle performance del sistema LLM"""
         try:
             # Test di velocità
             start_time = time.time()
@@ -350,7 +351,7 @@ RISPOSTA:"""
             }
     
     def _classify_performance(self, response_time: float) -> str:
-        """Classifica le performance basandosi sul tempo di risposta"""
+        """Classifica le performance in base ai tempi di risposta registrati"""
         if response_time < 5:
             return "Eccellente"
         elif response_time < 15:
@@ -361,7 +362,7 @@ RISPOSTA:"""
             return "Lento"
     
     def health_check(self) -> Dict[str, Any]:
-        """Verifica completa dello stato di Ollama"""
+        """Esegue verifica completa dello stato del servizio Ollama"""
         try:
             # Test connessione
             response = requests.get(f"{self.base_url}/api/tags", timeout=10)
@@ -396,7 +397,7 @@ RISPOSTA:"""
             return {"healthy": False, "error": str(e)}
     
     def pull_model(self, model_name: str) -> Dict[str, Any]:
-        """Scarica un modello da Ollama"""
+        """Scarica e installa un modello specifico da Ollama"""
         try:
             print(f"📥 Scaricamento modello {model_name}...")
             response = requests.post(
@@ -412,7 +413,7 @@ RISPOSTA:"""
             return {"success": False, "error": str(e)}
     
     def delete_model(self, model_name: str) -> Dict[str, Any]:
-        """Elimina un modello da Ollama"""
+        """Rimuove un modello specifico dall'installazione Ollama"""
         try:
             response = requests.delete(
                 f"{self.base_url}/api/delete",
@@ -427,7 +428,7 @@ RISPOSTA:"""
             return {"success": False, "error": str(e)}
     
     def get_model_info(self, model_name: str = None) -> Dict[str, Any]:
-        """Ottiene informazioni su un modello specifico"""
+        """Restituisce informazioni dettagliate su un modello specifico"""
         target_model = model_name or self.model
         try:
             response = requests.post(
@@ -442,7 +443,7 @@ RISPOSTA:"""
             return {"success": False, "error": str(e)}
         
     def _determine_category(self, prompt: str) -> str:
-        """Determina categoria della domanda per link appropriati"""
+        """Analizza la domanda per determinare la categoria più appropriata"""
         prompt_lower = prompt.lower()
     
         if any(word in prompt_lower for word in ['iscriver', 'esam', 'prenotare']):
@@ -462,7 +463,7 @@ RISPOSTA:"""
 
 # Funzioni helper per compatibilità
 def test_ollama_connection() -> bool:
-    """Test rapido della connessione Ollama"""
+    """Funzione helper per testare rapidamente la connessione a Ollama"""
     try:
         llm = OllamaLLM()
         return llm.check_connection()
@@ -472,10 +473,10 @@ def test_ollama_connection() -> bool:
 
 if __name__ == "__main__":
     # Test del modulo
-    print("🧪 Test OllamaLLM")
+    print("Test OllamaLLM")
     llm = OllamaLLM()
     
-    print(f"Connessione: {'✅' if llm.check_connection() else '❌'}")
+    print(f"Connessione: {'OK' if llm.check_connection() else 'ERRORE'}")
     print(f"Modelli: {llm.list_models()}")
     
     # Test generazione

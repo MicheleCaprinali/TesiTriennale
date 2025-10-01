@@ -1,0 +1,99 @@
+{
+  "timestamp": "2025-10-01 16:13:25",
+  "analysis_type": "WMC e LCOM Analysis",
+  "analyzed_files": [
+    "main.py",
+    "src\\creazione_vectorstore.py",
+    "src\\dividi_chunks.py",
+    "src\\link_enhancer.py",
+    "src\\local_embeddings.py",
+    "src\\ollama_llm.py",
+    "src\\prompt_templates.py",
+    "src\\testi_estratti.py",
+    "interfaccia\\streamlit.py"
+  ],
+  "metrics": {
+    "file_analizzati": 9,
+    "classi_analizzate": 6,
+    "wmc_scores": [
+      16,
+      15,
+      23,
+      89,
+      11,
+      13
+    ],
+    "lcom_scores": [
+      66.7,
+      95.2,
+      60.0,
+      70.0,
+      90.5,
+      66.7
+    ],
+    "dettagli_classi": [
+      {
+        "nome_classe": "ChatbotRAG",
+        "file": "main.py",
+        "wmc": 16,
+        "lcom": 66.7,
+        "numero_metodi": 4,
+        "valutazione_wmc": "Basso",
+        "valutazione_lcom": "Coesione Bassa"
+      },
+      {
+        "nome_classe": "LinkEnhancer",
+        "file": "link_enhancer.py",
+        "wmc": 15,
+        "lcom": 95.2,
+        "numero_metodi": 7,
+        "valutazione_wmc": "Basso",
+        "valutazione_lcom": "Coesione Molto Bassa"
+      },
+      {
+        "nome_classe": "LocalEmbeddings",
+        "file": "local_embeddings.py",
+        "wmc": 23,
+        "lcom": 60.0,
+        "numero_metodi": 6,
+        "valutazione_wmc": "Medio",
+        "valutazione_lcom": "Coesione Bassa"
+      },
+      {
+        "nome_classe": "OllamaLLM",
+        "file": "ollama_llm.py",
+        "wmc": 89,
+        "lcom": 70.0,
+        "numero_metodi": 16,
+        "valutazione_wmc": "Alto",
+        "valutazione_lcom": "Coesione Bassa"
+      },
+      {
+        "nome_classe": "PromptOptimizer",
+        "file": "prompt_templates.py",
+        "wmc": 11,
+        "lcom": 90.5,
+        "numero_metodi": 7,
+        "valutazione_wmc": "Basso",
+        "valutazione_lcom": "Coesione Molto Bassa"
+      },
+      {
+        "nome_classe": "ChatbotRAG",
+        "file": "streamlit.py",
+        "wmc": 13,
+        "lcom": 66.7,
+        "numero_metodi": 4,
+        "valutazione_wmc": "Basso",
+        "valutazione_lcom": "Coesione Bassa"
+      }
+    ],
+    "wmc_medio": 27.833333333333332,
+    "wmc_massimo": 89,
+    "wmc_minimo": 11,
+    "lcom_medio": 74.85000000000001,
+    "lcom_massimo": 95.2,
+    "lcom_minimo": 60.0,
+    "valutazione_wmc": "Buono",
+    "valutazione_lcom": "Da migliorare"
+  }
+}

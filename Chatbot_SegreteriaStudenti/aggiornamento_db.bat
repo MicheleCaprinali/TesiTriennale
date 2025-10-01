@@ -1,10 +1,10 @@
 @echo off
-title ChatBot UniBG - Aggiornamento Database Vettoriale
+title ChatBot UniBg - Aggiornamento Database Vettoriale
 color 0E
 echo.
 echo ================================================================
 echo  CHATBOT SEGRETERIA STUDENTI - UNIVERSITA' DI BERGAMO
-echo  Aggiornamento Database Vettoriale (Settembre 2025)
+echo  Aggiornamento Database Vettoriale
 echo ================================================================
 echo.
 
@@ -94,43 +94,34 @@ if exist "data" (
 )
 
 echo.
-echo FASE 3: CONFERMA OPERAZIONE
+echo FASE 3: CONFERMA OPERAZIONE (IMPORTANTE)
 echo ================================================================
-echo.
-echo ⚠️  ATTENZIONE: OPERAZIONE DISTRUTTIVA ⚠️
 echo.
 
 if %DB_EXISTS%==1 (
-    echo 🗑️  Il database vettoriale esistente SARA' COMPLETAMENTE ELIMINATO
-    echo     Tutti i dati e gli embedding attuali saranno persi
+    echo  Il database vettoriale esistente SARA' COMPLETAMENTE ELIMINATO
     echo.
 )
 
-echo 🔄 PROCESSO DI RICOSTRUZIONE:
+echo PROCESSO DI RICOSTRUZIONE:
 if %SKIP_EXTRACTION%==0 (
-    echo     1. Estrazione testi da PDF (se presenti)
-    echo     2. Divisione in chunks ottimizzati
-    echo     3. Generazione embedding semantici (all-MiniLM-L6-v2)
-    echo     4. Creazione nuovo database ChromaDB
-    echo     5. Indicizzazione documenti per ricerca
+    echo  1. Estrazione testi da PDF (%pdf_count% file^)
+    echo  2. Chunking intelligente documenti
+    echo  3. Generazione embeddings vettoriali
+    echo  4. Creazione database ChromaDB
 ) else (
-    echo     1. [SKIP] Estrazione testi (script non presente)
-    echo     2. Divisione in chunks ottimizzati
-    echo     3. Generazione embedding semantici (all-MiniLM-L6-v2)
-    echo     4. Creazione nuovo database ChromaDB
-    echo     5. Indicizzazione documenti per ricerca
+    echo  1. [SKIP] Estrazione PDF (script non disponibile^)
+    echo  2. Chunking documenti esistenti
+    echo  3. Generazione embeddings vettoriali
+    echo  4. Creazione database ChromaDB
 )
 
-echo.
-echo ⏱️  TEMPO STIMATO: 3-8 minuti (dipende dal numero di documenti)
-echo 💾 SPAZIO RICHIESTO: ~1-5MB per il nuovo database
 echo.
 
 set /p confirm="Procedere con l'aggiornamento? (S/N): "
 if /i "%confirm%" NEQ "S" (
     echo.
-    echo ❌ Operazione annullata dall'utente
-    echo    Database vettoriale rimane invariato
+    echo  Operazione annullata
     echo.
     pause
     exit /b 0
@@ -151,7 +142,7 @@ if %DB_EXISTS%==1 (
     
     xcopy "vectordb" "%backup_name%\" /E /I /Q >nul 2>&1
     if errorlevel 1 (
-        echo [WARN] Backup fallito - continuiamo comunque
+        echo [WARN] Backup fallito
     ) else (
         echo [OK] Backup creato: %backup_name%
     )
@@ -159,12 +150,12 @@ if %DB_EXISTS%==1 (
     echo 4.2- Rimozione database esistente...
     rmdir /s /q "vectordb" 2>nul
     if exist "vectordb" (
-        echo [WARN] Rimozione incompleta - alcuni file potrebbero rimanere
+        echo [WARN] Rimozione incompleta
     ) else (
         echo [OK] Database esistente rimosso
     )
 ) else (
-    echo 4.1- Database esistente non presente - skip backup
+    echo 4.1- Database esistente non presente
 )
 
 echo.
@@ -178,7 +169,7 @@ if %SKIP_EXTRACTION%==0 (
         
         chatbot_env\Scripts\python.exe src\testi_estratti.py
         if errorlevel 1 (
-            echo [WARN] Estrazione parzialmente fallita - continuiamo
+            echo [WARN] Estrazione parzialmente fallita
         ) else (
             echo [OK] Estrazione completata
         )
@@ -214,32 +205,23 @@ echo FASE 6: RICOSTRUZIONE DATABASE VETTORIALE
 echo ================================================================
 
 echo 6.1- Avvio creazione nuovo database...
-echo      📚 Processando documenti...
-echo      🧠 Generando embedding semantici...
-echo      💾 Creando indici di ricerca...
 echo.
-echo      ⏳ Attendere... (NON interrompere il processo)
+echo       Attendere... (NON interrompere il processo)
 
 chatbot_env\Scripts\python.exe src\creazione_vectorstore.py
 if errorlevel 1 (
     echo.
-    echo ❌ ERRORE nella creazione del database vettoriale!
-    echo.
-    echo POSSIBILI CAUSE:
-    echo - Memoria insufficiente
-    echo - Documenti corrotti
-    echo - Errore nei modelli di embedding
-    echo - Dipendenze mancanti
+    echo  ERRORE nella creazione del database vettoriale!
     echo.
     echo SOLUZIONI:
-    echo 1. Verifica disponibilità memoria (^>2GB RAM libera)
+    echo 1. Verifica disponibilità memoria RAM
     echo 2. Controlla integrità documenti in data\testi_estratti\
     echo 3. Reinstalla dipendenze: pip install -r requirements.txt
     echo 4. Riesegui setup.bat per verifica completa
     echo.
     
     if exist "%backup_name%" (
-        echo 🔄 RIPRISTINO BACKUP:
+        echo  RIPRISTINO BACKUP:
         echo Per ripristinare il database precedente:
         echo    rmdir /s /q vectordb
         echo    ren %backup_name% vectordb
@@ -276,7 +258,7 @@ echo 7.2- Test funzionalità database...
 chatbot_env\Scripts\python.exe -c "import sys; sys.path.append('src'); from creazione_vectorstore import search_vectorstore; from local_embeddings import LocalEmbeddings; result = search_vectorstore('test università bergamo', k=1, embedder=LocalEmbeddings()); print('[OK] Test ricerca completato -', len(result.get('documents', [[]])[0]), 'documenti trovati')"
 
 if errorlevel 1 (
-    echo [WARN] Test ricerca fallito - ma database creato
+    echo [WARN] Test ricerca fallito
 ) else (
     echo [OK] Database funzionante e testato
 )
@@ -286,35 +268,4 @@ echo ================================================================
 echo  AGGIORNAMENTO COMPLETATO CON SUCCESSO!
 echo ================================================================
 echo.
-
-echo ✅ RISULTATI:
-echo    Database vettoriale: ✅ Ricreato
-echo    Documenti processati: %final_txt_count%
-echo    Test funzionalità: ✅ Superato
-if exist "%backup_name%" (
-    echo    Backup precedente: %backup_name%
-)
-echo.
-
-echo 🎯 IL CHATBOT È PRONTO PER L'USO:
-echo    - python main.py              # Avvia chatbot CLI
-echo    - start_web.bat               # Avvia interfaccia web
-echo    - python main.py --check      # Verifica sistema
-echo.
-
-echo 📊 PERFORMANCE ATTESE:
-echo    - Ricerca documenti: ~1-2 secondi
-echo    - Generazione risposta: ~25-40 secondi
-echo    - Accuratezza semantica: Migliorata
-echo.
-
-if exist "%backup_name%" (
-    echo 🗂️  GESTIONE BACKUP:
-    echo    Il backup è stato conservato in: %backup_name%
-    echo    Per eliminarlo: rmdir /s /q "%backup_name%"
-    echo    Per ripristinarlo: rmdir /s /q vectordb ^&^& ren %backup_name% vectordb
-    echo.
-)
-
-echo Premi un tasto per chiudere...
-pause >nul
+pause

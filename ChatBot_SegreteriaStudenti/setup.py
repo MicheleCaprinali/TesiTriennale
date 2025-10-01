@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Script di setup automatico per ChatBot Segreteria Studenti UniBg
-Installa e configura tutto il necessario per il sistema RAG
+Setup automatico ChatBot Segreteria Studenti UniBg
+Sistema RAG con Mistral 7B + SentenceTransformers + ChromaDB
 """
 
 import os
@@ -9,62 +9,57 @@ import sys
 import subprocess
 import platform
 import time
-from pathlib import Path
 
 def print_header(title):
-    print("\n" + "="*60)
-    print(f"{title}")
-    print("="*60)
+    print("\n" + "="*50)
+    print(f" {title}")
+    print("="*50)
 
 def print_step(step, description):
     print(f"\n{step} {description}")
-    print("-" * 40)
 
 def run_command(command, description, check=True):
     """Esegue un comando e mostra il risultato"""
-    print(f"Eseguendo: {command}")
     try:
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
         if result.returncode == 0:
-            print(f"✅ {description} completato!")
+            print(f"[OK] {description}")
             return True
         else:
             if check:
-                print(f"❌ Errore in {description}")
+                print(f"[ERRORE] {description}")
                 if result.stderr.strip():
-                    print(f"Error: {result.stderr.strip()}")
+                    print(f"Dettagli: {result.stderr.strip()}")
                 return False
             else:
-                print(f"⚠️ {description} - continuiamo...")
+                print(f"[WARN] {description} - continuo")
                 return True
     except Exception as e:
-        print(f"❌ Errore esecuzione comando: {str(e)}")
+        print(f"[ERRORE] Comando fallito: {str(e)}")
         return False
 
 def check_python():
     """Verifica versione Python"""
     version = sys.version_info
     if version.major == 3 and version.minor >= 9:
-        print(f"✅ Python {version.major}.{version.minor}.{version.micro} - OK")
+        print(f"[OK] Python {version.major}.{version.minor}.{version.micro}")
         return True
     else:
-        print(f"❌ Python {version.major}.{version.minor} - Richiede Python 3.9+")
+        print(f"[ERRORE] Python {version.major}.{version.minor} - Richiede 3.9+")
         return False
-
 def check_venv():
-    """Verifica se siamo in un ambiente virtuale"""
+    """Verifica ambiente virtuale"""
     in_venv = hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix)
     
     if in_venv:
-        venv_path = sys.prefix
-        print(f"✅ Ambiente virtuale attivo: {venv_path}")
+        print(f"[OK] Ambiente virtuale attivo")
         return True
     else:
-        print("⚠️ Nessun ambiente virtuale rilevato")
+        print("[INFO] Nessun ambiente virtuale rilevato")
         return False
 
 def create_venv():
-    """Crea e attiva ambiente virtuale"""
+    """Crea ambiente virtuale"""
     print_step("1.", "Setup ambiente virtuale")
     
     venv_name = "chatbot_env"
@@ -72,171 +67,142 @@ def create_venv():
     if check_venv():
         return True
     
-    # Verifica se l'ambiente esiste già
     if os.path.exists(venv_name):
-        print(f"✅ Ambiente virtuale '{venv_name}' già presente!")
-        print(f"💡 Per attivarlo manualmente:")
+        print(f"[OK] Ambiente virtuale '{venv_name}' già presente")
         if platform.system().lower() == "windows":
-            print(f"   {venv_name}\\Scripts\\activate")
+            print(f"Per attivarlo: {venv_name}\\Scripts\\activate")
         else:
-            print(f"   source {venv_name}/bin/activate")
+            print(f"Per attivarlo: source {venv_name}/bin/activate")
         
-        # Chiedi se continuare o attivare manualmente
-        choice = input("\nVuoi continuare senza ambiente virtuale? (s/N): ").lower()
+        choice = input("\nContinuare senza ambiente virtuale? (s/N): ").lower()
         if choice != 's':
-            print("⚠️ Attiva l'ambiente virtuale e riesegui lo setup")
+            print("[INFO] Attiva l'ambiente virtuale e riesegui setup")
             return False
         return True
     
-    print(f"🔧 Creazione ambiente virtuale '{venv_name}'...")
+    print(f"[INFO] Creazione ambiente virtuale '{venv_name}'...")
     if not run_command(f"{sys.executable} -m venv {venv_name}", "Creazione ambiente virtuale"):
         return False
     
-    print("\n" + "="*60)
-    print("⚠️  IMPORTANTE: ATTIVA L'AMBIENTE VIRTUALE")
-    print("="*60)
+    print("\n" + "="*50)
+    print(" ATTIVA L'AMBIENTE VIRTUALE")
+    print("="*50)
     
     if platform.system().lower() == "windows":
         activate_cmd = f"{venv_name}\\Scripts\\activate"
     else:
         activate_cmd = f"source {venv_name}/bin/activate"
     
-    print(f"1. Apri un nuovo terminale")
-    print(f"2. Esegui: {activate_cmd}")
-    print(f"3. Riesegui: python setup.py")
-    print("\nL'ambiente virtuale isola le dipendenze del progetto!")
-    print("="*60)
+    print(f"1. Esegui: {activate_cmd}")
+    print(f"2. Riesegui: python setup.py")
+    print("="*50)
     
-    return False  # Ferma il setup per permettere attivazione manuale
+    return False
 
 def install_ollama():
-    """Installa Ollama se non presente"""
-    print_step("2.", "Verifica e installazione Ollama")
+    """Verifica e installa Ollama"""
+    print_step("2.", "Configurazione Ollama")
 
     if run_command("ollama --version", "Verifica Ollama", check=False):
-        print("✅ Ollama già installato!")
+        print("[OK] Ollama già installato")
         return True
     
-    print("Ollama non trovato, installazione richiesta...")
+    print("[INFO] Ollama non trovato")
     system = platform.system().lower()
     
     if system == "windows":
-        print("Sistema Windows rilevato")
-        print("📥 Scarica e installa Ollama da: https://ollama.ai/download/windows")
-        print("Premi INVIO dopo aver installato Ollama...")
-        input()
-        return run_command("ollama --version", "Verifica installazione Ollama")
+        print("Scarica da: https://ollama.ai/download/windows")
+        input("Premi INVIO dopo aver installato Ollama...")
+        return run_command("ollama --version", "Verifica Ollama")
         
-    elif system == "darwin":  # macOS
-        print("Sistema macOS rilevato")
-        print("Installazione via Homebrew...")
+    elif system == "darwin":
         return run_command("brew install ollama", "Installazione Ollama")
         
     elif system == "linux":
-        print("Sistema Linux rilevato")
         return run_command("curl -fsSL https://ollama.ai/install.sh | sh", "Installazione Ollama")
     
     else:
-        print(f"❌ Sistema {system} non supportato per installazione automatica")
-        print("Installa Ollama manualmente da: https://ollama.ai")
+        print(f"[ERRORE] Sistema {system} non supportato")
         return False
 
 def install_python_deps():
-    """Installa dipendenze Python nell'ambiente virtuale"""
+    """Installa dipendenze Python"""
     print_step("3.", "Installazione dipendenze Python")
     
     if not os.path.exists("requirements.txt"):
-        print("❌ File requirements.txt non trovato!")
+        print("[ERRORE] File requirements.txt non trovato")
         return False
     
-    # Verifica ambiente virtuale
     if not check_venv():
-        print("⚠️ Raccomandato: attiva ambiente virtuale prima dell'installazione")
-        choice = input("Continuare comunque? (s/N): ").lower()
+        print("[WARN] Ambiente virtuale non attivo")
+        choice = input("Continuare? (s/N): ").lower()
         if choice != 's':
             return False
     
-    # Aggiorna pip
     run_command(f"{sys.executable} -m pip install --upgrade pip", "Aggiornamento pip", check=False)
     
-    # Installa le dipendenze
     return run_command(
         f"{sys.executable} -m pip install -r requirements.txt",
-        "Installazione pacchetti Python"
+        "Installazione pacchetti"
     )
 
 def setup_ollama_model():
-    """Setup modello Mistral in Ollama"""
+    """Setup modello Mistral"""
     print_step("4.", "Setup modello Mistral 7B")
 
-    # Avvia servizio Ollama se non attivo
-    print("Verifica servizio Ollama...")
-    if not run_command("ollama list", "Verifica servizio Ollama", check=False):
-        print("Avvio servizio Ollama...")
+    print("[INFO] Verifica servizio Ollama...")
+    if not run_command("ollama list", "Verifica servizio", check=False):
+        print("[INFO] Avvio servizio Ollama...")
         if platform.system().lower() == "windows":
-            subprocess.Popen(["ollama", "serve"], shell=True, creationflags=subprocess.CREATE_NEW_CONSOLE)
+            subprocess.Popen(["ollama", "serve"], shell=True)
         else:
             subprocess.Popen(["ollama", "serve"])
         
-        print("Attesa avvio servizio...")
         time.sleep(5)
     
-    # Verifica se Mistral è già installato
     result = subprocess.run(["ollama", "list"], capture_output=True, text=True)
     if "mistral" in result.stdout:
-        print("✅ Modello Mistral già presente!")
+        print("[OK] Modello Mistral già presente")
         return True
     
-    print("📥 Download modello Mistral 7B...")
-    print("⏳ Dimensione: ~4GB - Tempo stimato: 10-20 minuti")
-    print("Non interrompere il download...")
-    
-    return run_command("ollama pull mistral:7b", "Download modello Mistral")
+    print("[INFO] Download modello Mistral 7B (~4GB)...")
+    return run_command("ollama pull mistral:7b", "Download Mistral")
 
 def setup_environment():
-    """Setup file di ambiente"""
+    """Setup configurazione"""
     print_step("5.", "Configurazione ambiente")
     
     if os.path.exists(".env"):
-        print("✅ File .env già presente!")
+        print("[OK] File .env già presente")
         return True
     
     env_content = """# Configurazione ChatBot Segreteria Studenti UniBg
-# Configurazione Embedding
 EMBEDDING_MODEL=all-MiniLM-L6-v2
-
-# Configurazione Ollama
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODEL=mistral:7b
 TEMPERATURE=0.1
-
-# Configurazione ChromaDB
 VECTORDB_COLLECTION=unibg_docs
-TICKET_URL=https://helpdesk.unibg.it/
 """
     
     try:
         with open(".env", "w", encoding="utf-8") as f:
             f.write(env_content)
-        print("✅ File .env creato con configurazioni di base")
+        print("[OK] File .env creato")
         return True
     except Exception as e:
-        print(f"❌ Errore nella creazione del file .env: {str(e)}")
+        print(f"[ERRORE] Creazione .env fallita: {str(e)}")
         return False
 
 def check_data_structure():
-    """Verifica struttura dati necessaria"""
-    print_step("6.", "Verifica struttura dati")
+    """Verifica struttura progetto"""
+    print_step("6.", "Verifica struttura progetto")
     
-    required_dirs = ["data", "src", "interfaccia"]  # ✅ Aggiunta cartella interfaccia
+    required_dirs = ["data", "src", "interfaccia"]
     required_files = [
         "src/local_embeddings.py",
         "src/ollama_llm.py", 
         "src/creazione_vectorstore.py",
-        "src/testi_estratti.py",
-        "src/dividi_chunks.py",
-        "interfaccia/streamlit.py",  # ✅ Aggiunto file streamlit
-        "main.py"  # ✅ Aggiunto main.py
+        "main.py"
     ]
     
     missing = []
@@ -250,88 +216,80 @@ def check_data_structure():
             missing.append(f"File: {file_name}")
     
     if missing:
-        print("❌ Elementi mancanti:")
+        print("[ERRORE] Elementi mancanti:")
         for item in missing:
             print(f"   - {item}")
         return False
     
-    print("✅ Struttura progetto completa!")
+    print("[OK] Struttura progetto completa")
     return True
 
 def extract_texts():
-    """Estrae testi dai PDF se necessario"""
-    print_step("7.", "Estrazione testi dai documenti")
+    """Estrae testi dai PDF"""
+    print_step("7.", "Estrazione testi documenti")
     
     if os.path.exists("data/testi_estratti") and os.listdir("data/testi_estratti"):
-        print("✅ Testi già estratti!")
+        print("[OK] Testi già estratti")
         return True
     
     if not os.path.exists("data"):
-        print("❌ Cartella 'data' non trovata!")
-        print("Carica i documenti PDF nella cartella data/")
+        print("[ERRORE] Cartella 'data' non trovata")
         return False
     
-    print("Estrazione testi dai PDF...")
-    return run_command(f"{sys.executable} src/testi_estratti.py", "Estrazione documenti PDF")
+    return run_command(f"{sys.executable} src/testi_estratti.py", "Estrazione documenti")
 
 def create_vectorstore():
-    """Crea il vectorstore dai documenti"""
+    """Crea database vettoriale"""
     print_step("8.", "Creazione database vettoriale")
     
     if os.path.exists("vectordb") and os.listdir("vectordb"):
-        print("✅ Database vettoriale già presente!")
+        print("[OK] Database vettoriale già presente")
         return True
     
-    print("📚 Creazione database vettoriale...")
-    print("⏳ Questo processo può richiedere alcuni minuti...")
-    
+    print("[INFO] Creazione database vettoriale...")
     return run_command(f"{sys.executable} src/creazione_vectorstore.py", "Creazione vectorstore")
 
 def test_system():
-    """Test completo del sistema"""
-    print_step("9.", "Test del sistema")
+    """Test sistema"""
+    print_step("9.", "Test sistema")
     
     try:
         sys.path.append("src")
         from local_embeddings import LocalEmbeddings
         from ollama_llm import OllamaLLM
-        print("✅ Import moduli completato!")
+        print("[OK] Import moduli completato")
         
-        # Test embedding
         embedder = LocalEmbeddings()
         test_embedding = embedder.embed_query("test")
-        if test_embedding and len(test_embedding) > 0:  # ✅ Migliore controllo
-            print("✅ Sistema embedding funzionante!")
+        if test_embedding and len(test_embedding) > 0:
+            print("[OK] Sistema embedding funzionante")
         
-        # Test Ollama
         llm = OllamaLLM()
-        if llm.check_connection():
-            print("✅ Connessione Ollama attiva!")
+        if hasattr(llm, 'check_connection') and llm.check_connection():
+            print("[OK] Connessione Ollama attiva")
         else:
-            print("⚠️ Ollama non risponde - verifica che sia in esecuzione")
-            return True  # ✅ Non bloccare per Ollama
+            print("[WARN] Ollama non risponde")
             
-        print("✅ Tutti i componenti funzionanti!")
+        print("[OK] Sistema funzionante")
         return True
         
     except ImportError as e:
-        print(f"❌ Errore import: {str(e)}")
+        print(f"[ERRORE] Import fallito: {str(e)}")
         return False
     except Exception as e:
-        print(f"❌ Errore nel test: {str(e)}")
+        print(f"[ERRORE] Test fallito: {str(e)}")
         return False
 
 def main():
     print_header("SETUP CHATBOT SEGRETERIA STUDENTI - UNIBG")
-    print("Sistema RAG con Mistral 7B + SentenceTransformers + ChromaDB")
     
     if not check_python():
-        print("❌ Aggiorna Python alla versione 3.9 o superiore")
+        print("[ERRORE] Aggiorna Python alla versione 3.9+")
         return
     
     steps = [
         ("Ambiente virtuale", create_venv),
-        ("Installazione Ollama", install_ollama),
+        ("Configurazione Ollama", install_ollama),
         ("Dipendenze Python", install_python_deps),
         ("Modello Mistral", setup_ollama_model),
         ("Configurazione", setup_environment),
@@ -347,44 +305,41 @@ def main():
         try:
             if step_func():
                 completed.append(step_name)
-                print(f"✅ {step_name} - COMPLETATO")
+                print(f"[OK] {step_name} completato")
             else:
-                print(f"❌ {step_name} - FALLITO")
+                print(f"[ERRORE] {step_name} fallito")
                 break
         except KeyboardInterrupt:
-            print("\n⚠️ Setup interrotto dall'utente")
+            print("\n[INFO] Setup interrotto")
             break
         except Exception as e:
-            print(f"❌ Errore in {step_name}: {str(e)}")
+            print(f"[ERRORE] {step_name}: {str(e)}")
             break
     
-    # Riepilogo finale
     print_header("RIEPILOGO SETUP")
     print(f"Completati: {len(completed)}/{len(steps)} passaggi")
     
     if len(completed) == len(steps):
-        print("🎉 SISTEMA PRONTO!")
+        print("[OK] SISTEMA PRONTO")
         print("\nComandi disponibili:")
         if check_venv():
-            print("   python main.py                    # Avvia chatbot CLI")
-            print("   start_web.bat                     # Avvia interfaccia web")  # ✅ Aggiunto
+            print("   python main.py                    # Chatbot CLI")
+            print("   streamlit run interfaccia/streamlit.py  # Interfaccia web")
         else:
             venv_name = "chatbot_env"
             if platform.system().lower() == "windows":
                 print(f"   {venv_name}\\Scripts\\activate      # Attiva ambiente")
             else:
                 print(f"   source {venv_name}/bin/activate   # Attiva ambiente")
-            print("   python main.py                    # Avvia chatbot CLI")
-            print("   start_web.bat                     # Avvia interfaccia web")
+            print("   python main.py                    # Chatbot CLI")
         
         print("   python main.py --check           # Verifica sistema")
-        print("   python main.py --help            # Mostra aiuto")
     else:
-        print(f"\n⚠️ Setup incompleto ({len(completed)}/{len(steps)})")
-        print("Risolvi gli errori e riesegui lo setup")
+        print(f"[WARN] Setup incompleto ({len(completed)}/{len(steps)})")
+        print("Risolvi gli errori e riesegui setup")
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\nSetup interrotto. Riesegui quando pronto.")
+        print("\nSetup interrotto")

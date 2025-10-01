@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-10-01 16:30:45",
+  "analysis_type": "Valutazione Sistema RAG",
+  "scope": "Sistema ChatBot completo con metriche RAG",
+  "evaluation_data": {
+    "query": "Quali documenti servono per l'immatricolazione?",
+    "generated_response": "Per l'immatricolazione all'Università di Bergamo servono:\n\n• Diploma di maturità originale\n• Certificato di nascita\n• Documento di identità valido\n• Codice fiscale\n• 2 foto tessera\n\nTutti i documenti devono essere presentati presso la Segreteria Studenti.",
+    "reference_response": "I documenti necessari per l'immatricolazione sono: diploma di scuola superiore, documento d'identità, codice fiscale, certificato di nascita e fotografie formato tessera. La documentazione va consegnata in Segreteria.",
+    "quality_metrics": {
+      "length_words": 37,
+      "length_chars": 255,
+      "num_sentences": 1,
+      "avg_sentence_length": 37.0,
+      "has_links": 0.0,
+      "has_structure": 1.0,
+      "semantic_similarity": 0.6239547729492188,
+      "keyword_overlap": 0.8333333333333334,
+      "completeness_score": 0.7,
+      "informativeness_score": 1.0,
+      "clarity_score": 0.6,
+      "professional_tone": 0.7,
+      "bleu_score": 0.32432432432432434,
+      "reference_similarity": 0.7976075410842896,
+      "overall_score": 0.722
+    },
+    "rag_metrics": {
+      "recall_at_1": 0.333,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0,
+      "bleu_score": 0.044,
+      "rouge_l": 0.25,
+      "bert_score": 0.798,
+      "answer_relevance": 0.624,
+      "context_precision": 0.6,
+      "faithfulness": 0.712,
+      "rag_overall_score": 0.527
+    },
+    "overall_quality_score": 0.722,
+    "overall_rag_score": 0.527
+  },
+  "metrics_summary": {
+    "bleu_score": 0.044,
+    "rouge_l": 0.25,
+    "bert_score": 0.798,
+    "answer_relevance": 0.624,
+    "context_precision": 0.6,
+    "faithfulness": 0.712,
+    "overall_rag_score": 0.527,
+    "recall_metrics": {
+      "recall_at_1": 0.333,
+      "recall_at_3": 1.0,
+      "recall_at_5": 1.0
+    }
+  }
+}

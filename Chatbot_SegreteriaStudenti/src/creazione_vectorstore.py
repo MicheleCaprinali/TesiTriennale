@@ -11,14 +11,12 @@ load_dotenv()
 
 
 def clean_text(text: str) -> str:
-    """Normalizza spazi e ritorni a capo per migliorare la consistenza"""
+    """Normalizza spazi e ritorni a capo per migliorare consistenza vettoriale"""
     return " ".join(text.split())
 
 
 def crea_vectorstore_free(chunk_list, persist_dir="vectordb"):
-    """
-    Crea un vectorstore usando ChromaDB e Sentence Transformers
-    """
+    """Crea database vettoriale usando ChromaDB e SentenceTransformers per embedding locali"""
     print(f"Creazione vectorstore in {persist_dir}...")
 
     embedder = LocalEmbeddings()
@@ -57,16 +55,14 @@ def crea_vectorstore_free(chunk_list, persist_dir="vectordb"):
         metadatas=[{"source": f"chunk_{i}"} for i in range(len(chunk_list))],
     )
 
-    print(f"✅ Vectorstore creato con {len(chunk_list)} documenti!")
+    print(f"Vectorstore creato con {len(chunk_list)} documenti!")
     print(f"Percorso: {os.path.abspath(persist_dir)}")
 
     return collection
 
 
 def search_vectorstore(query, persist_dir="vectordb", k=5, embedder=None):
-    """
-    Cerca nel vectorstore esistente
-    """
+    """Esegue ricerca semantica nel database vettoriale esistente"""
     if embedder is None:
         embedder = LocalEmbeddings()
 
@@ -88,7 +84,7 @@ if __name__ == "__main__":
     cartella_faq = os.path.join(BASE_DIR, "../data/FAQ")
     cartella_estratti = os.path.join(BASE_DIR, "../data/testi_estratti")
 
-    print("🚀 CREAZIONE DATABASE VETTORIALE")
+    print("CREAZIONE DATABASE VETTORIALE")
     print("=" * 50)
 
     tutti_i_chunks = []
@@ -96,10 +92,10 @@ if __name__ == "__main__":
 
     # 1. Processa file FAQ
     if os.path.exists(cartella_faq):
-        print(f"\n📁 ELABORAZIONE FAQ da {cartella_faq}")
+        print(f"\nELABORAZIONE FAQ da {cartella_faq}")
         for filepath in glob.glob(os.path.join(cartella_faq, "*.txt")):
             filename = os.path.basename(filepath)
-            print(f"   📄 {filename}")
+            print(f"   {filename}")
 
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
@@ -110,18 +106,18 @@ if __name__ == "__main__":
                     for i, chunk in enumerate(chunks):
                         tutti_i_chunks.append(f"[FAQ-{filename.replace('.txt', '')}] {chunk}")
                     file_processati += 1
-                    print(f"      ✅ {len(chunks)} chunk estratti")
+                    print(f"      {len(chunks)} chunk estratti")
             except Exception as e:
-                print(f"      ❌ Errore nel processare {filename}: {e}")
+                print(f"      Errore nel processare {filename}: {e}")
     else:
-        print(f"⚠️ Cartella FAQ {cartella_faq} non trovata")
+        print(f"Cartella FAQ {cartella_faq} non trovata")
 
     # 2. Processa file PDF estratti
     if os.path.exists(cartella_estratti):
-        print(f"\n📁 ELABORAZIONE PDF ESTRATTI da {cartella_estratti}")
+        print(f"\nELABORAZIONE PDF ESTRATTI da {cartella_estratti}")
         for filepath in glob.glob(os.path.join(cartella_estratti, "*_extracted.txt")):
             filename = os.path.basename(filepath)
-            print(f"   📄 {filename}")
+            print(f"   {filename}")
 
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
@@ -133,25 +129,25 @@ if __name__ == "__main__":
                     for i, chunk in enumerate(chunks):
                         tutti_i_chunks.append(f"[PDF-{fonte}] {chunk}")
                     file_processati += 1
-                    print(f"      ✅ {len(chunks)} chunk estratti")
+                    print(f"      {len(chunks)} chunk estratti")
             except Exception as e:
-                print(f"      ❌ Errore nel processare {filename}: {e}")
+                print(f"      Errore nel processare {filename}: {e}")
     else:
-        print(f"⚠️ Cartella estratti {cartella_estratti} non trovata")
+        print(f"Cartella estratti {cartella_estratti} non trovata")
 
     # 3. Crea vectorstore
     if tutti_i_chunks:
-        print(f"\n📊 RIEPILOGO:")
+        print(f"\nRIEPILOGO:")
         print(f"   File processati: {file_processati}")
         print(f"   Chunk totali: {len(tutti_i_chunks)}")
-        print(f"\n🔧 Creazione vectorstore...")
+        print(f"\nCreazione vectorstore...")
 
         try:
             vectordb = crea_vectorstore_free(tutti_i_chunks)
-            print(f"\n🎉 DATABASE VETTORIALE COMPLETATO!")
+            print(f"\nDATABASE VETTORIALE COMPLETATO!")
             print(f"   Documenti salvati: {len(tutti_i_chunks)}")
             
         except Exception as e:
-            print(f"❌ Errore nella creazione del vectorstore: {e}")
+            print(f"Errore nella creazione del vectorstore: {e}")
     else:
-        print("❌ Nessun chunk trovato!")
+        print("Nessun chunk trovato!")

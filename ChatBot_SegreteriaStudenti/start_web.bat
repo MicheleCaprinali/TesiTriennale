@@ -1,10 +1,10 @@
 @echo off
-title ChatBot UniBG - Interfaccia Web
+title ChatBot UniBg - Interfaccia Web
 color 0B
 echo.
 echo ================================================================
 echo  CHATBOT SEGRETERIA STUDENTI - UNIVERSITA' DI BERGAMO
-echo  Interfaccia Web Streamlit (Settembre 2025)
+echo  Interfaccia Web Streamlit
 echo ================================================================
 echo.
 
@@ -71,12 +71,12 @@ echo.
 echo 2.3- Test import moduli core...
 chatbot_env\Scripts\python.exe -c "import sys; sys.path.append('src'); from local_embeddings import LocalEmbeddings; print('[OK] LocalEmbeddings')" 2>nul
 if errorlevel 1 (
-    echo [WARN] Problema con LocalEmbeddings - il chatbot potrebbe non funzionare
+    echo [WARN] Problema con LocalEmbeddings
 )
 
 chatbot_env\Scripts\python.exe -c "import sys; sys.path.append('src'); from ollama_llm import OllamaLLM; print('[OK] OllamaLLM')" 2>nul
 if errorlevel 1 (
-    echo [WARN] Problema con OllamaLLM - il chatbot potrebbe non funzionare
+    echo [WARN] Problema con OllamaLLM
 )
 
 echo.
@@ -86,7 +86,7 @@ echo ================================================================
 echo 3.1- Controllo Ollama...
 ollama --version >nul 2>&1
 if errorlevel 1 (
-    echo [WARN] Ollama non trovato! Il chatbot NON funzionera
+    echo [WARN] Ollama non trovato!
     echo Installa da: https://ollama.ai
 ) else (
     echo [OK] Ollama disponibile
@@ -124,14 +124,10 @@ echo  AVVIO INTERFACCIA WEB
 echo ================================================================
 echo.
 echo  URL Locale:     http://localhost:8501
-echo  URL Rete:       http://192.168.1.XXX:8501
 echo  Controlli:      Ctrl+C per fermare
-echo  Browser:        Si apre automaticamente
 echo.
 echo  SUGGERIMENTI:
-echo  - Se la porta 8501 e occupata, cambiera automaticamente
-echo  - Per condividere in rete: --server.address 0.0.0.0
-echo  - Per disabilitare browser: --server.headless true
+echo  - Se la porta 8501 è occupata, cambierà automaticamente
 echo.
 
 echo [INFO] Avvio Streamlit...
@@ -170,6 +166,5 @@ if errorlevel 1 (
 ) else (
     echo [SUCCESS] Interfaccia web terminata correttamente
 )
-
 echo Premi un tasto per chiudere...
 pause >nul

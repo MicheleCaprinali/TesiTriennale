@@ -2,6 +2,7 @@ import fitz  # PyMuPDF
 import os
 
 def pdf_to_txt_with_inline_links(pdf_path, txt_path):
+    """Estrae testo da PDF preservando i link come annotazioni inline"""
     doc = fitz.open(pdf_path)
     output_lines = []
 
@@ -22,6 +23,7 @@ def pdf_to_txt_with_inline_links(pdf_path, txt_path):
         current_y = None
 
         def flush_buffer(force_newline=False):
+            """Svuota il buffer delle parole accumulando testo e link"""
             nonlocal buffer_word, buffer_link, line_text, output_lines
             if buffer_word:
                 phrase = " ".join(buffer_word)
@@ -67,10 +69,11 @@ def pdf_to_txt_with_inline_links(pdf_path, txt_path):
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write("\n".join(output_lines))
 
-    print(f"✔ Conversione completata: {txt_path}")
+    print(f"Conversione completata: {txt_path}")
 
 
 if __name__ == "__main__":
+    """Script principale per processare tutti i PDF nella cartella guida_dello_studente"""
     input_folder = "../data/guida_dello_studente"
     output_folder = "../data/testi_estratti"
 

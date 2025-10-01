@@ -1,0 +1,604 @@
+{
+  "timestamp": "2025-10-01 16:11:36",
+  "analysis_type": "Metriche Software - Complessità Ciclomatica",
+  "project_root": "..",
+  "analyzed_files": [
+    "main.py",
+    "src\\creazione_vectorstore.py",
+    "src\\dividi_chunks.py",
+    "src\\link_enhancer.py",
+    "src\\local_embeddings.py",
+    "src\\ollama_llm.py",
+    "src\\prompt_templates.py",
+    "src\\testi_estratti.py",
+    "interfaccia\\streamlit.py"
+  ],
+  "summary": {
+    "total_files": 9,
+    "total_lines": 2169,
+    "code_lines": 1669,
+    "total_functions": 66,
+    "total_classes": 6
+  },
+  "complexity_analysis": {
+    "total_functions": 66,
+    "avg_complexity": 4.0,
+    "max_complexity": 24,
+    "min_complexity": 1,
+    "distribution": {
+      "bassa_1_5": 81.8,
+      "media_6_10": 10.6,
+      "alta_11_15": 4.5,
+      "molto_alta_16+": 3.0
+    }
+  },
+  "complexity_stats": {
+    "qualita_complessita": "Eccellente",
+    "funzioni_problematiche": 5,
+    "percentuale_buona_qualita": 92.4
+  },
+  "detailed_metrics": {
+    "files": 9,
+    "total_lines": 2169,
+    "code_lines": 1669,
+    "comment_lines": 91,
+    "blank_lines": 409,
+    "functions": 66,
+    "classes": 6,
+    "complexity_issues": 5,
+    "long_functions": 6,
+    "file_details": [
+      {
+        "file_name": "main.py",
+        "file_path": "..\\main.py",
+        "total_lines": 339,
+        "code_lines": 252,
+        "comment_lines": 20,
+        "blank_lines": 67,
+        "functions": 10,
+        "classes": 1,
+        "long_functions": 1,
+        "complexity_issues": 2,
+        "avg_line_length": 33.793510324483776,
+        "complexity_details": [
+          {
+            "function_name": "check_requirements",
+            "complexity": 11,
+            "line_start": 134,
+            "level": "Alta"
+          },
+          {
+            "function_name": "setup_chatbot",
+            "complexity": 3,
+            "line_start": 181,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "chatbot_cli",
+            "complexity": 13,
+            "line_start": 190,
+            "level": "Alta"
+          },
+          {
+            "function_name": "show_help",
+            "complexity": 2,
+            "line_start": 254,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "show_setup_instructions",
+            "complexity": 1,
+            "line_start": 278,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "main",
+            "complexity": 5,
+            "line_start": 305,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "__init__",
+            "complexity": 4,
+            "line_start": 41,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "retrieve_documents",
+            "complexity": 6,
+            "line_start": 59,
+            "level": "Media"
+          },
+          {
+            "function_name": "generate_response",
+            "complexity": 5,
+            "line_start": 81,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "chat",
+            "complexity": 1,
+            "line_start": 123,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "creazione_vectorstore.py",
+        "file_path": "..\\src\\creazione_vectorstore.py",
+        "total_lines": 153,
+        "code_lines": 113,
+        "comment_lines": 5,
+        "blank_lines": 35,
+        "functions": 3,
+        "classes": 0,
+        "long_functions": 0,
+        "complexity_issues": 0,
+        "avg_line_length": 33.431372549019606,
+        "complexity_details": [
+          {
+            "function_name": "clean_text",
+            "complexity": 1,
+            "line_start": 13,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "crea_vectorstore_free",
+            "complexity": 3,
+            "line_start": 18,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "search_vectorstore",
+            "complexity": 2,
+            "line_start": 64,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "dividi_chunks.py",
+        "file_path": "..\\src\\dividi_chunks.py",
+        "total_lines": 88,
+        "code_lines": 69,
+        "comment_lines": 4,
+        "blank_lines": 15,
+        "functions": 3,
+        "classes": 0,
+        "long_functions": 0,
+        "complexity_issues": 0,
+        "avg_line_length": 37.89772727272727,
+        "complexity_details": [
+          {
+            "function_name": "split_text_in_chunks",
+            "complexity": 1,
+            "line_start": 4,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "split_text_in_chunks_simple",
+            "complexity": 2,
+            "line_start": 16,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "save_chunks_to_file",
+            "complexity": 3,
+            "line_start": 26,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "link_enhancer.py",
+        "file_path": "..\\src\\link_enhancer.py",
+        "total_lines": 149,
+        "code_lines": 111,
+        "comment_lines": 10,
+        "blank_lines": 28,
+        "functions": 8,
+        "classes": 1,
+        "long_functions": 0,
+        "complexity_issues": 0,
+        "avg_line_length": 36.993288590604024,
+        "complexity_details": [
+          {
+            "function_name": "__init__",
+            "complexity": 1,
+            "line_start": 7,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "enhance_response",
+            "complexity": 1,
+            "line_start": 23,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_enhance_contact_formatting",
+            "complexity": 6,
+            "line_start": 35,
+            "level": "Media"
+          },
+          {
+            "function_name": "_add_contact_section_if_missing",
+            "complexity": 3,
+            "line_start": 70,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_get_minimal_footer",
+            "complexity": 1,
+            "line_start": 89,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "count_links",
+            "complexity": 1,
+            "line_start": 112,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "get_enhancement_stats",
+            "complexity": 2,
+            "line_start": 119,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "replace_phone",
+            "complexity": 2,
+            "line_start": 46,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "local_embeddings.py",
+        "file_path": "..\\src\\local_embeddings.py",
+        "total_lines": 133,
+        "code_lines": 104,
+        "comment_lines": 6,
+        "blank_lines": 23,
+        "functions": 6,
+        "classes": 1,
+        "long_functions": 0,
+        "complexity_issues": 0,
+        "avg_line_length": 37.91729323308271,
+        "complexity_details": [
+          {
+            "function_name": "__init__",
+            "complexity": 4,
+            "line_start": 24,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "embed_documents",
+            "complexity": 4,
+            "line_start": 36,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "embed_query",
+            "complexity": 4,
+            "line_start": 50,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "get_model_info",
+            "complexity": 3,
+            "line_start": 63,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "compute_similarity",
+            "complexity": 5,
+            "line_start": 77,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "batch_embed_with_metadata",
+            "complexity": 3,
+            "line_start": 93,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "ollama_llm.py",
+        "file_path": "..\\src\\ollama_llm.py",
+        "total_lines": 491,
+        "code_lines": 383,
+        "comment_lines": 23,
+        "blank_lines": 85,
+        "functions": 17,
+        "classes": 1,
+        "long_functions": 2,
+        "complexity_issues": 1,
+        "avg_line_length": 38.11405295315682,
+        "complexity_details": [
+          {
+            "function_name": "test_ollama_connection",
+            "complexity": 3,
+            "line_start": 465,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "__init__",
+            "complexity": 6,
+            "line_start": 45,
+            "level": "Media"
+          },
+          {
+            "function_name": "is_running",
+            "complexity": 5,
+            "line_start": 68,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "check_connection",
+            "complexity": 1,
+            "line_start": 86,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "list_models",
+            "complexity": 4,
+            "line_start": 90,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "generate",
+            "complexity": 24,
+            "line_start": 102,
+            "level": "Molto Alta"
+          },
+          {
+            "function_name": "_get_fallback_prompt",
+            "complexity": 1,
+            "line_start": 219,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_process_response",
+            "complexity": 6,
+            "line_start": 236,
+            "level": "Media"
+          },
+          {
+            "function_name": "_remove_repetitions",
+            "complexity": 5,
+            "line_start": 261,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_is_valid_response",
+            "complexity": 5,
+            "line_start": 277,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "get_performance_stats",
+            "complexity": 4,
+            "line_start": 298,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_classify_performance",
+            "complexity": 4,
+            "line_start": 353,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "health_check",
+            "complexity": 7,
+            "line_start": 364,
+            "level": "Media"
+          },
+          {
+            "function_name": "pull_model",
+            "complexity": 3,
+            "line_start": 399,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "delete_model",
+            "complexity": 3,
+            "line_start": 415,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "get_model_info",
+            "complexity": 5,
+            "line_start": 430,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_determine_category",
+            "complexity": 6,
+            "line_start": 445,
+            "level": "Media"
+          }
+        ]
+      },
+      {
+        "file_name": "prompt_templates.py",
+        "file_path": "..\\src\\prompt_templates.py",
+        "total_lines": 263,
+        "code_lines": 187,
+        "comment_lines": 8,
+        "blank_lines": 68,
+        "functions": 8,
+        "classes": 1,
+        "long_functions": 1,
+        "complexity_issues": 0,
+        "avg_line_length": 39.452471482889734,
+        "complexity_details": [
+          {
+            "function_name": "get_optimized_prompt",
+            "complexity": 1,
+            "line_start": 251,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "__init__",
+            "complexity": 1,
+            "line_start": 11,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "optimize_prompt",
+            "complexity": 1,
+            "line_start": 16,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_categorize_question",
+            "complexity": 3,
+            "line_start": 33,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_load_patterns",
+            "complexity": 1,
+            "line_start": 44,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_load_templates",
+            "complexity": 1,
+            "line_start": 67,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_optimize_context",
+            "complexity": 3,
+            "line_start": 215,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "_get_priority_keywords",
+            "complexity": 1,
+            "line_start": 238,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "testi_estratti.py",
+        "file_path": "..\\src\\testi_estratti.py",
+        "total_lines": 90,
+        "code_lines": 72,
+        "comment_lines": 0,
+        "blank_lines": 18,
+        "functions": 2,
+        "classes": 0,
+        "long_functions": 1,
+        "complexity_issues": 1,
+        "avg_line_length": 32.75555555555555,
+        "complexity_details": [
+          {
+            "function_name": "pdf_to_txt_with_inline_links",
+            "complexity": 18,
+            "line_start": 4,
+            "level": "Molto Alta"
+          },
+          {
+            "function_name": "flush_buffer",
+            "complexity": 5,
+            "line_start": 25,
+            "level": "Bassa"
+          }
+        ]
+      },
+      {
+        "file_name": "streamlit.py",
+        "file_path": "..\\interfaccia\\streamlit.py",
+        "total_lines": 463,
+        "code_lines": 378,
+        "comment_lines": 15,
+        "blank_lines": 70,
+        "functions": 9,
+        "classes": 1,
+        "long_functions": 1,
+        "complexity_issues": 1,
+        "avg_line_length": 26.116630669546435,
+        "complexity_details": [
+          {
+            "function_name": "initialize_chatbot",
+            "complexity": 3,
+            "line_start": 312,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "create_clickable_links",
+            "complexity": 1,
+            "line_start": 320,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "display_message",
+            "complexity": 2,
+            "line_start": 330,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "main",
+            "complexity": 14,
+            "line_start": 350,
+            "level": "Alta"
+          },
+          {
+            "function_name": "__init__",
+            "complexity": 1,
+            "line_start": 266,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "retrieve_documents",
+            "complexity": 6,
+            "line_start": 270,
+            "level": "Media"
+          },
+          {
+            "function_name": "generate_response",
+            "complexity": 5,
+            "line_start": 286,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "chat",
+            "complexity": 1,
+            "line_start": 306,
+            "level": "Bassa"
+          },
+          {
+            "function_name": "replace_url",
+            "complexity": 1,
+            "line_start": 324,
+            "level": "Bassa"
+          }
+        ]
+      }
+    ],
+    "avg_lines_per_file": 241.0,
+    "code_to_comment_ratio": 5.4523666866387055,
+    "complexity_analysis": {
+      "total_functions": 66,
+      "avg_complexity": 4.0,
+      "max_complexity": 24,
+      "min_complexity": 1,
+      "distribution": {
+        "bassa_1_5": 81.8,
+        "media_6_10": 10.6,
+        "alta_11_15": 4.5,
+        "molto_alta_16+": 3.0
+      }
+    },
+    "complexity_stats": {
+      "qualita_complessita": "Eccellente",
+      "funzioni_problematiche": 5,
+      "percentuale_buona_qualita": 92.4
+    }
+  },
+  "thesis_ready": true
+}

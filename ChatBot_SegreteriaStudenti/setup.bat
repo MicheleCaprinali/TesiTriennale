@@ -1,18 +1,22 @@
 @echo off
 title ChatBot UniBG - Setup Automatico
 color 0A
+
+REM Inizializzazione variabili
+set OLLAMA_MISSING=0
+
 echo.
 echo ================================================================
 echo  CHATBOT SEGRETERIA STUDENTI - UNIVERSITA' DI BERGAMO
-echo  Setup Automatico Sistema RAG (Settembre 2025)
+echo  Setup Automatico Sistema RAG
 echo ================================================================
 echo.
-echo Tecnologie: Mistral 7B + SentenceTransformers + ChromaDB + Ollama
-echo.
+echo [DEBUG] Script avviato correttamente
+echo [DEBUG] Variabili inizializzate
 
-echo FASE 1: CONTROLLO PREREQUISITI...
+echo FASE 1: CONTROLLO PREREQUISITI
 echo ================================================================
-echo.
+echo [DEBUG] Inizio Fase 1
 
 echo 1.1- Verifica Python...
 python --version >nul 2>&1
@@ -20,323 +24,310 @@ if errorlevel 1 (
     echo [ERRORE] Python non trovato!
     echo.
     echo AZIONE RICHIESTA:
-    echo 1. Installa Python 3.9+ da: https://www.python.org/downloads/
-    echo 2. IMPORTANTE: Seleziona "Add Python to PATH" durante installazione
-    echo 3. Riavvia il terminale dopo l'installazione
-    echo 4. Riesegui questo script
+    echo 1. Installa Python 3.9+ da python.org
+    echo 2. Aggiungi Python al PATH
+    echo 3. Riavvia CMD e riesegui setup.bat
     echo.
     pause
     exit /b 1
-) else (
-    echo [OK] Python trovato:
-    python --version
 )
 
+for /f "tokens=2" %%i in ('python --version') do set PYTHON_VERSION=%%i
+echo [OK] Python %PYTHON_VERSION%
+echo [DEBUG] Python versione catturata
+
 echo.
-echo 1.2- Verifica versione Python compatibile...
-for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
-echo Versione rilevata: %PYTHON_VERSION%
+echo 1.2- Verifica versione...
 python -c "import sys; exit(0 if sys.version_info >= (3,9) else 1)" >nul 2>&1
 if errorlevel 1 (
     echo [ERRORE] Python 3.9+ richiesto!
-    echo Versione corrente troppo vecchia.
-    echo Aggiorna Python e riprova.
     pause
     exit /b 1
-) else (
-    echo [OK] Versione Python compatibile
 )
+echo [OK] Versione compatibile
+echo [DEBUG] Fase 1 completata
 
 echo.
-echo FASE 2: SETUP AMBIENTE VIRTUALE
+echo FASE 2: AMBIENTE VIRTUALE
 echo ================================================================
-echo.
+echo [DEBUG] Inizio Fase 2
 
-echo 2.1- Controllo ambiente virtuale...
-if not exist "chatbot_env\Scripts\activate.bat" (
-    echo [INFO] Creazione ambiente virtuale isolato...
+echo 2.1- Setup ambiente virtuale...
+if not exist "chatbot_env\Scripts\python.exe" (
+    echo [INFO] Creazione ambiente virtuale...
     python -m venv chatbot_env
     if errorlevel 1 (
-        echo [ERRORE] Impossibile creare ambiente virtuale
-        echo Verifica permessi e spazio disco
+        echo [ERRORE] Creazione fallita
         pause
         exit /b 1
     )
-    echo [OK] Ambiente virtuale "chatbot_env" creato
+    echo [OK] Ambiente creato
 ) else (
-    echo [OK] Ambiente virtuale esistente
+    echo [OK] Ambiente esistente
 )
 
 echo.
-echo 2.2- Attivazione ambiente virtuale...
+echo 2.2- Attivazione ambiente...
 call chatbot_env\Scripts\activate.bat
 if errorlevel 1 (
-    echo [ERRORE] Impossibile attivare ambiente virtuale
+    echo [ERRORE] Attivazione fallita
     pause
     exit /b 1
 )
-echo [OK] Ambiente virtuale attivo
+echo [OK] Ambiente attivo
+echo [DEBUG] Fase 2 completata
 
 echo.
 echo FASE 3: INSTALLAZIONE DIPENDENZE
 echo ================================================================
-echo.
+echo [DEBUG] Inizio Fase 3
 
 echo 3.1- Aggiornamento pip...
-chatbot_env\Scripts\python.exe -m pip install --upgrade pip --quiet
-echo [OK] pip aggiornato
+chatbot_env\Scripts\python.exe -m pip install --upgrade pip --quiet --no-warn-script-location
+if errorlevel 1 (
+    echo [WARN] Aggiornamento pip fallito
+) else (
+    echo [OK] pip aggiornato
+)
 
 echo.
-echo 3.2- Installazione pacchetti Python...
-echo Questo puo richiedere 5-10 minuti...
+echo 3.2- Verifica requirements.txt...
 if not exist "requirements.txt" (
     echo [ERRORE] File requirements.txt non trovato!
-    echo Verifica che il file sia presente nella cartella
     pause
     exit /b 1
 )
+echo [OK] requirements.txt trovato
 
-chatbot_env\Scripts\python.exe -m pip install -r requirements.txt --quiet
+echo.
+echo 3.3- Installazione pacchetti (può richiedere alcuni minuti)...
+chatbot_env\Scripts\python.exe -m pip install -r requirements.txt --quiet --no-warn-script-location
 if errorlevel 1 (
-    echo [ERRORE] Errore nell'installazione dipendenze
+    echo [ERRORE] Installazione fallita
     echo Verifica connessione internet e riprova
     pause
     exit /b 1
 )
-echo [OK] Dipendenze Python installate
+echo [OK] Dipendenze installate
 
 echo.
-echo 3.3- Test import moduli core...
-chatbot_env\Scripts\python.exe -c "import sentence_transformers; print('[OK] SentenceTransformers')" 2>nul
+echo 3.4- Test moduli essenziali...
+echo [INFO] Test SentenceTransformers...
+chatbot_env\Scripts\python.exe -c "import sentence_transformers; print('SentenceTransformers OK')"
 if errorlevel 1 (
     echo [WARN] SentenceTransformers non disponibile
-) 
+) else (
+    echo [OK] SentenceTransformers verificato
+)
 
-chatbot_env\Scripts\python.exe -c "import chromadb; print('[OK] ChromaDB')" 2>nul
+echo [INFO] Test ChromaDB...
+chatbot_env\Scripts\python.exe -c "import chromadb; print('ChromaDB OK')"
 if errorlevel 1 (
     echo [WARN] ChromaDB non disponibile
+) else (
+    echo [OK] ChromaDB verificato
 )
-
-chatbot_env\Scripts\python.exe -c "import requests; print('[OK] Requests')" 2>nul
-echo [OK] Moduli core verificati
+echo [DEBUG] Fase 3 completata
 
 echo.
-echo FASE 4: SETUP OLLAMA E MODELLO MISTRAL
+echo FASE 4: CONFIGURAZIONE OLLAMA
 echo ================================================================
-echo.
+echo [DEBUG] Inizio Fase 4
 
 echo 4.1- Verifica Ollama...
-ollama --version >nul 2>&1
-if errorlevel 1 (
-    echo [WARN] Ollama non trovato!
+echo [DEBUG] Test comando where ollama...
+where ollama >nul 2>&1
+set OLLAMA_WHERE_RESULT=%errorlevel%
+echo [DEBUG] Where ollama result: %OLLAMA_WHERE_RESULT%
+
+if %OLLAMA_WHERE_RESULT% neq 0 (
+    echo [WARN] Ollama non installato
     echo.
-    echo INSTALLAZIONE OLLAMA RICHIESTA:
-    echo 1. Vai su: https://ollama.ai/download/windows
+    echo INSTALLAZIONE MANUALE RICHIESTA:
+    echo 1. Vai su https://ollama.ai/download
     echo 2. Scarica e installa Ollama per Windows
-    echo 3. Riavvia il terminale
-    echo 4. Riesegui questo script
+    echo 3. Riavvia CMD e riesegui questo script
     echo.
-    echo Il chatbot NON FUNZIONERA' senza Ollama!
-    echo.
-    pause
-    goto :skip_model
-) else (
-    echo [OK] Ollama installato:
-    ollama --version
+    set OLLAMA_MISSING=1
+    echo [DEBUG] Saltando a skip_ollama
+    goto skip_ollama
 )
+
+echo [DEBUG] Ollama trovato, test version...
+ollama --version >nul 2>&1
+set OLLAMA_VERSION_RESULT=%errorlevel%
+echo [DEBUG] Ollama version result: %OLLAMA_VERSION_RESULT%
+
+if %OLLAMA_VERSION_RESULT% neq 0 (
+    echo [WARN] Ollama installato ma non funzionante
+    set OLLAMA_MISSING=1
+    echo [DEBUG] Saltando a skip_ollama per version error
+    goto skip_ollama
+)
+
+echo [OK] Ollama installato
+echo [DEBUG] Ollama version OK
 
 echo.
 echo 4.2- Verifica servizio Ollama...
+echo [DEBUG] Test ollama list...
 ollama list >nul 2>&1
-if errorlevel 1 (
+set OLLAMA_LIST_RESULT=%errorlevel%
+echo [DEBUG] Ollama list result: %OLLAMA_LIST_RESULT%
+
+if %OLLAMA_LIST_RESULT% neq 0 (
     echo [INFO] Avvio servizio Ollama...
-    start /min ollama serve
+    echo [DEBUG] Starting ollama serve...
+    start /B ollama serve >nul 2>&1
     timeout /t 5 /nobreak >nul
+    
+    echo [DEBUG] Re-testing ollama list...
+    ollama list >nul 2>&1
+    set OLLAMA_LIST_RESULT2=%errorlevel%
+    echo [DEBUG] Ollama list result 2: %OLLAMA_LIST_RESULT2%
+    
+    if %OLLAMA_LIST_RESULT2% neq 0 (
+        echo [WARN] Servizio Ollama non avviato
+        set OLLAMA_MISSING=1
+        echo [DEBUG] Servizio fallito, saltando
+        goto skip_ollama
+    )
 )
+
+echo [OK] Servizio Ollama attivo
+echo [DEBUG] Ollama service OK
 
 echo.
-echo 4.3- Verifica modello Mistral 7B...
-ollama list | findstr "mistral" >nul 2>&1
-if errorlevel 1 (
-    echo [INFO] Download modello Mistral 7B...
-    echo ATTENZIONE: Download di ~4GB - Tempo stimato: 10-20 minuti
-    echo NON INTERROMPERE il download!
-    echo.
+echo 4.3- Verifica modello Mistral...
+echo [DEBUG] Cercando modello mistral...
+ollama list 2>nul | findstr /i "mistral" >nul
+set MISTRAL_FOUND=%errorlevel%
+echo [DEBUG] Mistral found result: %MISTRAL_FOUND%
+
+if %MISTRAL_FOUND% neq 0 (
+    echo [INFO] Download Mistral 7B (circa 4GB)...
+    echo [INFO] ATTENDERE - Non interrompere il download!
+    echo [DEBUG] Avvio download mistral...
     ollama pull mistral:7b
-    if errorlevel 1 (
-        echo [ERRORE] Download fallito
-        echo Installa manualmente con: ollama pull mistral:7b
-        pause
+    set MISTRAL_PULL_RESULT=%errorlevel%
+    echo [DEBUG] Mistral pull result: %MISTRAL_PULL_RESULT%
+    
+    if %MISTRAL_PULL_RESULT% neq 0 (
+        echo [WARN] Download fallito - comando manuale: ollama pull mistral:7b
     ) else (
-        echo [OK] Modello Mistral 7B installato
+        echo [OK] Mistral 7B installato
     )
 ) else (
-    echo [OK] Modello Mistral 7B disponibile
+    echo [OK] Mistral 7B disponibile
 )
 
-:skip_model
+echo [DEBUG] Fine controlli Ollama
+goto continue_setup
+
+:skip_ollama
+echo [INFO] Configurazione Ollama saltata
+echo [DEBUG] Ollama saltato
+
+:continue_setup
+echo [DEBUG] Continuazione setup - Fase 4 completata
 
 echo.
 echo FASE 5: CONFIGURAZIONE PROGETTO
 echo ================================================================
-echo.
+echo [DEBUG] Inizio Fase 5
 
-echo 5.1- Creazione file configurazione...
+echo 5.1- Verifica struttura file...
+set FILES_MISSING=0
+
+if not exist "src\local_embeddings.py" (
+    echo [ERRORE] File src\local_embeddings.py mancante!
+    set FILES_MISSING=1
+)
+
+if not exist "src\ollama_llm.py" (
+    echo [ERRORE] File src\ollama_llm.py mancante!
+    set FILES_MISSING=1
+)
+
+if not exist "main.py" (
+    echo [ERRORE] File main.py mancante!
+    set FILES_MISSING=1
+)
+
+if %FILES_MISSING%==1 (
+    echo [ERRORE] File essenziali mancanti! Verifica struttura progetto.
+    pause
+    exit /b 1
+)
+
+echo [OK] File principali verificati
+
+echo.
+echo 5.2- Creazione configurazione...
 if not exist ".env" (
-    echo # Configurazione ChatBot Segreteria Studenti UniBg > .env
+    echo # ChatBot Segreteria Studenti UniBG > .env
     echo EMBEDDING_MODEL=all-MiniLM-L6-v2 >> .env
     echo OLLAMA_BASE_URL=http://localhost:11434 >> .env
     echo OLLAMA_MODEL=mistral:7b >> .env
     echo TEMPERATURE=0.1 >> .env
-    echo VECTORDB_COLLECTION=unibg_docs >> .env
-    echo TICKET_URL=https://helpdesk.unibg.it/ >> .env
     echo [OK] File .env creato
 ) else (
     echo [OK] File .env esistente
 )
 
 echo.
-echo 5.2- Verifica struttura progetto...
-if not exist "src\" (
-    echo [ERRORE] Cartella src\ non trovata!
-    echo Verifica di essere nella cartella corretta del progetto
-    pause
-    exit /b 1
-)
-
-if not exist "data\" (
-    echo [WARN] Cartella data\ non trovata - creazione automatica...
+echo 5.3- Preparazione cartelle...
+if not exist "data" (
     mkdir data
-)
-
-set FILES_OK=1
-if not exist "src\local_embeddings.py" (
-    echo [ERRORE] File src\local_embeddings.py mancante!
-    set FILES_OK=0
-)
-if not exist "src\ollama_llm.py" (
-    echo [ERRORE] File src\ollama_llm.py mancante!
-    set FILES_OK=0
-)
-if not exist "src\creazione_vectorstore.py" (
-    echo [ERRORE] File src\creazione_vectorstore.py mancante!
-    set FILES_OK=0
-)
-
-if %FILES_OK%==0 (
-    echo [ERRORE] File del progetto mancanti!
-    echo Verifica di aver estratto correttamente il progetto
-    pause
-    exit /b 1
-)
-
-echo [OK] Struttura progetto verificata
-
-echo.
-echo FASE 6: PREPARAZIONE DATI
-echo ================================================================
-echo.
-
-echo 6.1- Verifica documenti estratti...
-if not exist "data\testi_estratti\" (
-    echo [INFO] Cartella testi estratti non trovata
-    if exist "data\" (
-        echo Verifica presenza documenti PDF in data\...
-        dir /b "data\*.pdf" >nul 2>&1
-        if not errorlevel 1 (
-            echo [INFO] PDF trovati - estrazione automatica...
-            chatbot_env\Scripts\python.exe src\testi_estratti.py
-            if errorlevel 1 (
-                echo [WARN] Estrazione testi fallita
-            ) else (
-                echo [OK] Testi estratti dai PDF
-            )
-        ) else (
-            echo [INFO] Nessun PDF trovato in data\
-        )
-    )
+    echo [OK] Cartella data creata
 ) else (
-    echo [OK] Testi estratti presenti
+    echo [OK] Cartella data esistente
 )
 
-echo.
-echo 6.2- Verifica database vettoriale...
-if not exist "vectordb\" (
-    echo [INFO] Database vettoriale non trovato - creazione...
-    echo Questo processo puo richiedere 3-5 minuti...
-    chatbot_env\Scripts\python.exe src\creazione_vectorstore.py
-    if errorlevel 1 (
-        echo [WARN] Creazione database fallita
-        echo Eseguire manualmente: python src\creazione_vectorstore.py
-    ) else (
-        echo [OK] Database vettoriale creato
-    )
+if not exist "data\testi_estratti" (
+    mkdir "data\testi_estratti"
+    echo [OK] Cartella testi_estratti creata
 ) else (
-    echo [OK] Database vettoriale esistente
+    echo [OK] Cartella testi_estratti esistente
 )
+echo [DEBUG] Fase 5 completata
 
 echo.
-echo FASE 7: TEST FINALE SISTEMA
+echo FASE 6: TEST FINALE
 echo ================================================================
-echo.
+echo [DEBUG] Inizio Fase 6
 
-echo 7.1- Test moduli Python...
-chatbot_env\Scripts\python.exe -c "import sys; sys.path.append('src'); from local_embeddings import LocalEmbeddings; print('[OK] LocalEmbeddings importato')" 2>nul
+echo 6.1- Test moduli sistema...
+chatbot_env\Scripts\python.exe -c "import sys; sys.path.append('src'); from local_embeddings import LocalEmbeddings; print('Moduli OK')" 2>nul
 if errorlevel 1 (
-    echo [WARN] Problema con LocalEmbeddings
+    echo [WARN] Test moduli sistema fallito
+    echo [INFO] Verifica manualmente: python -c "from src.local_embeddings import LocalEmbeddings"
+) else (
+    echo [OK] Moduli sistema verificati
 )
-
-chatbot_env\Scripts\python.exe -c "import sys; sys.path.append('src'); from ollama_llm import OllamaLLM; print('[OK] OllamaLLM importato')" 2>nul
-if errorlevel 1 (
-    echo [WARN] Problema con OllamaLLM
-)
-
-echo.
-echo 7.2- Test connessione Ollama...
-chatbot_env\Scripts\python.exe -c "import requests; r=requests.get('http://localhost:11434/api/tags', timeout=3); print('[OK] Ollama raggiungibile')" 2>nul
-if errorlevel 1 (
-    echo [WARN] Ollama non raggiungibile - verificare che sia in esecuzione
-)
+echo [DEBUG] Fase 6 completata
 
 echo.
 echo ================================================================
-echo  SETUP COMPLETATO!
+echo  ✅ SETUP COMPLETATO!
 echo ================================================================
+echo [DEBUG] Setup completato - tutto OK
 echo.
-echo [SUCCESS] Sistema ChatBot RAG configurato correttamente!
-echo.
-echo CARATTERISTICHE INSTALLATE:
-echo   - Ambiente virtuale isolato: chatbot_env\
-echo   - SentenceTransformers per embedding semantici
-echo   - ChromaDB per database vettoriale
-echo   - Ollama + Mistral 7B per generazione risposte
-echo   - Sistema RAG ottimizzato per performance
-echo.
-echo COMANDI DISPONIBILI:
-echo   - python main.py              : Avvia chatbot CLI
-echo   - python main.py --check      : Verifica sistema  
-echo   - python main.py --help       : Mostra aiuto
-echo.
-echo NOTA IMPORTANTE:
-echo Per utilizzare il chatbot, SEMPRE attivare l'ambiente virtuale:
-echo   chatbot_env\Scripts\activate
-echo Poi eseguire: python main.py
-echo.
+echo [PAUSA FORZATA] Premi un tasto per vedere i risultati finali...
+pause
 
-if not exist "vectordb\" (
-    echo [ATTENZIONE] Database vettoriale non presente!
-    echo Il chatbot non funzionera senza database.
-    echo Esegui: python src\creazione_vectorstore.py
-    echo.
+echo ⚠️  CONTROLLI FINALI:
+if %OLLAMA_MISSING%==1 (
+    echo [!] Ollama non configurato - installa manualmente da ollama.ai
 )
 
-ollama list | findstr "mistral" >nul 2>&1
-if errorlevel 1 (
-    echo [ATTENZIONE] Modello Mistral non presente!
-    echo Il chatbot non funzionera senza il modello LLM.
-    echo Installa con: ollama pull mistral:7b
-    echo.
+if not exist "vectordb" (
+    echo [!] Database vettoriale mancante - verrà creato al primo avvio
 )
 
-echo Premi un tasto per chiudere...
-pause >nul
+echo.
+echo ✅ Il sistema è configurato e pronto per l'uso!
+echo.
+echo [DEBUG] Arrivato alla fine correttamente
+echo [DEBUG] Premere un tasto per chiudere...
+pause

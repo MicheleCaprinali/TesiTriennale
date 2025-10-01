@@ -6,14 +6,15 @@ from typing import Dict, List
 import re
 
 class PromptOptimizer:
-    """Ottimizzatore di prompt per diverse categorie di domande"""
+    """Sistema di ottimizzazione prompts per diverse categorie di domande universitarie"""
     
     def __init__(self):
+        """Inizializza templates e pattern per il riconoscimento delle categorie"""
         self.templates = self._load_templates()
         self.question_patterns = self._load_patterns()
     
     def optimize_prompt(self, question: str, context: str) -> str:
-        """Ottimizza il prompt basandosi sul tipo di domanda"""
+        """Genera prompt ottimizzato basandosi sul tipo di domanda e contesto"""
         
         # Identifica categoria domanda
         category = self._categorize_question(question)
@@ -30,7 +31,7 @@ class PromptOptimizer:
         )
     
     def _categorize_question(self, question: str) -> str:
-        """Categorizza la domanda per scegliere il template migliore"""
+        """Analizza la domanda e la classifica nella categoria più appropriata"""
         
         question_lower = question.lower()
         
@@ -41,7 +42,7 @@ class PromptOptimizer:
         return 'generic'
     
     def _load_patterns(self) -> Dict[str, List[str]]:
-        """Pattern per riconoscere tipologie di domande"""
+        """Definisce i pattern testuali per il riconoscimento automatico delle categorie"""
         return {
             'iscrizioni_esami': [
                 'iscriver', 'esam', 'prenotare', 'prenotazione', 'sessione'
@@ -64,7 +65,7 @@ class PromptOptimizer:
         }
     
     def _load_templates(self) -> Dict[str, str]:
-        """Template ottimizzati per ogni categoria"""
+        """Carica i template di prompt specializzati per ogni categoria di domande"""
         return {
             'iscrizioni_esami': """Sei l'assistente AI della Segreteria Studenti UniBg specializzato in ISCRIZIONI ESAMI.
 
@@ -212,7 +213,7 @@ RISPOSTA PROFESSIONALE:"""
         }
     
     def _optimize_context(self, context: str, category: str) -> str:
-        """Ottimizza il contesto basandosi sulla categoria"""
+        """Ottimizza il contesto in base alla categoria per migliorare rilevanza"""
         
         if len(context) > 4000:  # Aumentato limite per più dettagli
             # Prioritizza informazioni rilevanti per la categoria
@@ -235,7 +236,7 @@ RISPOSTA PROFESSIONALE:"""
         return context
     
     def _get_priority_keywords(self, category: str) -> List[str]:
-        """Keywords prioritarie per categoria"""
+        """Restituisce le parole chiave prioritarie per una specifica categoria"""
         priority_map = {
             'iscrizioni_esami': ['iscrizione', 'esame', 'prenotazione', 'sessione', 'scadenza'],
             'tasse_pagamenti': ['tassa', 'pagamento', 'importo', 'scadenza', 'bollettino'],
@@ -248,12 +249,12 @@ RISPOSTA PROFESSIONALE:"""
 
 # Funzione helper per integrare facilmente
 def get_optimized_prompt(question: str, context: str) -> str:
-    """Ottiene prompt ottimizzato per la domanda"""
+    """Funzione helper per ottenere prompt ottimizzato per qualsiasi domanda"""
     optimizer = PromptOptimizer()
     return optimizer.optimize_prompt(question, context)
 
 if __name__ == "__main__":
-    # Test
+    # Test sistema di ottimizzazione
     question = "Come faccio a iscrivermi agli esami?"
     context = "Gli studenti possono iscriversi agli esami tramite il portale online. Le iscrizioni aprono 15 giorni prima della data d'esame."
     
