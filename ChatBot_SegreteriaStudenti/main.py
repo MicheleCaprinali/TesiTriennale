@@ -56,8 +56,11 @@ class ChatbotRAG:
             print(f"Errore inizializzazione: {e}")
             raise
     
-    def retrieve_documents(self, query, k=5):
-        """Recupera documenti semanticamente rilevanti dal vector database"""
+    def retrieve_documents(self, query, k=4):
+        """
+        ✅ OTTIMIZZATO: Recupera top-4 documenti (meno = più veloce)
+        Ridotto da k=5 a k=4 per velocizzare retrieval + generation
+        """
         try:
             results = search_vectorstore(query, k=k, embedder=self.embedder)
             
@@ -91,10 +94,10 @@ class ChatbotRAG:
                 "should_redirect": True
             }
         
-        # Prepara contesto testuale separato (top-3 documenti per velocità)
+        # ✅ OTTIMIZZATO: Usa solo top-2 documenti più rilevanti (velocità++)
         context = "\n\n".join([
             f"Documento {i+1}:\n{doc['content']}" 
-            for i, doc in enumerate(context_docs[:3])
+            for i, doc in enumerate(context_docs[:2])  # Ridotto da 3 a 2
         ])
         
         try:

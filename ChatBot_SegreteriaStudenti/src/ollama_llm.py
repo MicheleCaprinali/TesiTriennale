@@ -140,18 +140,18 @@ class OllamaLLM:
             "prompt": final_prompt,
             "stream": False,
             "options": {
-                "temperature": 0.2,      # ✅ BILANCIATO: buon compromesso qualità/velocità
-                "top_p": 0.85,           # ✅ BILANCIATO: tra 0.8 e 0.9
-                "num_predict": 400,      # ✅ AUMENTATO da 300 (risposte complete ma non eccessive)
+                "temperature": 0.25,     # ✅ AUMENTATO leggermente (più varietà = meno retry)
+                "top_p": 0.88,           # ✅ AUMENTATO (meno stringente = più veloce)
+                "num_predict": 350,      # ✅ RIDOTTO da 400 (risposte concise ma complete)
                 "num_ctx": 2048,         # ✅ Mantenuto (efficiente)
-                "repeat_penalty": 1.1,   # ✅ OK
+                "repeat_penalty": 1.15,  # ✅ AUMENTATO (meno ripetizioni = meno token)
                 "top_k": 40,             # ✅ OK
                 "stop": ["Human:", "Assistant:", "###"]
             }
         }
         
-        # FASE 3: Sistema retry con timeout bilanciati velocità/affidabilità
-        timeouts = [30, 45, 60]  # ✅ BILANCIATI: abbastanza per Mistral, non eccessivi (max 135s)
+        # FASE 3: Sistema retry con timeout progressivi ottimizzati
+        timeouts = [25, 40, 55]  # ✅ RIDOTTI: 25-40s sufficiente per la maggior parte (max 120s)
         
         for attempt, timeout in enumerate(timeouts, 1):
             try:

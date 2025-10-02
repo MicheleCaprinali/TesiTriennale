@@ -89,6 +89,11 @@ REGOLE COMPLETEZZA E CHIAREZZA:
 - Usa formatting **grassetto** per passaggi chiave
 - Lunghezza ottimale: 250-400 parole
 
+REGOLE LINK (CRITICO):
+- USA SOLO link presenti ESATTAMENTE nel contesto
+- NON INVENTARE link o URL
+- Se link mancante nel contesto, NON aggiungerlo
+
 CONTESTO UNIBG: {context}
 
 DOMANDA STUDENTE: {question}
@@ -105,8 +110,8 @@ REGOLE SPECIFICHE:
 - Elenca tutte le MODALITÀ DI PAGAMENTO possibili
 - Spiega cosa succede in caso di ritardo
 - Includi informazioni su agevolazioni/riduzioni se pertinenti
-- Fornisci link diretti per il pagamento
-- Mantieni i link esatti senza modifiche
+- Fornisci link diretti per il pagamento SOLO se presenti nel contesto
+- NON INVENTARE link di pagamento (rischio sicurezza)
 
 CONTESTO UNIBG: {context}
 
@@ -125,7 +130,7 @@ REGOLE SPECIFICHE:
 - Elenca DOCUMENTI NECESSARI per la richiesta
 - Fornisci procedure sia per studenti in corso che laureati
 - Includi orari e modalità di ritiro
-- Mantieni i link esatti senza modifiche
+- USA SOLO link presenti nel contesto (NON inventare URL)
 
 CONTESTO UNIBG: {context}
 
@@ -144,7 +149,7 @@ REGOLE SPECIFICHE:
 - Indica eventuali variazioni stagionali degli orari
 - Specifica quali servizi sono disponibili online H24
 - Aggiungi informazioni su periodi di chiusura
-- Mantieni i link esatti senza modifiche
+- USA SOLO link/email presenti nel contesto
 
 CONTESTO UNIBG: {context}
 
@@ -164,7 +169,7 @@ REGOLE SPECIFICHE:
 - Distingui tra procedure online e cartacee
 - Avverti di possibili intoppi o ritardi
 - Fornisci alternative quando possibili
-- Mantieni i link esatti senza modifiche
+- USA SOLO link presenti nel contesto
 
 CONTESTO UNIBG: {context}
 
@@ -184,7 +189,12 @@ REGOLE SPECIFICHE:
 - Segnala scadenze per richieste/rinnovi
 - Distingui tra servizi per diversi tipi di studenti
 - Fornisci contatti specifici per ogni servizio
-- Mantieni i link esatti senza modifiche
+
+REGOLE LINK (CRITICO):
+- USA SOLO link presenti nel contesto fornito
+- NON INVENTARE link, URL o indirizzi web
+- Se il contesto non contiene link specifici, NON aggiungerli
+- Meglio non mettere link che inventarne uno falso
 
 CONTESTO UNIBG: {context}
 
@@ -202,8 +212,13 @@ REGOLE GENERALI:
 - Mantieni un tono cordiale ma professionale
 - Struttura la risposta in modo chiaro e leggibile
 - Includi contatti per ulteriori informazioni quando appropriato
-- Mantieni tutti i link esattamente come nel contesto
-- Non inventare informazioni non presenti nel contesto
+
+REGOLE LINK (CRITICO):
+- USA SOLO link presenti ESATTAMENTE nel contesto fornito
+- NON INVENTARE link, URL o indirizzi web
+- Se il contesto non contiene link specifici, NON aggiungerli
+- Meglio omettere un link che inventarne uno falso
+- Se menzionato nel contesto, riportalo IDENTICO (copia-incolla)
 
 CONTESTO UNIBG: {context}
 
