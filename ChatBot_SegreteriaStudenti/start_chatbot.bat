@@ -135,28 +135,6 @@ echo ================================================================
 echo  AVVIO CHATBOT CONSOLE
 echo ================================================================
 echo.
-
-echo 🤖 CHATBOT SEGRETERIA STUDENTI - UniBg
-echo 📋 Modalità: Console CLI Interattiva
-echo 🔧 Tecnologie: RAG + Mistral 7B + SentenceTransformers
-echo.
-
-echo 💡 COMANDI DISPONIBILI:
-echo    ▶️  Scrivi una domanda e premi INVIO
-echo    ▶️  'exit', 'quit' o 'bye' per uscire
-echo    ▶️  'help' per mostrare esempi
-echo    ▶️  'status' per info sistema
-echo    ▶️  Ctrl+C per interruzione forzata
-echo.
-
-echo 🎯 ESEMPI DI DOMANDE:
-echo    • "Come iscriversi agli esami?"
-echo    • "Orari della segreteria studenti?"  
-echo    • "Informazioni su tasse universitarie?"
-echo    • "Servizi per studenti con disabilità?"
-echo    • "Come richiedere certificati?"
-echo.
-
 echo ▶️  Premi un tasto per avviare il chatbot...
 pause >nul
 
