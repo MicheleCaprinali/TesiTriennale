@@ -79,43 +79,55 @@ class ChatbotRAG:
             return []
     
     def generate_response(self, query, context_docs):
-        """Genera risposta contestualizzata usando il modello LLM"""
+        """
+        ✅ OTTIMIZZATO: Genera risposta usando query + context separati
+        Permette a prompt_templates.py di categorizzare e ottimizzare il prompt
+        """
         
-        # Costruisci contesto dai documenti recuperati
-        if context_docs:
-            context = "\n\n".join([doc["content"] for doc in context_docs[:3]])
-        else:
-            context = "Non sono riuscito a trovare informazioni specifiche nei documenti."
+        if not context_docs:
+            return {
+                "response": "Non ho trovato informazioni pertinenti nella mia base di conoscenza. Ti consiglio di contattare la segreteria per assistenza.",
+                "context_used": 0,
+                "should_redirect": True
+            }
         
-        # Template prompt ottimizzato per assistenza universitaria
-        prompt = f"""Sei un assistente virtuale della Segreteria Studenti dell'Università di Bergamo.
-
-CONTESTO DOCUMENTI:
-{context}
-
-DOMANDA STUDENTE: {query}
-
-ISTRUZIONI:
-- Rispondi in modo preciso basandoti sul CONTESTO fornito
-- Se il contesto non contiene informazioni sufficienti, dillo chiaramente
-- Mantieni un tono professionale ma cordiale
-- Includi link/URL del contesto se presenti
-- Se la domanda è fuori ambito, suggerisci di contattare l'ufficio competente
-
-RISPOSTA:"""
-
+        # Prepara contesto testuale separato (top-3 documenti per velocità)
+        context = "\n\n".join([
+            f"Documento {i+1}:\n{doc['content']}" 
+            for i, doc in enumerate(context_docs[:3])
+        ])
+        
         try:
-            response = self.llm.generate(prompt)
+            # ✅ MODIFICA CRITICA: Passa query originale + context separati
+            # Questo permette a prompt_templates.py di categorizzare e ottimizzare
+            response = self.llm.generate(query, context)
+            
+            # Gestione redirect to human
+            if "REDIRECT_TO_HUMAN" in response:
+                ticket_url = os.getenv('TICKET_URL', 'https://helpdesk.unibg.it/')
+                return {
+                    "response": f"""Mi dispiace, al momento non riesco a fornirti una risposta accurata.
+
+Ti consiglio di contattare direttamente la segreteria studenti:
+📧 Email: segreteria.studenti@unibg.it
+🌐 Helpdesk: {ticket_url}
+
+Dettagli tecnici: {response.replace('REDIRECT_TO_HUMAN - ', '')}""",
+                    "context_used": len(context_docs),
+                    "should_redirect": True
+                }
+            
             return {
                 "response": response,
                 "context_used": len(context_docs),
-                "should_redirect": len(context_docs) == 0 or "non sono riuscito" in response.lower()
+                "should_redirect": False
             }
             
         except Exception as e:
             print(f"Errore generazione: {e}")
+            ticket_url = os.getenv('TICKET_URL', 'https://helpdesk.unibg.it/')
             return {
-                "response": "Mi dispiace, sto avendo difficoltà tecniche. Contatta direttamente la segreteria studenti (https://helpdesk.unibg.it/) .",
+                "response": f"Mi dispiace, sto avendo difficoltà tecniche. Contatta direttamente la segreteria studenti ({ticket_url}).",
                 "context_used": 0,
                 "should_redirect": True
             }

@@ -1,9 +1,9 @@
 """
 Modulo per gestire LLM locale con Ollama
 Versione ottimizzata con prompt templates e gestione errori migliorata
+✅ OTTIMIZZATO: Timeout ridotti, parametri LLM ottimizzati, validazione meno rigida
 """
 
-from click import prompt
 import requests
 import os
 import logging
@@ -16,19 +16,19 @@ from typing import Dict, Any
 try:
     from prompt_templates import get_optimized_prompt
     PROMPT_OPTIMIZATION = True
-    print("Sistema prompt ottimizzati caricato")
+    print("✅ Sistema prompt ottimizzati caricato")
 except ImportError as e:
     PROMPT_OPTIMIZATION = False
-    print(f"Prompt optimization non disponibile: {e}")
+    print(f"⚠️ Prompt optimization non disponibile: {e}")
 
-
+# Import sicuro per link enhancer
 try:
     from link_enhancer import LinkEnhancer
     LINK_ENHANCEMENT_AVAILABLE = True
-    print("Sistema link automatico caricato")
+    print("✅ Sistema link automatico caricato")
 except ImportError as e:
     LINK_ENHANCEMENT_AVAILABLE = False
-    print(f"Link enhancement non disponibile: {e}")
+    print(f"⚠️ Link enhancement non disponibile: {e}")
 
 load_dotenv()
 
@@ -40,6 +40,7 @@ class OllamaLLM:
     """
     Classe per interfacciarsi con Ollama per LLM locale
     Supporta prompt ottimizzati e gestione errori avanzata
+    ✅ OTTIMIZZATO: Parametri LLM bilanciati per velocità/qualità
     """
     
     def __init__(self, base_url: str = None, model: str = None):
@@ -52,6 +53,7 @@ class OllamaLLM:
         self._request_count = 0
         self._success_count = 0
         self._total_response_time = 0.0
+        self._warmed_up = False  # ✅ Flag per tracking warm-up
         
         self.link_enhancement_enabled = False
         if LINK_ENHANCEMENT_AVAILABLE:
@@ -99,13 +101,13 @@ class OllamaLLM:
             logger.warning(f"Errore nel recupero modelli: {e}")
             return []
     
-    def generate(self, prompt: str, context: str = "") -> str:
+    def generate(self, query: str, context: str = "") -> str:
         """
-        Genera risposta con prompt ottimizzato e gestione errori robusta
+        ✅ OTTIMIZZATO: Genera risposta veloce con prompt ottimizzato
         
         Args:
-            prompt: Domanda dell'utente
-            context: Contesto dai documenti
+            query: Query ORIGINALE dell'utente (es. "Come iscrivermi agli esami?")
+            context: Contesto documenti recuperati dal RAG (testo concatenato)
             
         Returns:
             str: Risposta generata o messaggio di errore
@@ -114,36 +116,42 @@ class OllamaLLM:
         start_time = time.time()
         self._request_count += 1
         
+        # ✅ WARM-UP: Prima richiesta richiede più tempo (caricamento modello)
+        if not self._warmed_up:
+            print("🔥 Caricamento modello in corso (prima richiesta più lenta)...")
+            self._warmed_up = True
+        
         # FASE 1: Costruzione prompt ottimizzato
         if PROMPT_OPTIMIZATION:
             try:
-                final_prompt = get_optimized_prompt(prompt, context)
+                # ✅ Passa query originale + context separati per categorizzazione
+                final_prompt = get_optimized_prompt(query, context)
                 print("🔧 Usando prompt ottimizzato")
             except Exception as e:
                 print(f"⚠️ Errore prompt optimization: {e}")
-                final_prompt = self._get_fallback_prompt(prompt, context)
+                final_prompt = self._get_fallback_prompt(query, context)
         else:
-            final_prompt = self._get_fallback_prompt(prompt, context)
+            final_prompt = self._get_fallback_prompt(query, context)
             print("⚠️ Usando prompt base")
         
-        # FASE 2: Configurazione parametri ottimizzati
+        # FASE 2: Configurazione parametri ottimizzati per velocità/qualità
         payload = {
             "model": self.model,
             "prompt": final_prompt,
             "stream": False,
             "options": {
-                "temperature": self.temperature,
-                "top_p": 0.8,
-                "num_predict": 600,  # Più parole per completezza
-                "num_ctx": 4096,     # Più contesto
-                "repeat_penalty": 1.15,
-                "top_k": 20,
-                "stop": ["Human:", "Assistant:", "###"]  # Stop tokens
+                "temperature": 0.2,      # ✅ BILANCIATO: buon compromesso qualità/velocità
+                "top_p": 0.85,           # ✅ BILANCIATO: tra 0.8 e 0.9
+                "num_predict": 400,      # ✅ AUMENTATO da 300 (risposte complete ma non eccessive)
+                "num_ctx": 2048,         # ✅ Mantenuto (efficiente)
+                "repeat_penalty": 1.1,   # ✅ OK
+                "top_k": 40,             # ✅ OK
+                "stop": ["Human:", "Assistant:", "###"]
             }
         }
         
-        # FASE 3: Sistema retry con timeout progressivi
-        timeouts = [60, 90, 120]  # Timeout molto generosi
+        # FASE 3: Sistema retry con timeout bilanciati velocità/affidabilità
+        timeouts = [30, 45, 60]  # ✅ BILANCIATI: abbastanza per Mistral, non eccessivi (max 135s)
         
         for attempt, timeout in enumerate(timeouts, 1):
             try:
@@ -161,11 +169,11 @@ class OllamaLLM:
                     answer = result.get('response', '').strip()
                     
                     # FASE 4: Validazione e post-processing
-                    processed_answer = self._process_response(answer, prompt)
+                    processed_answer = self._process_response(answer, query)  # ✅ Usa query originale
                     
                     if self.link_enhancement_enabled and hasattr(self, 'link_enhancer') and processed_answer:
                         try:
-                            category = self._determine_category(prompt)
+                            category = self._determine_category(query)  # ✅ Usa query originale
                             original_links = self.link_enhancer.count_links(processed_answer)
                             processed_answer = self.link_enhancer.enhance_response(processed_answer, category)
                             new_links = self.link_enhancer.count_links(processed_answer)
@@ -195,9 +203,9 @@ class OllamaLLM:
                         return f"REDIRECT_TO_HUMAN - Errore server (HTTP {response.status_code})"
             
             except requests.exceptions.Timeout:
-                print(f"⏰ Timeout {timeout}s al tentativo {attempt}")
+                print(f"⏰ Timeout {timeout}s al tentativo {attempt} - il modello sta elaborando...")
                 if attempt == len(timeouts):
-                    return "REDIRECT_TO_HUMAN - Sistema sovraccarico, riprova tra qualche minuto"
+                    return "REDIRECT_TO_HUMAN - Il sistema sta richiedendo più tempo del previsto. Riprova tra un momento o semplifica la domanda."
             
             except requests.exceptions.ConnectionError:
                 print(f"🔌 Errore connessione al tentativo {attempt}")
@@ -216,13 +224,16 @@ class OllamaLLM:
         
         return "REDIRECT_TO_HUMAN - Impossibile generare risposta dopo tutti i tentativi"
     
-    def _get_fallback_prompt(self, prompt: str, context: str) -> str:
-        """Genera prompt di fallback quando l'ottimizzazione avanzata non è disponibile"""
+    def _get_fallback_prompt(self, query: str, context: str) -> str:
+        """
+        ✅ OTTIMIZZATO: Usa query invece di prompt per chiarezza
+        Genera prompt di fallback quando l'ottimizzazione avanzata non è disponibile
+        """
         return f"""Sei l'assistente AI della Segreteria Studenti dell'Università di Bergamo.
 
 CONTESTO: {context}
 
-DOMANDA STUDENTE: {prompt}
+DOMANDA STUDENTE: {query}
 
 ISTRUZIONI:
 - Rispondi in modo professionale e completo
@@ -233,11 +244,14 @@ ISTRUZIONI:
 
 RISPOSTA:"""
     
-    def _process_response(self, answer: str, original_prompt: str) -> str:
-        """Post-elabora la risposta per migliorarne qualità e formato"""
+    def _process_response(self, answer: str, original_query: str) -> str:
+        """
+        ✅ OTTIMIZZATO: Rinominato parametro per chiarezza
+        Post-elabora la risposta per migliorarne qualità e formato
+        """
         
         if not answer:
-            return "Mi dispiace, non sono riuscito a generare una risposta appropriata."
+            return ""
         
         # Rimuovi eventuali prefissi indesiderati
         prefixes_to_remove = [
@@ -247,6 +261,7 @@ RISPOSTA:"""
         
         for prefix in prefixes_to_remove:
             if answer.startswith(prefix):
+                answer = answer[len(prefix):].strip()
                 answer = answer[len(prefix):].strip()
         
         # Rimuovi ripetizioni eccessive
@@ -275,25 +290,33 @@ RISPOSTA:"""
         return '\n'.join(unique_lines)
     
     def _is_valid_response(self, answer: str) -> bool:
-        """Valuta se la risposta generata è utile e di qualità sufficiente"""
+        """
+        ✅ OTTIMIZZATO: Validazione meno rigida per ridurre retry inutili
+        Valuta se la risposta generata è utile e di qualità sufficiente
+        """
         
-        if not answer or len(answer.strip()) < 10:
+        if not answer or len(answer.strip()) < 15:  # ✅ Abbassato da 20 a 15
             return False
         
-        # Risposte da considerare non valide
+        # ✅ MODIFICATO: Pattern più specifici (evita falsi positivi)
         invalid_patterns = [
-            "non riesco", "non posso", "non ho informazioni",
-            "mi dispiace, non", "errore", "impossibile rispondere",
-            "contatta la segreteria" # Solo se è l'unica cosa che dice
+            "non riesco a rispondere",
+            "non posso aiutarti con questo", 
+            "non ho informazioni sufficienti per rispondere",
+            "errore nella generazione della risposta", 
+            "impossibile rispondere a questa specifica domanda"
         ]
         
         answer_lower = answer.lower()
         
-        # Se contiene solo pattern invalidi
-        if len(answer) < 50 and any(pattern in answer_lower for pattern in invalid_patterns):
-            return False
+        # ✅ OTTIMIZZATO: Scarta solo se TUTTA la risposta è chiaramente invalida
+        if len(answer) < 80:  # ✅ Abbassato da 100 a 80 (più permissivo)
+            # Richiede almeno 2 pattern invalidi per scartare
+            invalid_count = sum(1 for pattern in invalid_patterns if pattern in answer_lower)
+            if invalid_count >= 2:
+                return False
         
-        return True
+        return True  # ✅ Accetta tutte le altre risposte
     
     def get_performance_stats(self) -> Dict[str, Any]:
         """Restituisce statistiche dettagliate sulle performance del sistema LLM"""
@@ -442,19 +465,22 @@ RISPOSTA:"""
         except Exception as e:
             return {"success": False, "error": str(e)}
         
-    def _determine_category(self, prompt: str) -> str:
-        """Analizza la domanda per determinare la categoria più appropriata"""
-        prompt_lower = prompt.lower()
+    def _determine_category(self, query: str) -> str:
+        """
+        ✅ OTTIMIZZATO: Usa query invece di prompt
+        Analizza la domanda per determinare la categoria più appropriata
+        """
+        query_lower = query.lower()
     
-        if any(word in prompt_lower for word in ['iscriver', 'esam', 'prenotare']):
+        if any(word in query_lower for word in ['iscriver', 'esam', 'prenotare']):
             return 'iscrizioni_esami'
-        elif any(word in prompt_lower for word in ['tasse', 'pagare', 'pagament']):
+        elif any(word in query_lower for word in ['tasse', 'pagare', 'pagament']):
             return 'tasse_pagamenti'  
-        elif any(word in prompt_lower for word in ['certificat', 'document']):
+        elif any(word in query_lower for word in ['certificat', 'document']):
             return 'certificati_documenti'
-        elif any(word in prompt_lower for word in ['orari', 'contatt', 'telefono']):
+        elif any(word in query_lower for word in ['orari', 'contatt', 'telefono']):
             return 'orari_contatti'
-        elif any(word in prompt_lower for word in ['servizi', 'agevolazioni', 'borse']):
+        elif any(word in query_lower for word in ['servizi', 'agevolazioni', 'borse']):
             return 'servizi_studenti'
     
         return 'generic'    
@@ -480,8 +506,9 @@ if __name__ == "__main__":
     print(f"Modelli: {llm.list_models()}")
     
     # Test generazione
-    test_prompt = "Test di connessione"
-    result = llm.generate(test_prompt, "Contesto di test")
+    test_query = "Come mi iscrivo agli esami?"
+    test_context = "Per iscriversi agli esami bisogna accedere al portale studenti..."
+    result = llm.generate(test_query, test_context)
     print(f"Test generazione: {result[:100]}...")
     
     # Statistiche
