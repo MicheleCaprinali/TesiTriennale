@@ -1,0 +1,43 @@
+{
+  "query": "Come faccio a iscrivermi all'università?",
+  "category": "iscrizioni",
+  "generated_response": "Per iscriversi agli esami all'Università di Bergamo, seguire questa procedura dettagliata:\n\n1. **Supera il test di ammissione**: Controlla i requisiti di ammissione per il tuo corso di studio e supera il relativo test.\n\n2. **Presentazione della domanda di trasferimento**: Se sei un studente proveniente da un'altra università, dovrai presentare all’Università di provenienza istanza di trasferimento. La ricevuta della presentazione della domanda di trasferimento rilasciata dall’Università di provenienza andrà trasmessa alla Segreteria entro la scadenza indicata dal bando.\n\n3. **Foglio di congedo**: Sarà cura dell’Università di provenienza trasmettere all’Università degli studi di Bergamo il tuo foglio di congedo. Successivamente alla delibera della competente struttura didattica, la Segreteria studenti provvederà ad inviarti a mezzo mail comunicazione in merito al riconoscimento degli esami sostenuti durante la carriera pregressa.\n\n4. **Visiting Student**: Se sei un studente che vuole proseguire gli studi presso un’Università straniera, dovrai:\n   - Inoltrare all’Università straniera domanda di accoglimento in qualità di visiting student;\n   - Ottenere i programmi degli esami che intendi sostenere all’estero da far approvare ai docenti dell’Università di Bergamo che dovranno in seguito riconoscere gli esami;\n   - Inoltrare alla competente struttura didattica richiesta di autorizzazione a sostenere esami all’estero;\n   - Avanzare domanda di sospensione dagli studi presso l'Università degli Studi di Bergamo.\n\n5. **Trasferimento ad altre Università Lombarde**: Se dovrai trasferirti ad altro ateneo lombardo, dovrai richiedere all'Università di destinazione il rimborso della tassa regionale eventualmente versata presso l'Università di Bergamo.\n\n6. **Scadenze e costi**: Se compilerai l'istanza di trasferimento dopo il 3 ottobre 2025 (dal 4 ottobre al 28 novembre 2025), dovrai versare il contributo di trasferimento di € 95,00 (+.",
+  "reference_response": "Per iscriverti all'Università di Bergamo devi seguire questi passi:\n\n1. Consulta l'offerta formativa su https://www.unibg.it/studiare/corsi/offerta-formativa\n2. Verifica le scadenze di iscrizione su https://www.unibg.it/studia-noi/iscriversi/scadenze-iscriversi\n3. Per corsi ad accesso programmato, consulta i bandi specifici\n4. Effettua la pre-iscrizione/immatricolazione online tramite il portale studenti\n\nLe procedure sono diverse per corsi triennali e magistrali. Per informazioni dettagliate: https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi",
+  "retrieved_documents": [
+    "[PDF-guide_2025-2026] . Dopo aver superato il test di ammissione ed esserti collocato/a utilmente in graduatoria, dovrai presentare all’Università di provenienza istanza di trasferimento. La ricevuta ...",
+    "[PDF-studenti] . Per le stesse casistiche, sarà inoltre consentita la sospensione dagli studi per gli studenti che vogliano iscriversi presso altro ateneo senza usufruire della contemporanea iscrizion...",
+    "[PDF-studenti] . Se ti trasferirai ad altro ateneo lombardo dovrai richiedere all'Università di destinazione il rimborso della tassa regionale eventualmente versata presso l'Università di Bergamo. Se ..."
+  ],
+  "num_retrieved_docs": 5,
+  "quality_metrics": {
+    "length_words": 264,
+    "length_chars": 1954,
+    "num_sentences": 14,
+    "avg_sentence_length": 18.857142857142858,
+    "has_links": 0.0,
+    "has_structure": 1.0,
+    "semantic_similarity": 0.5667730569839478,
+    "keyword_overlap": 0.5,
+    "completeness_score": 1.0,
+    "informativeness_score": 1.0,
+    "clarity_score": 1.0,
+    "professional_tone": 0.7,
+    "bleu_score": 0.06439393939393939,
+    "reference_similarity": 0.5611299276351929,
+    "overall_score": 0.825
+  },
+  "rag_metrics": {
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "bleu_score": 0.003,
+    "rouge_l": 0.075,
+    "bert_score": 0.561,
+    "answer_relevance": 0.567,
+    "context_precision": 0.0,
+    "faithfulness": 0.863,
+    "rag_overall_score": 0.32
+  },
+  "overall_quality_score": 0.825,
+  "overall_rag_score": 0.32
+}
