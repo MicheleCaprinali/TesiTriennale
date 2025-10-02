@@ -366,7 +366,6 @@ def main():
             "Orari della segreteria studenti?", 
             "Servizi per studenti con disabilità?",
             "Come richiedere certificati?",
-            "Informazioni su alloggi universitari?",
             "Procedure per la laurea?",
             "Contatti segreteria"
         ]
@@ -405,7 +404,6 @@ Posso aiutarti con informazioni su:
 • 📄 Certificati e documenti ufficiali
 • 📞 Contatti e orari degli uffici
 • ♿ Servizi per studenti con disabilità
-• 🏠 Alloggi e servizi universitari
 • 🎓 Procedure di laurea
 
 Scrivi la tua domanda qui sotto! 🚀"""

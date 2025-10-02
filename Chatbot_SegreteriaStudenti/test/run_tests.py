@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-Test Suite Essenziale - Chatbot Segreteria Studenti
-=================================================
-Script per eseguire test unitari e prestazionali del chatbot reale
-"""
-
 import os
 import sys
 import json
@@ -16,7 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 def run_essential_test_suite():
     """Esegue la suite essenziale di test"""
     
-    print("🧪 SUITE ESSENZIALE - CHATBOT SEGRETERIA STUDENTI")
+    print("🧪 CHATBOT SEGRETERIA STUDENTI")
     print("=" * 60)
     print(f"Avvio: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()

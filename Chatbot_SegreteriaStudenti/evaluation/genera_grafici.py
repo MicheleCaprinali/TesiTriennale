@@ -1,8 +1,3 @@
-"""
-Generatore grafici PNG dai risultati JSON per tesi
-Trasforma dati metriche in visualizzazioni professionali
-"""
-
 import json
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -10,8 +5,7 @@ from pathlib import Path
 import pandas as pd
 
 def genera_grafici_tesi():
-    """Genera grafici PNG dai file JSON per inserimento in tesi"""
-    
+
     results_dir = Path("../results")
     if not results_dir.exists():
         print("Cartella results non trovata. Esegui prima le analisi delle metriche.")
@@ -29,10 +23,6 @@ def genera_grafici_tesi():
     _grafico_metriche_rag(results_dir)
     
     print("Grafici salvati nella cartella results/")
-    print("Grafici generati (3 PNG per tesi):")
-    print("  • complessita_ciclomatica_distribuzione.png")
-    print("  • wmc_lcom_analisi.png") 
-    print("  • metriche_rag_valutazione.png")
 
 def _grafico_complessita_ciclomatica(results_dir):
     """Grafico a torta distribuzione complessità ciclomatica"""
@@ -218,8 +208,7 @@ def _grafico_metriche_rag(results_dir):
 if __name__ == "__main__":
     try:
         genera_grafici_tesi()
-        print("\nTutti i grafici PNG generati con successo!")
-        print("Grafici pronti per inserimento in tesi LaTeX")
+        print("\nTutti i grafici generati con successo!")
     except ImportError as e:
         print(f"Dipendenze mancanti: {e}")
         print("Installa con: pip install matplotlib seaborn pandas")

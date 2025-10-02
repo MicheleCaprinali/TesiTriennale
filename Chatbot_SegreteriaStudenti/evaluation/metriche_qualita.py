@@ -1,8 +1,3 @@
-"""
-Valutazione automatica qualità risposte ChatBot RAG per tesi
-Con mini-dataset realistico basato su documenti UniBG effettivi
-"""
-
 import re
 import sys
 import os
@@ -27,23 +22,6 @@ try:
     ROUGE_AVAILABLE = True
 except ImportError:
     ROUGE_AVAILABLE = False
-
-
-# ============================================================================
-# MINI-DATASET REALISTICO BASATO SU DOCUMENTI UNIBG
-# ============================================================================
-# 
-# Struttura di ogni entry:
-# - query: domanda dello studente
-# - reference_answer: risposta di riferimento (ground truth) basata sui documenti reali
-# - relevant_docs: nomi dei file FAQ che contengono informazioni rilevanti per questa query
-# - category: categoria tematica (iscrizioni, tasse, esami, laurea, certificati, servizi)
-#
-# Note: 
-# - relevant_docs serve per valutare Recall@K e Context Precision
-# - Il sistema RAG recupera chunks di testo (non file completi) tramite ricerca semantica
-# - La valutazione confronta semanticamente i chunks recuperati con i file rilevanti
-# ============================================================================
 
 REFERENCE_DATASET = [
     {
@@ -285,10 +263,6 @@ Puoi consultare tutti i corsi su:
     }
 ]
 
-
-# ============================================================================
-# CLASSI PER VALUTAZIONE QUALITÀ
-# ============================================================================
 
 class ResponseQualityEvaluator:
     """Valutatore qualità risposte ChatBot"""
@@ -724,11 +698,6 @@ class RAGSystemEvaluator:
         
         return round(score / total_weight if total_weight > 0 else 0.0, 3)
 
-
-# ============================================================================
-# FUNZIONI DI VALUTAZIONE CON CHATBOT REALE
-# ============================================================================
-
 def evaluate_rag_with_real_chatbot(query: str, chatbot, reference_data: Dict[str, Any]) -> Dict[str, Any]:
     """
     Valuta risposta del chatbot reale con ground truth dal dataset
@@ -892,10 +861,6 @@ def batch_evaluate_rag_system(num_samples: int = 5, save_results: bool = True) -
     
     return {}
 
-
-# ============================================================================
-# TEST E ESEMPI
-# ============================================================================
 
 def test_single_rag_evaluation():
     """Test singola valutazione RAG"""

@@ -1,15 +1,9 @@
-"""
-Analisi metriche software per tesi triennale
-Focus su complessità ciclomatica e qualità del codice
-"""
-
 import ast
 import time
 import json
 from pathlib import Path
 
 class NativeSoftwareAnalyzer:
-    """Analizzatore metriche software con Python nativo"""
     
     def __init__(self, project_root=".."):
         self.project_root = Path(project_root)
@@ -348,29 +342,7 @@ class NativeSoftwareAnalyzer:
         print(f"   Qualità complessiva: {complexity_stats['qualita_complessita']}")
         print(f"   Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
         print(f"   Funzioni problematiche (>10): {complexity_stats['funzioni_problematiche']}")
-        
-        print(f"\nALTRE METRICHE:")
-        print(f"   Funzioni lunghe (>50 righe): {metrics['long_functions']}")
-        print(f"   Funzioni molto complesse (>10): {metrics['complexity_issues']}")
-        
-        # Top 5 funzioni più complesse
-        print(f"\nFUNZIONI PIÙ COMPLESSE:")
-        all_functions = []
-        for file_detail in metrics['file_details']:
-            if 'complexity_details' in file_detail:
-                for func_detail in file_detail['complexity_details']:
-                    all_functions.append({
-                        'file': file_detail['file_name'],
-                        'function': func_detail['function_name'],
-                        'complexity': func_detail['complexity'],
-                        'level': func_detail['level']
-                    })
-        
-        all_functions.sort(key=lambda x: x['complexity'], reverse=True)
-        for i, func in enumerate(all_functions[:5]):
-            print(f"   {i+1}. {func['function']} ({func['file']}): {func['complexity']} - {func['level']}")
-        
-        print(f"\nAnalisi completata - Dati pronti per tesi")
+
     
     def _save_results(self, metrics):
         """Salva risultati JSON per tesi"""
@@ -410,4 +382,3 @@ if __name__ == "__main__":
     complexity_stats = results['complexity_stats']
     print(f"Qualità complessità: {complexity_stats['qualita_complessita']}")
     print(f"Funzioni di buona qualità: {complexity_stats['percentuale_buona_qualita']}%")
-    print(f"Dati pronti per tesi")

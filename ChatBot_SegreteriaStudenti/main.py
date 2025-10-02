@@ -115,7 +115,7 @@ RISPOSTA:"""
         except Exception as e:
             print(f"Errore generazione: {e}")
             return {
-                "response": "Mi dispiace, sto avendo difficoltà tecniche. Contatta direttamente la segreteria studenti.",
+                "response": "Mi dispiace, sto avendo difficoltà tecniche. Contatta direttamente la segreteria studenti (https://helpdesk.unibg.it/) .",
                 "context_used": 0,
                 "should_redirect": True
             }

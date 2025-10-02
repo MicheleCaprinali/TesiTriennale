@@ -284,7 +284,7 @@ def main():
     print_header("SETUP CHATBOT SEGRETERIA STUDENTI - UNIBG")
     
     if not check_python():
-        print("[ERRORE] Aggiorna Python alla versione 3.9+")
+        print("[ERRORE] Aggiorna Python alla versione 3.13+")
         return
     
     steps = [

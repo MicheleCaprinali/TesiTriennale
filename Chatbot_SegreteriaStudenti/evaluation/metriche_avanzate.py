@@ -1,6 +1,5 @@
 """
-Metriche software avanzate WMC e LCOM per tesi triennale
-Analisi qualità architettura object-oriented
+Metriche software avanzate WMC e LCOM
 """
 
 import ast
@@ -10,8 +9,6 @@ from pathlib import Path
 from collections import defaultdict
 
 class AdvancedMetricsAnalyzer:
-    """Analizzatore WMC e LCOM per valutazione architettura OOP"""
-    
     def __init__(self, project_root=".."):
         self.project_root = Path(project_root)
         self.results = {}
@@ -19,7 +16,6 @@ class AdvancedMetricsAnalyzer:
     def analyze_wmc_lcom_metrics(self):
         """Analisi WMC (Weighted Methods per Class) e LCOM (Lack of Cohesion)"""
         
-        print("ANALISI METRICHE AVANZATE - WMC e LCOM")
         print("=" * 40)
         
         print("\nAnalisi WMC e LCOM in corso...")
@@ -339,4 +335,3 @@ if __name__ == "__main__":
     if metrics['classi_analizzate'] > 0:
         print(f"WMC medio: {metrics['wmc_medio']:.1f} ({metrics['valutazione_wmc']})")
         print(f"LCOM medio: {metrics['lcom_medio']:.1f}% ({metrics['valutazione_lcom']})")
-    print(f"Dati pronti per tesi")

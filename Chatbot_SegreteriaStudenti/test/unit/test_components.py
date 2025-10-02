@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-Test Unitari - Componenti Base del Sistema RAG
-============================================== 
-Test per validare funzionalità core dei moduli in src/
-"""
-
 import os
 import sys
 import json
