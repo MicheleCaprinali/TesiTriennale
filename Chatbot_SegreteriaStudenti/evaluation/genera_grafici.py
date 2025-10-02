@@ -23,20 +23,16 @@ def genera_grafici_tesi():
     plt.style.use('seaborn-v0_8')
     sns.set_palette("husl")
     
-    # Genera tutti i grafici
+    # Genera solo i 3 grafici richiesti per la tesi
     _grafico_complessita_ciclomatica(results_dir)
     _grafico_wmc_lcom(results_dir)
-    _grafico_metriche_software(results_dir)
     _grafico_metriche_rag(results_dir)
-    _grafico_qualita_vs_rag(results_dir)
     
     print("Grafici salvati nella cartella results/")
-    print("Grafici generati:")
+    print("Grafici generati (3 PNG per tesi):")
     print("  • complessita_ciclomatica_distribuzione.png")
     print("  • wmc_lcom_analisi.png") 
-    print("  • metriche_software_panoramica.png")
-    print("  • metriche_rag_valutazione.png (se dati RAG disponibili)")
-    print("  • confronto_qualita_rag.png (se dati disponibili)")
+    print("  • metriche_rag_valutazione.png")
 
 def _grafico_complessita_ciclomatica(results_dir):
     """Grafico a torta distribuzione complessità ciclomatica"""
@@ -113,54 +109,7 @@ def _grafico_wmc_lcom(results_dir):
     plt.savefig(results_dir / 'wmc_lcom_analisi.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    print("Grafici WMC e LCOM salvati")
-
-def _grafico_metriche_software(results_dir):
-    """Grafico panoramico composizione e struttura progetto"""
-    
-    file_path = results_dir / 'metriche_software_results.json'
-    if not file_path.exists():
-        return
-    
-    with open(file_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    
-    summary = data['summary']
-    
-    # Grafico composizione righe di codice
-    labels = ['Righe Codice', 'Righe Commenti', 'Righe Vuote']
-    sizes = [
-        data['detailed_metrics']['code_lines'],
-        data['detailed_metrics']['comment_lines'],
-        data['detailed_metrics']['blank_lines']
-    ]
-    colors = ['#3498db', '#2ecc71', '#95a5a6']
-    
-    plt.figure(figsize=(14, 6))
-    
-    # Grafico composizione (torta)
-    plt.subplot(1, 2, 1)
-    plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
-    plt.title('Composizione Linee di Codice', fontsize=14)
-    
-    # Grafico elementi strutturali (barre)
-    plt.subplot(1, 2, 2)
-    elementi = ['File Python', 'Funzioni', 'Classi']
-    valori = [summary['total_files'], summary['total_functions'], summary['total_classes']]
-    plt.bar(elementi, valori, color=['#9b59b6', '#f39c12', '#1abc9c'])
-    plt.title('Elementi Strutturali Progetto', fontsize=14)
-    plt.ylabel('Conteggio')
-    
-    # Aggiungi valori sopra le barre
-    for i, v in enumerate(valori):
-        plt.text(i, v + max(valori)*0.01, str(v), ha='center', va='bottom')
-    
-    plt.suptitle('Panoramica Metriche Software - ChatBot RAG UniBg\n(Analisi Completa Sistema)', fontsize=16)
-    plt.tight_layout()
-    plt.savefig(results_dir / 'metriche_software_panoramica.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    print("Grafico panoramica metriche salvato")
+    print("Grafico WMC e LCOM salvato")
 
 
 def _grafico_metriche_rag(results_dir):
@@ -265,93 +214,6 @@ def _grafico_metriche_rag(results_dir):
     
     print("Grafico metriche RAG salvato")
 
-
-def _grafico_qualita_vs_rag(results_dir):
-    """Confronto metriche qualità tradizionali vs RAG"""
-    
-    # Verifica presenza entrambi i file
-    rag_path = results_dir / 'metriche_rag_results.json'
-    quality_path = results_dir / 'metriche_qualita_results.json'
-    
-    if not rag_path.exists() and not quality_path.exists():
-        print("File metriche qualità/RAG non trovati")
-        return
-    
-    # Carica dati disponibili
-    rag_data = {}
-    quality_data = {}
-    
-    if rag_path.exists():
-        with open(rag_path, 'r', encoding='utf-8') as f:
-            rag_data = json.load(f)
-    
-    if quality_path.exists():
-        with open(quality_path, 'r', encoding='utf-8') as f:
-            quality_data = json.load(f)
-    
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-    
-    # 1. Confronto score complessivi
-    if rag_data and quality_data:
-        rag_overall = rag_data.get('evaluation_data', {}).get('overall_rag_score', 0)
-        quality_overall = quality_data.get('evaluation_result', {}).get('metrics', {}).get('overall_score', 0)
-        
-        scores = [quality_overall, rag_overall]
-        labels = ['Qualità\nTradizionale', 'Sistema\nRAG']
-        colors = ['#3498db', '#e74c3c']
-        
-        bars1 = ax1.bar(labels, scores, color=colors)
-        ax1.set_title('Confronto Score Complessivi', fontsize=12, fontweight='bold')
-        ax1.set_ylabel('Score (0-1)')
-        ax1.set_ylim(0, 1)
-        
-        for bar, score in zip(bars1, scores):
-            ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
-                    f'{score:.3f}', ha='center', va='bottom', fontweight='bold')
-    else:
-        ax1.text(0.5, 0.5, 'Dati confronto\nnon disponibili', 
-                ha='center', va='center', transform=ax1.transAxes)
-        ax1.set_title('Confronto Score Complessivi', fontsize=12, fontweight='bold')
-    
-    # 2. Distribuzione metriche RAG principali
-    if rag_data:
-        metrics_summary = rag_data.get('metrics_summary', {})
-        
-        # Seleziona metriche chiave per il radar
-        metric_names = ['BLEU', 'ROUGE-L', 'BERT Score', 'Answer\nRelevance', 'Faithfulness']
-        metric_values = [
-            metrics_summary.get('bleu_score', 0),
-            metrics_summary.get('rouge_l', 0),
-            metrics_summary.get('bert_score', 0),
-            metrics_summary.get('answer_relevance', 0),
-            metrics_summary.get('faithfulness', 0)
-        ]
-        
-        # Grafico radar semplificato come grafico polare
-        angles = [i * 2 * 3.14159 / len(metric_names) for i in range(len(metric_names))]
-        angles += angles[:1]  # Chiudi il cerchio
-        metric_values += metric_values[:1]
-        
-        ax2 = plt.subplot(122, projection='polar')
-        ax2.plot(angles, metric_values, 'o-', linewidth=2, color='#e74c3c')
-        ax2.fill(angles, metric_values, alpha=0.25, color='#e74c3c')
-        ax2.set_xticks(angles[:-1])
-        ax2.set_xticklabels(metric_names)
-        ax2.set_ylim(0, 1)
-        ax2.set_title('Profilo Metriche RAG', fontsize=12, fontweight='bold', pad=20)
-        ax2.grid(True)
-    else:
-        ax2.text(0.5, 0.5, 'Dati RAG\nnon disponibili', 
-                ha='center', va='center', transform=ax2.transAxes)
-        ax2.set_title('Profilo Metriche RAG', fontsize=12, fontweight='bold')
-    
-    plt.suptitle('Analisi Comparativa Qualità vs RAG - ChatBot UniBg', 
-                fontsize=16, fontweight='bold')
-    plt.tight_layout()
-    plt.savefig(results_dir / 'confronto_qualita_rag.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    print("Grafico confronto qualità vs RAG salvato")
 
 if __name__ == "__main__":
     try:

@@ -873,7 +873,7 @@ def batch_evaluate_rag_system(num_samples: int = 5, save_results: bool = True) -
             results_dir = Path(__file__).parent.parent / 'results'
             results_dir.mkdir(exist_ok=True)
             
-            output_file = results_dir / 'metriche_rag_batch.json'
+            output_file = results_dir / 'metriche_rag_results.json'
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(batch_result, f, indent=2, ensure_ascii=False)
             
@@ -937,7 +937,7 @@ def test_single_rag_evaluation():
     results_dir = Path(__file__).parent.parent / 'results'
     results_dir.mkdir(exist_ok=True)
     
-    output_file = results_dir / 'metriche_rag_single.json'
+    output_file = results_dir / 'metriche_rag_results.json'
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
     

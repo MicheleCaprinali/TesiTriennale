@@ -1,54 +1,31 @@
-# CHATBOT SEGRETERIA STUDENTI - GUIDA UTENTE# CHATBOT SEGRETERIA STUDENTI - GUIDA UTENTE
+# CHATBOT SEGRETERIA STUDENTI
+
+Sistema RAG per assistenza automatica agli studenti universitari.
+
+## FUNZIONALITÀ
+
+Il chatbot risponde a domande su:
+
+- Iscrizioni agli esami
+- Tasse e pagamenti
+- Certificati e documenti
+- Orari e contatti segreteria
+- Servizi per studenti
+- Carriera universitaria
+- Orientamento e tirocini
+
+---
 
 
+# GUIDA RAPIDA
 
-Sistema RAG per assistenza automatica agli studenti universitari.Sistema RAG per assistenza automatica agli studenti universitari.
+## IMPORTANTE - REQUISITO FONDAMENTALE
 
-
-
-## FUNZIONALITÀ## FUNZIONALITÀ
-
-
-
-Il chatbot risponde a domande su:Il chatbot risponde a domande su:
-
-- Iscrizioni agli esami- Iscrizioni agli esami
-
-- Tasse e pagamenti- Tasse e pagamenti
-
-- Certificati e documenti- Certificati e documenti
-
-- Orari e contatti segreteria- Orari e contatti segreteria
-
-- Servizi per studenti- Servizi per studenti
-
-- Carriera universitaria- Carriera universitaria
-
-- Orientamento e tirocini- Orientamento e tirocini
-
-
-
-------
-
-
-
-# GUIDA RAPIDA# GUIDA RAPIDA
-
-
-
-## IMPORTANTE - REQUISITO FONDAMENTALE## IMPORTANTE - REQUISITO FONDAMENTALE
-
-
-
-**Ogni comando Python richiede l'attivazione dell'ambiente virtuale `chatbot_env/`.****Ogni comando Python richiede l'attivazione dell'ambiente virtuale `chatbot_env/`.**  
+**Ogni comando Python richiede l'attivazione dell'ambiente virtuale `chatbot_env/`.**
 
 Senza questo passaggio il progetto non funzionerà.
 
 ---
-
----
-
-## STEP 0: ATTIVAZIONE AMBIENTE VIRTUALE
 
 ## STEP 0: ATTIVAZIONE AMBIENTE VIRTUALE
 
@@ -696,221 +673,6 @@ Risultati: `test/results/unit_tests_results.json`│   ├── TECHNICAL_GUIDE
 
 └── 📄 aggiornamento_db.bat         # Aggiorna database vettoriale (Windows)
 
-## Test prestazionali```
-
-
-
-Testa chatbot con 25 query in sequenza. Richiede Ollama attivo.### **📌 File Chiave da Conoscere:**
-
-
-
-**CMD/PowerShell:**1. **`main.py`** - Il cuore del chatbot, classe `ChatbotRAG` con metodo `chat()`
-
-```powershell2. **`interfaccia/streamlit.py`** - Interface web per utenti finali
-
-python test/run_tests.py --performance3. **`src/ollama_llm.py`** - Comunicazione con Mistral 7B via Ollama
-
-```4. **`src/creazione_vectorstore.py`** - Creazione e ricerca nel vector database
-
-5. **`requirements.txt`** - Tutte le dipendenze da installare nell'ambiente virtuale
-
-Risultati: `test/results/real_performance_results.json`6. **`test/run_tests.py`** - Esegui tutti i test del progetto
-
-
-
-**Metriche:**---
-
-- Tempo medio risposta
-
-- Throughput (query/secondo)# 🧪 **ESEGUIRE I TEST**
-
-- Percentili (P50, P95, P99)
-
-- Tasso successoIl progetto include una suite completa di test per validare il funzionamento del sistema.
-
-
-
-## Test completi + grafici## **⚠️ PRIMA DI ESEGUIRE I TEST:**
-
-
-
-**CMD/PowerShell:**```bash
-
-```powershell# 1. Attiva l'ambiente virtuale (OBBLIGATORIO!)
-
-python test/run_tests.pychatbot_env\Scripts\activate    # Windows
-
-python test/generate_performance_charts.pysource chatbot_env/bin/activate # Linux/Mac
-
-```
-
-# 2. Verifica che (chatbot_env) sia visibile nel prompt
-
-**Grafici generati:**```
-
-- `response_time_distribution.png`
-
-- `performance_overview.png`## **🔬 Test Disponibili:**
-
-- `performance_comparison.png`
-
-- `performance_dashboard.png`### **1️⃣ Test Unitari (Validazione Moduli)**
-
-
-
-### Visualizza risultatiVerifica che tutti i moduli in `src/` funzionino correttamente senza errori logici.
-
-
-
-**CMD:**```bash
-
-```cmd# ⚠️ Ambiente virtuale DEVE essere attivo!
-
-type test\results\unit_tests_results.json
-
-type test\results\real_performance_results.json# Esegui solo i test unitari
-
-start test\results\performance_dashboard.pngpython test/run_tests.py --unit
-
-```
-
-# Output: Risultati salvati in test/results/unit_tests_results.json
-
-**PowerShell:**```
-
-```powershell
-
-Get-Content test\results\unit_tests_results.json**Cosa viene testato:**
-
-Get-Content test\results\real_performance_results.json- ✅ `local_embeddings.py` - Generazione embeddings
-
-Invoke-Item test\results\performance_dashboard.png- ✅ `dividi_chunks.py` - Chunking testi
-
-```- ✅ `ollama_llm.py` - Connessione LLM
-
-- ✅ `prompt_templates.py` - Template prompt
-
-**Linux/Mac:**- ✅ `creazione_vectorstore.py` - Database vettoriale
-
-```bash
-
-cat test/results/unit_tests_results.json---
-
-cat test/results/real_performance_results.json
-
-xdg-open test/results/performance_dashboard.png### **2️⃣ Test Prestazionali (Performance Reali)**
-
-```
-
-Testa il chatbot reale con 25 query in rapida sequenza, misurando tempi di risposta e throughput.
-
----
-
-```bash
-
-# RISULTATI RAGGIUNTI# ⚠️ Ambiente virtuale DEVE essere attivo!
-
-# ⚠️ Ollama DEVE essere in esecuzione (ollama serve)
-
-- Database: 15 FAQ + 4 PDF guide ufficiali
-
-- Vector DB: ChromaDB con embeddings ottimizzati# Esegui solo i test prestazionali
-
-- Testing: Sistema scientifico implementatopython test/run_tests.py --performance
-
-- Grafici: 12 visualizzazioni professionali
-
-- Interface: Web app Streamlit moderna# Output: Risultati salvati in test/results/real_performance_results.json
-
-```
-
-## Validazione
-
-**Metriche misurate:**
-
-- Metriche Software: WMC, LCOM, CBO, Complessità- ⏱️ Tempo medio risposta
-
-- Metriche RAG: Context, Answer, Retrieval Relevancy- 📊 Throughput (query/secondo)
-
-- Testing automatizzato: Framework scientifico- 📈 Percentili (P50, P95, P99)
-
-- Ambiente completo: Virtual env con dipendenze- ✅ Tasso successo
-
-
-
-------
-
-
-
-# SUPPORTO### **3️⃣ Tutti i Test + Grafici**
-
-
-
-**Studente:** Caprinali Michele  Esegui suite completa e genera grafici professionali per documentazione tesi.
-
-**Email:** m.caprinali@studenti.unibg.it
-
-```bash
-
-## Risorse# ⚠️ Ambiente virtuale DEVE essere attivo!
-
-# ⚠️ Ollama DEVE essere in esecuzione
-
-- Guida tecnica: `documentazione/TECHNICAL_GUIDE.md`
-
-- Guida rapida: `documentazione/QUICK_START.md`# Esegui tutti i test
-
-- Indice: `documentazione/INDICE.md`python test/run_tests.py
-
-
-# Genera grafici dai risultati
-python test/generate_performance_charts.py
-
-# Output grafici salvati in: test/results/*.png
-```
-
-**Grafici generati:**
-- 📊 `response_time_distribution.png` - Distribuzione tempi risposta
-- 📈 `performance_overview.png` - Overview metriche principali
-- 🔍 `performance_comparison.png` - Confronto percentili
-- 📉 `performance_dashboard.png` - Dashboard completa
-
----
-
-### **🔍 Visualizzare Risultati Test:**
-
-```bash
-# Visualizza JSON risultati test unitari
-type test\results\unit_tests_results.json       # Windows
-cat test/results/unit_tests_results.json        # Linux/Mac
-
-# Visualizza JSON risultati performance
-type test\results\real_performance_results.json # Windows
-cat test/results/real_performance_results.json  # Linux/Mac
-
-# Apri grafici PNG generati
-start test\results\performance_dashboard.png    # Windows
-open test/results/performance_dashboard.png     # Mac
-xdg-open test/results/performance_dashboard.png # Linux
-```
-
----
-
-# 📊 **RISULTATI RAGGIUNTI (REALI)**
-
-## **🏆 PERFORMANCE SISTEMA:**
-- ✅ **Database**: 15 FAQ + 4 PDF guide ufficiali
-- ✅ **Vector DB**: ChromaDB con embeddings ottimizzati
-- ✅ **Testing**: Sistema scientifico implementato
-- ✅ **Grafici**: 12 visualizzazioni professionali (PNG+PDF)
-- ✅ **Interface**: Web app Streamlit moderna
-
-## **🎯 VALIDAZIONE:**
-- ✅ **Metriche Software**: WMC, LCOM, CBO, Complessità
-- ✅ **Metriche RAG**: Context, Answer, Retrieval Relevancy  
-- ✅ **Testing Automatizzato**: Framework scientifico
-- ✅ **Ambiente Completo**: Virtual env con tutte le dipendenze
-
 ---
 
 # 🆘 **SUPPORTO**
@@ -918,10 +680,4 @@ xdg-open test/results/performance_dashboard.png # Linux
 ## **📞 CONTATTI:**
 - 🎓 **Studente**: Caprinali Michele  
 - 📧 **Email**: m.caprinali@studenti.unibg.it
-- 📚 **Documentazione**: `tesi/documentazione/`
 - 🐛 **Issue**: Repository GitHub
-
-## **📖 RISORSE:**
-- **Guida Tecnica**: `tesi/documentazione/TECHNICAL_GUIDE.md`
-- **Testing Report**: `tesi/testing/grafici_testing/TESTING_FINAL_REPORT.md`  
-- **Grafici Tesi**: `tesi/grafici/`
