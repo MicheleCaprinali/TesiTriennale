@@ -260,7 +260,7 @@ HARDWARE: Sistema locale con Ollama
     print("📊 Generato: performance_dashboard.png")
 
 def main():
-    """Funzione principale"""
+    """Funzione principale - Genera solo i 2 grafici essenziali per la tesi"""
     print("📈 Generazione Grafici Performance per Tesi")
     print("=" * 50)
     
@@ -272,23 +272,15 @@ def main():
     if not data:
         return
     
-    # Genera tutti i grafici
+    # Genera solo i 2 grafici richiesti per la tesi
     create_response_time_distribution(data)
-    create_performance_overview(data)
     create_comparison_chart(data)
-    create_summary_dashboard(data)
     
     print("\n🎉 Grafici generati con successo!")
     print("📁 Disponibili in: results/")
     print("   • response_time_distribution.png")
-    print("   • performance_overview.png") 
     print("   • performance_comparison.png")
-    print("   • performance_dashboard.png")
-    print("\n💡 Usa questi grafici nella tua tesi per mostrare:")
-    print("   • Performance attuali del sistema")
-    print("   • Distribuzione dei tempi di risposta")
-    print("   • Confronto con target di produzione")
-    print("   • Analisi complessiva delle metriche")
+    print("\n💡 Grafici ottimizzati per inserimento in tesi LaTeX")
 
 if __name__ == "__main__":
     main()

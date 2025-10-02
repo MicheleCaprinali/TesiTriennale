@@ -277,20 +277,13 @@ def run_unit_tests():
         "success_rate": passed_tests / total_tests if total_tests > 0 else 0
     }
     
-    # Salva risultati
-    results_file = os.path.join(os.path.dirname(__file__), "..", "results", "unit_tests_results.json")
-    os.makedirs(os.path.dirname(results_file), exist_ok=True)
-    
-    with open(results_file, 'w', encoding='utf-8') as f:
-        json.dump(runner.results, f, indent=2, ensure_ascii=False)
-    
+    # Stampa sommario (senza salvare JSON separato)
     print(f"\n📊 Sommario Test Unitari:")
     print(f"   Totale: {total_tests}")
     print(f"   Passati: {passed_tests}")
     print(f"   Falliti: {failed_tests}")
     print(f"   Errori: {error_tests}")
     print(f"   Tasso successo: {runner.results['summary']['success_rate']:.2%}")
-    print(f"   Risultati salvati in: {results_file}")
     
     return runner.results
 

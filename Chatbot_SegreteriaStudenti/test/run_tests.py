@@ -76,14 +76,7 @@ def run_essential_test_suite():
     # Finalizza risultati
     test_results["suite_end"] = datetime.now().isoformat()
     
-    # Salva log dell'esecuzione
-    log_file = os.path.join(os.path.dirname(__file__), "results", "essential_test_execution.json")
-    os.makedirs(os.path.dirname(log_file), exist_ok=True)
-    
-    with open(log_file, 'w', encoding='utf-8') as f:
-        json.dump(test_results, f, indent=2, ensure_ascii=False)
-    
-    # Stampa sommario finale
+    # Stampa sommario finale (senza salvare log extra)
     print("📋 SOMMARIO ESECUZIONE SUITE")
     print("=" * 60)
     print(f"✅ Test eseguiti: {', '.join(test_results['tests_executed'])}")
@@ -111,8 +104,7 @@ def run_essential_test_suite():
     else:
         print("✅ Nessun errore critico")
     
-    print(f"📊 Log esecuzione: {log_file}")
-    print(f"📁 Risultati disponibili in: {os.path.join(os.path.dirname(__file__), 'results')}")
+    print(f" Risultati disponibili in: {os.path.join(os.path.dirname(__file__), 'results')}")
     
     if test_results["success"]:
         print("\n🎉 SUITE ESSENZIALE COMPLETATA CON SUCCESSO!")
