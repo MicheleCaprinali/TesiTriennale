@@ -1,0 +1,662 @@
+{
+  "metadata": {
+    "source": "FAQ UniBG - Dataset Reale",
+    "extraction_date": "2025-10-04",
+    "total_pairs": 68,
+    "evaluation_pairs": 25,
+    "categories": [
+      "iscrizioni",
+      "tasse",
+      "esami_lezioni",
+      "laurea",
+      "servizi_dsa",
+      "servizi_diritto_studio",
+      "servizi_orientamento",
+      "carriera",
+      "tessera",
+      "tirocini",
+      "corsi_singoli",
+      "contatti",
+      "varie",
+      "sito_web"
+    ],
+    "description": "Dataset estratto dai file FAQ ufficiali della Segreteria Studenti UniBG"
+  },
+  "evaluation_set": [
+    {
+      "query": "Posso anticipare degli esami (ad esempio dal secondo al primo anno)?",
+      "reference_answer": "Sì, è possibile richiedere l'anticipo di esami, facendo una richiesta per il Consiglio di corso di studio entro la scadenza prevista per la compilazione del Piano di Studi. Devi inviare alla Segreteria Studenti, via ticket, l'apposito modulo (Modulo di richiesta per Consiglio di corso di studio) che trovi qui https://www.unibg.it/servizi/segreteria/modulistica",
+      "category": "carriera",
+      "source_file": "carriera.txt",
+      "relevant_docs": [
+        "carriera.txt"
+      ]
+    },
+    {
+      "query": "Cosa è e quali funzioni ha il Consiglio di corso di Studio?",
+      "reference_answer": "Il Consiglio di corso di studio (CCS) è un organo composto da Professori. Il CCS si riunisce più o meno una volta al mese. È presieduto dal Presidente del Corso di Studi. Tra i suoi compiti, uno dei principali è valutare le richieste che vengono inoltrate dagli studenti. Per esempio, in caso di domande di passaggio di corso, conseguimento di seconda laurea, ecc., il CCS deve valutare quali esami eventualmente si possono convalidare. Oppure il CCS deve valutare le richieste specifiche e motivate che gli studenti possono inoltrare per esigenze particolari (es. modifica straordinaria del piano di studi, inserimento di esami soprannumerari, ecc.).",
+      "category": "carriera",
+      "source_file": "carriera.txt",
+      "relevant_docs": [
+        "carriera.txt"
+      ]
+    },
+    {
+      "query": "Devo parlare direttamente con la Segreteria Studenti - come la contatto?",
+      "reference_answer": "Per problematiche particolari, non risolvibili via ticket, puoi contattare direttamente la Segreteria Studenti tramite vari canali. Qui https://www.unibg.it/studia-noi/ti-aiutiamo/contatta-segreteria trovi le modalità e gli orari di contatto.\n\nHo problemi con l'accesso a Moodle/e-learning/Teams\nQui https://www.unibg.it/studia-noi/frequentare/elearning-moodle trovi i contatti per eventuali problematiche.",
+      "category": "contatti",
+      "source_file": "contatti_utili_problematiche_varie.txt",
+      "relevant_docs": [
+        "contatti_utili_problematiche_varie.txt"
+      ]
+    },
+    {
+      "query": "Ho un problema con la domanda provvisoria di laurea, a chi devo rivolgermi?",
+      "reference_answer": "La domanda provvisoria di laurea (o domanda di assegnazione del titolo provvisorio), per i corsi di laurea in cui è prevista non è gestita dalla Segreteria Studenti, ma dalla Segreteria del Dipartimento. Quindi vai nel sito del Dipartimento e, nella pagina CONTATTI troverai i contatti di riferimento.\n\nNon riesco ad accedere allo Sportello Internet\nAccertati di aver inserito correttamente il nome utente e la password. Per problematiche tecniche riguardanti lo Sportello Internet Studenti, scrivi una mail a sia@unibg.it",
+      "category": "contatti",
+      "source_file": "contatti_utili_problematiche_varie.txt",
+      "relevant_docs": [
+        "contatti_utili_problematiche_varie.txt"
+      ]
+    },
+    {
+      "query": "Quanto costa, e a quanti corsi singoli posso iscrivermi?",
+      "reference_answer": "Oltre all'imposta di bollo euro 16,00, il costo è di 25 euro per ogni cfu. Potrai iscriverti ad un numero massimo di 36 cfu.",
+      "category": "corsi_singoli",
+      "source_file": "corsi_singoli.txt",
+      "relevant_docs": [
+        "corsi_singoli.txt"
+      ]
+    },
+    {
+      "query": "Quanto tempo ho per sostenere gli esami?",
+      "reference_answer": "Se ti iscrivi a corsi singoli per l'anno accademico 2020/2021, hai tempo fino alla sessione di Aprile 2022 (se prevista per il Dipartimento cui appartiene l'insegnamento) per sostenere gli esami.",
+      "category": "corsi_singoli",
+      "source_file": "corsi_singoli.txt",
+      "relevant_docs": [
+        "corsi_singoli.txt"
+      ]
+    },
+    {
+      "query": "Dove trovo gli orari delle lezioni?",
+      "reference_answer": "Qui https://logistica.unibg.it/PortaleStudenti/ trovi gli orari delle lezioni ed hai la possibilità di prenotare un posto in aula, se si svolge qualche lezione in presenza.",
+      "category": "esami_lezioni",
+      "source_file": "lezioni_esami.txt",
+      "relevant_docs": [
+        "lezioni_esami.txt"
+      ]
+    },
+    {
+      "query": "Dove trovo le date degli esami?",
+      "reference_answer": "Qui https://logistica.unibg.it/PortaleStudenti/ puoi trovare le date degli appelli d'esame.",
+      "category": "esami_lezioni",
+      "source_file": "lezioni_esami.txt",
+      "relevant_docs": [
+        "lezioni_esami.txt"
+      ]
+    },
+    {
+      "query": "Come calcolo la media dei voti del 4° anno della scuola superiore necessaria per partecipare al primo bando di selezione?",
+      "reference_answer": "La media dei voti del 4° anno deve essere arrotondata alla seconda cifra decimale; se la terza cifra dopo la virgola è maggiore o uguale a 5 si deve arrotondare per eccesso. Ad esempio: 7,423 diventa 7,42 mentre in caso di media pari a 7,425 va indicato 7,43. Vanno sempre messe le 2 cifre dopo la virgola: se la media è 8 deve essere indicato 8,00",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt",
+      "relevant_docs": [
+        "iscrizioni_anno_accademico.txt"
+      ]
+    },
+    {
+      "query": "Come ci si iscrive?",
+      "reference_answer": "Qui https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi sono descritti gli step per effettuare l'iscrizione. Attenzione: le procedure sono diverse a seconda della tipologia di corso (triennale o magistrale). Inoltre alcuni corsi sono ad accesso programmato, quindi è essenziale prendere visione dei rispettivi bandi. Qui https://www.unibg.it/node/10733 trovi il bando per l'ammissione ai corsi di laurea triennale ad accesso programmato.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt",
+      "relevant_docs": [
+        "iscrizioni_anno_accademico.txt"
+      ]
+    },
+    {
+      "query": "Come si compila la domanda definitiva di laurea?",
+      "reference_answer": "La domanda definitiva di laurea va inserita online da Sportello internet studenti. L'inserimento avviene in tre fasi successive, le cui scadenze sono riportate sul Calendario Didattico dei rispettivi Dipartimenti:\n1) inserimento titolo tesi e nome del Relatore\n2) Approvazione online da parte del relatore\n3) Inserimento della vera e propria domanda di laurea, e pagamento del relativo contributo.\nQui https://www.unibg.it/sites/default/files/campus_e_servizi/2019_newsite_domanda-conseguimento-titolo_guida_studenti_sintetica.pdftrovi la Guida alla procedura.",
+      "category": "laurea",
+      "source_file": "lauree.txt",
+      "relevant_docs": [
+        "lauree.txt"
+      ]
+    },
+    {
+      "query": "Dove devo consegnare la tesi?",
+      "reference_answer": "Una copia cartacea della tesi deve essere consegnata al relatore e all'eventuale correlatore. Inoltre, dopo che la tua domanda di laurea sarà stata confermata dalla Segreteria Studenti, dovrai caricare la tesi in formato pdf nel tuo Sportello Internet, entro la scadenza prevista dal Calendario Didattico .",
+      "category": "laurea",
+      "source_file": "lauree.txt",
+      "relevant_docs": [
+        "lauree.txt"
+      ]
+    },
+    {
+      "query": "Come e quando posso sapere l'esito della mia domanda di borsa di studio?",
+      "reference_answer": "I richiedenti possono controllare l'esito della propria domanda nel Portale del Diritto allo studio https://unibg-sol.dirittoallostudio.it/apps/V5.0/sol/homepage. Le date entro cui verranno pubblicate le graduatorie e effettuati i pagamenti sono indicate ogni anno nel bando di concorso disponibile qui: https://www.unibg.it/servizi/segreteria/borse-studio (paragrafi 8 - 9).",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt",
+      "relevant_docs": [
+        "servizio_diritto_studio.txt"
+      ]
+    },
+    {
+      "query": "Come faccio a presentare domanda di Borsa di Studio?",
+      "reference_answer": "La domanda va inoltrata online entro le scadenze previste nel bando di concorso https://www.unibg.it/ateneo/amministrazione/concorsi-e-selezioni/bandi-borse-studio (paragrafo 7). Trovi il link per presentare domanda qui: https://www.unibg.it/servizi/segreteria/borse-studio",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt",
+      "relevant_docs": [
+        "servizio_diritto_studio.txt"
+      ]
+    },
+    {
+      "query": "Come ottenere le misure previste da un PDP o un PEI?",
+      "reference_answer": "Per poter ottenere misure di supporto, occorre leggere con attenzione il proprio PEI/PDP e individuare le misure di cui avrai bisogno in relazione all’esame. Contatta il docente ad inizio corso e spiega garbatamente quali misure del tuo PEI o del tuo PDP vorresti concordare per lo studio e l’esame.\nRicordati soprattutto le seguenti regole:\nLe mappe concettuali ed i formulari vanno condivise con il docente già nel corso del semestre di lezione.\nL’eventuale affiancamento per la lettura, nel caso di test scritti, è da concordare con il docente e segnalare al servizio, a mezzo modulo https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa, non più tardi di 15 gg prima dell’appello.\nTutta le misure previste dal tuo PDP/PEI saranno visibili all'atto dell'iscrizione ai singoli appelli/parziali d'esame, prenotabile tramite sportello internet. Ricordati di selezionare solo le misure già pattuite con i singoli docenti, le misure non previamente pattuite con i docenti non saranno garantite nel corso dell'esame.\nPer maggiori informazioni clicca qui https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa.",
+      "category": "servizi_dsa",
+      "source_file": "servizio_disabilità_dsa.txt",
+      "relevant_docs": [
+        "servizio_disabilità_dsa.txt"
+      ]
+    },
+    {
+      "query": "Come richiedere un PDP o un PEI?",
+      "reference_answer": "Per ottenere un PDP o un PEI sono necessari i seguenti passaggi:\n1.Carica la certificazione in tuo possesso sul tuo sportello internet e seleziona nel corso della procedura \"Richiesta PDP\" oppure \"Richiesta PEI\";\n2.Attendi di essere contattato dal servizio per la Disabilità e per i DSA per fissare una data per il colloquio con la Psicopedagogista d’Ateneo;\n3.Partecipa al colloquio con la psicopedagogista d’Ateneo;\n4.Attendi la comunicazione per ritirare il tuo PDP o il tuo PEI presso il Servizio.\nPer maggiori informazioni clicca qui https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa.",
+      "category": "servizi_dsa",
+      "source_file": "servizio_disabilità_dsa.txt",
+      "relevant_docs": [
+        "servizio_disabilità_dsa.txt"
+      ]
+    },
+    {
+      "query": "Come posso informarmi sulle iniziative di orientamento UNIBG?",
+      "reference_answer": "Controlla la nostra pagina dedicata a Open Day e Open Week: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/open-day. UniBg partecipa anche a diverse Fiere dell'Orientamento: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/fiere",
+      "category": "servizi_orientamento",
+      "source_file": "servizio_orientamento.txt",
+      "relevant_docs": [
+        "servizio_orientamento.txt"
+      ]
+    },
+    {
+      "query": "Cosa è il servizio POT?",
+      "reference_answer": "I Piani di Orientamento e Tutorato (POT) identificano un servizio che coinvolge i nostri studenti senior, disponibili per rispondere alle domande degli studenti junior e delle future matricole. Trovi tutte le informazioni al link: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/pot-piani-orientamento-e-tutorato",
+      "category": "servizi_orientamento",
+      "source_file": "servizio_orientamento.txt",
+      "relevant_docs": [
+        "servizio_orientamento.txt"
+      ]
+    },
+    {
+      "query": "Come trovo le pagine del mio Dipartimento?",
+      "reference_answer": "Dalla home page unibg.it, clicca su Università, poi su Dipartimenti (sotto la voce Organizzazione), poi seleziona il Dipartimento che ti interessa. Si aprirà il sito del Dipartimento.",
+      "category": "sito_web",
+      "source_file": "sito_web_unibg.txt",
+      "relevant_docs": [
+        "sito_web_unibg.txt"
+      ]
+    },
+    {
+      "query": "Come trovo le pagine relative ad un determinato corso di studio?",
+      "reference_answer": "Dalla home page unibg.it, clicca su Studiare, poi, sotto la voce Corsi di studio, clicca su Offerta formativa. Potrai cercare il corso di studio che ti interessa, applicando i vari filtri disponibili. Dal sito del relativo Dipartimento, clicca su Studiare, poi, sotto la voce Corsi di studio, seleziona Laurea Triennale o Magistrale e poi il Corso di Laurea che ti interessa.",
+      "category": "sito_web",
+      "source_file": "sito_web_unibg.txt",
+      "relevant_docs": [
+        "sito_web_unibg.txt"
+      ]
+    },
+    {
+      "query": "Quali tasse bisogna pagare per l'iscrizione?",
+      "reference_answer": "Quando ci si immatricola, si paga un contributo fisso di euro 156,00 (tassa regionale + imposta di bollo). Successivamente si dovrà pagare una tassa divisa in due rate. L'importo totale dipende dal Corso di laurea, dalla tipologia di iscrizione e, soprattutto dal valore ISEEU, che determina la fascia di reddito. Su https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi le informazioni dettagliate.",
+      "category": "tasse",
+      "source_file": "tasse.txt",
+      "relevant_docs": [
+        "tasse.txt"
+      ]
+    },
+    {
+      "query": "Come ed entro quando va acquisito l'ISEEU?",
+      "reference_answer": "L'attestazione ISEEU va richiesta entro il 31 Dicembre, altrimenti verrai inserito d'Ufficio nella fascia di reddito più alta. L'attestazione ISEEU può essere richiesta in ub qualsiasi CAF (Centro Assistenza Fiscale) oppure online dalla pagina Portale unico ISEE https://servizi2.inps.it/servizi/PortaleUnicoISEE/ del sito dell'INPS. Qui https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi tutte le informazioni sulle tasse.",
+      "category": "tasse",
+      "source_file": "tasse.txt",
+      "relevant_docs": [
+        "tasse.txt"
+      ]
+    },
+    {
+      "query": "A cosa serve la tessera universitaria?",
+      "reference_answer": "La tessera universitaria, che si chiama Flash Up Studio, serve innanzitutto per usufruire dei servizi interni all'Università (accesso alle biblioteche, mense, centri stampa...), e come documento identificativo in sede di esami. Inoltre, è fatta in collaborazione con Intesa San Paolo, quindi fornisce anche servizi bancari a condizioni molto vantaggiose.",
+      "category": "tessera",
+      "source_file": "tessera_universitaria.txt",
+      "relevant_docs": [
+        "tessera_universitaria.txt"
+      ]
+    },
+    {
+      "query": "Come contattare l'Ufficio Tirocini?",
+      "reference_answer": "L'Ufficio Tirocini si trova in Via S.Bernardino 72/e (24122 Bergamo).\nReperibilità telefonica: (+39 035 205 2265)\n- lunedì 9.30-12.00\n- mercoledì 9.30-12.00\n- giovedì 9.30-12.00\n- venerdì 9.30-12.00\nApertura al pubblico (su prenotazione https://logistica.unibg.it/PortalePlanning/UNIBG-servizi): Mercoledì e venerdì: 9.30-12.00. Consegna dei registri finali di tirocinio: unicamente attraverso il Servizio Help Desk Studenti https://helpdesk.unibg.it/helpdesksegrestud/.",
+      "category": "tirocini",
+      "source_file": "tirocini.txt",
+      "relevant_docs": [
+        "tirocini.txt"
+      ]
+    },
+    {
+      "query": "Come si converte un file da PDF a PDF/A?",
+      "reference_answer": "Qui https://www.unibg.it/sites/default/files/media/documents/2023-04-19/Guida_PDF-A.pdf trovi le informazioni sul formato PDF/A e sulla conversione di un file da PDF a PDF/A",
+      "category": "varie",
+      "source_file": "varie.txt",
+      "relevant_docs": [
+        "varie.txt"
+      ]
+    }
+  ],
+  "full_dataset": [
+    {
+      "query": "Come calcolo la media dei voti del 4° anno della scuola superiore necessaria per partecipare al primo bando di selezione?",
+      "reference_answer": "La media dei voti del 4° anno deve essere arrotondata alla seconda cifra decimale; se la terza cifra dopo la virgola è maggiore o uguale a 5 si deve arrotondare per eccesso. Ad esempio: 7,423 diventa 7,42 mentre in caso di media pari a 7,425 va indicato 7,43. Vanno sempre messe le 2 cifre dopo la virgola: se la media è 8 deve essere indicato 8,00",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Come ci si iscrive?",
+      "reference_answer": "Qui https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi sono descritti gli step per effettuare l'iscrizione. Attenzione: le procedure sono diverse a seconda della tipologia di corso (triennale o magistrale). Inoltre alcuni corsi sono ad accesso programmato, quindi è essenziale prendere visione dei rispettivi bandi. Qui https://www.unibg.it/node/10733 trovi il bando per l'ammissione ai corsi di laurea triennale ad accesso programmato.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Come iscriversi a tempo parziale ?",
+      "reference_answer": "PART-TIME",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Esiste un servizio di orientamento?",
+      "reference_answer": "Sì, è attivo un servizio di orientamento e tutorato, a cui rivolgersi per dubbi e richieste di chiarimenti. Qui https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/pot-piani-orientamento-e-tutorato trovi tutte le informazioni.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Mi sono dimenticato il numero di pre-matricola, come faccio a recuperarlo?",
+      "reference_answer": "Qui https://www.unibg.it/sites/default/files/how_to_-_recuperare_il_numero_di_pre-matricola.pdf trovi la guida che spiega come recuperare il numero di pre-matricola.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Qual è l'offerta formativa per l'anno accademico 2024/2025?",
+      "reference_answer": "Qui https://www.unibg.it/studiare/ti-aiutiamo/scopri-unibg/cerca-tuo-corso-laurea, oppure qui https://www.unibg.it/studiare/corsi/offerta-formativa  trovi le informazioni sui corsi di laurea triennali, magistrali e magistrali a ciclo unico offerti della nostra Università per l'anno accademico 2024/2025.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Quali sono le scadenze per l'iscrizione?",
+      "reference_answer": "Qui https://www.unibg.it/studia-noi/iscriversi/scadenze-iscriversi trovi le scadenze, divise tra lauree triennali (o magistrali a ciclo unico) e lauree magistrali.\nAttenzione: per i corsi ad accesso programmato, è comunque essenziale prendere visione dei rispettivi bandi.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "TOLC - Devo iscrivermi al TOLC, ma non ci sono posti presso l'Università di Bergamo. Come faccio?",
+      "reference_answer": "Puoi iscriverti (sul sito CISIA) al TOLC presso una qualsiasi altra Università. Ricordati, se vuoi immatricolarti ad un nostro corso di Laurea, di effettuare la pre-iscrizione/immatricolazione in UNIBG entro le scadenze previste. In questo modo, il TOLC che hai sostenuto presso un'altra Università verrà acquisito dal nostro sistema.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "TOLC - Ho sostenuto il TOLC l'anno scorso, è ancora valido?",
+      "reference_answer": "Ai fini dell’ammissione ai corsi di laurea ad accesso programmato e dell’immatricolazione ai corsi di laurea ad accesso libero per l’anno accademico 2024/2025 sono validi i TOLC sostenuti a partire dal 1° gennaio 2023.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "TOLC - Posso rifarlo più volte? E, nel caso, quale viene preso in considerazione per le graduatorie?",
+      "reference_answer": "Sì, puoi rifare il TOLC più volte entro la scadenza (puoi farne uno al mese, ripagando ogni volta il contributo previsto di 30 euro). Ai fini della graduatoria (se ti sei pre-iscritto ad un corso di laurea ad accesso programmato), verrà preso in considerazione il TOLC con il punteggio migliore.",
+      "category": "iscrizioni",
+      "source_file": "iscrizioni_anno_accademico.txt"
+    },
+    {
+      "query": "Quali tasse bisogna pagare per l'iscrizione?",
+      "reference_answer": "Quando ci si immatricola, si paga un contributo fisso di euro 156,00 (tassa regionale + imposta di bollo). Successivamente si dovrà pagare una tassa divisa in due rate. L'importo totale dipende dal Corso di laurea, dalla tipologia di iscrizione e, soprattutto dal valore ISEEU, che determina la fascia di reddito. Su https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi le informazioni dettagliate.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Come ed entro quando va acquisito l'ISEEU?",
+      "reference_answer": "L'attestazione ISEEU va richiesta entro il 31 Dicembre, altrimenti verrai inserito d'Ufficio nella fascia di reddito più alta. L'attestazione ISEEU può essere richiesta in ub qualsiasi CAF (Centro Assistenza Fiscale) oppure online dalla pagina Portale unico ISEE https://servizi2.inps.it/servizi/PortaleUnicoISEE/ del sito dell'INPS. Qui https://www.unibg.it/servizi/segreteria/tasse-e-agevolazioni trovi tutte le informazioni sulle tasse.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "In quali casi sono esonerato totalmente dal pagamento del contributo onnicomprensivo?",
+      "reference_answer": "Gli studenti immatricolati nell’a.a. 2022-2023 sono esonerati totalmente dal pagamento del contributo onnicomprensivo qualora in possesso di un indicatore ISEEU di valore compreso tra € 0,00 e € 26.000,00. Per gli studenti che nell’a.a. 2022-2023 si iscrivono a un anno di corso successivo al primo fino al primo anno fuori corso oltre al requisito del valore ISEEU è richiesto il conseguimento di un certo numero di CFU nel periodo 11.08.2021 – 10.08.2022 come segue:\n- Studenti full time al secondo anno di tutti i CdL (10 CFU), al terzo anno di lauree triennali e magistrali a ciclo unico (25 CFU), al quarto e quinto di lauree magistrali a ciclo unico (25 CFU), al primo anno fuoricorso di tutti i CdL (25 CFU);\n- Studenti part time al primo anno ripetente di tutti i CdL (5 CFU), al secondo anno di tutti i CdL (12 CFU), al secondo anno ripetente di tutti i CdL (13 CFU), al terzo anno di lauree triennali e magistrali a ciclo unico (12 CFU), al terzo anno ripetente di lauree triennali e magistrali a ciclo unico (13 CFU), agli anni quarto e quinto di lauree magistrali a ciclo unico (12 CFU), al quarto e quinto anno ripetente di lauree magistrali a ciclo unico (13 CFU).",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Esistono delle agevolazioni e/o possibilità di riduzione delle tasse?",
+      "reference_answer": "Si, ci sono varie tipologie di agevolazioni ed edoneri totali o parziali. Su https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca trovi tutte le informazioni dettagliate.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Come faccio a capire se devo pagare una seconda rata di contributo onnicomprensivo?",
+      "reference_answer": "Se il totale dovuto in base al suo valore ISEEU è maggiore di 400,00 € avrai una seconda rata di contributo onnicomprensivo data dalla differenza tra l’importo dovuto e l’acconto di 400,00 € già versato.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Come faccio a conoscere l'importo totale del contributo onnicomprensivo dovuto in base al mio valore ISEEU?",
+      "reference_answer": "Per conoscere l’importo totale dovuto, esclusi i 156,00 €, puoi utilizzare l’apposito simulatore pubblicato alla pagina Tasse e agevolazioni https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Come faccio a pagare la mora?",
+      "reference_answer": "Il bollettino con l’importo di mora viene generato automaticamente dal sistema solo dopo il pagamento di una rata scaduta.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Come posso rateizzare la seconda rata di contributo onnicomprensivo con scadenza 15 maggio?",
+      "reference_answer": "Per conoscere le modalità di rateizzazione consulta la pagina Modalità di pagamento https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca/modalita-pagamento.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Cosa succede se non pago le tasse entro la scadenza?",
+      "reference_answer": "Il pagamento di una rata oltre la scadenza prevista comporta l’addebito di un importo di mora in base ai giorni di ritardo, trovi tutti i dettagli alla pagina Pagamenti tardivi https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca/pagamenti-tardivi.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Mi è stata generata una tassa alta perché non ho acquisito l'ISEEU entro la scadenza. Posso rimediare?",
+      "reference_answer": "Sì, puoi consegnare tardivamente l’attestazione ISEEU entro il 30 settembre 2025, con l’addebito di una sanzione di 150,00 €. Per tutti i dettagli in merito consulta la “Guida alla richiesta e alla presentazione dell'attestazione ISEEU a.a. 2024-2025” pubblicata alla pagina Tasse e agevolazioni https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Posso avere una ricevuta o un documento che accerti il pagamento delle tasse universitarie per la dichiarazione dei redditi?",
+      "reference_answer": "Per richiedere una certificazione ad uso detrazione fiscale, relativa alle tasse ed ai contributi versati in un anno solare devi scaricare l’apposito modulo di “Richiesta certificazione ad uso fiscale” dalla sezione Modulistica https://www.unibg.it/studiare/contatta-segreteria/modulistica e inviarlo con copia del tuo documento di identità. Non puoi richiedere una certificazione relativa alle tasse pagate in un anno solare prima che l’anno in questione sia concluso.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Quali saranno le scadenze delle rate di contributo omnicomprensivo?",
+      "reference_answer": "Per l'anno accademico, le scadenze per il pagamento del contributo omnicomprensivo sono:\n- 17 Febbraio 2025 - prima rata\n- 15 Maggio 2025 - seconda rata.\n\nLe  rate verranno emesse circa un mese prima della scadenza prevista per il pagamento.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Quali sono le modalità di pagamento?",
+      "reference_answer": "Devi pagare attraverso il sistema di PagoPA, per maggiori informazioni consulta la pagina Modalità di pagamento https://www.unibg.it/studiare/iscriversi/tasse-e-agevolazioni/contribuzione-studentesca/modalita-pagamento.",
+      "category": "tasse",
+      "source_file": "tasse.txt"
+    },
+    {
+      "query": "Dove trovo gli orari delle lezioni?",
+      "reference_answer": "Qui https://logistica.unibg.it/PortaleStudenti/ trovi gli orari delle lezioni ed hai la possibilità di prenotare un posto in aula, se si svolge qualche lezione in presenza.",
+      "category": "esami_lezioni",
+      "source_file": "lezioni_esami.txt"
+    },
+    {
+      "query": "Dove trovo le date degli esami?",
+      "reference_answer": "Qui https://logistica.unibg.it/PortaleStudenti/ puoi trovare le date degli appelli d'esame.",
+      "category": "esami_lezioni",
+      "source_file": "lezioni_esami.txt"
+    },
+    {
+      "query": "Come si compila la domanda definitiva di laurea?",
+      "reference_answer": "La domanda definitiva di laurea va inserita online da Sportello internet studenti. L'inserimento avviene in tre fasi successive, le cui scadenze sono riportate sul Calendario Didattico dei rispettivi Dipartimenti:\n1) inserimento titolo tesi e nome del Relatore\n2) Approvazione online da parte del relatore\n3) Inserimento della vera e propria domanda di laurea, e pagamento del relativo contributo.\nQui https://www.unibg.it/sites/default/files/campus_e_servizi/2019_newsite_domanda-conseguimento-titolo_guida_studenti_sintetica.pdftrovi la Guida alla procedura.",
+      "category": "laurea",
+      "source_file": "lauree.txt"
+    },
+    {
+      "query": "Dove devo consegnare la tesi?",
+      "reference_answer": "Una copia cartacea della tesi deve essere consegnata al relatore e all'eventuale correlatore. Inoltre, dopo che la tua domanda di laurea sarà stata confermata dalla Segreteria Studenti, dovrai caricare la tesi in formato pdf nel tuo Sportello Internet, entro la scadenza prevista dal Calendario Didattico .",
+      "category": "laurea",
+      "source_file": "lauree.txt"
+    },
+    {
+      "query": "Dove trovo le date delle sessioni di laurea?",
+      "reference_answer": "Le date delle sessioni di laurea e le scadenze per le iscrizioni sono riportate sul Calendario Didattico di ogni Dipartimento.",
+      "category": "laurea",
+      "source_file": "lauree.txt"
+    },
+    {
+      "query": "Come ottenere le misure previste da un PDP o un PEI?",
+      "reference_answer": "Per poter ottenere misure di supporto, occorre leggere con attenzione il proprio PEI/PDP e individuare le misure di cui avrai bisogno in relazione all’esame. Contatta il docente ad inizio corso e spiega garbatamente quali misure del tuo PEI o del tuo PDP vorresti concordare per lo studio e l’esame.\nRicordati soprattutto le seguenti regole:\nLe mappe concettuali ed i formulari vanno condivise con il docente già nel corso del semestre di lezione.\nL’eventuale affiancamento per la lettura, nel caso di test scritti, è da concordare con il docente e segnalare al servizio, a mezzo modulo https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa, non più tardi di 15 gg prima dell’appello.\nTutta le misure previste dal tuo PDP/PEI saranno visibili all'atto dell'iscrizione ai singoli appelli/parziali d'esame, prenotabile tramite sportello internet. Ricordati di selezionare solo le misure già pattuite con i singoli docenti, le misure non previamente pattuite con i docenti non saranno garantite nel corso dell'esame.\nPer maggiori informazioni clicca qui https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa.",
+      "category": "servizi_dsa",
+      "source_file": "servizio_disabilità_dsa.txt"
+    },
+    {
+      "query": "Come richiedere un PDP o un PEI?",
+      "reference_answer": "Per ottenere un PDP o un PEI sono necessari i seguenti passaggi:\n1.Carica la certificazione in tuo possesso sul tuo sportello internet e seleziona nel corso della procedura \"Richiesta PDP\" oppure \"Richiesta PEI\";\n2.Attendi di essere contattato dal servizio per la Disabilità e per i DSA per fissare una data per il colloquio con la Psicopedagogista d’Ateneo;\n3.Partecipa al colloquio con la psicopedagogista d’Ateneo;\n4.Attendi la comunicazione per ritirare il tuo PDP o il tuo PEI presso il Servizio.\nPer maggiori informazioni clicca qui https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa.",
+      "category": "servizi_dsa",
+      "source_file": "servizio_disabilità_dsa.txt"
+    },
+    {
+      "query": "Di quali certificazioni ho bisogno per richiedere un PDP?",
+      "reference_answer": "Per richiedere un PDP è necessario disporre di una certificazione con le seguenti caratteristiche:\n- sia stata rilasciata da una struttura del Servizio sanitario nazionale o da ente accreditato;\n- non sia stata redatta da più di 3 anni rispetto alla data di immatricolazione/pre-iscrizione;\n- riporti i disturbi specifichi e la relativa gravità (Dislessia, Disgrafia, Disortografia, Discalculia);\n- venga menzionata la legge n. 170 del 2010;\n- contenga l’allegato con gli esiti dei test effettuati;\n- siano ben visibili le firme degli specialisti che hanno redatto la certificazione (Neuropsichiatra/Psicologo/Logopedista).\nSe la tua certificazione non ha una o più delle caratteristiche indicate sopra indicate, rivolgiti all’equipe di riferimento per un’integrazione o un aggiornamento. Per maggiori informazioni clicca qui https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa.",
+      "category": "servizi_dsa",
+      "source_file": "servizio_disabilità_dsa.txt"
+    },
+    {
+      "query": "Di quali certificazioni ho bisogno per richiedere un PEI?",
+      "reference_answer": "Per richiedere un PEI, è necessario che tu disponga di una certificazione di invalidità civile, ai sensi della legge n. 118 del 1971 (invalidità civile), e/o di una certificazione attestante lo stato di handicap, ai sensi della legge n. 104 del 1992 e successive integrazioni (dichiarazione di handicap). La dichiarazione deve essere stata rilasciate dall’INPS o dalla struttura pubblica sanitaria territoriale competente. Per maggiori informazioni clicca qui https://www.unibg.it/studiare/frequentare/servizi-disabilita-e-dsa.",
+      "category": "servizi_dsa",
+      "source_file": "servizio_disabilità_dsa.txt"
+    },
+    {
+      "query": "Come e quando posso sapere l'esito della mia domanda di borsa di studio?",
+      "reference_answer": "I richiedenti possono controllare l'esito della propria domanda nel Portale del Diritto allo studio https://unibg-sol.dirittoallostudio.it/apps/V5.0/sol/homepage. Le date entro cui verranno pubblicate le graduatorie e effettuati i pagamenti sono indicate ogni anno nel bando di concorso disponibile qui: https://www.unibg.it/servizi/segreteria/borse-studio (paragrafi 8 - 9).",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Come faccio a presentare domanda di Borsa di Studio?",
+      "reference_answer": "La domanda va inoltrata online entro le scadenze previste nel bando di concorso https://www.unibg.it/ateneo/amministrazione/concorsi-e-selezioni/bandi-borse-studio (paragrafo 7). Trovi il link per presentare domanda qui: https://www.unibg.it/servizi/segreteria/borse-studio",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Dove trovo tutte le informazioni relative alle Borse di Studio?",
+      "reference_answer": "Ogni anno nel mese di luglio viene pubblicato il bando di concorso che trovi qui: https://www.unibg.it/servizi/segreteria/borse-studio Consultandolo puoi trovare tutte le informazioni necessarie: i requisiti (paragrafo 3), gli importi (paragrafo 4) e i termini e le modalità di presentazione della domanda (paragrafo 7).",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Dove trovo tutti i moduli del Servizio Diritto allo Studio?",
+      "reference_answer": "Trovi tutti i moduli per l’autocertificazione del merito, richiesta certificati e altro qui: https://www.unibg.it/servizi/segreteria/modulistica selezionando nella tipologia di modulo: Diritto allo Studio (ex ISU )",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "In cosa consiste il Contributo Integrativo per la Mobilità Internazionale erogato dal Servizio Diritto allo Studio?",
+      "reference_answer": "Si tratta di un'integrazione alla borsa di studio. Trovi tutte le informazioni necessarie nel bando di concorso: https://www.unibg.it/servizi/segreteria/borse-studio",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "In cosa consiste il Premio di Laurea?",
+      "reference_answer": "Si tratta di un'integrazione alla borsa di studio. Trovi tutte le informazioni necessarie nel bando di concorso: https://www.unibg.it/servizi/segreteria/borse-studio",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Quali sono le agevolazioni sui trasporti riservate agli studenti?",
+      "reference_answer": "Trovi tutte le informazioni nell’avviso “Convenzione trasporti” pubblicato qui: https://www.unibg.it/servizi/vita-unibg/convenzioni-e-sconti",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Come e quando devo richiedere l'alloggio nelle residenze universitarie?",
+      "reference_answer": "Il bando di concorso per Servizio Abitativo nelle Residenze Universitarie viene pubblicato tutti gli anni nel mese di luglio alla pagina Alloggi https://www.unibg.it/vivere-unibg/spazi-e-servizi/alloggi. Nel bando puoi trovare tutte le informazioni necessarie, come per esempio i requisiti (paragrafo 2) e i termini e le modalità di presentazione della domanda (paragrafo 8).",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Residenze Universitarie - Quando vengono pubblicate le graduatorie?",
+      "reference_answer": "L'esito della domanda è disponibile nel Portale per il diritto allo studio https://unibg-sol.dirittoallostudio.it/apps/V5.0/sol/homepage entro la scadenza prevista dal bando di concorso. Solo gli studenti beneficiari sono sicuri di avere il posto in una delle residenze universitarie.",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Dove trovo le informazioni sulle mense universitarie?",
+      "reference_answer": "Trovi tutti gli indirizzi, gli orari di apertura e le novità sulle mense a questa pagina https://www.unibg.it/servizi/luoghi/servizio-ristorazione. In particolare, trovi tutte le informazioni su come accedere al Servizio nell’avviso “Modalità di accesso alle mense universitarie”, pubblicato in fondo alla pagina.",
+      "category": "servizi_diritto_studio",
+      "source_file": "servizio_diritto_studio.txt"
+    },
+    {
+      "query": "Come posso informarmi sulle iniziative di orientamento UNIBG?",
+      "reference_answer": "Controlla la nostra pagina dedicata a Open Day e Open Week: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/open-day. UniBg partecipa anche a diverse Fiere dell'Orientamento: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/fiere",
+      "category": "servizi_orientamento",
+      "source_file": "servizio_orientamento.txt"
+    },
+    {
+      "query": "Cosa è il servizio POT?",
+      "reference_answer": "I Piani di Orientamento e Tutorato (POT) identificano un servizio che coinvolge i nostri studenti senior, disponibili per rispondere alle domande degli studenti junior e delle future matricole. Trovi tutte le informazioni al link: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/pot-piani-orientamento-e-tutorato",
+      "category": "servizi_orientamento",
+      "source_file": "servizio_orientamento.txt"
+    },
+    {
+      "query": "Dove trovo le informazioni sull'offerta formativa UNIBG?",
+      "reference_answer": "Da questo link puoi raggiungere le pagine dedicate a ogni singolo Corso di Laurea Triennale e Magistrale a Ciclo Unico: https://www.unibg.it/studia-noi/corsi/lauree-triennali-e-ciclo-unico. Da questo link puoi raggiungere le pagine dedicate a ogni singolo Corso di Laurea Magistrale: https://www.unibg.it/studia-noi/corsi/lauree-magistrali\n\nPassi per iscriversi e TOLC\nA partire da questa pagina https://www.unibg.it/studia-noi/iscriversi/passi-iscriversi trovi tutte le informazioni necessarie per capire cosa sono i TOLC e come funzionano.",
+      "category": "servizi_orientamento",
+      "source_file": "servizio_orientamento.txt"
+    },
+    {
+      "query": "Vorrei un aiuto personale per affrontare la scelta universitaria, come posso fare?",
+      "reference_answer": "Rivolgiti al nostro servizio gratuito di counseling individuale: https://www.unibg.it/studia-noi/ti-aiutiamo/orientarsi/counseling",
+      "category": "servizi_orientamento",
+      "source_file": "servizio_orientamento.txt"
+    },
+    {
+      "query": "Posso anticipare degli esami (ad esempio dal secondo al primo anno)?",
+      "reference_answer": "Sì, è possibile richiedere l'anticipo di esami, facendo una richiesta per il Consiglio di corso di studio entro la scadenza prevista per la compilazione del Piano di Studi. Devi inviare alla Segreteria Studenti, via ticket, l'apposito modulo (Modulo di richiesta per Consiglio di corso di studio) che trovi qui https://www.unibg.it/servizi/segreteria/modulistica",
+      "category": "carriera",
+      "source_file": "carriera.txt"
+    },
+    {
+      "query": "Cosa è e quali funzioni ha il Consiglio di corso di Studio?",
+      "reference_answer": "Il Consiglio di corso di studio (CCS) è un organo composto da Professori. Il CCS si riunisce più o meno una volta al mese. È presieduto dal Presidente del Corso di Studi. Tra i suoi compiti, uno dei principali è valutare le richieste che vengono inoltrate dagli studenti. Per esempio, in caso di domande di passaggio di corso, conseguimento di seconda laurea, ecc., il CCS deve valutare quali esami eventualmente si possono convalidare. Oppure il CCS deve valutare le richieste specifiche e motivate che gli studenti possono inoltrare per esigenze particolari (es. modifica straordinaria del piano di studi, inserimento di esami soprannumerari, ecc.).",
+      "category": "carriera",
+      "source_file": "carriera.txt"
+    },
+    {
+      "query": "Devo presentare una richiesta al Consiglio di corso di studio, come si fa? E come faccio a conoscere l'esito?",
+      "reference_answer": "Per fare una richiesta al CCS occorre compilare l'apposito modulo (Modulo di richiesta per Consiglio di corso di Studio) che si trova qui https://www.unibg.it/servizi/segreteria/modulistica e farlo pervenire (via ticket) alla Segreteria Studenti.  L'esito della valutazione (richiesta accolta o respinta) ti verrà comunicato via mail.",
+      "category": "carriera",
+      "source_file": "carriera.txt"
+    },
+    {
+      "query": "Ho una certificazione informatica (es. ECDL). Posso richiederne il riconoscimento?",
+      "reference_answer": "Per alcuni corsi di laurea, il possesso di una certificazione informatica (per esempio ECDL) recente può comportare il riconoscimento e l'esonero (totale o parziale) dall'esame di Informatica di base o simili. Guarda sul sito del tuo corso di laurea per informazioni a riguardo.",
+      "category": "carriera",
+      "source_file": "carriera.txt"
+    },
+    {
+      "query": "Ho una certificazione Linguistica (es. PET,...). Posso richiederne il riconoscimento?",
+      "reference_answer": "Sì, le principali certificazioni linguistiche possono essere riconosciute e comportano l'esonero parziale o totale (dipende dai corsi di laurea e dagli insegnamenti) dagli esami di Lingua straniera. Qui https://ccl.unibg.it/it/apprendimento-lingue/servizi-studenti/riconoscimento-certificazioni-linguistiche trovi tutte le informazioni sulle certificazioni riconosciute e sulle modalità per richiedere il riconoscimento.",
+      "category": "carriera",
+      "source_file": "carriera.txt"
+    },
+    {
+      "query": "A cosa serve la tessera universitaria?",
+      "reference_answer": "La tessera universitaria, che si chiama Flash Up Studio, serve innanzitutto per usufruire dei servizi interni all'Università (accesso alle biblioteche, mense, centri stampa...), e come documento identificativo in sede di esami. Inoltre, è fatta in collaborazione con Intesa San Paolo, quindi fornisce anche servizi bancari a condizioni molto vantaggiose.",
+      "category": "tessera",
+      "source_file": "tessera_universitaria.txt"
+    },
+    {
+      "query": "Come si ottiene la tessera Flash Up Studio?",
+      "reference_answer": "Gli step per ottenere la tessera Flash Up Studio sono i seguenti:\n- acquisizione foto: in fase di immatricolazione, devi  caricare nel tuo Sportello Internet Studenti una foto del volto, ben visibile e riconoscibile, in formato jpg con le seguenti dimensioni: base 720 pixel, altezza 960 pixel.\n- Dopo aver acquisito la foto, è necessario fare la richiesta della tessera, scaricando la app preposta. Qui https://www.intesasanpaolo.com/it/persone-e-famiglie/prodotti/carte/carte-prepagate/carta-flash-up-studio-universita-bergamo.html trovi le informazioni sulle condizioni di utilizzo e su come effettuare la richiesta.",
+      "category": "tessera",
+      "source_file": "tessera_universitaria.txt"
+    },
+    {
+      "query": "Se riscontro dei problemi con la tessera Flash Up Studio, a chi mi devo rivolgere?",
+      "reference_answer": "Qui https://www.intesasanpaolo.com/it/common/parla-con-noi.html trovi i contatti del Centro Assistenza di Intesa San Paolo.",
+      "category": "tessera",
+      "source_file": "tessera_universitaria.txt"
+    },
+    {
+      "query": "Come contattare l'Ufficio Tirocini?",
+      "reference_answer": "L'Ufficio Tirocini si trova in Via S.Bernardino 72/e (24122 Bergamo).\nReperibilità telefonica: (+39 035 205 2265)\n- lunedì 9.30-12.00\n- mercoledì 9.30-12.00\n- giovedì 9.30-12.00\n- venerdì 9.30-12.00\nApertura al pubblico (su prenotazione https://logistica.unibg.it/PortalePlanning/UNIBG-servizi): Mercoledì e venerdì: 9.30-12.00. Consegna dei registri finali di tirocinio: unicamente attraverso il Servizio Help Desk Studenti https://helpdesk.unibg.it/helpdesksegrestud/.",
+      "category": "tirocini",
+      "source_file": "tirocini.txt"
+    },
+    {
+      "query": "Come si avvia un Tirocinio?",
+      "reference_answer": "Consulta il vademecum specifico relativo al tuo Dipartimento: https://www.unibg.it/studia-noi/frequentare/tirocinio/tirocini-dipartimento. Inoltre, qui https://www.unibg.it/sites/default/files/normativa/regolamento_per_tirocini_curriculari_0.pdf  trovi il Regolamento generale dei Tirocini.",
+      "category": "tirocini",
+      "source_file": "tirocini.txt"
+    },
+    {
+      "query": "Devo inscrivermi ad un corso obbligatorio sulla sicurezza? (Solo se non è già stato svolto)",
+      "reference_answer": "Si. Al seguente link, nella sezione ‘Corso di formazione generale (4h) in tema di sicurezza sui luoghi di lavoro, devi compilare la domanda, dopo aver letto il testo descrittivo: https://www.unibg.it/studia-noi/frequentare/tirocinio. Il Corso di formazione specifica è a cura dell'Ente, perché legato alle specifiche attività da svolgere durante il tirocinio",
+      "category": "tirocini",
+      "source_file": "tirocini.txt"
+    },
+    {
+      "query": "Dove trovo il registro del Tirocinio?",
+      "reference_answer": "Sulla pagina inerente ai tirocini del proprio Dipartimento devi scaricare il documento: https://www.unibg.it/studia-noi/frequentare/tirocinio/tirocini-dipartimento",
+      "category": "tirocini",
+      "source_file": "tirocini.txt"
+    },
+    {
+      "query": "Dove trovo le informazioni sui tirocini curriculari e/o extracurriculari?",
+      "reference_answer": "Trovi le informazioni su questa pagina: https://www.unibg.it/studia-noi/frequentare/tirocinio",
+      "category": "tirocini",
+      "source_file": "tirocini.txt"
+    },
+    {
+      "query": "Vorrei fare il Tirocinio all'estero. Dove trovo le informazioni a riguardo?",
+      "reference_answer": "Informazioni generali: https://www.unibg.it/studia-noi/frequentare/tirocini/tirocinio-allestero. Bandi per Tirocini all'estero: https://www.unibg.it/universita/amministrazione/concorsi-e-selezioni/bandi-tirocini-e-studio-allestero. Iscrizione all'accertamento linguistico (se necessaria): https://www.unibg.it/internazionale/andare-allestero/partire/accertamento-conoscenza-linguistica",
+      "category": "tirocini",
+      "source_file": "tirocini.txt"
+    },
+    {
+      "query": "Quanto costa, e a quanti corsi singoli posso iscrivermi?",
+      "reference_answer": "Oltre all'imposta di bollo euro 16,00, il costo è di 25 euro per ogni cfu. Potrai iscriverti ad un numero massimo di 36 cfu.",
+      "category": "corsi_singoli",
+      "source_file": "corsi_singoli.txt"
+    },
+    {
+      "query": "Quanto tempo ho per sostenere gli esami?",
+      "reference_answer": "Se ti iscrivi a corsi singoli per l'anno accademico 2020/2021, hai tempo fino alla sessione di Aprile 2022 (se prevista per il Dipartimento cui appartiene l'insegnamento) per sostenere gli esami.",
+      "category": "corsi_singoli",
+      "source_file": "corsi_singoli.txt"
+    },
+    {
+      "query": "Devo parlare direttamente con la Segreteria Studenti - come la contatto?",
+      "reference_answer": "Per problematiche particolari, non risolvibili via ticket, puoi contattare direttamente la Segreteria Studenti tramite vari canali. Qui https://www.unibg.it/studia-noi/ti-aiutiamo/contatta-segreteria trovi le modalità e gli orari di contatto.\n\nHo problemi con l'accesso a Moodle/e-learning/Teams\nQui https://www.unibg.it/studia-noi/frequentare/elearning-moodle trovi i contatti per eventuali problematiche.",
+      "category": "contatti",
+      "source_file": "contatti_utili_problematiche_varie.txt"
+    },
+    {
+      "query": "Ho un problema con la domanda provvisoria di laurea, a chi devo rivolgermi?",
+      "reference_answer": "La domanda provvisoria di laurea (o domanda di assegnazione del titolo provvisorio), per i corsi di laurea in cui è prevista non è gestita dalla Segreteria Studenti, ma dalla Segreteria del Dipartimento. Quindi vai nel sito del Dipartimento e, nella pagina CONTATTI troverai i contatti di riferimento.\n\nNon riesco ad accedere allo Sportello Internet\nAccertati di aver inserito correttamente il nome utente e la password. Per problematiche tecniche riguardanti lo Sportello Internet Studenti, scrivi una mail a sia@unibg.it",
+      "category": "contatti",
+      "source_file": "contatti_utili_problematiche_varie.txt"
+    },
+    {
+      "query": "Come si converte un file da PDF a PDF/A?",
+      "reference_answer": "Qui https://www.unibg.it/sites/default/files/media/documents/2023-04-19/Guida_PDF-A.pdf trovi le informazioni sul formato PDF/A e sulla conversione di un file da PDF a PDF/A",
+      "category": "varie",
+      "source_file": "varie.txt"
+    },
+    {
+      "query": "Ho ricevuto una mail dall'Ufficio Stipendi dell'Università. Come mai? Cosa devo fare?",
+      "reference_answer": "Se nel corso dell'anno solare 2021 ti sono stati accreditati dei compensi dall'Università (es. Borsa di studio, oppure compensi per 150 ore o altre collaborazioni), l'Ufficio Stipendi ti ha inviato in questi giorni, via mail, la Certificazione Unica, che ti servirà per la dichiarazione dei redditi. NON si tratta, quindi, di spam o di fishing. Come indicato nella mail, devi rispondere entro 5 giorni confermando la ricezione della Certificazione Unica.",
+      "category": "varie",
+      "source_file": "varie.txt"
+    },
+    {
+      "query": "Come trovo le pagine del mio Dipartimento?",
+      "reference_answer": "Dalla home page unibg.it, clicca su Università, poi su Dipartimenti (sotto la voce Organizzazione), poi seleziona il Dipartimento che ti interessa. Si aprirà il sito del Dipartimento.",
+      "category": "sito_web",
+      "source_file": "sito_web_unibg.txt"
+    },
+    {
+      "query": "Come trovo le pagine relative ad un determinato corso di studio?",
+      "reference_answer": "Dalla home page unibg.it, clicca su Studiare, poi, sotto la voce Corsi di studio, clicca su Offerta formativa. Potrai cercare il corso di studio che ti interessa, applicando i vari filtri disponibili. Dal sito del relativo Dipartimento, clicca su Studiare, poi, sotto la voce Corsi di studio, seleziona Laurea Triennale o Magistrale e poi il Corso di Laurea che ti interessa.",
+      "category": "sito_web",
+      "source_file": "sito_web_unibg.txt"
+    }
+  ]
+}

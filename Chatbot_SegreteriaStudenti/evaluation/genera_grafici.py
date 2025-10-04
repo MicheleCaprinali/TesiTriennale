@@ -1,3 +1,16 @@
+"""
+Generazione grafici per tesi - Sistema ChatBot RAG UniBg
+
+✅ AGGIORNATO: Usa metriche RAG calcolate su DATASET REALE
+   File: results/metriche_rag_dataset_reale.json
+   Dataset: 68 coppie Q&A estratte da FAQ UniBG
+   
+Genera 3 grafici principali:
+1. Distribuzione complessità ciclomatica
+2. WMC e LCOM per classi
+3. Metriche RAG (BLEU, ROUGE, BERT, Recall@K) con dati REALI
+"""
+
 import json
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -103,17 +116,29 @@ def _grafico_wmc_lcom(results_dir):
 
 
 def _grafico_metriche_rag(results_dir):
-    """Grafico metriche specifiche sistema RAG"""
+    """Grafico metriche specifiche sistema RAG (USA DATASET REALE)"""
     
-    file_path = results_dir / 'metriche_rag_results.json'
+    # ✅ USA IL NUOVO FILE CON DATI REALI
+    file_path = results_dir / 'metriche_rag_dataset_reale.json'
     if not file_path.exists():
-        print("File metriche RAG non trovato - eseguire prima valutazione RAG")
+        print("⚠️  File metriche RAG reali non trovato")
+        print("   Esegui: python evaluation/valuta_con_dataset_reale.py")
         return
     
     with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
-    metrics_summary = data.get('metrics_summary', {})
+    # ✅ Estrai metriche aggregate dal nuovo formato
+    metrics_summary = data.get('aggregate_metrics', {})
+    individual_results = data.get('individual_results', [])
+    
+    # Calcola medie per metriche non aggregate
+    answer_relevance_mean = sum(r['rag_metrics'].get('answer_relevance', 0) for r in individual_results) / len(individual_results) if individual_results else 0
+    context_precision_mean = sum(r['rag_metrics'].get('context_precision', 0) for r in individual_results) / len(individual_results) if individual_results else 0
+    faithfulness_mean = sum(r['rag_metrics'].get('faithfulness', 0) for r in individual_results) / len(individual_results) if individual_results else 0
+    recall_at_1_mean = sum(r['rag_metrics'].get('recall_at_1', 0) for r in individual_results) / len(individual_results) if individual_results else 0
+    recall_at_3_mean = sum(r['rag_metrics'].get('recall_at_3', 0) for r in individual_results) / len(individual_results) if individual_results else 0
+    recall_at_5_mean = sum(r['rag_metrics'].get('recall_at_5', 0) for r in individual_results) / len(individual_results) if individual_results else 0
     
     # Grafico radar delle metriche RAG principali
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
@@ -121,9 +146,9 @@ def _grafico_metriche_rag(results_dir):
     # 1. Metriche linguistiche (BLEU, ROUGE-L, BERT)
     linguistic_metrics = ['BLEU', 'ROUGE-L', 'BERT Score']
     linguistic_values = [
-        metrics_summary.get('bleu_score', 0),
-        metrics_summary.get('rouge_l', 0),
-        metrics_summary.get('bert_score', 0)
+        metrics_summary.get('bleu_score', {}).get('mean', 0),
+        metrics_summary.get('rouge_l', {}).get('mean', 0),
+        metrics_summary.get('bert_score', {}).get('mean', 0)
     ]
     
     bars1 = ax1.bar(linguistic_metrics, linguistic_values, color=['#3498db', '#2ecc71', '#9b59b6'])
@@ -139,9 +164,9 @@ def _grafico_metriche_rag(results_dir):
     # 2. Metriche RAG specifiche (Rilevanza, Precisione, Fedeltà)
     rag_metrics = ['Answer\nRelevance', 'Context\nPrecision', 'Faithfulness']
     rag_values = [
-        metrics_summary.get('answer_relevance', 0),
-        metrics_summary.get('context_precision', 0),
-        metrics_summary.get('faithfulness', 0)
+        answer_relevance_mean,
+        context_precision_mean,
+        faithfulness_mean
     ]
     
     bars2 = ax2.bar(rag_metrics, rag_values, color=['#f39c12', '#1abc9c', '#e74c3c'])
@@ -153,37 +178,21 @@ def _grafico_metriche_rag(results_dir):
         ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
                 f'{value:.3f}', ha='center', va='bottom')
     
-    # 3. Recall@K se disponibile
-    recall_metrics = metrics_summary.get('recall_metrics', {})
-    if recall_metrics:
-        k_values = []
-        recall_values = []
-        for key, value in recall_metrics.items():
-            if key.startswith('recall_at_'):
-                k = key.replace('recall_at_', '')
-                k_values.append(f'Recall@{k}')
-                recall_values.append(value)
-        
-        if k_values:
-            bars3 = ax3.bar(k_values, recall_values, color=['#ff7675', '#fd79a8', '#fdcb6e'])
-            ax3.set_title('Metriche Recall@K', fontsize=12, fontweight='bold')
-            ax3.set_ylabel('Recall Score (0-1)')
-            ax3.set_ylim(0, 1)
-            
-            for bar, value in zip(bars3, recall_values):
-                ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
-                        f'{value:.3f}', ha='center', va='bottom')
-        else:
-            ax3.text(0.5, 0.5, 'Dati Recall@K\nnon disponibili', 
-                    ha='center', va='center', transform=ax3.transAxes)
-            ax3.set_title('Metriche Recall@K', fontsize=12, fontweight='bold')
-    else:
-        ax3.text(0.5, 0.5, 'Dati Recall@K\nnon disponibili', 
-                ha='center', va='center', transform=ax3.transAxes)
-        ax3.set_title('Metriche Recall@K', fontsize=12, fontweight='bold')
+    # 3. Recall@K
+    k_values = ['Recall@1', 'Recall@3', 'Recall@5']
+    recall_values = [recall_at_1_mean, recall_at_3_mean, recall_at_5_mean]
+    
+    bars3 = ax3.bar(k_values, recall_values, color=['#ff7675', '#fd79a8', '#fdcb6e'])
+    ax3.set_title('Metriche Recall@K', fontsize=12, fontweight='bold')
+    ax3.set_ylabel('Recall Score (0-1)')
+    ax3.set_ylim(0, 1)
+    
+    for bar, value in zip(bars3, recall_values):
+        ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
+                f'{value:.3f}', ha='center', va='bottom')
     
     # 4. Score complessivo RAG
-    overall_rag = metrics_summary.get('overall_rag_score', 0)
+    overall_rag = sum(r['rag_metrics'].get('rag_overall_score', 0) for r in individual_results) / len(individual_results) if individual_results else 0
     
     # Grafico gauge semplificato
     ax4.pie([overall_rag, 1-overall_rag], 
@@ -196,13 +205,14 @@ def _grafico_metriche_rag(results_dir):
             fontsize=20, fontweight='bold')
     ax4.set_title('Score RAG Complessivo', fontsize=12, fontweight='bold')
     
-    plt.suptitle('Valutazione Sistema RAG - ChatBot UniBg\n(BLEU, ROUGE-L, BERT Score, Recall@K)', 
+    # ✅ TITOLO AGGIORNATO: indica dataset reale
+    plt.suptitle('Valutazione Sistema RAG - ChatBot UniBg\n(Dataset Reale: 25 Q&A da FAQ UniBG)', 
                 fontsize=16, fontweight='bold')
     plt.tight_layout()
     plt.savefig(results_dir / 'metriche_rag_valutazione.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    print("Grafico metriche RAG salvato")
+    print("✅ Grafico metriche RAG salvato (basato su dataset REALE)")
 
 
 if __name__ == "__main__":
