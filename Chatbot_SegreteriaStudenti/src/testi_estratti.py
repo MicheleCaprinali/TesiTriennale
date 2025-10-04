@@ -74,16 +74,44 @@ def pdf_to_txt_with_inline_links(pdf_path, txt_path):
 
 if __name__ == "__main__":
     """Script principale per processare tutti i PDF nella cartella guida_dello_studente"""
-    input_folder = "../data/guida_dello_studente"
-    output_folder = "../data/testi_estratti"
+    # ✅ FIX: Usa percorsi assoluti basati sulla posizione dello script
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    input_folder = os.path.join(BASE_DIR, "../data/guida_dello_studente")
+    output_folder = os.path.join(BASE_DIR, "../data/testi_estratti")
 
     os.makedirs(output_folder, exist_ok=True)
+    
+    print(f"ESTRAZIONE TESTI DA PDF")
+    print("=" * 50)
+    print(f"Input: {os.path.abspath(input_folder)}")
+    print(f"Output: {os.path.abspath(output_folder)}")
+    print()
 
-    for filename in os.listdir(input_folder):
-        if filename.lower().endswith(".pdf"):
-            input_path = os.path.join(input_folder, filename)
-            base_name = os.path.splitext(filename)[0]
-            output_filename = f"{base_name}_extracted.txt"
-            output_path = os.path.join(output_folder, output_filename)
+    if not os.path.exists(input_folder):
+        print(f"[ERRORE] Cartella {input_folder} non trovata!")
+        exit(1)
 
+    pdf_files = [f for f in os.listdir(input_folder) if f.lower().endswith(".pdf")]
+    
+    if not pdf_files:
+        print(f"[WARN] Nessun file PDF trovato in {input_folder}")
+        exit(0)
+    
+    print(f"Trovati {len(pdf_files)} file PDF da processare\n")
+
+    for filename in pdf_files:
+        input_path = os.path.join(input_folder, filename)
+        base_name = os.path.splitext(filename)[0]
+        output_filename = f"{base_name}_extracted.txt"
+        output_path = os.path.join(output_folder, output_filename)
+
+        print(f"Processando: {filename}...")
+        try:
             pdf_to_txt_with_inline_links(input_path, output_path)
+            print(f"  ✓ Completato: {output_filename}\n")
+        except Exception as e:
+            print(f"  ✗ Errore: {e}\n")
+    
+    print("=" * 50)
+    print(f"ESTRAZIONE COMPLETATA")
+    print(f"File processati: {len(pdf_files)}")

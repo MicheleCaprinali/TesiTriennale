@@ -82,10 +82,15 @@ if exist "data" (
         set txt_count=0
     )
     
-    dir "data\*.pdf" /b 2>nul | find /c /v "" > temp_count.txt
-    set /p pdf_count=<temp_count.txt
-    del temp_count.txt 2>nul
-    echo       PDF disponibili: %pdf_count% file
+    if exist "data\guida_dello_studente" (
+        dir "data\guida_dello_studente\*.pdf" /b 2>nul | find /c /v "" > temp_count.txt
+        set /p pdf_count=<temp_count.txt
+        del temp_count.txt 2>nul
+        echo       PDF disponibili (guida_dello_studente): %pdf_count% file
+    ) else (
+        echo [WARN] Cartella guida_dello_studente non presente
+        set pdf_count=0
+    )
     
 ) else (
     echo [WARN] Cartella data non presente
@@ -105,7 +110,7 @@ if %DB_EXISTS%==1 (
 
 echo PROCESSO DI RICOSTRUZIONE:
 if %SKIP_EXTRACTION%==0 (
-    echo  1. Estrazione testi da PDF (%pdf_count% file^)
+    echo  1. Estrazione testi da PDF (da guida_dello_studente: %pdf_count% file^)
     echo  2. Chunking intelligente documenti
     echo  3. Generazione embeddings vettoriali
     echo  4. Creazione database ChromaDB
@@ -165,16 +170,20 @@ echo ================================================================
 if %SKIP_EXTRACTION%==0 (
     if %pdf_count% GTR 0 (
         echo 5.1- Estrazione testi da PDF...
-        echo      (Processando %pdf_count% file PDF)
+        echo      (Processando %pdf_count% file PDF da data\guida_dello_studente)
+        echo.
         
         chatbot_env\Scripts\python.exe src\testi_estratti.py
         if errorlevel 1 (
+            echo.
             echo [WARN] Estrazione parzialmente fallita
+            echo        Controlla i messaggi sopra per dettagli
         ) else (
-            echo [OK] Estrazione completata
+            echo.
+            echo [OK] Estrazione completata con successo
         )
     ) else (
-        echo 5.1- Nessun PDF da estrarre
+        echo 5.1- Nessun PDF da estrarre (cartella guida_dello_studente vuota)
     )
 ) else (
     echo 5.1- [SKIP] Estrazione testi (script non disponibile)
